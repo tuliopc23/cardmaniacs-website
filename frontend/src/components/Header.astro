@@ -7,40 +7,42 @@ const { currentPage = '' } = Astro.props;
 ---
 
 <header data-testid="site-header" class="fixed top-0 left-0 right-0 z-50">
-  <div class="mx-auto max-w-[1120px] px-6">
-    <nav class="flex items-center justify-between h-14 border-b border-border-light/50" data-testid="main-nav">
+  <div class="mx-auto max-w-[1120px] px-6 pt-3">
+    <nav 
+      class="flex items-center justify-between h-12 px-5 rounded-2xl glass"
+      data-testid="main-nav"
+      style="border: 0.5px solid rgba(255,255,255,0.55); box-shadow: 0 0.5px 0 0 rgba(255,255,255,0.7) inset, 0 1px 2px rgba(0,0,0,0.03), 0 4px 16px rgba(0,0,0,0.05), 0 0 0 0.5px rgba(0,0,0,0.04);"
+    >
       
       <a href="/" class="flex items-center gap-2.5 group" data-testid="logo-link">
-        <img src="/images/Graphic.png" alt="Cardmaniacs" class="w-7 h-7 rounded-lg" />
-        <span class="font-display font-semibold text-[15px] tracking-tight text-ink group-hover:text-accent transition-colors duration-200">Cardmaniacs</span>
+        <img src="/images/Graphic.png" alt="Cardmaniacs" class="w-[26px] h-[26px] rounded-[7px]" style="box-shadow: 0 1px 3px rgba(0,0,0,0.1);" />
+        <span class="font-display font-semibold text-[14.5px] tracking-[-0.02em] text-ink group-hover:text-accent transition-colors duration-300">Cardmaniacs</span>
       </a>
 
-      <div class="hidden md:flex items-center gap-8">
+      <div class="hidden md:flex items-center gap-1">
         <a 
           href="/features" 
-          class:list={["text-[13px] font-medium tracking-tight transition-colors duration-200", currentPage === 'features' ? 'text-ink' : 'text-ink-secondary hover:text-ink']}
+          class:list={["text-[13px] font-medium tracking-[-0.01em] px-3.5 py-1.5 rounded-lg transition-all duration-300", currentPage === 'features' ? 'text-ink bg-black/[0.04]' : 'text-ink-secondary hover:text-ink hover:bg-black/[0.03]']}
           data-testid="nav-features"
         >Features</a>
         <a 
           href="/pricing" 
-          class:list={["text-[13px] font-medium tracking-tight transition-colors duration-200", currentPage === 'pricing' ? 'text-ink' : 'text-ink-secondary hover:text-ink']}
+          class:list={["text-[13px] font-medium tracking-[-0.01em] px-3.5 py-1.5 rounded-lg transition-all duration-300", currentPage === 'pricing' ? 'text-ink bg-black/[0.04]' : 'text-ink-secondary hover:text-ink hover:bg-black/[0.03]']}
           data-testid="nav-pricing"
         >Pricing</a>
         <a 
           href="/blog" 
-          class:list={["text-[13px] font-medium tracking-tight transition-colors duration-200", currentPage === 'blog' ? 'text-ink' : 'text-ink-secondary hover:text-ink']}
+          class:list={["text-[13px] font-medium tracking-[-0.01em] px-3.5 py-1.5 rounded-lg transition-all duration-300", currentPage === 'blog' ? 'text-ink bg-black/[0.04]' : 'text-ink-secondary hover:text-ink hover:bg-black/[0.03]']}
           data-testid="nav-blog"
         >Blog</a>
       </div>
 
       <a 
         href="#download" 
-        class="bg-ink text-surface text-[13px] font-medium px-4 py-1.5 rounded-pill hover:bg-ink/85 transition-all duration-200"
+        class="text-[12.5px] font-semibold px-4 py-[6px] rounded-full transition-all duration-300 hover:scale-[1.03] active:scale-[0.97]"
+        style="background: linear-gradient(180deg, #3a3a3c 0%, #1d1d1f 100%); color: #fff; box-shadow: 0 0.5px 0 0 rgba(255,255,255,0.1) inset, 0 1px 2px rgba(0,0,0,0.15), 0 2px 8px rgba(0,0,0,0.1);"
         data-testid="nav-download-cta"
       >Download</a>
     </nav>
   </div>
-  
-  <!-- Backdrop blur layer -->
-  <div class="absolute inset-0 -z-10 bg-surface/80 backdrop-blur-xl border-b border-border-light/30"></div>
 </header>

@@ -28,31 +28,43 @@ const comparisons = [
 ];
 ---
 
-<section data-testid="trust-section" class="section-gap bg-surface-raised">
+<section data-testid="trust-section" class="section-gap atmosphere-trust relative">
   <div class="mx-auto max-w-[1120px] px-6">
     
-    <div class="max-w-[560px] mb-16">
-      <p class="label text-accent mb-4">Why Cardmaniacs</p>
-      <h2 class="heading-display text-ink mb-5">
+    <div class="max-w-[560px] mb-20">
+      <p class="label text-accent mb-5 tracking-[0.08em]">Why Cardmaniacs</p>
+      <h2 class="heading-display text-ink mb-6">
         One calm app<br/>instead of five noisy ones.
       </h2>
-      <p class="body-large text-ink-secondary">
+      <p class="body-large text-ink-secondary leading-relaxed">
         Most reading workflows are fragmented across multiple apps. 
         Cardmaniacs brings feeds, read-later, and bookmarks together 
         in a single native experience that feels like it belongs on your Mac.
       </p>
     </div>
 
-    <!-- Editorial comparison list -->
-    <div class="space-y-0" data-testid="comparison-list">
+    <!-- Glass comparison table -->
+    <div 
+      class="rounded-2xl overflow-hidden"
+      style="background: var(--color-glass-bg-strong); backdrop-filter: blur(20px) saturate(1.6); border: 0.5px solid var(--color-glass-border-subtle); box-shadow: var(--shadow-glass-elevated);"
+      data-testid="comparison-list"
+    >
+      <!-- Table header -->
+      <div class="grid grid-cols-1 md:grid-cols-[180px_1fr_1fr] gap-4 md:gap-8 px-7 py-4 border-b border-black/[0.04]">
+        <div class="label text-ink-tertiary text-[11px]">Feature</div>
+        <div class="hidden md:block label text-ink-tertiary text-[11px]">Typical setup</div>
+        <div class="hidden md:block label text-accent text-[11px]">Cardmaniacs</div>
+      </div>
+
       {comparisons.map((c, i) => (
         <div 
-          class="grid grid-cols-1 md:grid-cols-[180px_1fr_1fr] gap-4 md:gap-8 py-6 border-b border-border-light"
+          class="grid grid-cols-1 md:grid-cols-[180px_1fr_1fr] gap-4 md:gap-8 px-7 py-5 comparison-row"
+          style={i < comparisons.length - 1 ? 'border-bottom: 0.5px solid rgba(0,0,0,0.04);' : ''}
           data-testid={`comparison-${i}`}
         >
-          <div class="heading-subsection text-ink">{c.trait}</div>
-          <div class="text-ink-tertiary body-default">{c.others}</div>
-          <div class="text-ink body-default font-medium">{c.cardmaniacs}</div>
+          <div class="heading-subsection text-ink text-[15px]">{c.trait}</div>
+          <div class="text-ink-tertiary body-default text-[14px]">{c.others}</div>
+          <div class="text-ink body-default text-[14px] font-medium">{c.cardmaniacs}</div>
         </div>
       ))}
     </div>

@@ -1,38 +1,38 @@
 ---
 ---
 
-<section data-testid="hero-section" class="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
+<section data-testid="hero-section" class="relative pt-28 pb-20 md:pt-36 md:pb-28 atmosphere-hero overflow-hidden">
   
-  <!-- Organic background shapes -->
-  <div class="blob blob-blue w-[500px] h-[500px] -top-48 -right-32 absolute"></div>
-  <div class="blob blob-lavender w-[400px] h-[400px] top-20 -left-48 absolute"></div>
+  <!-- Ambient blobs -->
+  <div class="blob blob-blue blob-animate w-[600px] h-[500px] -top-40 -right-24 absolute"></div>
+  <div class="blob blob-lavender blob-animate-delay w-[500px] h-[500px] top-16 -left-40 absolute"></div>
+  <div class="blob blob-peach blob-animate w-[300px] h-[300px] bottom-20 right-1/4 absolute opacity-30"></div>
 
-  <div class="mx-auto max-w-[1120px] px-6 relative">
+  <div class="mx-auto max-w-[1120px] px-6 relative z-10">
     
-    <!-- Text content — left aligned -->
+    <!-- Text content — left aligned, generous whitespace -->
     <div class="max-w-[680px]">
-      <p class="label text-accent mb-5" data-testid="hero-label">Feeds &middot; Read Later &middot; Bookmarks</p>
+      <p class="label text-accent mb-5 tracking-[0.08em]" data-testid="hero-label">Feeds &middot; Read Later &middot; Bookmarks</p>
       
-      <h1 class="heading-hero text-ink mb-6" data-testid="hero-heading">
+      <h1 class="heading-hero text-ink mb-7" data-testid="hero-heading">
         Your calm reading desk,<br/>
         all in one place.
       </h1>
 
-      <p class="body-large text-ink-secondary max-w-[520px] mb-10" data-testid="hero-description">
+      <p class="body-large text-ink-secondary max-w-[520px] mb-12 leading-relaxed" data-testid="hero-description">
         A native Apple app that unifies RSS feeds, Read Later, and Bookmarks into one beautifully crafted experience. Built for people who collect, save, and actually finish what they read.
       </p>
 
-      <div class="flex flex-col sm:flex-row items-start gap-4" data-testid="hero-ctas">
-        <!-- App Store badge -->
-        <a href="#download" data-testid="hero-appstore-btn">
-          <svg viewBox="0 0 120 40" class="h-[54px] w-auto" xmlns="http://www.w3.org/2000/svg">
-            <rect width="120" height="40" rx="6" fill="#000"/>
-            <text x="42" y="13" fill="#fff" font-size="5.5" font-family="-apple-system, sans-serif" font-weight="400">Download on the</text>
-            <text x="42" y="27" fill="#fff" font-size="11" font-family="-apple-system, sans-serif" font-weight="600">App Store</text>
-            <g transform="translate(12, 6) scale(0.56)" fill="#fff">
-              <path d="M24.769 20.3a4.949 4.949 0 0 1 2.356-4.151 5.066 5.066 0 0 0-3.99-2.158c-1.68-.176-3.308 1.005-4.164 1.005-.872 0-2.19-.988-3.608-.958a5.315 5.315 0 0 0-4.473 2.728c-1.934 3.348-.491 8.269 1.361 10.976.927 1.325 2.01 2.805 3.428 2.753 1.387-.058 1.905-.885 3.58-.885 1.658 0 2.144.885 3.59.852 1.489-.025 2.426-1.332 3.32-2.669a10.962 10.962 0 0 0 1.52-3.092 4.782 4.782 0 0 1-2.92-4.4ZM22.037 12.21a4.872 4.872 0 0 0 1.115-3.49 4.957 4.957 0 0 0-3.208 1.66 4.636 4.636 0 0 0-1.144 3.36 4.1 4.1 0 0 0 3.237-1.53Z"/>
-            </g>
+      <div class="flex flex-col sm:flex-row items-start gap-5" data-testid="hero-ctas">
+        <!-- App Store badge — rendered as styled link -->
+        <a href="#download" class="inline-flex items-center gap-3 bg-[#1d1d1f] text-white pl-4 pr-5 py-2.5 rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] group" style="box-shadow: 0 0.5px 0 0 rgba(255,255,255,0.08) inset, 0 2px 6px rgba(0,0,0,0.12), 0 8px 24px rgba(0,0,0,0.15);" data-testid="hero-appstore-btn">
+          <svg class="w-7 h-7 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 21.99 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.1 21.99C7.79 22.03 6.8 20.68 5.96 19.47C4.25 16.97 2.94 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/>
           </svg>
+          <div class="flex flex-col">
+            <span class="text-[10px] text-white/60 leading-none">Download on the</span>
+            <span class="text-[17px] font-semibold leading-tight tracking-tight">App Store</span>
+          </div>
         </a>
 
         <a 
@@ -41,7 +41,7 @@
           data-testid="hero-features-link"
         >
           Explore features
-          <svg class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
           </svg>
         </a>
@@ -49,8 +49,10 @@
     </div>
 
     <!-- Hero screenshot composition -->
-    <div class="mt-16 md:mt-20 relative" data-testid="hero-screenshot">
-      <div class="macbook-frame max-w-[900px] mx-auto relative z-10">
+    <div class="mt-20 md:mt-24 relative" data-testid="hero-screenshot">
+      <!-- Main large screenshot -->
+      <div class="macbook-frame max-w-[920px] mx-auto relative z-10">
+        <div class="macbook-frame-specular"></div>
         <img 
           src="/images/Cardmaniacs-mac - 1.png" 
           alt="Cardmaniacs on macOS — Card-based reading interface" 
@@ -59,18 +61,21 @@
         />
       </div>
 
-      <!-- Overlapping secondary screenshot -->
-      <div class="hidden md:block absolute -right-4 bottom-8 w-[380px] z-20 macbook-frame rotate-1 opacity-95">
-        <img 
-          src="/images/Cardmaniacs-mac - 3.png" 
-          alt="Cardmaniacs article view" 
-          loading="eager"
-          class="w-full"
-        />
+      <!-- Overlapping secondary screenshot — offset + rotated for depth -->
+      <div class="hidden md:block absolute -right-6 bottom-12 w-[360px] z-20 transition-transform duration-700 hover:translate-y-[-4px]">
+        <div class="macbook-frame" style="transform: rotate(1.5deg);">
+          <div class="macbook-frame-specular"></div>
+          <img 
+            src="/images/Cardmaniacs-mac - 3.png" 
+            alt="Cardmaniacs article view" 
+            loading="eager"
+            class="w-full"
+          />
+        </div>
       </div>
 
-      <!-- Subtle organic form behind -->
-      <div class="blob blob-peach w-[600px] h-[400px] -bottom-32 left-1/4 absolute -z-10"></div>
+      <!-- Ambient glow under the MacBook -->
+      <div class="absolute left-1/2 -translate-x-1/2 bottom-[-60px] w-[80%] h-[120px] rounded-full blur-[80px] opacity-20 bg-gradient-to-r from-blue-300 via-purple-200 to-orange-200 pointer-events-none"></div>
     </div>
   </div>
 </section>

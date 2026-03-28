@@ -99,8 +99,9 @@ const featureGroups = [
   <main data-testid="features-page">
     
     <!-- Features hero -->
-    <section class="pt-32 pb-16 md:pt-40 md:pb-20 relative overflow-hidden">
-      <div class="blob blob-blue w-[500px] h-[400px] -top-32 -right-24 absolute"></div>
+    <section class="pt-28 pb-16 md:pt-36 md:pb-20 relative overflow-hidden atmosphere-hero">
+      <div class="blob blob-blue blob-animate w-[500px] h-[400px] -top-32 -right-24 absolute"></div>
+      <div class="blob blob-lavender blob-animate-delay w-[300px] h-[300px] top-10 -left-20 absolute opacity-40"></div>
       <div class="mx-auto max-w-[1120px] px-6 relative">
         <div class="max-w-[680px]">
           <p class="label text-accent mb-5">Features</p>
@@ -151,6 +152,7 @@ const featureGroups = [
                   fi % 2 !== 0 ? 'md:col-start-1 md:order-1' : ''
                 ]}>
                   <div class="macbook-frame">
+                    <div class="macbook-frame-specular"></div>
                     <img 
                       src={f.screenshot} 
                       alt={f.title}

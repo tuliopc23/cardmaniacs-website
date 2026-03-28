@@ -6,61 +6,74 @@ interface Props {
 const { compact = false } = Astro.props;
 ---
 
-<section data-testid="pricing-section" class:list={["section-gap", compact ? '' : 'bg-surface-raised']}>
+<section data-testid="pricing-section" class:list={["section-gap relative", compact ? '' : 'atmosphere-trust']}>
   <div class="mx-auto max-w-[1120px] px-6">
     
     {!compact && (
       <div class="max-w-[560px] mb-16">
-        <p class="label text-accent mb-4">Pricing</p>
-        <h2 class="heading-display text-ink mb-5">
+        <p class="label text-accent mb-5 tracking-[0.08em]">Pricing</p>
+        <h2 class="heading-display text-ink mb-6">
           Simple, fair pricing.
         </h2>
-        <p class="body-large text-ink-secondary">
+        <p class="body-large text-ink-secondary leading-relaxed">
           No free tier, no feature gates, no upsell pressure. 
           One plan with everything included.
         </p>
       </div>
     )}
 
-    <div class="flex flex-col sm:flex-row gap-6 max-w-[640px]" data-testid="pricing-cards">
+    <div class="flex flex-col sm:flex-row gap-5 max-w-[640px]" data-testid="pricing-cards">
       
-      <!-- Monthly Plan -->
+      <!-- Monthly Plan — Glass card -->
       <div 
-        class="flex-1 bg-surface rounded-xl p-7 border border-border-light shadow-card hover:shadow-card-hover transition-shadow duration-300"
+        class="flex-1 rounded-2xl p-7 transition-all duration-500 hover:translate-y-[-2px] relative overflow-hidden noise"
+        style="background: var(--color-glass-bg-strong); backdrop-filter: blur(24px) saturate(1.8); border: 0.5px solid var(--color-glass-border); box-shadow: var(--shadow-pricing);"
         data-testid="pricing-monthly"
       >
-        <p class="label text-ink-tertiary mb-2">Monthly</p>
-        <div class="flex items-baseline gap-1 mb-1">
-          <span class="heading-section text-ink">$4.99</span>
-          <span class="text-ink-tertiary text-[13px]">/month</span>
+        <div class="relative z-10">
+          <p class="label text-ink-tertiary mb-3 tracking-[0.08em]">Monthly</p>
+          <div class="flex items-baseline gap-1 mb-1.5">
+            <span class="heading-section text-ink">$4.99</span>
+            <span class="text-ink-tertiary text-[13px] font-medium">/month</span>
+          </div>
+          <p class="text-ink-secondary text-[14px] mb-7">Full access, cancel anytime.</p>
+          <a 
+            href="#download" 
+            class="block w-full text-center text-ink text-[14px] font-semibold py-2.5 rounded-xl transition-all duration-300 hover:bg-black/[0.06] active:scale-[0.98]"
+            style="background: rgba(0,0,0,0.03); border: 0.5px solid rgba(0,0,0,0.06); box-shadow: 0 0.5px 0 0 rgba(255,255,255,0.5) inset;"
+            data-testid="pricing-monthly-cta"
+          >Get started</a>
         </div>
-        <p class="text-ink-secondary text-[14px] mb-6">Full access, cancel anytime.</p>
-        <a 
-          href="#download" 
-          class="block w-full text-center bg-surface-raised text-ink text-[14px] font-medium py-2.5 rounded-lg border border-border-light hover:bg-border-light/50 transition-colors duration-200"
-          data-testid="pricing-monthly-cta"
-        >Get started</a>
       </div>
 
-      <!-- Annual Plan -->
+      <!-- Annual Plan — Dark glass card with accent -->
       <div 
-        class="flex-1 bg-ink rounded-xl p-7 shadow-elevated relative overflow-hidden"
+        class="flex-1 rounded-2xl p-7 relative overflow-hidden transition-all duration-500 hover:translate-y-[-2px]"
+        style="background: linear-gradient(170deg, #2c2c2e 0%, #1d1d1f 50%, #151516 100%); box-shadow: var(--shadow-pricing-dark);"
         data-testid="pricing-annual"
       >
-        <div class="absolute top-3 right-3 bg-accent text-white text-[11px] font-semibold px-2.5 py-0.5 rounded-pill" data-testid="pricing-save-badge">
+        <!-- Specular highlight -->
+        <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.12] to-transparent"></div>
+        <!-- Inner top glow -->
+        <div class="absolute top-0 left-1/4 right-1/4 h-20 bg-gradient-to-b from-white/[0.04] to-transparent rounded-b-full pointer-events-none"></div>
+
+        <div class="absolute top-3.5 right-3.5 text-white text-[11px] font-semibold px-3 py-[3px] rounded-full" style="background: linear-gradient(135deg, #0077ed 0%, #0071e3 100%); box-shadow: 0 1px 4px rgba(0,113,227,0.3);" data-testid="pricing-save-badge">
           Save 50%
         </div>
-        <p class="label text-ink-faint mb-2">Annual</p>
-        <div class="flex items-baseline gap-1 mb-1">
-          <span class="heading-section text-white">$29.99</span>
-          <span class="text-ink-faint text-[13px]">/year</span>
+        <div class="relative z-10">
+          <p class="label text-white/40 mb-3 tracking-[0.08em]">Annual</p>
+          <div class="flex items-baseline gap-1 mb-1.5">
+            <span class="heading-section text-white">$29.99</span>
+            <span class="text-white/40 text-[13px] font-medium">/year</span>
+          </div>
+          <p class="text-white/40 text-[14px] mb-7">Best value — just $2.50/month.</p>
+          <a 
+            href="#download" 
+            class="block w-full text-center text-white text-[14px] font-semibold py-2.5 rounded-xl transition-all duration-300 hover:brightness-110 active:scale-[0.98]"
+            style="background: linear-gradient(180deg, #0077ed 0%, #005ec4 100%); box-shadow: 0 0.5px 0 0 rgba(255,255,255,0.15) inset, 0 2px 8px rgba(0,113,227,0.3);"
+            data-testid="pricing-annual-cta"
+          >Get started</a>
         </div>
-        <p class="text-ink-faint text-[14px] mb-6">Best value — just $2.50/month.</p>
-        <a 
-          href="#download" 
-          class="block w-full text-center bg-accent text-white text-[14px] font-medium py-2.5 rounded-lg hover:bg-accent-hover transition-colors duration-200"
-          data-testid="pricing-annual-cta"
-        >Get started</a>
       </div>
 
     </div>

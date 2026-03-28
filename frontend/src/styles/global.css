@@ -5,6 +5,7 @@
   --font-body: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-mono: "SF Mono", ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, monospace;
 
+  /* Core palette */
   --color-surface: #ffffff;
   --color-surface-raised: #f5f5f7;
   --color-surface-sunken: #fafafa;
@@ -17,19 +18,55 @@
   --color-border: #d2d2d7;
   --color-border-light: #e8e8ed;
 
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
-  --radius-xl: 28px;
+  /* Glass tokens */
+  --color-glass-bg: rgba(255, 255, 255, 0.55);
+  --color-glass-bg-strong: rgba(255, 255, 255, 0.72);
+  --color-glass-border: rgba(255, 255, 255, 0.65);
+  --color-glass-border-subtle: rgba(255, 255, 255, 0.35);
+  --color-glass-highlight: rgba(255, 255, 255, 0.9);
+  --color-glass-shadow: rgba(0, 0, 0, 0.06);
+  --color-glass-inset: rgba(255, 255, 255, 0.35);
+
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 30px;
   --radius-pill: 9999px;
 
-  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
-  --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.06);
-  --shadow-elevated: 0 12px 40px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.06);
-  --shadow-macbook: 0 20px 60px rgba(0, 0, 0, 0.15), 0 8px 20px rgba(0, 0, 0, 0.1);
+  /* Liquid shadows — multi-layered for realism */
+  --shadow-glass: 
+    0 0.5px 0 0 rgba(255, 255, 255, 0.6) inset,
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    0 4px 12px rgba(0, 0, 0, 0.04);
+  --shadow-glass-hover:
+    0 0.5px 0 0 rgba(255, 255, 255, 0.7) inset,
+    0 2px 8px rgba(0, 0, 0, 0.06),
+    0 12px 32px rgba(0, 0, 0, 0.08);
+  --shadow-glass-elevated:
+    0 1px 0 0 rgba(255, 255, 255, 0.5) inset,
+    0 4px 16px rgba(0, 0, 0, 0.06),
+    0 16px 48px rgba(0, 0, 0, 0.1);
+  --shadow-macbook:
+    0 2px 4px rgba(0, 0, 0, 0.04),
+    0 8px 24px rgba(0, 0, 0, 0.08),
+    0 24px 64px rgba(0, 0, 0, 0.14);
+  --shadow-macbook-hover:
+    0 2px 4px rgba(0, 0, 0, 0.04),
+    0 12px 32px rgba(0, 0, 0, 0.1),
+    0 32px 80px rgba(0, 0, 0, 0.18);
+  --shadow-pricing:
+    0 1px 0 0 rgba(255, 255, 255, 0.5) inset,
+    0 4px 12px rgba(0, 0, 0, 0.04),
+    0 20px 48px rgba(0, 0, 0, 0.08);
+  --shadow-pricing-dark:
+    0 1px 0 0 rgba(255, 255, 255, 0.08) inset,
+    0 8px 24px rgba(0, 0, 0, 0.2),
+    0 24px 64px rgba(0, 0, 0, 0.35);
 }
 
-/* Base styles */
+/* ============================================
+   BASE
+   ============================================ */
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -43,31 +80,35 @@ body {
   background: var(--color-surface);
   line-height: 1.47059;
   letter-spacing: -0.022em;
+  overflow-x: hidden;
 }
 
-/* Typography scale — Apple HIG inspired */
+/* ============================================
+   TYPOGRAPHY — Apple HIG scale, bold sans-serif
+   ============================================ */
 .heading-hero {
   font-family: var(--font-display);
   font-size: clamp(2.75rem, 5.5vw, 4.5rem);
   font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.035em;
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+  font-feature-settings: 'ss01', 'cv01';
 }
 
 .heading-display {
   font-family: var(--font-display);
   font-size: clamp(2rem, 4vw, 3.25rem);
   font-weight: 700;
-  line-height: 1.08;
-  letter-spacing: -0.032em;
+  line-height: 1.07;
+  letter-spacing: -0.035em;
 }
 
 .heading-section {
   font-family: var(--font-display);
   font-size: clamp(1.5rem, 2.5vw, 2rem);
   font-weight: 600;
-  line-height: 1.125;
-  letter-spacing: -0.028em;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
 }
 
 .heading-subsection {
@@ -99,100 +140,261 @@ body {
 .label {
   font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
-/* MacBook frame styling */
-.macbook-frame {
-  position: relative;
-  border-radius: 12px;
-  overflow: hidden;
-  background: #1d1d1f;
-  box-shadow: var(--shadow-macbook);
+/* ============================================
+   LIQUID GLASS MATERIALS
+   ============================================ */
+
+/* Primary glass — nav, modals, overlays */
+.glass {
+  background: var(--color-glass-bg);
+  backdrop-filter: blur(24px) saturate(1.8);
+  -webkit-backdrop-filter: blur(24px) saturate(1.8);
+  border: 0.5px solid var(--color-glass-border);
+  box-shadow: var(--shadow-glass);
 }
 
+/* Stronger glass for prominent cards */
+.glass-strong {
+  background: var(--color-glass-bg-strong);
+  backdrop-filter: blur(32px) saturate(1.9);
+  -webkit-backdrop-filter: blur(32px) saturate(1.9);
+  border: 0.5px solid var(--color-glass-border);
+  box-shadow: var(--shadow-glass);
+}
+
+/* Tinted glass for accent areas */
+.glass-tinted {
+  background: rgba(0, 113, 227, 0.05);
+  backdrop-filter: blur(20px) saturate(1.6);
+  -webkit-backdrop-filter: blur(20px) saturate(1.6);
+  border: 0.5px solid rgba(0, 113, 227, 0.12);
+  box-shadow:
+    0 0.5px 0 0 rgba(0, 113, 227, 0.08) inset,
+    0 1px 3px rgba(0, 0, 0, 0.03),
+    0 4px 12px rgba(0, 113, 227, 0.04);
+}
+
+/* ============================================
+   MACBOOK FRAME — Refined bezel with reflections
+   ============================================ */
+.macbook-frame {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #1a1a1c;
+  box-shadow: var(--shadow-macbook);
+  transition: box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1), transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.macbook-frame:hover {
+  box-shadow: var(--shadow-macbook-hover);
+}
+
+/* Title bar */
 .macbook-frame::before {
   content: '';
   display: block;
-  height: 28px;
-  background: linear-gradient(180deg, #3a3a3c 0%, #2c2c2e 100%);
-  border-radius: 12px 12px 0 0;
+  height: 32px;
+  background: linear-gradient(180deg, #3d3d3f 0%, #2a2a2c 50%, #252527 100%);
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.3);
   position: relative;
 }
 
+/* Traffic lights */
 .macbook-frame::after {
   content: '';
   position: absolute;
-  top: 10px;
-  left: 12px;
-  width: 8px;
-  height: 8px;
+  top: 11px;
+  left: 13px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  background: #ff5f57;
-  box-shadow: 16px 0 0 #febc2e, 32px 0 0 #28c840;
+  background: radial-gradient(circle at 35% 35%, #ff6b6b, #ff5f57);
+  box-shadow:
+    16px 0 0 0 #febc2e,
+    16px 0 0 0 #febc2e,
+    32px 0 0 0 #28c840,
+    /* Subtle glow under each dot */
+    0 0 4px rgba(255, 95, 87, 0.3),
+    16px 0 4px rgba(254, 188, 46, 0.3),
+    32px 0 4px rgba(40, 200, 64, 0.3);
 }
 
-.macbook-frame img {
+/* Screen bezel inner glow */
+.macbook-frame > img {
   display: block;
   width: 100%;
   height: auto;
+  border-top: 0.5px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Organic background blobs */
+/* Specular highlight along the top edge of the screen */
+.macbook-frame-specular {
+  position: absolute;
+  top: 32px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.12) 20%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.12) 80%, transparent 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ============================================
+   ORGANIC BLOBS — Richer, more vivid
+   ============================================ */
 .blob {
   position: absolute;
   border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.35;
+  filter: blur(100px);
+  opacity: 0.5;
   pointer-events: none;
+  will-change: transform;
 }
 
-.blob-blue {
-  background: #b6d0e2;
+.blob-blue { background: radial-gradient(circle, #a8d4f5 0%, #7fb8e8 40%, #5a9fd4 100%); }
+.blob-lavender { background: radial-gradient(circle, #d8c8f8 0%, #c4a8f0 40%, #a888e0 100%); }
+.blob-peach { background: radial-gradient(circle, #fcd9c4 0%, #f5c0a0 40%, #e8a880 100%); }
+.blob-mint { background: radial-gradient(circle, #b8f0d8 0%, #90e0c0 40%, #68d0a8 100%); }
+.blob-rose { background: radial-gradient(circle, #f8c8d8 0%, #f0a0b8 40%, #e08098 100%); }
+
+/* Animated ambient float */
+@keyframes blob-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(12px, -8px) scale(1.02); }
+  66% { transform: translate(-8px, 6px) scale(0.98); }
 }
 
-.blob-lavender {
-  background: #d4c5f9;
+.blob-animate {
+  animation: blob-float 20s ease-in-out infinite;
 }
 
-.blob-peach {
-  background: #f9d5c5;
+.blob-animate-delay {
+  animation: blob-float 24s ease-in-out infinite;
+  animation-delay: -8s;
 }
 
-.blob-mint {
-  background: #c5f9e5;
-}
-
-/* Section spacing */
+/* ============================================
+   SECTION SPACING
+   ============================================ */
 .section-gap {
-  padding-top: clamp(5rem, 10vw, 8rem);
-  padding-bottom: clamp(5rem, 10vw, 8rem);
+  padding-top: clamp(6rem, 12vw, 10rem);
+  padding-bottom: clamp(6rem, 12vw, 10rem);
 }
 
-/* App Store button */
-.appstore-badge {
-  display: inline-block;
-  height: 54px;
-  transition: opacity 0.2s ease;
-}
-
-.appstore-badge:hover {
-  opacity: 0.8;
-}
-
-/* Proof strip items */
+/* ============================================
+   PROOF STRIP ITEMS — Glass pill style
+   ============================================ */
 .proof-item {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   color: var(--color-ink-secondary);
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   font-weight: 500;
   white-space: nowrap;
+  padding: 6px 14px 6px 10px;
+  background: var(--color-glass-bg);
+  backdrop-filter: blur(12px) saturate(1.5);
+  -webkit-backdrop-filter: blur(12px) saturate(1.5);
+  border: 0.5px solid var(--color-glass-border-subtle);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-glass);
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Reduced motion */
+.proof-item:hover {
+  background: var(--color-glass-bg-strong);
+  box-shadow: var(--shadow-glass-hover);
+  transform: translateY(-1px);
+}
+
+/* ============================================
+   APP STORE BADGE
+   ============================================ */
+.appstore-badge {
+  display: inline-block;
+  height: 54px;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.12));
+}
+
+.appstore-badge:hover {
+  transform: translateY(-2px);
+  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.18));
+}
+
+/* ============================================
+   COMPARISON ROW
+   ============================================ */
+.comparison-row {
+  transition: background-color 0.2s ease;
+}
+
+.comparison-row:hover {
+  background-color: rgba(0, 0, 0, 0.015);
+}
+
+/* ============================================
+   ATMOSPHERIC SECTION BACKGROUNDS
+   ============================================ */
+
+/* Hero atmospheric wash */
+.atmosphere-hero {
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 40%, rgba(168, 212, 245, 0.2) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(216, 200, 248, 0.15) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 50% 80%, rgba(252, 217, 196, 0.1) 0%, transparent 70%),
+    var(--color-surface);
+}
+
+/* Reading desk atmospheric wash */
+.atmosphere-desk {
+  background:
+    radial-gradient(ellipse 70% 50% at 30% 50%, rgba(252, 217, 196, 0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 60% at 70% 40%, rgba(216, 200, 248, 0.14) 0%, transparent 70%),
+    var(--color-surface);
+}
+
+/* Trust section glass surface */
+.atmosphere-trust {
+  background:
+    linear-gradient(180deg, rgba(245, 245, 247, 0.8) 0%, rgba(250, 250, 252, 0.5) 100%);
+  border-top: 0.5px solid var(--color-glass-border-subtle);
+  border-bottom: 0.5px solid var(--color-glass-border-subtle);
+}
+
+/* Final CTA gradient mesh */
+.atmosphere-cta {
+  background:
+    radial-gradient(ellipse 60% 50% at 25% 50%, rgba(168, 212, 245, 0.25) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 50% at 75% 50%, rgba(252, 217, 196, 0.2) 0%, transparent 70%),
+    radial-gradient(ellipse 80% 40% at 50% 30%, rgba(216, 200, 248, 0.12) 0%, transparent 70%),
+    linear-gradient(180deg, var(--color-surface) 0%, var(--color-surface-raised) 100%);
+}
+
+/* ============================================
+   NOISE TEXTURE OVERLAY — Subtle grain
+   ============================================ */
+.noise::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px;
+  pointer-events: none;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -201,8 +403,27 @@ body {
   }
 }
 
-/* Selection */
+/* ============================================
+   SELECTION
+   ============================================ */
 ::selection {
-  background: rgba(0, 113, 227, 0.15);
+  background: rgba(0, 113, 227, 0.12);
   color: var(--color-ink);
+}
+
+/* ============================================
+   SCROLLBAR — Refined
+   ============================================ */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.25);
 }
