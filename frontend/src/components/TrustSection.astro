@@ -1,0 +1,61 @@
+---
+const comparisons = [
+  {
+    trait: 'Feed aggregation',
+    others: 'One app for RSS, another for YouTube, another for podcasts',
+    cardmaniacs: 'All syndication formats in one native reader',
+  },
+  {
+    trait: 'Read Later',
+    others: 'Separate pocket-style app with basic parsing',
+    cardmaniacs: 'Built-in with specialized parsers for complex sites',
+  },
+  {
+    trait: 'Bookmarks',
+    others: 'Browser bookmarks scattered across profiles',
+    cardmaniacs: 'Unified bookmark manager with tags and smart folders',
+  },
+  {
+    trait: 'Documents',
+    others: 'Separate PDF readers, note apps, and file managers',
+    cardmaniacs: 'Upload PDFs, EPUB, Markdown — all searchable',
+  },
+  {
+    trait: 'Platform feel',
+    others: 'Electron wrappers, web views, non-native UI',
+    cardmaniacs: 'Totally native Swift on macOS, iOS, and iPadOS',
+  },
+];
+---
+
+<section data-testid="trust-section" class="section-gap bg-surface-raised">
+  <div class="mx-auto max-w-[1120px] px-6">
+    
+    <div class="max-w-[560px] mb-16">
+      <p class="label text-accent mb-4">Why Cardmaniacs</p>
+      <h2 class="heading-display text-ink mb-5">
+        One calm app<br/>instead of five noisy ones.
+      </h2>
+      <p class="body-large text-ink-secondary">
+        Most reading workflows are fragmented across multiple apps. 
+        Cardmaniacs brings feeds, read-later, and bookmarks together 
+        in a single native experience that feels like it belongs on your Mac.
+      </p>
+    </div>
+
+    <!-- Editorial comparison list -->
+    <div class="space-y-0" data-testid="comparison-list">
+      {comparisons.map((c, i) => (
+        <div 
+          class="grid grid-cols-1 md:grid-cols-[180px_1fr_1fr] gap-4 md:gap-8 py-6 border-b border-border-light"
+          data-testid={`comparison-${i}`}
+        >
+          <div class="heading-subsection text-ink">{c.trait}</div>
+          <div class="text-ink-tertiary body-default">{c.others}</div>
+          <div class="text-ink body-default font-medium">{c.cardmaniacs}</div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,32 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { 
+  title = 'Cardmaniacs — Your calm reading desk for feeds, articles, and bookmarks',
+  description = 'A native Apple app that unifies RSS feeds, Read Later, and Bookmarks. Crafted for macOS, iOS, and iPadOS.'
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+
+    <!-- Preconnect to Apple CDN for SF Pro fallback -->
+    <link rel="preconnect" href="https://sf.aaplimg.com" crossorigin />
+  </head>
+  <body class="bg-surface text-ink overflow-x-hidden">
+    <slot />
+  </body>
+</html>

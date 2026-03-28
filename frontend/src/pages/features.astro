@@ -1,0 +1,177 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+import MotionInit from '../components/MotionInit.astro';
+
+const featureGroups = [
+  {
+    label: 'Capture',
+    heading: 'Bring everything into one place.',
+    features: [
+      {
+        title: 'RSS & Atom feeds',
+        description: 'Subscribe to any site that publishes a feed. Full-text parsing, smart deduplication, and a beautiful card-based layout.',
+        screenshot: '/images/Cardmaniacs-mac - 2.png',
+      },
+      {
+        title: 'YouTube, Podcasts, Reddit, Mastodon',
+        description: 'Beyond RSS — add your favorite YouTube channels, podcast feeds, subreddits, and Mastodon accounts as first-class sources.',
+        screenshot: '/images/Cardmaniacs-mac - 9.png',
+      },
+      {
+        title: 'Quick save from anywhere',
+        description: 'Share extension, keyboard shortcut, or drag-and-drop. Save anything from Safari, any app, or the clipboard in under a second.',
+        screenshot: '/images/Cardmaniacs-mac - 10.png',
+      },
+    ]
+  },
+  {
+    label: 'Read',
+    heading: 'The best reading experience on Apple platforms.',
+    features: [
+      {
+        title: 'Specialized parsers',
+        description: 'JS-heavy sites, GitHub READMEs, Wikipedia articles — Cardmaniacs strips the noise and delivers clean, readable text.',
+        screenshot: '/images/Cardmaniacs-mac - 11.png',
+      },
+      {
+        title: 'PDF, EPUB & Markdown',
+        description: 'Upload documents directly. Read them alongside your articles with the same beautiful typography and full-text search.',
+        screenshot: '/images/Cardmaniacs-mac - 12.png',
+      },
+      {
+        title: 'Offline reading',
+        description: 'Articles and documents are synced for offline access. Read on the train, on a flight, or anywhere without a connection.',
+        screenshot: '/images/Cardmaniacs-mac - 13.png',
+      },
+    ]
+  },
+  {
+    label: 'Organize',
+    heading: 'Find anything, instantly.',
+    features: [
+      {
+        title: 'Tags & smart folders',
+        description: 'Flexible organization that adapts to your workflow. Create rules, auto-tag content, and build smart folders that update themselves.',
+        screenshot: '/images/Cardmaniacs-mac - 14.png',
+      },
+      {
+        title: 'Full-text search',
+        description: 'Search across everything — articles, feeds, bookmarks, documents. Fast, local, and private.',
+        screenshot: '/images/Cardmaniacs-mac - 15.png',
+      },
+      {
+        title: 'Vim navigation & keyboard shortcuts',
+        description: 'Power-user navigation inspired by Vim. Navigate, tag, archive, and manage everything without touching the mouse.',
+        screenshot: '/images/Cardmaniacs-mac - 16.png',
+      },
+    ]
+  },
+  {
+    label: 'Integrate',
+    heading: 'Deeply native, deeply connected.',
+    features: [
+      {
+        title: 'Widgets & Shortcuts',
+        description: 'Home screen widgets for unread counts, recent saves, and reading progress. Siri Shortcuts for automated workflows.',
+        screenshot: '/images/Cardmaniacs-mac - 17.png',
+      },
+      {
+        title: 'Handoff & iCloud Sync',
+        description: 'Start reading on your Mac, continue on your iPhone. Everything syncs seamlessly through iCloud.',
+        screenshot: '/images/Cardmaniacs-mac - 8.png',
+      },
+      {
+        title: 'Spotlight & system integration',
+        description: 'Search your saved content from Spotlight. Share to any app. Drag articles into your notes or documents.',
+        screenshot: '/images/Cardmaniacs-mac - 6.png',
+      },
+    ]
+  }
+];
+---
+
+<Layout title="Features — Cardmaniacs">
+  <Header currentPage="features" />
+  
+  <main data-testid="features-page">
+    
+    <!-- Features hero -->
+    <section class="pt-32 pb-16 md:pt-40 md:pb-20 relative overflow-hidden">
+      <div class="blob blob-blue w-[500px] h-[400px] -top-32 -right-24 absolute"></div>
+      <div class="mx-auto max-w-[1120px] px-6 relative">
+        <div class="max-w-[680px]">
+          <p class="label text-accent mb-5">Features</p>
+          <h1 class="heading-hero text-ink mb-6">
+            Three apps in one.<br/>Zero compromise.
+          </h1>
+          <p class="body-large text-ink-secondary max-w-[520px]">
+            Feeds, Read Later, and Bookmarks — unified in a native Apple experience with power-user features and a beautifully crafted interface.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature groups -->
+    {featureGroups.map((group, gi) => (
+      <section 
+        class:list={["section-gap", gi % 2 === 0 ? '' : 'bg-surface-raised']}
+        data-testid={`feature-group-${gi}`}
+      >
+        <div class="mx-auto max-w-[1120px] px-6">
+          
+          <div class="max-w-[560px] mb-16" data-reveal>
+            <p class="label text-accent mb-4">{group.label}</p>
+            <h2 class="heading-display text-ink">{group.heading}</h2>
+          </div>
+
+          <div class="space-y-20 md:space-y-28">
+            {group.features.map((f, fi) => (
+              <div 
+                class:list={[
+                  "grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-14 items-center",
+                  fi % 2 !== 0 ? '' : ''
+                ]}
+                data-reveal
+              >
+                <!-- Text -->
+                <div class:list={[
+                  "md:col-span-4",
+                  fi % 2 !== 0 ? 'md:col-start-9 md:order-2' : ''
+                ]}>
+                  <h3 class="heading-section text-ink mb-3">{f.title}</h3>
+                  <p class="body-default text-ink-secondary">{f.description}</p>
+                </div>
+
+                <!-- Screenshot -->
+                <div class:list={[
+                  "md:col-span-8",
+                  fi % 2 !== 0 ? 'md:col-start-1 md:order-1' : ''
+                ]}>
+                  <div class="macbook-frame">
+                    <img 
+                      src={f.screenshot} 
+                      alt={f.title}
+                      loading="lazy"
+                      class="w-full"
+                    />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+    ))}
+
+    <div data-reveal>
+      <FinalCTA />
+    </div>
+  </main>
+
+  <Footer />
+  <MotionInit />
+</Layout>

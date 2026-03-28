@@ -1,0 +1,68 @@
+---
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+
+<section data-testid="pricing-section" class:list={["section-gap", compact ? '' : 'bg-surface-raised']}>
+  <div class="mx-auto max-w-[1120px] px-6">
+    
+    {!compact && (
+      <div class="max-w-[560px] mb-16">
+        <p class="label text-accent mb-4">Pricing</p>
+        <h2 class="heading-display text-ink mb-5">
+          Simple, fair pricing.
+        </h2>
+        <p class="body-large text-ink-secondary">
+          No free tier, no feature gates, no upsell pressure. 
+          One plan with everything included.
+        </p>
+      </div>
+    )}
+
+    <div class="flex flex-col sm:flex-row gap-6 max-w-[640px]" data-testid="pricing-cards">
+      
+      <!-- Monthly Plan -->
+      <div 
+        class="flex-1 bg-surface rounded-xl p-7 border border-border-light shadow-card hover:shadow-card-hover transition-shadow duration-300"
+        data-testid="pricing-monthly"
+      >
+        <p class="label text-ink-tertiary mb-2">Monthly</p>
+        <div class="flex items-baseline gap-1 mb-1">
+          <span class="heading-section text-ink">$4.99</span>
+          <span class="text-ink-tertiary text-[13px]">/month</span>
+        </div>
+        <p class="text-ink-secondary text-[14px] mb-6">Full access, cancel anytime.</p>
+        <a 
+          href="#download" 
+          class="block w-full text-center bg-surface-raised text-ink text-[14px] font-medium py-2.5 rounded-lg border border-border-light hover:bg-border-light/50 transition-colors duration-200"
+          data-testid="pricing-monthly-cta"
+        >Get started</a>
+      </div>
+
+      <!-- Annual Plan -->
+      <div 
+        class="flex-1 bg-ink rounded-xl p-7 shadow-elevated relative overflow-hidden"
+        data-testid="pricing-annual"
+      >
+        <div class="absolute top-3 right-3 bg-accent text-white text-[11px] font-semibold px-2.5 py-0.5 rounded-pill" data-testid="pricing-save-badge">
+          Save 50%
+        </div>
+        <p class="label text-ink-faint mb-2">Annual</p>
+        <div class="flex items-baseline gap-1 mb-1">
+          <span class="heading-section text-white">$29.99</span>
+          <span class="text-ink-faint text-[13px]">/year</span>
+        </div>
+        <p class="text-ink-faint text-[14px] mb-6">Best value — just $2.50/month.</p>
+        <a 
+          href="#download" 
+          class="block w-full text-center bg-accent text-white text-[14px] font-medium py-2.5 rounded-lg hover:bg-accent-hover transition-colors duration-200"
+          data-testid="pricing-annual-cta"
+        >Get started</a>
+      </div>
+
+    </div>
+  </div>
+</section>

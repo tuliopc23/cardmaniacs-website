@@ -1,0 +1,53 @@
+---
+---
+
+<script>
+  import { animate, scroll, stagger, inView } from 'motion';
+
+  function initAnimations() {
+    // Check for reduced motion preference
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    // Animate elements with data-animate on scroll into view
+    const elements = document.querySelectorAll('[data-reveal]');
+    
+    elements.forEach((el) => {
+      const htmlEl = el as HTMLElement;
+      htmlEl.style.opacity = '0';
+      htmlEl.style.transform = 'translateY(28px)';
+      
+      inView(htmlEl, () => {
+        animate(
+          htmlEl,
+          { opacity: [0, 1], transform: ['translateY(28px)', 'translateY(0px)'] },
+          { duration: 0.65, easing: [0.22, 1, 0.36, 1] }
+        );
+      }, { margin: '-40px 0px -40px 0px' });
+    });
+
+    // Stagger animate groups
+    const groups = document.querySelectorAll('[data-reveal-group]');
+    groups.forEach((group) => {
+      const children = Array.from(group.children) as HTMLElement[];
+      
+      children.forEach((child) => {
+        child.style.opacity = '0';
+        child.style.transform = 'translateY(16px)';
+      });
+
+      inView(group as HTMLElement, () => {
+        animate(
+          children,
+          { opacity: [0, 1], transform: ['translateY(16px)', 'translateY(0px)'] },
+          { duration: 0.5, delay: stagger(0.08), easing: [0.22, 1, 0.36, 1] }
+        );
+      }, { margin: '-40px 0px -40px 0px' });
+    });
+  }
+
+  // Run immediately
+  initAnimations();
+  
+  // Also for Astro view transitions  
+  document.addEventListener('astro:after-swap', initAnimations);
+</script>

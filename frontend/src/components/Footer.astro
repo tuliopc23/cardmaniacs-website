@@ -1,0 +1,62 @@
+---
+---
+
+<footer data-testid="site-footer" class="border-t border-border-light mt-20">
+  <div class="mx-auto max-w-[1120px] px-6 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
+      
+      <!-- Brand column -->
+      <div class="md:col-span-1">
+        <a href="/" class="flex items-center gap-2.5 mb-4">
+          <img src="/images/Graphic.png" alt="Cardmaniacs" class="w-7 h-7 rounded-lg" />
+          <span class="font-display font-semibold text-[15px] tracking-tight">Cardmaniacs</span>
+        </a>
+        <p class="text-ink-tertiary text-[13px] leading-relaxed max-w-[240px]">
+          Your calm reading desk for feeds, articles, and bookmarks. Crafted for Apple platforms.
+        </p>
+      </div>
+
+      <!-- Product column -->
+      <div>
+        <h4 class="label text-ink-tertiary mb-4" data-testid="footer-product-heading">Product</h4>
+        <ul class="space-y-3">
+          <li><a href="/features" class="text-ink-secondary text-[14px] hover:text-ink transition-colors" data-testid="footer-features-link">Features</a></li>
+          <li><a href="/pricing" class="text-ink-secondary text-[14px] hover:text-ink transition-colors" data-testid="footer-pricing-link">Pricing</a></li>
+          <li><a href="#download" class="text-ink-secondary text-[14px] hover:text-ink transition-colors" data-testid="footer-download-link">Download</a></li>
+        </ul>
+      </div>
+
+      <!-- Resources column -->
+      <div>
+        <h4 class="label text-ink-tertiary mb-4" data-testid="footer-resources-heading">Resources</h4>
+        <ul class="space-y-3">
+          <li><a href="/blog" class="text-ink-secondary text-[14px] hover:text-ink transition-colors" data-testid="footer-blog-link">Blog</a></li>
+          <li><a href="#" class="text-ink-secondary text-[14px] hover:text-ink transition-colors">Changelog</a></li>
+          <li><a href="#" class="text-ink-secondary text-[14px] hover:text-ink transition-colors">Support</a></li>
+        </ul>
+      </div>
+
+      <!-- Legal column -->
+      <div>
+        <h4 class="label text-ink-tertiary mb-4" data-testid="footer-legal-heading">Legal</h4>
+        <ul class="space-y-3">
+          <li><a href="#" class="text-ink-secondary text-[14px] hover:text-ink transition-colors">Privacy Policy</a></li>
+          <li><a href="#" class="text-ink-secondary text-[14px] hover:text-ink transition-colors">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-16 pt-6 border-t border-border-light flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <p class="text-ink-tertiary text-[12px]" data-testid="footer-copyright">
+        &copy; {new Date().getFullYear()} Cardmaniacs. All rights reserved.
+      </p>
+      <div class="flex items-center gap-1">
+        <span class="text-ink-tertiary text-[12px]">Crafted with care for</span>
+        <svg class="w-3.5 h-3.5 text-ink-tertiary" viewBox="0 0 14 14" fill="currentColor">
+          <path d="M11.25 1.75C10.09 1.75 9.02 2.29 8.33 3.17L7 4.91L5.67 3.17C4.98 2.29 3.91 1.75 2.75 1.75C0.95 1.75 0 3.17 0 4.83C0 8.75 7 12.25 7 12.25C7 12.25 14 8.75 14 4.83C14 3.17 13.05 1.75 11.25 1.75Z"/>
+        </svg>
+        <span class="text-ink-tertiary text-[12px]">on Apple platforms</span>
+      </div>
+    </div>
+  </div>
+</footer>

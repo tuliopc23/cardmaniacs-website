@@ -1,0 +1,46 @@
+---
+interface Props {
+  currentPage?: string;
+}
+
+const { currentPage = '' } = Astro.props;
+---
+
+<header data-testid="site-header" class="fixed top-0 left-0 right-0 z-50">
+  <div class="mx-auto max-w-[1120px] px-6">
+    <nav class="flex items-center justify-between h-14 border-b border-border-light/50" data-testid="main-nav">
+      
+      <a href="/" class="flex items-center gap-2.5 group" data-testid="logo-link">
+        <img src="/images/Graphic.png" alt="Cardmaniacs" class="w-7 h-7 rounded-lg" />
+        <span class="font-display font-semibold text-[15px] tracking-tight text-ink group-hover:text-accent transition-colors duration-200">Cardmaniacs</span>
+      </a>
+
+      <div class="hidden md:flex items-center gap-8">
+        <a 
+          href="/features" 
+          class:list={["text-[13px] font-medium tracking-tight transition-colors duration-200", currentPage === 'features' ? 'text-ink' : 'text-ink-secondary hover:text-ink']}
+          data-testid="nav-features"
+        >Features</a>
+        <a 
+          href="/pricing" 
+          class:list={["text-[13px] font-medium tracking-tight transition-colors duration-200", currentPage === 'pricing' ? 'text-ink' : 'text-ink-secondary hover:text-ink']}
+          data-testid="nav-pricing"
+        >Pricing</a>
+        <a 
+          href="/blog" 
+          class:list={["text-[13px] font-medium tracking-tight transition-colors duration-200", currentPage === 'blog' ? 'text-ink' : 'text-ink-secondary hover:text-ink']}
+          data-testid="nav-blog"
+        >Blog</a>
+      </div>
+
+      <a 
+        href="#download" 
+        class="bg-ink text-surface text-[13px] font-medium px-4 py-1.5 rounded-pill hover:bg-ink/85 transition-all duration-200"
+        data-testid="nav-download-cta"
+      >Download</a>
+    </nav>
+  </div>
+  
+  <!-- Backdrop blur layer -->
+  <div class="absolute inset-0 -z-10 bg-surface/80 backdrop-blur-xl border-b border-border-light/30"></div>
+</header>
