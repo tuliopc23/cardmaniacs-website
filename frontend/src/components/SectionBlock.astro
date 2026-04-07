@@ -1,0 +1,29 @@
+---
+import Container from './Container.astro';
+
+interface Props {
+  label?: string;
+  heading?: string;
+  class?: string;
+  id?: string;
+  as?: string;
+  inset?: boolean;
+}
+
+const { label, heading, class: className = '', id, as: Tag = 'section', inset = false } = Astro.props;
+---
+
+<Tag
+  id={id}
+  class:list={['py-20 md:py-28 lg:py-32', inset ? 'surface-inset' : '', className]}
+>
+  <Container>
+    {(label || heading) && (
+      <div class="mb-12 md:mb-16 max-w-[560px]">
+        {label && <p class="caption ink-accent mb-4">{label}</p>}
+        {heading && <h2 class="display ink-primary">{heading}</h2>}
+      </div>
+    )}
+    <slot />
+  </Container>
+</Tag>

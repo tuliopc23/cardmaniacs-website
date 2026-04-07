@@ -1,0 +1,14 @@
+---
+interface Props {
+  as?: string;
+  class?: string;
+  narrow?: boolean;
+}
+
+const { as: Tag = 'div', class: className = '', narrow = false } = Astro.props;
+const maxWidth = narrow ? 'max-w-[720px]' : 'max-w-[1120px]';
+---
+
+<Tag class:list={[maxWidth, 'mx-auto px-5 sm:px-6', className]}>
+  <slot />
+</Tag>

@@ -1,0 +1,31 @@
+---
+// Drop this component once on any page that uses data-reveal attributes.
+// It handles scroll-triggered reveal animations via the Motion library.
+---
+
+<script>
+  import { animate, inView } from 'motion';
+
+  function initScrollReveal() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    document.querySelectorAll('[data-reveal]').forEach((el) => {
+      const htmlEl = el as HTMLElement;
+      if (htmlEl.dataset.revealInit) return; // prevent double-init
+      htmlEl.dataset.revealInit = '1';
+      htmlEl.style.opacity = '0';
+      htmlEl.style.transform = 'translateY(24px)';
+
+      inView(htmlEl, () => {
+        animate(
+          htmlEl,
+          { opacity: [0, 1], transform: ['translateY(24px)', 'translateY(0px)'] },
+          { duration: 0.6, easing: 'ease-out' }
+        );
+      }, { margin: '-60px 0px -60px 0px' });
+    });
+  }
+
+  initScrollReveal();
+  document.addEventListener('astro:after-swap', initScrollReveal);
+</script>

@@ -1,0 +1,49 @@
+---
+import SectionBlock from './SectionBlock.astro';
+import Card from './Card.astro';
+
+const pillars = [
+  {
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12.75 19.5v-.75a7.5 7.5 0 00-7.5-7.5H4.5m0-6.75h.75c7.87 0 14.25 6.38 14.25 14.25v.75M6 18.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" /></svg>`,
+    title: 'Feeds',
+    description: 'RSS, Atom, YouTube, podcasts, Reddit, Mastodon — every syndication format in one beautiful card-based stream.',
+    screenshot: '/images/Cardmaniacs-mac - 2.png',
+  },
+  {
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" /></svg>`,
+    title: 'Read Later',
+    description: 'Quick capture from any app, full-text parsing, specialized renderers for complex sites. Your queue, under control.',
+    screenshot: '/images/Cardmaniacs-mac - 5.png',
+  },
+  {
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" /></svg>`,
+    title: 'Bookmarks',
+    description: 'Tags, smart folders, full-text search across everything. Import PDFs, EPUB & Markdown. Your reference library.',
+    screenshot: '/images/Cardmaniacs-mac - 7.png',
+  },
+];
+---
+
+<SectionBlock label="Three pillars" heading="One app for your entire reading workflow.">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+    {pillars.map((pillar) => (
+      <Card variant="interactive" class="p-6 flex flex-col gap-4 group overflow-hidden">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 flex items-center justify-center rounded-[var(--radius-md)] bg-[var(--accent-subtle)] ink-accent">
+            <Fragment set:html={pillar.icon} />
+          </div>
+          <h3 class="subheading ink-primary">{pillar.title}</h3>
+        </div>
+        <p class="body-s ink-secondary leading-relaxed">{pillar.description}</p>
+        <div class="mt-auto pt-4 -mx-6 -mb-6 overflow-hidden rounded-b-[var(--radius-lg)]">
+          <img
+            src={pillar.screenshot}
+            alt={`Cardmaniacs — ${pillar.title}`}
+            loading="lazy"
+            class="w-full h-auto transition-transform duration-500 group-hover:scale-[1.02]"
+          />
+        </div>
+      </Card>
+    ))}
+  </div>
+</SectionBlock>

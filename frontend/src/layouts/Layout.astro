@@ -4,12 +4,16 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  ogImage?: string;
 }
 
-const { 
-  title = 'Cardmaniacs — Your calm reading desk for feeds, articles, and bookmarks',
-  description = 'A native Apple app that unifies RSS feeds, Read Later, and Bookmarks. Crafted for macOS, iOS, and iPadOS.'
+const {
+  title = 'Cardmaniacs — Your calm reading desk for feeds, articles & bookmarks',
+  description = 'A native Apple app that unifies RSS feeds, Read Later, and Bookmarks into one beautifully crafted experience. Built for macOS, iOS & iPadOS.',
+  ogImage = '/images/Graphic.png',
 } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://cardmaniacs.app');
 ---
 
 <!doctype html>
@@ -17,16 +21,54 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Theme flash prevention — runs before paint -->
+    <script is:inline>
+      (function() {
+        var stored = localStorage.getItem('cm-theme');
+        if (stored === 'dark' || stored === 'light') {
+          document.documentElement.setAttribute('data-theme', stored);
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
+
+    <!-- Preload critical font -->
+    <link
+      rel="preload"
+      href="/fonts/Satoshi-Variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
-    <meta name="description" content={description} />
-    <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
 
-    <!-- Preconnect to Apple CDN for SF Pro fallback -->
-    <link rel="preconnect" href="https://sf.aaplimg.com" crossorigin />
+    <!-- SEO -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={canonicalURL} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
   </head>
-  <body class="bg-surface text-ink overflow-x-hidden">
+  <body>
     <slot />
   </body>
 </html>

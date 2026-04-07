@@ -1,0 +1,56 @@
+---
+import SectionBlock from './SectionBlock.astro';
+import Card from './Card.astro';
+import Button from './Button.astro';
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+
+<SectionBlock
+  label={compact ? undefined : 'Pricing'}
+  heading={compact ? undefined : 'Simple, fair pricing.'}
+  class={compact ? 'py-12 md:py-16' : ''}
+>
+  {!compact && (
+    <p class="body-l ink-secondary max-w-[480px] -mt-8 mb-12 leading-relaxed">
+      No free tier, no feature gates, no upsell pressure. One plan with everything included.
+    </p>
+  )}
+
+  <div class="flex flex-col sm:flex-row gap-5 max-w-[600px]">
+    <!-- Monthly -->
+    <Card variant="raised" class="flex-1 p-7">
+      <p class="caption ink-tertiary mb-3">Monthly</p>
+      <div class="flex items-baseline gap-1 mb-1.5">
+        <span class="heading ink-primary">$4.99</span>
+        <span class="body-s ink-tertiary">/month</span>
+      </div>
+      <p class="body-s ink-secondary mb-6">Full access, cancel anytime.</p>
+      <Button href="#download" variant="secondary" class="w-full justify-center">
+        Get started
+      </Button>
+    </Card>
+
+    <!-- Annual -->
+    <Card variant="raised" class="flex-1 p-7 relative border-[var(--border-accent)]!">
+      <div class="absolute top-3 right-3">
+        <span class="inline-flex items-center px-2.5 py-1 rounded-[var(--radius-full)] text-[11px] font-display font-semibold bg-[var(--accent)] text-white">
+          Save 50%
+        </span>
+      </div>
+      <p class="caption ink-tertiary mb-3">Annual</p>
+      <div class="flex items-baseline gap-1 mb-1.5">
+        <span class="heading ink-primary">$29.99</span>
+        <span class="body-s ink-tertiary">/year</span>
+      </div>
+      <p class="body-s ink-secondary mb-6">Best value — $2.50/month.</p>
+      <Button href="#download" class="w-full justify-center">
+        Get started
+      </Button>
+    </Card>
+  </div>
+</SectionBlock>

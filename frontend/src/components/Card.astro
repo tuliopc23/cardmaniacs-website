@@ -1,0 +1,27 @@
+---
+interface Props {
+  variant?: 'flat' | 'raised' | 'interactive';
+  class?: string;
+  as?: string;
+  href?: string;
+}
+
+const { variant = 'raised', class: className = '', as, href } = Astro.props;
+
+const Tag = href ? 'a' : (as ?? 'div');
+
+const baseStyles = 'rounded-[var(--radius-lg)] border transition-all duration-300';
+
+const variantStyles = {
+  flat: 'border-[var(--border-subtle)] bg-transparent',
+  raised: 'surface-raised border-[var(--border-subtle)] shadow-[var(--shadow-card)]',
+  interactive: 'surface-raised border-[var(--border-subtle)] shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] hover:-translate-y-0.5 cursor-pointer',
+};
+---
+
+<Tag
+  href={href}
+  class:list={[baseStyles, variantStyles[variant], className]}
+>
+  <slot />
+</Tag>
