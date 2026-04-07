@@ -1,0 +1,76 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  loading?: 'eager' | 'lazy';
+  class?: string;
+}
+
+const { src, alt, loading = 'lazy', class: className = '' } = Astro.props;
+---
+
+<div class:list={['device-frame', className]}>
+  <div class="device-frame__titlebar">
+    <div class="device-frame__dots">
+      <span class="device-frame__dot device-frame__dot--close"></span>
+      <span class="device-frame__dot device-frame__dot--minimize"></span>
+      <span class="device-frame__dot device-frame__dot--zoom"></span>
+    </div>
+  </div>
+  <img src={src} alt={alt} loading={loading} class="device-frame__screen" />
+</div>
+
+<style>
+  .device-frame {
+    position: relative;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    background: var(--surface-overlay);
+    box-shadow: var(--shadow-device);
+    transition: box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .device-frame:hover {
+    box-shadow:
+      var(--shadow-device),
+      0 0 0 1px var(--border-subtle);
+  }
+
+  .device-frame__titlebar {
+    height: 36px;
+    background: var(--surface-overlay);
+    border-bottom: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+  }
+
+  .device-frame__dots {
+    display: flex;
+    gap: 7px;
+  }
+
+  .device-frame__dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+  }
+
+  .device-frame__dot--close {
+    background: #ff5f57;
+  }
+
+  .device-frame__dot--minimize {
+    background: #febc2e;
+  }
+
+  .device-frame__dot--zoom {
+    background: #28c840;
+  }
+
+  .device-frame__screen {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+</style>

@@ -1,7 +1,7 @@
 {
   "name": "",
-  "type": "module",
   "version": "0.0.1",
+  "type": "module",
   "scripts": {
     "dev": "astro dev --port 3000 --host 0.0.0.0",
     "start": "astro dev --port 3000 --host 0.0.0.0",
@@ -20,6 +20,8 @@
     "motion": "^12.38.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "tailwindcss": "^4.2.2"
-  }
+    "tailwindcss": "^4.2.2",
+    "vite": "^7.3.1"
+  },
+  "packageManager": "pnpm@10.33.0"
 }

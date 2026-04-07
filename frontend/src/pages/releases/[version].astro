@@ -1,0 +1,74 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SiteNav from '../../components/SiteNav.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import Container from '../../components/Container.astro';
+import Pill from '../../components/Pill.astro';
+import Button from '../../components/Button.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const releases = await getCollection('releases');
+  return releases.map((release) => ({
+    params: { version: release.id },
+    props: { release },
+  }));
+}
+
+const { release } = Astro.props;
+const { Content } = await render(release);
+---
+
+<Layout title={`${release.data.title} — Cardmaniacs`}>
+  <SiteNav />
+
+  <main>
+    <article class="pt-32 pb-20 md:pt-40 md:pb-28">
+      <Container narrow>
+        <header class="mb-10">
+          <a href="/changelog" class="inline-flex items-center gap-1.5 ink-accent text-[13px] font-display font-medium mb-6 hover:underline underline-offset-2">
+            ← Back to changelog
+          </a>
+
+          <div class="flex flex-wrap items-center gap-2 mb-4">
+            {release.data.version && <Pill variant="accent">v{release.data.version}</Pill>}
+            {release.data.platforms && <Pill variant="muted">{release.data.platforms}</Pill>}
+          </div>
+
+          {release.data.date && (
+            <time class="caption ink-tertiary block mb-4" datetime={release.data.date}>
+              {new Date(release.data.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+            </time>
+          )}
+
+          <h1 class="display ink-primary mb-4">{release.data.title}</h1>
+
+          {release.data.highlights && (
+            <p class="body-l ink-secondary leading-relaxed">{release.data.highlights}</p>
+          )}
+
+          {release.data.downloadUrl && (
+            <div class="mt-6">
+              <Button href={release.data.downloadUrl}>Download</Button>
+            </div>
+          )}
+        </header>
+
+        <div class="prose">
+          <Content />
+        </div>
+      </Container>
+    </article>
+  </main>
+
+  <SiteFooter />
+</Layout>
+
+<style>
+  .prose { font-size: 1.0625rem; line-height: 1.7; color: var(--ink-primary); }
+  .prose :global(h2) { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; margin-top: 2.5rem; margin-bottom: 1rem; color: var(--ink-primary); }
+  .prose :global(p) { margin-bottom: 1.25rem; color: var(--ink-secondary); }
+  .prose :global(ul) { list-style: disc; padding-left: 1.5rem; margin-bottom: 1.25rem; }
+  .prose :global(li) { margin-bottom: 0.5rem; color: var(--ink-secondary); }
+  .prose :global(strong) { color: var(--ink-primary); font-weight: 600; }
+</style>

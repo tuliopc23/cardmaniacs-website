@@ -1,0 +1,45 @@
+---
+import Container from './Container.astro';
+import DeviceFrame from './DeviceFrame.astro';
+
+interface Props {
+  label: string;
+  heading: string;
+  description: string;
+  screenshot: string;
+  screenshotAlt: string;
+  reverse?: boolean;
+  inset?: boolean;
+}
+
+const { label, heading, description, screenshot, screenshotAlt, reverse = false, inset = false } = Astro.props;
+---
+
+<section class:list={['py-20 md:py-28 lg:py-32', inset ? 'surface-inset' : '']}>
+  <Container>
+    <div class:list={[
+      'grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center',
+    ]}>
+      <!-- Text side -->
+      <div class:list={[
+        'lg:col-span-4',
+        reverse ? 'lg:col-start-9 lg:order-2' : '',
+      ]}>
+        <p class="caption ink-accent mb-4">{label}</p>
+        <h2 class="display ink-primary mb-5">{heading}</h2>
+        <p class="body-l ink-secondary leading-relaxed">{description}</p>
+      </div>
+
+      <!-- Screenshot side -->
+      <div class:list={[
+        'lg:col-span-8',
+        reverse ? 'lg:col-start-1 lg:row-start-1 lg:order-1' : '',
+      ]} data-reveal>
+        <DeviceFrame
+          src={screenshot}
+          alt={screenshotAlt}
+        />
+      </div>
+    </div>
+  </Container>
+</section>

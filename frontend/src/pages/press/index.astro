@@ -1,0 +1,79 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SiteNav from '../../components/SiteNav.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import Container from '../../components/Container.astro';
+import Card from '../../components/Card.astro';
+import Pill from '../../components/Pill.astro';
+---
+
+<Layout title="Press Kit — Cardmaniacs">
+  <SiteNav />
+
+  <main>
+    <section class="pt-32 pb-16 md:pt-40 md:pb-20">
+      <Container>
+        <div class="max-w-[680px]">
+          <p class="caption ink-accent mb-5">Press Kit</p>
+          <h1 class="display-xl ink-primary mb-6">Media & assets.</h1>
+          <p class="body-l ink-secondary max-w-[520px]">
+            Download app icons, screenshots, and branding assets for press coverage and reviews.
+          </p>
+        </div>
+      </Container>
+    </section>
+
+    <section class="pb-20">
+      <Container>
+        <!-- App icon -->
+        <div class="mb-16">
+          <h2 class="heading ink-primary mb-6">App Icon</h2>
+          <div class="flex items-center gap-6">
+            <img src="/images/Graphic.png" alt="Cardmaniacs App Icon" class="w-24 h-24 rounded-[20px]" style="box-shadow: var(--shadow-card);" />
+            <div>
+              <p class="body-s ink-secondary mb-2">Cardmaniacs app icon in PNG format.</p>
+              <a href="/images/Graphic.png" download class="body-s ink-accent font-medium hover:underline underline-offset-2">Download PNG →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Screenshots -->
+        <div>
+          <h2 class="heading ink-primary mb-6">Screenshots</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {[
+              { src: '/images/Cardmaniacs-mac - 1.png', label: 'Empty state', platform: 'macOS' },
+              { src: '/images/Cardmaniacs-mac - 2.png', label: 'Card grid view', platform: 'macOS' },
+              { src: '/images/Cardmaniacs-mac - 3.png', label: 'Article reader', platform: 'macOS' },
+              { src: '/images/Cardmaniacs-mac - 4.png', label: 'Feed stream', platform: 'macOS' },
+            ].map((s) => (
+              <Card variant="raised" class="overflow-hidden">
+                <img src={s.src} alt={s.label} loading="lazy" class="w-full h-auto" />
+                <div class="p-4 flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <span class="body-s ink-primary font-medium">{s.label}</span>
+                    <Pill variant="muted">{s.platform}</Pill>
+                  </div>
+                  <a href={s.src} download class="body-s ink-accent font-medium hover:underline underline-offset-2">Download</a>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        <!-- About blurb -->
+        <div class="mt-16 max-w-[560px]">
+          <h2 class="heading ink-primary mb-4">About Cardmaniacs</h2>
+          <p class="body ink-secondary leading-relaxed mb-3">
+            Cardmaniacs is a native Apple app that unifies RSS feeds, Read Later, and Bookmarks into one beautifully crafted reading experience. Built entirely in Swift for macOS, iOS, and iPadOS, it features card-based content presentation, full-text search, offline reading, iCloud sync, and power-user features like Vim navigation.
+          </p>
+          <p class="body-s ink-tertiary">
+            For press inquiries, contact <a href="mailto:press@cardmaniacs.app" class="ink-accent hover:underline underline-offset-2">press@cardmaniacs.app</a>.
+          </p>
+        </div>
+      </Container>
+    </section>
+  </main>
+
+  <SiteFooter />
+</Layout>

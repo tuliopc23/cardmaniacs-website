@@ -1,0 +1,23 @@
+---
+import Container from './Container.astro';
+import AppStoreButton from './AppStoreButton.astro';
+---
+
+<section class="relative py-24 md:py-32 text-center overflow-hidden" id="download">
+  <!-- Subtle warm radial -->
+  <div
+    class="absolute inset-0 pointer-events-none opacity-[0.04]"
+    style="background: radial-gradient(ellipse 70% 50% at 50% 50%, var(--accent) 0%, transparent 70%);"
+  ></div>
+
+  <Container class="relative z-10">
+    <h2 class="display-xl ink-primary mb-6 max-w-[600px] mx-auto">
+      Start reading,<br/>stop tab-hoarding.
+    </h2>
+    <p class="body-l ink-secondary mb-10 max-w-[440px] mx-auto leading-relaxed">
+      Download Cardmaniacs for macOS, iOS, or iPadOS. Your calm reading desk is waiting.
+    </p>
+    <AppStoreButton class="mx-auto" />
+    <p class="caption ink-tertiary mt-6">Available on macOS, iOS & iPadOS</p>
+  </Container>
+</section>

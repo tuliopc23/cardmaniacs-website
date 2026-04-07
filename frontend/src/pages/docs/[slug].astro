@@ -1,0 +1,92 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SiteNav from '../../components/SiteNav.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import Container from '../../components/Container.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const docs = await getCollection('docs');
+  return docs.map((doc) => ({
+    params: { slug: doc.id },
+    props: { doc },
+  }));
+}
+
+const { doc } = Astro.props;
+const { Content } = await render(doc);
+
+const allDocs = await getCollection('docs');
+const sorted = allDocs.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+const sections = new Map<string, typeof sorted>();
+sorted.forEach((d) => {
+  const section = d.data.section ?? 'General';
+  if (!sections.has(section)) sections.set(section, []);
+  sections.get(section)!.push(d);
+});
+---
+
+<Layout title={`${doc.data.title} — Cardmaniacs Docs`}>
+  <SiteNav />
+
+  <main class="pt-32 pb-20 md:pt-40 md:pb-28">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-[220px_1fr] gap-12">
+        <!-- Sidebar -->
+        <aside class="hidden lg:block">
+          <nav class="sticky top-28 space-y-6">
+            {[...sections.entries()].map(([section, items]) => (
+              <div>
+                <p class="caption ink-tertiary mb-2">{section}</p>
+                <ul class="space-y-1">
+                  {items.map((d) => (
+                    <li>
+                      <a
+                        href={`/docs/${d.id}`}
+                        class:list={[
+                          'block body-s px-3 py-1.5 rounded-[var(--radius-sm)] transition-colors duration-200',
+                          d.id === doc.id
+                            ? 'ink-primary bg-[var(--accent-subtle)] font-medium'
+                            : 'ink-secondary hover:ink-primary hover:bg-[var(--surface-overlay)]',
+                        ]}
+                      >
+                        {d.data.title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </nav>
+        </aside>
+
+        <!-- Content -->
+        <article class="max-w-[680px]">
+          <a href="/docs" class="inline-flex items-center gap-1.5 ink-accent text-[13px] font-display font-medium mb-6 hover:underline underline-offset-2 lg:hidden">
+            ← All docs
+          </a>
+          {doc.data.section && <p class="caption ink-tertiary mb-2">{doc.data.section}</p>}
+          <h1 class="display ink-primary mb-8">{doc.data.title}</h1>
+          <div class="prose">
+            <Content />
+          </div>
+        </article>
+      </div>
+    </Container>
+  </main>
+
+  <SiteFooter />
+</Layout>
+
+<style>
+  .prose { font-size: 1.0625rem; line-height: 1.7; color: var(--ink-primary); }
+  .prose :global(h2) { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; line-height: 1.2; letter-spacing: -0.025em; margin-top: 2.5rem; margin-bottom: 1rem; color: var(--ink-primary); }
+  .prose :global(h3) { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; margin-top: 2rem; margin-bottom: 0.75rem; color: var(--ink-primary); }
+  .prose :global(p) { margin-bottom: 1.25rem; color: var(--ink-secondary); }
+  .prose :global(ul), .prose :global(ol) { margin-bottom: 1.25rem; padding-left: 1.5rem; }
+  .prose :global(li) { margin-bottom: 0.5rem; color: var(--ink-secondary); }
+  .prose :global(ul) { list-style: disc; }
+  .prose :global(strong) { color: var(--ink-primary); font-weight: 600; }
+  .prose :global(a) { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+  .prose :global(code) { font-family: var(--font-mono); font-size: 0.9em; background: var(--surface-overlay); padding: 0.15em 0.4em; border-radius: 4px; }
+</style>
