@@ -1,0 +1,42 @@
+---
+interface Props {
+  variant?: "primary" | "secondary" | "ghost" | "quiet";
+  size?: "sm" | "md" | "lg";
+  href?: string;
+  class?: string;
+}
+
+const {
+  variant = "primary",
+  size = "md",
+  href,
+  class: className = "",
+} = Astro.props;
+
+const Tag = href ? "a" : "button";
+
+const base =
+  "group inline-flex items-center justify-center gap-2 select-none font-display font-semibold transition-all duration-200 active:scale-[0.985] motion-reduce:active:scale-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-base)] [border-radius:var(--radius-pill)]";
+
+const sizes = {
+  sm: "text-[13px] px-4 py-1.5",
+  md: "text-[14px] px-5 py-2.5",
+  lg: "text-[15px] px-7 py-3",
+} as const;
+
+const variants = {
+  primary:
+    "text-white bg-[var(--accent)] shadow-[var(--shadow-button)] hover:bg-[var(--accent-hover)] hover:-translate-y-[1px] active:translate-y-0",
+  secondary:
+    "text-[var(--ink-primary)] bg-[color-mix(in_oklab,var(--surface-elevated)_80%,transparent)] border border-[var(--border-strong)] hover:bg-[var(--surface-overlay)]",
+  ghost:
+    "text-[var(--ink-secondary)] hover:text-[var(--ink-primary)] hover:bg-[var(--accent-subtle)]",
+  quiet:
+    "text-[var(--ink-secondary)] bg-transparent border border-[var(--border-subtle)] hover:text-[var(--ink-primary)] hover:bg-[var(--surface-overlay)]",
+} as const;
+---
+
+<Tag href={href} class:list={[base, sizes[size], variants[variant], className]}>
+  <slot />
+</Tag>
+

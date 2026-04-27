@@ -11,6 +11,7 @@ Technical constraints are already clear: Astro latest with Vite, Tailwind CSS v4
 ## Goals / Non-Goals
 
 **Goals:**
+
 - Define a cohesive marketing system that translates the Cardmaniacs app’s visual language into the web.
 - Specify the information architecture and section rhythm for Home, Features, Pricing, and a blog-ready shell.
 - Make the site sell Cardmaniacs as a premium native Apple-platform product for macOS, iPhone, and iPad rather than a generic web app.
@@ -19,6 +20,7 @@ Technical constraints are already clear: Astro latest with Vite, Tailwind CSS v4
 - Create implementation-ready specs that future work can follow without re-deciding the site’s identity.
 
 **Non-Goals:**
+
 - Implementing the website in this change.
 - Finalizing commercial pricing copy or App Store submission details.
 - Creating exhaustive Sanity schema field definitions for every content type.
@@ -29,6 +31,7 @@ Technical constraints are already clear: Astro latest with Vite, Tailwind CSS v4
 ## Decisions
 
 ### 1. Split the change into four capabilities instead of one monolithic marketing spec
+
 - **Decision:** Model the work as `marketing-design-language`, `marketing-page-architecture`, `marketing-content-platform`, and `marketing-delivery-foundation`.
 - **Rationale:** The site has four distinct concerns: visual identity, page behavior, editorial content ownership, and implementation constraints. Separating them keeps requirements readable and reduces future spec churn when only one area evolves.
 - **Alternatives considered:**
@@ -36,6 +39,7 @@ Technical constraints are already clear: Astro latest with Vite, Tailwind CSS v4
   - **One spec per page only:** Rejected because design system and delivery constraints are cross-cutting and should not be duplicated.
 
 ### 2. Use an “Apple-native editorial desk” design direction rather than a SaaS landing page or a literal Apple clone
+
 - **Decision:** The website will adapt the app’s layered cards, soft glass, floating controls, and calm asymmetry into editorial compositions that feel native to Cardmaniacs.
 - **Rationale:** The app imagery already communicates the strongest brand signal. Leaning into that signal creates consistency between product and marketing while avoiding startup-template aesthetics.
 - **Alternatives considered:**
@@ -43,6 +47,7 @@ Technical constraints are already clear: Astro latest with Vite, Tailwind CSS v4
   - **Direct Apple.com mimicry:** Rejected because it would weaken Cardmaniacs’ own identity and create awkward expectations.
 
 ### 2a. Keep the inspiration boundary explicit
+
 - **Decision:** External references such as Bear, Things, Craft, and Apple developer marketing guide composition and quality level, but the site must keep Cardmaniacs’ own colors, iconography, copy, and screenshot art direction.
 - **Rationale:** The requested direction is “adapt, not mimic.” Treating inspiration as a quality bar rather than a template preserves originality and reduces the risk of derivative output.
 - **Alternatives considered:**
@@ -50,6 +55,7 @@ Technical constraints are already clear: Astro latest with Vite, Tailwind CSS v4
   - **Ignoring the references entirely:** Rejected because they establish the target level of craft, pacing, and restraint.
 
 ### 3. Keep the site multi-page but intentionally lean
+
 - **Decision:** The primary architecture is Home, Features, Pricing, and blog/changelog editorial surfaces, with a thin global navigation and restrained CTA system.
 - **Rationale:** This gives enough space to explain the product’s three-in-one model, premium Apple-platform fit, and future editorial content without introducing a sprawling sitemap.
 - **Alternatives considered:**
@@ -57,6 +63,7 @@ Technical constraints are already clear: Astro latest with Vite, Tailwind CSS v4
   - **Large docs-like site:** Rejected because the near-term goal is focused marketing and app download conversion.
 
 ### 4. Use real app imagery as the core art direction system
+
 - **Decision:** Screenshot crops, layered windows, sidebar fragments, floating toolbar details, and the app icon become the main visual artifacts.
 - **Rationale:** The product UI already contains the exact qualities the site needs to sell: sculpted cards, calm surface contrast, elegant chrome, and strong content framing.
 - **Alternatives considered:**
@@ -64,12 +71,14 @@ Technical constraints are already clear: Astro latest with Vite, Tailwind CSS v4
   - **Abstract illustration-led storytelling:** Rejected because it hides the product’s strongest differentiator.
 
 ### 4a. Favor card-led staging over device-led staging
+
 - **Decision:** Website compositions should privilege article cards, layered reading surfaces, and cropped product windows over full hardware silhouettes.
 - **Rationale:** Cardmaniacs’ strongest visual differentiator is its content-as-cards reading interface, not the existence of a device shell.
 - **Alternatives considered:**
   - **Large phone or laptop mock-device hero compositions:** Rejected because they over-index on hardware presence and underplay the reading-desk metaphor.
 
 ### 5. Keep Sanity selective and editorial, not all-powerful
+
 - **Decision:** Sanity owns blog posts, changelog entries, and selected editable marketing sections, while page layout, component structure, and token logic remain in code.
 - **Rationale:** This balances content flexibility with the need to preserve visual quality and motion behavior in a highly art-directed site.
 - **Alternatives considered:**
@@ -77,12 +86,14 @@ Technical constraints are already clear: Astro latest with Vite, Tailwind CSS v4
   - **Fully composable CMS pages:** Rejected because it would dilute the design system and increase implementation overhead.
 
 ### 5a. Separate structured editorial content from composed marketing layout
+
 - **Decision:** Blog posts and changelog entries may be fully content-driven, but top-level marketing pages keep authored slots inside code-owned layouts rather than schema-defined page builders.
 - **Rationale:** A page-builder CMS would undermine the asymmetrical composition and art-directed screenshot system this project depends on.
 - **Alternatives considered:**
   - **Universal page-builder model:** Rejected because it optimizes flexibility at the expense of quality and consistency.
 
 ### 6. Use Tailwind v4 tokens and shared primitives, with Motion.dev reserved for high-value moments
+
 - **Decision:** The implementation should define a tokenized design layer in Tailwind v4 and reusable primitives for sections, cards, CTAs, screenshot frames, proof chips, page bands, and navigation chrome. Motion.dev should power hero reveals, layout transitions, and selected hover/scroll moments, while simpler micro-interactions stay in CSS.
 - **Rationale:** The site needs both polish and restraint. Shared primitives prevent drift, and selective motion keeps the site premium rather than noisy.
 - **Alternatives considered:**
@@ -90,12 +101,14 @@ Technical constraints are already clear: Astro latest with Vite, Tailwind CSS v4
   - **Motion on every element:** Rejected because it would undermine clarity and reduced-motion support.
 
 ### 6a. Encode anti-patterns in the system, not only in review comments
+
 - **Decision:** The design system and specs explicitly forbid generic SaaS hero patterns, loud startup gradients, dense dashboard grids, center-aligned-everything layouts, excessive glassmorphism, and default corporate font choices.
 - **Rationale:** The requested design direction is defined as much by what it avoids as by what it includes. Making anti-patterns explicit reduces regression during implementation.
 - **Alternatives considered:**
   - **Relying on taste alone during implementation:** Rejected because the repo currently has no established visual baseline.
 
 ### 7. Default to static-first delivery on Workers with strong media discipline
+
 - **Decision:** The site should be designed as a static-first marketing surface that can pull editorial content from Sanity while keeping image handling, loading, and animation budgets controlled.
 - **Rationale:** Cardmaniacs is a download-focused product site, so fast first paint and stable layouts matter more than heavy interactivity.
 - **Alternatives considered:**

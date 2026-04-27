@@ -1,0 +1,68 @@
+---
+import Surface from "../ui/Surface.astro";
+import Pill from "../Pill.astro";
+import Prose from "../ui/Prose.astro";
+
+interface Props {
+  version?: string;
+  type?: string;
+  platform?: string;
+  date?: string;
+  title: string;
+  href?: string;
+  size?: "card" | "row";
+}
+
+const {
+  version,
+  type,
+  platform,
+  date,
+  title,
+  href,
+  size = "card",
+} = Astro.props;
+
+const typeVariant =
+  type === "feature" ? "accent" : type === "fix" ? "muted" : "default";
+---
+
+<Surface
+  href={href}
+  variant={size === "row" ? "paper" : "elevated"}
+  interactive={Boolean(href) && size !== "row"}
+  class:list={[
+    size === "row"
+      ? "py-7 border-0 border-b border-[var(--border-subtle)] last:border-b-0"
+      : "p-6 md:p-7",
+  ]}
+>
+  <div class:list={[size === "row" ? "" : "space-y-2"]}>
+    <div class="flex flex-wrap items-center gap-2">
+      {version && <Pill variant="accent">v{version}</Pill>}
+      {type && <Pill variant={typeVariant}>{type}</Pill>}
+      {platform && platform !== "all" && <Pill variant="muted">{platform}</Pill>}
+    </div>
+
+    {date && (
+      <time class="caption ink-tertiary block mt-3" datetime={date}>
+        {new Date(date).toLocaleDateString("en-US", {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        })}
+      </time>
+    )}
+
+    <h2 class:list={[size === "row" ? "heading" : "subheading", "ink-primary mt-3 text-balance"]}>
+      {title}
+    </h2>
+
+    <div class="mt-4">
+      <Prose size="sm">
+        <slot />
+      </Prose>
+    </div>
+  </div>
+</Surface>
+

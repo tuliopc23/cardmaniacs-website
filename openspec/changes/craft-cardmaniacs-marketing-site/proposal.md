@@ -16,6 +16,7 @@ Cardmaniacs already has a strong product identity as a native reading desk for f
 ## Capabilities
 
 ### New Capabilities
+
 - `marketing-design-language`: Defines the visual grammar, typography hierarchy, composition rules, anti-patterns, screenshot staging, motion style, and Apple-native quality bar for the Cardmaniacs website.
 - `marketing-page-architecture`: Defines the required pages, global navigation, section sequencing, CTA placement, platform messaging, and editorial layout rules for the marketing experience.
 - `marketing-content-platform`: Defines the Sanity-backed blog and changelog shell plus the bounded editable marketing content that should live in CMS.

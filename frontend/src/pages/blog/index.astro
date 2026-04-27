@@ -20,19 +20,19 @@ const sortedPosts = posts
   <SiteNav currentPage="blog" />
 
   <main>
-    <section class="pt-32 pb-16 md:pt-40 md:pb-20">
+    <section class="pt-32 pb-14 md:pt-40 md:pb-18">
       <Container>
-        <div class="max-w-[680px]">
-          <p class="caption ink-accent mb-5">Blog</p>
-          <h1 class="display-xl ink-primary mb-6">Notes from<br/>the reading desk.</h1>
-          <p class="body-l ink-secondary max-w-[520px]">
+        <div class="max-w-[760px]">
+          <p class="caption ink-accent mb-5">Notes from the reading desk</p>
+          <h1 class="display-xl ink-primary mb-6 text-balance">Calm thoughts on reading, craft, and native software.</h1>
+          <p class="body-l ink-secondary max-w-[560px] text-pretty">
             Updates, thoughts, and stories about building a calm reading experience for Apple platforms.
           </p>
         </div>
       </Container>
     </section>
 
-    <section class="pb-20">
+    <section class="pb-24">
       <Container>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {sortedPosts.map((post) => (

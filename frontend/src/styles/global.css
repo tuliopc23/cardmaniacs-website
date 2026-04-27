@@ -27,66 +27,161 @@
   --radius-lg: 16px;
   --radius-xl: 24px;
   --radius-full: 9999px;
+
+  /* Semantic radii (design system) */
+  --radius-pill: var(--radius-full);
+  --radius-panel: var(--radius-xl);
+  --radius-card: var(--radius-lg);
+  --radius-hero: 28px;
+
+  /* Backdrop levels */
+  --blur-glass: 18px;
+  --blur-nav: 22px;
+  --sat-glass: 1.35;
 }
 
 /* ==============================================
-   COLOR TOKENS — Dual-mode via data-theme
+   TOKENS — Dual-mode via data-theme
    ============================================== */
 :root,
 [data-theme="light"] {
-  --surface-base: #fafaf8;
-  --surface-raised: #ffffff;
-  --surface-floating: rgba(255, 255, 255, 0.78);
-  --surface-overlay: #f5f5f3;
-  --surface-inset: #f0f0ee;
+  /* Brand (Cardmaniacs blue) */
+  --cm-blue: #539ac6;
+  --cm-blue-hover: #4b90bc;
+  --cm-blue-ink: #1a5d7a;
+  --cm-blue-subtle: color-mix(in oklab, var(--cm-blue) 10%, white);
+  --cm-blue-subtle-2: color-mix(in oklab, var(--cm-blue) 16%, white);
+
+  /* Background atmosphere */
+  --bg-paper: oklch(0.985 0.008 95);
+  --bg-paper-warm: oklch(0.987 0.01 85);
+  --bg-atmo-1: color-mix(in oklab, var(--cm-blue) 18%, white);
+  --bg-atmo-2: color-mix(in oklab, var(--cm-blue) 10%, white);
+  --bg-vignette: rgba(6, 10, 20, 0.05);
+
+  /* Surfaces */
+  --surface-base: color-mix(in oklab, var(--bg-paper) 70%, var(--bg-paper-warm));
+  --surface-raised: rgba(255, 255, 255, 0.92);
+  --surface-elevated: rgba(255, 255, 255, 0.98);
+  --surface-glass: rgba(255, 255, 255, 0.64);
+  --surface-floating: var(--surface-glass);
+  --surface-overlay: color-mix(in oklab, var(--surface-base) 92%, black);
+  --surface-inset: color-mix(in oklab, var(--surface-base) 82%, black);
 
   --ink-primary: #1d1d1f;
   --ink-secondary: #6e6e73;
   --ink-tertiary: #86868b;
   --ink-faint: #d2d2d7;
 
-  --accent: #0071e3;
-  --accent-hover: #0077ed;
-  --accent-subtle: rgba(0, 113, 227, 0.08);
+  /* Back-compat: existing components reference --accent */
+  --accent: var(--cm-blue);
+  --accent-hover: var(--cm-blue-hover);
+  --accent-subtle: color-mix(in oklab, var(--cm-blue) 12%, transparent);
 
   --border-subtle: rgba(0, 0, 0, 0.05);
   --border-strong: rgba(0, 0, 0, 0.1);
-  --border-accent: rgba(0, 113, 227, 0.2);
+  --border-glass: rgba(255, 255, 255, 0.46);
+  --border-accent: color-mix(in oklab, var(--cm-blue) 26%, transparent);
+  --ring-focus: color-mix(in oklab, var(--cm-blue) 70%, white);
 
-  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.06);
-  --shadow-card-hover: 0 2px 4px rgba(0, 0, 0, 0.06), 0 12px 32px rgba(0, 0, 0, 0.1);
-  --shadow-device: 0 4px 16px rgba(0, 0, 0, 0.08), 0 24px 64px rgba(0, 0, 0, 0.12);
-  --shadow-nav: 0 1px 0 0 rgba(0, 0, 0, 0.03) inset, 0 4px 24px rgba(0, 0, 0, 0.06);
-  --shadow-elevated: 0 8px 32px rgba(0, 0, 0, 0.08);
+  /* Shadows (tactile, not Tailwind defaults) */
+  --shadow-soft: 0 1px 0 rgba(0, 0, 0, 0.02), 0 8px 24px rgba(6, 10, 20, 0.06);
+  --shadow-card: 0 1px 0 rgba(0, 0, 0, 0.03), 0 12px 32px rgba(6, 10, 20, 0.08);
+  --shadow-card-hover:
+    0 1px 0 rgba(0, 0, 0, 0.03), 0 18px 44px rgba(6, 10, 20, 0.12),
+    0 0 0 1px rgba(83, 154, 198, 0.08);
+  --shadow-glass:
+    0 1px 0 rgba(255, 255, 255, 0.55) inset, 0 0 0 1px rgba(0, 0, 0, 0.04),
+    0 18px 50px rgba(6, 10, 20, 0.1);
+  --shadow-device: 0 6px 20px rgba(6, 10, 20, 0.1), 0 32px 96px rgba(6, 10, 20, 0.12);
+  --shadow-nav:
+    0 1px 0 rgba(255, 255, 255, 0.55) inset, 0 0 0 1px rgba(0, 0, 0, 0.04),
+    0 18px 60px rgba(6, 10, 20, 0.1);
+  --shadow-elevated: 0 30px 90px rgba(6, 10, 20, 0.14);
+  --shadow-button: 0 1px 0 rgba(255, 255, 255, 0.24) inset, 0 8px 22px rgba(6, 10, 20, 0.12);
+
+  /* Status badges */
+  --status-feature-bg: color-mix(in oklab, oklch(0.93 0.07 150) 22%, transparent);
+  --status-feature-fg: oklch(0.52 0.15 150);
+  --status-fix-bg: color-mix(in oklab, oklch(0.92 0.09 25) 20%, transparent);
+  --status-fix-fg: oklch(0.52 0.17 25);
+  --status-improvement-bg: color-mix(in oklab, oklch(0.93 0.09 85) 22%, transparent);
+  --status-improvement-fg: oklch(0.56 0.15 85);
+
+  /* macOS titlebar dots */
+  --mac-dot-close: oklch(0.69 0.2 25);
+  --mac-dot-minimize: oklch(0.83 0.16 85);
+  --mac-dot-zoom: oklch(0.78 0.19 145);
 
   --color-scheme: light;
 }
 
 [data-theme="dark"] {
-  --surface-base: #111113;
-  --surface-raised: #1c1c1e;
-  --surface-floating: rgba(44, 44, 46, 0.72);
-  --surface-overlay: #2c2c2e;
-  --surface-inset: #0a0a0b;
+  /* Brand (keep hue, tuned for dark) */
+  --cm-blue: #539ac6;
+  --cm-blue-hover: #65b0dc;
+  --cm-blue-ink: #b8e7ff;
+  --cm-blue-subtle: color-mix(in oklab, var(--cm-blue) 18%, transparent);
+  --cm-blue-subtle-2: color-mix(in oklab, var(--cm-blue) 26%, transparent);
+
+  /* Background atmosphere */
+  --bg-night: oklch(0.16 0.02 255);
+  --bg-night-deep: oklch(0.13 0.03 255);
+  --bg-atmo-1: color-mix(in oklab, var(--cm-blue) 26%, black);
+  --bg-atmo-2: color-mix(in oklab, var(--cm-blue) 18%, black);
+  --bg-vignette: rgba(0, 0, 0, 0.55);
+
+  /* Surfaces */
+  --surface-base: color-mix(in oklab, var(--bg-night) 70%, var(--bg-night-deep));
+  --surface-raised: rgba(255, 255, 255, 0.06);
+  --surface-elevated: rgba(255, 255, 255, 0.085);
+  --surface-glass: rgba(255, 255, 255, 0.055);
+  --surface-floating: var(--surface-glass);
+  --surface-overlay: rgba(255, 255, 255, 0.09);
+  --surface-inset: rgba(0, 0, 0, 0.28);
 
   --ink-primary: #f5f5f7;
   --ink-secondary: #a1a1a6;
   --ink-tertiary: #6e6e73;
   --ink-faint: #3a3a3c;
 
-  --accent: #0a84ff;
-  --accent-hover: #409cff;
-  --accent-subtle: rgba(10, 132, 255, 0.12);
+  --accent: var(--cm-blue);
+  --accent-hover: var(--cm-blue-hover);
+  --accent-subtle: color-mix(in oklab, var(--cm-blue) 18%, transparent);
 
   --border-subtle: rgba(255, 255, 255, 0.06);
   --border-strong: rgba(255, 255, 255, 0.12);
-  --border-accent: rgba(10, 132, 255, 0.25);
+  --border-glass: rgba(255, 255, 255, 0.12);
+  --border-accent: color-mix(in oklab, var(--cm-blue) 36%, transparent);
+  --ring-focus: color-mix(in oklab, var(--cm-blue) 86%, white);
 
-  --shadow-card: 0 1px 0 0 rgba(255, 255, 255, 0.03), 0 1px 3px rgba(0, 0, 0, 0.4);
-  --shadow-card-hover: 0 1px 0 0 rgba(255, 255, 255, 0.05), 0 8px 24px rgba(0, 0, 0, 0.5);
-  --shadow-device: 0 4px 16px rgba(0, 0, 0, 0.3), 0 24px 64px rgba(0, 0, 0, 0.5);
-  --shadow-nav: 0 1px 0 0 rgba(255, 255, 255, 0.04) inset, 0 4px 24px rgba(0, 0, 0, 0.3);
-  --shadow-elevated: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-soft: 0 1px 0 rgba(255, 255, 255, 0.05) inset, 0 20px 70px rgba(0, 0, 0, 0.35);
+  --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 20px 70px rgba(0, 0, 0, 0.4);
+  --shadow-card-hover:
+    0 1px 0 rgba(255, 255, 255, 0.07) inset, 0 26px 84px rgba(0, 0, 0, 0.52),
+    0 0 0 1px rgba(83, 154, 198, 0.18);
+  --shadow-glass:
+    0 1px 0 rgba(255, 255, 255, 0.08) inset, 0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 28px 90px rgba(0, 0, 0, 0.5);
+  --shadow-device: 0 14px 40px rgba(0, 0, 0, 0.45), 0 70px 160px rgba(0, 0, 0, 0.55);
+  --shadow-nav:
+    0 1px 0 rgba(255, 255, 255, 0.07) inset, 0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 28px 90px rgba(0, 0, 0, 0.48);
+  --shadow-elevated: 0 70px 180px rgba(0, 0, 0, 0.55);
+  --shadow-button: 0 1px 0 rgba(255, 255, 255, 0.08) inset, 0 16px 40px rgba(0, 0, 0, 0.38);
+
+  /* Status badges */
+  --status-feature-bg: color-mix(in oklab, oklch(0.78 0.16 150) 18%, transparent);
+  --status-feature-fg: oklch(0.82 0.14 150);
+  --status-fix-bg: color-mix(in oklab, oklch(0.74 0.16 25) 18%, transparent);
+  --status-fix-fg: oklch(0.79 0.15 25);
+  --status-improvement-bg: color-mix(in oklab, oklch(0.8 0.13 85) 18%, transparent);
+  --status-improvement-fg: oklch(0.84 0.12 85);
+
+  /* macOS titlebar dots */
+  --mac-dot-close: oklch(0.72 0.2 25);
+  --mac-dot-minimize: oklch(0.85 0.16 85);
+  --mac-dot-zoom: oklch(0.8 0.19 145);
 
   --color-scheme: dark;
 }
@@ -109,9 +204,81 @@ body {
   line-height: 1.5;
   letter-spacing: -0.011em;
   overflow-x: hidden;
+  isolation: isolate;
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
+}
+
+/* ==============================================
+   BACKGROUND ATMOSPHERE
+   ============================================== */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: -2px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+body::before {
+  opacity: 1;
+  background:
+    radial-gradient(
+      900px 520px at 18% 6%,
+      color-mix(in oklab, var(--bg-atmo-1) 30%, transparent) 0%,
+      transparent 62%
+    ),
+    radial-gradient(
+      860px 520px at 70% 18%,
+      color-mix(in oklab, var(--bg-atmo-2) 26%, transparent) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      1200px 900px at 50% 110%,
+      color-mix(in oklab, var(--cm-blue) 16%, transparent) 0%,
+      transparent 70%
+    );
+  filter: saturate(1.05);
+}
+
+body::after {
+  background:
+    radial-gradient(1200px 900px at 50% 35%, transparent 55%, var(--bg-vignette) 100%),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.18) 0%, transparent 40%);
+  mix-blend-mode: multiply;
+  opacity: 0.65;
+}
+
+[data-theme="dark"] body::after {
+  mix-blend-mode: normal;
+  opacity: 0.75;
+}
+
+/* ==============================================
+   THEME VISIBILITY UTILITIES
+   ============================================== */
+.theme-only-light {
+  display: block;
+}
+
+.theme-only-dark {
+  display: none;
+}
+
+[data-theme="dark"] .theme-only-light {
+  display: none;
+}
+
+[data-theme="dark"] .theme-only-dark {
+  display: block;
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .surface-floating {
+    background: var(--surface-raised);
+  }
 }
 
 /* ==============================================
@@ -187,9 +354,9 @@ body {
 }
 
 .surface-floating {
-  background: var(--surface-floating);
-  backdrop-filter: blur(24px) saturate(1.8);
-  -webkit-backdrop-filter: blur(24px) saturate(1.8);
+  background: var(--surface-glass);
+  backdrop-filter: blur(var(--blur-nav)) saturate(var(--sat-glass));
+  -webkit-backdrop-filter: blur(var(--blur-nav)) saturate(var(--sat-glass));
 }
 
 .surface-overlay {
@@ -252,7 +419,7 @@ body {
    FOCUS RING
    ============================================== */
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--ring-focus);
   outline-offset: 2px;
   border-radius: var(--radius-sm);
 }

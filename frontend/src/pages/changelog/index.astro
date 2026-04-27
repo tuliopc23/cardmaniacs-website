@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import SiteNav from '../../components/SiteNav.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
 import Container from '../../components/Container.astro';
-import Pill from '../../components/Pill.astro';
+import ReleaseCard from '../../components/site/ReleaseCard.astro';
 import { getCollection, render } from 'astro:content';
 
 const entries = await getCollection('changelog');
@@ -22,37 +22,29 @@ const sorted = entries.sort((a, b) => {
       <Container>
         <div class="max-w-[680px]">
           <p class="caption ink-accent mb-5">Changelog</p>
-          <h1 class="display-xl ink-primary mb-6">What's new.</h1>
+          <h1 class="display-xl ink-primary mb-6 text-balance">Release journal.</h1>
           <p class="body-l ink-secondary max-w-[520px]">
-            Every update, improvement, and fix — documented as it ships.
+            Every update, improvement, and fix — written like a shipping log.
           </p>
         </div>
       </Container>
     </section>
 
-    <section class="pb-20">
+    <section class="pb-24">
       <Container narrow>
-        <div class="space-y-0">
+        <div class="space-y-5">
           {sorted.map(async (entry) => {
             const { Content } = await render(entry);
-            const typeVariant = entry.data.type === 'feature' ? 'accent' : entry.data.type === 'fix' ? 'muted' : 'default';
             return (
-              <div class="py-8 border-b border-[var(--border-subtle)] last:border-0">
-                <div class="flex flex-wrap items-center gap-2 mb-3">
-                  {entry.data.version && <Pill variant="accent">v{entry.data.version}</Pill>}
-                  {entry.data.type && <Pill variant={typeVariant}>{entry.data.type}</Pill>}
-                  {entry.data.platform && entry.data.platform !== 'all' && <Pill variant="muted">{entry.data.platform}</Pill>}
-                </div>
-                {entry.data.date && (
-                  <time class="caption ink-tertiary block mb-2" datetime={entry.data.date}>
-                    {new Date(entry.data.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
-                  </time>
-                )}
-                <h2 class="heading ink-primary mb-3">{entry.data.title}</h2>
-                <div class="prose-sm ink-secondary">
+              <ReleaseCard
+                version={entry.data.version}
+                type={entry.data.type}
+                platform={entry.data.platform}
+                date={entry.data.date}
+                title={entry.data.title}
+              >
                   <Content />
-                </div>
-              </div>
+              </ReleaseCard>
             );
           })}
         </div>
@@ -62,12 +54,3 @@ const sorted = entries.sort((a, b) => {
 
   <SiteFooter />
 </Layout>
-
-<style>
-  .prose-sm { font-size: 0.9375rem; line-height: 1.65; }
-  .prose-sm :global(h2) { font-family: var(--font-display); font-size: 1.125rem; font-weight: 600; margin-top: 1rem; margin-bottom: 0.5rem; color: var(--ink-primary); }
-  .prose-sm :global(p) { margin-bottom: 0.75rem; color: var(--ink-secondary); }
-  .prose-sm :global(ul) { list-style: disc; padding-left: 1.25rem; margin-bottom: 0.75rem; }
-  .prose-sm :global(li) { margin-bottom: 0.25rem; color: var(--ink-secondary); }
-  .prose-sm :global(strong) { color: var(--ink-primary); font-weight: 600; }
-</style>

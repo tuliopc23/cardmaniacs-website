@@ -1,0 +1,64 @@
+---
+import Surface from "../ui/Surface.astro";
+import Pill from "../Pill.astro";
+
+interface Props {
+  href: string;
+  title: string;
+  summary?: string;
+  date?: string;
+  eyebrow?: string;
+}
+
+const { href, title, summary, date, eyebrow } = Astro.props;
+---
+
+<Surface
+  href={href}
+  variant="elevated"
+  interactive
+  class="group p-6 md:p-7"
+>
+  <div class="flex items-start justify-between gap-4 mb-5">
+    <div class="space-y-1">
+      {eyebrow && <p class="caption ink-accent">{eyebrow}</p>}
+      {date && (
+        <time class="caption ink-tertiary block" datetime={date}>
+          {new Date(date).toLocaleDateString("en-US", {
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+          })}
+        </time>
+      )}
+    </div>
+    <Pill variant="accent" class="hidden sm:inline-flex">
+      Read
+      <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+      </svg>
+    </Pill>
+  </div>
+
+  <h2 class="subheading ink-primary mb-2 text-balance group-hover:ink-primary">
+    {title}
+  </h2>
+
+  {summary && (
+    <p class="body-s ink-secondary leading-relaxed text-pretty line-clamp-3">
+      {summary}
+    </p>
+  )}
+
+  <div class="mt-5 flex items-center gap-2">
+    <span class="text-[13px] font-display font-semibold ink-accent">
+      Read article
+    </span>
+    <span class="inline-flex items-center justify-center size-6 [border-radius:var(--radius-pill)] bg-[var(--cm-blue-subtle)] text-[var(--cm-blue-ink)] transition-transform duration-200 group-hover:translate-x-0.5">
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+      </svg>
+    </span>
+  </div>
+</Surface>
+

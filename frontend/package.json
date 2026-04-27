@@ -10,18 +10,33 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/markdoc": "^1.0.3",
-    "@astrojs/node": "^10.0.4",
-    "@astrojs/react": "^5.0.2",
+    "@astrojs/check": "^0.9.8",
+    "@astrojs/cloudflare": "^13.2.1",
+    "@astrojs/markdoc": "^1.0.4",
+    "@astrojs/react": "^5.0.4",
+    "@astrojs/rss": "^4.0.18",
+    "@astrojs/sitemap": "^3.7.2",
+    "@cloudflare/workers-types": "^4.20260426.1",
     "@keystatic/astro": "^5.0.6",
     "@keystatic/core": "^0.5.50",
-    "@tailwindcss/vite": "^4.2.2",
-    "astro": "^6.1.1",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/forms": "^0.5.11",
+    "@tailwindcss/typography": "^0.5.19",
+    "@tailwindcss/vite": "^4.2.4",
+    "astro": "^6.1.9",
+    "astro-icon": "^1.1.5",
     "motion": "^12.38.0",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
-    "tailwindcss": "^4.2.2",
-    "vite": "^7.3.1"
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "tailwindcss": "^4.2.4",
+    "vite": "^8.0.10",
+    "wrangler": "^4.85.0"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "jsdom": "^29.1.0",
+    "typescript": "^5.9.3"
   },
   "packageManager": "pnpm@10.33.0"
 }

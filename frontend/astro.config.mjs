@@ -1,18 +1,16 @@
-// @ts-check
 import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@astrojs/react";
 import markdoc from "@astrojs/markdoc";
 import keystatic from "@keystatic/astro";
-
-import node from "@astrojs/node";
+import cloudflare from "@astrojs/cloudflare";
 
 export default defineConfig({
-  output: "static",
-  adapter: node({ mode: "standalone" }),
+  output: "server",
+  adapter: cloudflare(),
   integrations: [react(), markdoc(), keystatic()],
   vite: {
-    plugins: [tailwindcss()],
+    plugins: tailwindcss(),
     server: {
       allowedHosts: true,
     },

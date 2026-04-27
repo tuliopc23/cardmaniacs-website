@@ -1,0 +1,61 @@
+---
+import Container from "../Container.astro";
+import AppStoreButton from "../AppStoreButton.astro";
+import ProductFrame from "./ProductFrame.astro";
+import Pill from "../Pill.astro";
+
+const chips = ["Feeds", "Read Later", "Bookmarks", "Highlights", "Summaries", "Offline"];
+---
+
+<section class="relative pt-32 pb-14 md:pt-40 md:pb-22 overflow-hidden">
+  <Container class="relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-[1fr_520px] gap-10 lg:gap-14 items-start">
+      <div class="max-w-[720px]">
+        <p class="caption ink-accent mb-5">A calmer home for everything you read</p>
+
+        <h1 class="display-xl ink-primary mb-6 text-balance">
+          Your native reading desk —<br class="hidden sm:block" />
+          collected, triaged, finished.
+        </h1>
+
+        <p class="body-l ink-secondary max-w-[560px] mb-9 text-pretty">
+          Cardmaniacs unifies feeds, read-later, bookmarks, and highlights into one quiet Apple-native command
+          center — so you stop tab-hoarding and start reading.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-start gap-4 mb-8">
+          <AppStoreButton />
+          <a
+            href="/features"
+            class="inline-flex items-center gap-2 font-display font-semibold text-[15px] ink-primary py-3 group"
+          >
+            Explore features
+            <span
+              class="inline-flex items-center justify-center size-6 [border-radius:var(--radius-pill)] bg-[var(--cm-blue-subtle)] text-[var(--cm-blue-ink)] transition-transform duration-200 group-hover:translate-x-0.5"
+              aria-hidden="true"
+            >
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </span>
+          </a>
+        </div>
+
+        <div class="flex flex-wrap gap-2">
+          {chips.map((c) => (
+            <Pill variant={c === "Feeds" ? "accent" : "default"}>{c}</Pill>
+          ))}
+        </div>
+      </div>
+
+      <div class="lg:pt-2" data-reveal>
+        <ProductFrame
+          srcLight="/images/cardmaniacs-mac-bezel-light.png"
+          srcDark="/images/cardmaniacs-mac-bezel-dark.png"
+          alt="Cardmaniacs on macOS — card-based reading interface"
+        />
+      </div>
+    </div>
+  </Container>
+</section>
+

@@ -1,4 +1,6 @@
 ---
+import UIButton from './ui/Button.astro';
+
 interface Props {
   variant?: 'primary' | 'secondary' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
@@ -7,27 +9,8 @@ interface Props {
 }
 
 const { variant = 'primary', size = 'md', href, class: className = '' } = Astro.props;
-
-const Tag = href ? 'a' : 'button';
-
-const base = 'inline-flex items-center justify-center gap-2 font-display font-semibold rounded-[var(--radius-full)] transition-all duration-200 active:scale-[0.97] select-none';
-
-const sizes = {
-  sm: 'text-[13px] px-4 py-1.5',
-  md: 'text-[14px] px-5 py-2.5',
-  lg: 'text-[15px] px-7 py-3',
-};
-
-const variants = {
-  primary: 'bg-[var(--accent)] text-white hover:bg-[var(--accent-hover)] shadow-[0_1px_2px_rgba(0,0,0,0.2)]',
-  secondary: 'border border-[var(--border-strong)] ink-primary hover:bg-[var(--surface-overlay)]',
-  ghost: 'ink-secondary hover:ink-primary hover:bg-[var(--accent-subtle)]',
-};
 ---
 
-<Tag
-  href={href}
-  class:list={[base, sizes[size], variants[variant], className]}
->
+<UIButton href={href} variant={variant} size={size} class={className}>
   <slot />
-</Tag>
+</UIButton>

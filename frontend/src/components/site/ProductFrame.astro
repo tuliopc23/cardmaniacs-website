@@ -1,0 +1,37 @@
+---
+import Surface from "../ui/Surface.astro";
+
+interface Props {
+  srcLight: string;
+  srcDark: string;
+  alt: string;
+  class?: string;
+}
+
+const { srcLight, srcDark, alt, class: className = "" } = Astro.props;
+---
+
+<Surface
+  variant="elevated"
+  class:list={[
+    "p-2 md:p-3 [border-radius:var(--radius-hero)] bg-[color-mix(in_oklab,var(--surface-elevated)_85%,transparent)]",
+    className,
+  ]}
+>
+  <div class="relative">
+    <img
+      src={srcLight}
+      alt={alt}
+      loading="eager"
+      class="theme-only-light w-full h-auto [border-radius:calc(var(--radius-hero)-10px)] shadow-[var(--shadow-device)]"
+    />
+    <img
+      src={srcDark}
+      alt={alt}
+      loading="eager"
+      class="theme-only-dark w-full h-auto [border-radius:calc(var(--radius-hero)-10px)] shadow-[var(--shadow-device)]"
+    />
+
+    <div class="pointer-events-none absolute inset-0 [border-radius:calc(var(--radius-hero)-10px)] ring-1 ring-black/5 dark:ring-white/10"></div>
+  </div>
+</Surface>

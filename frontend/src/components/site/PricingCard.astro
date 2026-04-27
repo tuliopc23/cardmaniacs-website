@@ -1,0 +1,58 @@
+---
+import Surface from "../ui/Surface.astro";
+import Button from "../Button.astro";
+import Pill from "../Pill.astro";
+
+interface Props {
+  label: string;
+  price: string;
+  interval: string;
+  description: string;
+  ctaHref: string;
+  ctaVariant?: "primary" | "secondary";
+  highlighted?: boolean;
+  badge?: string;
+}
+
+const {
+  label,
+  price,
+  interval,
+  description,
+  ctaHref,
+  ctaVariant = "secondary",
+  highlighted = false,
+  badge,
+} = Astro.props;
+---
+
+<Surface
+  variant="elevated"
+  class:list={[
+    "p-7 md:p-8 flex-1",
+    highlighted ? "ring-1 ring-[var(--border-accent)]" : "",
+  ]}
+>
+  <div class="flex items-start justify-between gap-4 mb-5">
+    <div>
+      <p class="caption ink-tertiary mb-2">{label}</p>
+      <div class="flex items-baseline gap-1.5">
+        <span class="heading ink-primary">{price}</span>
+        <span class="body-s ink-tertiary">{interval}</span>
+      </div>
+    </div>
+
+    {badge && (
+      <Pill variant="accent" class="shrink-0">
+        {badge}
+      </Pill>
+    )}
+  </div>
+
+  <p class="body-s ink-secondary mb-6 text-pretty">{description}</p>
+
+  <Button href={ctaHref} variant={ctaVariant} class="w-full justify-center">
+    Get started
+  </Button>
+</Surface>
+

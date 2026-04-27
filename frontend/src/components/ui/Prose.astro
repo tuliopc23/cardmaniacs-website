@@ -1,0 +1,133 @@
+---
+interface Props {
+  size?: "md" | "sm";
+  class?: string;
+}
+
+const { size = "md", class: className = "" } = Astro.props;
+
+const sizes = {
+  md: "text-[1.0625rem] leading-[1.75] md:text-[1.075rem]",
+  sm: "text-[0.95rem] leading-[1.7]",
+} as const;
+---
+
+<div class:list={["cm-prose", sizes[size], className]}>
+  <slot />
+</div>
+
+<style>
+  .cm-prose {
+    font-family: var(--font-body);
+    color: var(--ink-primary);
+  }
+
+  .cm-prose :global(h2) {
+    font-family: var(--font-display);
+    font-weight: 650;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    margin-top: 2.8rem;
+    margin-bottom: 1rem;
+    font-size: 1.55rem;
+    color: var(--ink-primary);
+    text-wrap: balance;
+  }
+
+  .cm-prose :global(h3) {
+    font-family: var(--font-display);
+    font-weight: 650;
+    line-height: 1.22;
+    letter-spacing: -0.02em;
+    margin-top: 2.1rem;
+    margin-bottom: 0.85rem;
+    font-size: 1.25rem;
+    color: var(--ink-primary);
+    text-wrap: balance;
+  }
+
+  .cm-prose :global(p) {
+    margin-bottom: 1.25rem;
+    color: var(--ink-secondary);
+    text-wrap: pretty;
+  }
+
+  .cm-prose :global(ul),
+  .cm-prose :global(ol) {
+    margin-bottom: 1.25rem;
+    padding-left: 1.35rem;
+  }
+
+  .cm-prose :global(ul) {
+    list-style: disc;
+  }
+
+  .cm-prose :global(li) {
+    margin-bottom: 0.5rem;
+    color: var(--ink-secondary);
+  }
+
+  .cm-prose :global(strong) {
+    color: var(--ink-primary);
+    font-weight: 650;
+  }
+
+  .cm-prose :global(a) {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
+
+  .cm-prose :global(a:hover) {
+    color: var(--accent-hover);
+  }
+
+  .cm-prose :global(code) {
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+    background: color-mix(in oklab, var(--surface-overlay) 75%, transparent);
+    padding: 0.15em 0.4em;
+    border-radius: 8px;
+    border: 1px solid var(--border-subtle);
+  }
+
+  .cm-prose :global(pre) {
+    background: color-mix(in oklab, var(--surface-inset) 75%, transparent);
+    border: 1px solid var(--border-subtle);
+    border-radius: 14px;
+    padding: 1rem 1.1rem;
+    overflow-x: auto;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .cm-prose :global(pre code) {
+    background: transparent;
+    border: none;
+    padding: 0;
+    border-radius: 0;
+    font-size: 0.92em;
+    color: var(--ink-primary);
+  }
+
+  .cm-prose :global(blockquote) {
+    border-left: 3px solid color-mix(in oklab, var(--cm-blue) 50%, var(--border-strong));
+    padding-left: 1.25rem;
+    margin: 1.75rem 0;
+    color: var(--ink-tertiary);
+    font-style: italic;
+  }
+
+  .cm-prose :global(hr) {
+    border: none;
+    border-top: 1px solid var(--border-subtle);
+    margin: 2.5rem 0;
+  }
+
+  .cm-prose :global(img) {
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-soft);
+    border: 1px solid var(--border-subtle);
+  }
+</style>
+

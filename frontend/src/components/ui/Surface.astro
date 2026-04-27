@@ -1,0 +1,52 @@
+---
+interface Props {
+  variant?: "paper" | "elevated" | "glass" | "inset";
+  interactive?: boolean;
+  href?: string;
+  as?: string;
+  class?: string;
+}
+
+const {
+  variant = "elevated",
+  interactive = false,
+  href,
+  as,
+  class: className = "",
+} = Astro.props;
+
+const Tag = href ? "a" : (as ?? "div");
+
+const base =
+  "relative overflow-hidden border transition-all duration-300 [border-radius:var(--radius-card)]";
+
+const variants: Record<NonNullable<Props["variant"]>, string> = {
+  paper: "bg-[var(--surface-base)] border-[var(--border-subtle)]",
+  elevated:
+    "bg-[var(--surface-elevated)] border-[var(--border-subtle)] shadow-[var(--shadow-card)]",
+  glass:
+    "bg-[var(--surface-glass)] border-[var(--border-glass)] shadow-[var(--shadow-glass)] backdrop-blur-[var(--blur-glass)] backdrop-saturate-[var(--sat-glass)] supports-[backdrop-filter]:bg-[var(--surface-glass)]",
+  inset: "bg-[var(--surface-inset)] border-[var(--border-subtle)]",
+};
+
+const interaction = interactive
+  ? "hover:-translate-y-0.5 hover:shadow-[var(--shadow-card-hover)] active:translate-y-0 motion-reduce:hover:translate-y-0"
+  : "";
+---
+
+<Tag
+  href={href}
+  class:list={[
+    base,
+    variants[variant],
+    interaction,
+    interactive ? "cursor-pointer" : "",
+    className,
+  ]}
+>
+  <div class="pointer-events-none absolute inset-0 opacity-70 [background:radial-gradient(1200px_600px_at_30%_0%,color-mix(in_oklab,var(--cm-blue)_10%,transparent)_0%,transparent_55%)]"></div>
+  <div class="relative">
+    <slot />
+  </div>
+</Tag>
+

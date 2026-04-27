@@ -1,24 +1,14 @@
 ---
+import UIPill from './ui/Pill.astro';
+
 interface Props {
   variant?: 'default' | 'accent' | 'muted';
   class?: string;
 }
 
 const { variant = 'default', class: className = '' } = Astro.props;
-
-const variants = {
-  default: 'bg-[var(--surface-overlay)] ink-secondary border-[var(--border-subtle)]',
-  accent: 'bg-[var(--accent-subtle)] ink-accent border-[var(--border-accent)]',
-  muted: 'bg-transparent ink-tertiary border-[var(--border-subtle)]',
-};
 ---
 
-<span
-  class:list={[
-    'inline-flex items-center gap-1.5 px-3 py-1 rounded-[var(--radius-full)] text-[12px] font-display font-medium border leading-none',
-    variants[variant],
-    className,
-  ]}
->
+<UIPill variant={variant} class={className}>
   <slot />
-</span>
+</UIPill>

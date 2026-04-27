@@ -7,9 +7,9 @@ interface Props {
 const { variant = 'neutral', class: className = '' } = Astro.props;
 
 const variants = {
-  feature: 'badge--feature',
-  fix: 'badge--fix',
-  improvement: 'badge--improvement',
+  feature: 'bg-[var(--status-feature-bg)] text-[var(--status-feature-fg)]',
+  fix: 'bg-[var(--status-fix-bg)] text-[var(--status-fix-fg)]',
+  improvement: 'bg-[var(--status-improvement-bg)] text-[var(--status-improvement-fg)]',
   neutral: 'bg-[var(--surface-overlay)] ink-tertiary',
 };
 ---
@@ -23,12 +23,3 @@ const variants = {
 >
   <slot />
 </span>
-
-<style>
-  .badge--feature { background: rgba(16, 185, 129, 0.1); color: #059669; }
-  .badge--fix { background: rgba(239, 68, 68, 0.1); color: #dc2626; }
-  .badge--improvement { background: rgba(245, 158, 11, 0.1); color: #d97706; }
-  [data-theme="dark"] .badge--feature { color: #34d399; }
-  [data-theme="dark"] .badge--fix { color: #f87171; }
-  [data-theme="dark"] .badge--improvement { color: #fbbf24; }
-</style>
