@@ -1,15 +1,6 @@
 ---
 import Container from './Container.astro';
 
-interface Props {
-  label?: string;
-  heading?: string;
-  class?: string;
-  id?: string;
-  as?: string;
-  inset?: boolean;
-}
-
 const { label, heading, class: className = '', id, as: Tag = 'section', inset = false } = Astro.props;
 ---
 

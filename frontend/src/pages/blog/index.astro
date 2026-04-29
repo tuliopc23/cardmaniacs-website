@@ -14,6 +14,9 @@ const sortedPosts = posts
     const dateB = b.data.date ? new Date(b.data.date).getTime() : 0;
     return dateB - dateA;
   });
+
+const featured = sortedPosts.find((p) => p.data.featured);
+const rest = featured ? sortedPosts.filter((p) => p.id !== featured.id) : sortedPosts;
 ---
 
 <Layout title="Blog — Cardmaniacs">
@@ -35,12 +38,26 @@ const sortedPosts = posts
     <section class="pb-24">
       <Container>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {sortedPosts.map((post) => (
+          {featured && (
+            <PostCard
+              href={`/blog/${featured.id}`}
+              title={featured.data.title}
+              summary={featured.data.summary}
+              date={featured.data.date}
+              cover={featured.data.cover}
+              featured
+              tags={featured.data.tags}
+            />
+          )}
+
+          {rest.map((post) => (
             <PostCard
               href={`/blog/${post.id}`}
               title={post.data.title}
               summary={post.data.summary}
               date={post.data.date}
+              cover={post.data.cover}
+              tags={post.data.tags}
             />
           ))}
         </div>

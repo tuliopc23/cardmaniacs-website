@@ -1,13 +1,6 @@
 ---
 import Surface from './ui/Surface.astro';
 
-interface Props {
-  variant?: 'flat' | 'raised' | 'interactive';
-  class?: string;
-  as?: string;
-  href?: string;
-}
-
 const { variant = 'raised', class: className = '', as, href } = Astro.props;
 ---
 

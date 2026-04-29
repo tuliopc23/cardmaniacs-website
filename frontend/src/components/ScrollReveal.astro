@@ -19,8 +19,8 @@
       inView(htmlEl, () => {
         animate(
           htmlEl,
-          { opacity: [0, 1], transform: ['translateY(24px)', 'translateY(0px)'] },
-          { duration: 0.6, easing: 'ease-out' }
+          ({ opacity: [0, 1], y: [24, 0] } as any),
+          ({ duration: 0.6, easing: 'ease-out' } as any)
         );
       }, { margin: '-60px 0px -60px 0px' });
     });

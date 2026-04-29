@@ -6,9 +6,12 @@ interface Props {
   title: string;
   summary?: string;
   date?: string;
+  cover?: string;
+  featured?: boolean;
+  tags?: string;
 }
 
-const { href, title, summary, date } = Astro.props;
+const { href, title, summary, date, cover, featured, tags } = Astro.props;
 ---
 
-<ArticleCard href={href} title={title} summary={summary} date={date} />
+<ArticleCard href={href} title={title} summary={summary} date={date} cover={cover} featured={featured} tags={tags} />

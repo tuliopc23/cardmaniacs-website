@@ -30,9 +30,15 @@ const {
   variant="elevated"
   class:list={[
     "p-7 md:p-8 flex-1",
-    highlighted ? "ring-1 ring-[var(--border-accent)]" : "",
+    highlighted
+      ? "ring-1 ring-[var(--border-accent)] shadow-[var(--shadow-elevated)]"
+      : "",
   ]}
 >
+  {highlighted ? (
+    <div class="pointer-events-none absolute inset-0 opacity-80 [background:radial-gradient(900px_420px_at_20%_0%,color-mix(in_oklab,var(--cm-blue)_18%,transparent)_0%,transparent_60%)]"></div>
+  ) : null}
+
   <div class="flex items-start justify-between gap-4 mb-5">
     <div>
       <p class="caption ink-tertiary mb-2">{label}</p>

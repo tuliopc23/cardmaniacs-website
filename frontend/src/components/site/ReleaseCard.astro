@@ -34,35 +34,77 @@ const typeVariant =
   class:list={[
     size === "row"
       ? "py-7 border-0 border-b border-[var(--border-subtle)] last:border-b-0"
-      : "p-6 md:p-7",
+      : "p-0 overflow-hidden",
   ]}
 >
-  <div class:list={[size === "row" ? "" : "space-y-2"]}>
-    <div class="flex flex-wrap items-center gap-2">
-      {version && <Pill variant="accent">v{version}</Pill>}
-      {type && <Pill variant={typeVariant}>{type}</Pill>}
-      {platform && platform !== "all" && <Pill variant="muted">{platform}</Pill>}
+  {size === "row" ? (
+    <div>
+      <div class="flex flex-wrap items-center gap-2">
+        {version && <Pill variant="accent">v{version}</Pill>}
+        {type && <Pill variant={typeVariant}>{type}</Pill>}
+        {platform && platform !== "all" && <Pill variant="muted">{platform}</Pill>}
+      </div>
+
+      {date && (
+        <time class="caption ink-tertiary block mt-3" datetime={date}>
+          {new Date(date).toLocaleDateString("en-US", {
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+          })}
+        </time>
+      )}
+
+      <h2 class:list={["heading", "ink-primary mt-3 text-balance"]}>
+        {title}
+      </h2>
+
+      <div class="mt-4">
+        <Prose size="sm">
+          <slot />
+        </Prose>
+      </div>
     </div>
+  ) : (
+    <>
+      <div class="relative border-b border-[var(--border-subtle)] bg-[radial-gradient(1100px_360px_at_18%_0%,color-mix(in_oklab,var(--cm-blue)_18%,transparent)_0%,transparent_60%),linear-gradient(to_bottom,color-mix(in_oklab,var(--surface-overlay)_42%,transparent),transparent)] p-6 md:p-7">
+        <div class="flex items-start justify-between gap-4">
+          <div class="space-y-2">
+            <div class="flex flex-wrap items-center gap-2">
+              {version && <Pill variant="accent">v{version}</Pill>}
+              {type && <Pill variant={typeVariant}>{type}</Pill>}
+              {platform && platform !== "all" && <Pill variant="muted">{platform}</Pill>}
+            </div>
 
-    {date && (
-      <time class="caption ink-tertiary block mt-3" datetime={date}>
-        {new Date(date).toLocaleDateString("en-US", {
-          month: "long",
-          day: "numeric",
-          year: "numeric",
-        })}
-      </time>
-    )}
+            <h2 class="subheading ink-primary text-balance">
+              {title}
+            </h2>
 
-    <h2 class:list={[size === "row" ? "heading" : "subheading", "ink-primary mt-3 text-balance"]}>
-      {title}
-    </h2>
+            {date && (
+              <time class="caption ink-tertiary block" datetime={date}>
+                {new Date(date).toLocaleDateString("en-US", {
+                  month: "long",
+                  day: "numeric",
+                  year: "numeric",
+                })}
+              </time>
+            )}
+          </div>
 
-    <div class="mt-4">
-      <Prose size="sm">
-        <slot />
-      </Prose>
-    </div>
-  </div>
+          <span class="hidden sm:inline-flex items-center justify-center size-9 [border-radius:var(--radius-pill)] bg-[color-mix(in_oklab,var(--surface-elevated)_60%,transparent)] ring-1 ring-black/5 dark:ring-white/10 backdrop-blur-md">
+            <svg class="w-4 h-4 ink-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </span>
+        </div>
+      </div>
+
+      <div class="p-6 md:p-7">
+        <Prose size="sm">
+          <slot />
+        </Prose>
+      </div>
+    </>
+  )}
 </Surface>
 

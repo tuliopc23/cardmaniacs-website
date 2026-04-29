@@ -21,13 +21,14 @@ const links = [
   <div class="mx-auto max-w-[1160px]">
     <Surface
       variant="glass"
-      class="h-13 flex items-center justify-between px-3 md:px-4 [border-radius:calc(var(--radius-pill)+6px)] shadow-[var(--shadow-nav)]"
+      radius="pill"
+      class="h-[52px] flex items-center justify-between px-3.5 md:px-4 shadow-[var(--shadow-nav)]"
     >
       <a href="/" class="flex items-center gap-2.5 shrink-0">
         <img
           src="/images/Graphic.png"
           alt="Cardmaniacs"
-          class="size-7 rounded-[10px] shadow-[var(--shadow-soft)]"
+          class="size-7 rounded-[10px] shadow-[var(--shadow-soft)] ring-1 ring-black/5 dark:ring-white/10"
           width="28"
           height="28"
           loading="eager"
@@ -37,15 +38,15 @@ const links = [
         </span>
       </a>
 
-      <div class="hidden md:flex items-center gap-1">
+      <div class="hidden md:flex items-center gap-1 p-1 [border-radius:var(--radius-pill)] bg-[color-mix(in_oklab,var(--surface-overlay)_55%,transparent)] ring-1 ring-black/5 dark:ring-white/10">
         {links.map((link) => (
           <a
             href={link.href}
             class:list={[
-              "relative px-3.5 py-2 text-[13px] font-display font-medium transition-colors duration-200 [border-radius:var(--radius-pill)]",
+              "relative px-3.5 py-2 text-[13px] font-display font-semibold transition-all duration-200 [border-radius:var(--radius-pill)]",
               currentPage === link.key
-                ? "ink-primary bg-[var(--cm-blue-subtle-2)]"
-                : "ink-secondary hover:ink-primary hover:bg-[color-mix(in_oklab,var(--surface-overlay)_70%,transparent)]",
+                ? "ink-primary bg-[var(--cm-blue-subtle-2)] shadow-[var(--shadow-soft)]"
+                : "ink-secondary hover:ink-primary hover:bg-[color-mix(in_oklab,var(--surface-overlay)_60%,transparent)]",
             ]}
           >
             {link.label}
@@ -76,7 +77,8 @@ const links = [
     <Surface
       id="cm-mobile-menu"
       variant="glass"
-      class="hidden md:hidden mt-2 p-2.5 [border-radius:var(--radius-panel)] shadow-[var(--shadow-elevated)]"
+      radius="panel"
+      class="hidden md:hidden mt-2 p-2.5 shadow-[var(--shadow-elevated)]"
     >
       <div class="space-y-1">
         {links.map((link) => (

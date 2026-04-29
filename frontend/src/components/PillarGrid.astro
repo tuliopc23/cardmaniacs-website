@@ -1,6 +1,7 @@
 ---
 import SectionBlock from './SectionBlock.astro';
-import Card from './Card.astro';
+import Surface from './ui/Surface.astro';
+import Pill from './Pill.astro';
 
 const pillars = [
   {
@@ -27,23 +28,30 @@ const pillars = [
 <SectionBlock label="Three pillars" heading="One app for your entire reading workflow.">
   <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
     {pillars.map((pillar) => (
-      <Card variant="interactive" class="p-6 flex flex-col gap-4 group overflow-hidden">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 flex items-center justify-center rounded-[var(--radius-md)] bg-[var(--accent-subtle)] ink-accent">
-            <Fragment set:html={pillar.icon} />
-          </div>
-          <h3 class="subheading ink-primary">{pillar.title}</h3>
-        </div>
-        <p class="body-s ink-secondary leading-relaxed">{pillar.description}</p>
-        <div class="mt-auto pt-4 -mx-6 -mb-6 overflow-hidden rounded-b-[var(--radius-lg)]">
+      <Surface href="/features" variant="elevated" interactive class="group p-0">
+        <div class="relative overflow-hidden border-b border-[var(--border-subtle)] bg-[radial-gradient(900px_260px_at_25%_0%,color-mix(in_oklab,var(--cm-blue)_18%,transparent)_0%,transparent_60%),linear-gradient(to_bottom,color-mix(in_oklab,var(--surface-overlay)_45%,transparent),transparent)] h-[172px] [border-top-left-radius:var(--radius-card)] [border-top-right-radius:var(--radius-card)]">
           <img
             src={pillar.screenshot}
             alt={`Cardmaniacs — ${pillar.title}`}
             loading="lazy"
-            class="w-full h-auto transition-transform duration-500 group-hover:scale-[1.02]"
+            class="absolute inset-0 h-full w-full object-cover opacity-[0.92] transition-transform duration-500 group-hover:scale-[1.02]"
           />
+          <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.08),transparent_40%,rgba(0,0,0,0.12))] dark:bg-[linear-gradient(to_bottom,rgba(0,0,0,0.25),transparent_45%,rgba(0,0,0,0.35))]"></div>
+          <div class="absolute left-4 top-4 flex items-center gap-2">
+            <span class="inline-flex items-center justify-center size-9 [border-radius:var(--radius-pill)] bg-[color-mix(in_oklab,var(--surface-elevated)_55%,transparent)] ring-1 ring-black/5 dark:ring-white/10 backdrop-blur-md ink-primary">
+              <Fragment set:html={pillar.icon} />
+            </span>
+            <Pill variant="accent">{pillar.title}</Pill>
+          </div>
         </div>
-      </Card>
+
+        <div class="p-6">
+          <h3 class="subheading ink-primary mb-2 text-balance">{pillar.title}</h3>
+          <p class="body-s ink-secondary leading-relaxed text-pretty">
+            {pillar.description}
+          </p>
+        </div>
+      </Surface>
     ))}
   </div>
 </SectionBlock>

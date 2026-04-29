@@ -1,10 +1,4 @@
 ---
-interface Props {
-  as?: string;
-  class?: string;
-  narrow?: boolean;
-}
-
 const { as: Tag = 'div', class: className = '', narrow = false } = Astro.props;
 const maxWidth = narrow ? 'max-w-[720px]' : 'max-w-[1120px]';
 ---
