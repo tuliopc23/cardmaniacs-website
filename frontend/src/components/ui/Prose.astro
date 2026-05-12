@@ -22,14 +22,26 @@ const sizes = {
     color: var(--ink-primary);
   }
 
+  .cm-prose :global(h1) {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.034em;
+    margin-top: 0;
+    margin-bottom: 1.1rem;
+    font-size: clamp(1.85rem, 3.2vw, 2.65rem);
+    color: var(--ink-primary);
+    text-wrap: balance;
+  }
+
   .cm-prose :global(h2) {
     font-family: var(--font-display);
     font-weight: 650;
-    line-height: 1.15;
-    letter-spacing: -0.03em;
+    line-height: 1.12;
+    letter-spacing: -0.032em;
     margin-top: 2.8rem;
     margin-bottom: 1rem;
-    font-size: 1.55rem;
+    font-size: clamp(1.45rem, 2.4vw, 1.75rem);
     color: var(--ink-primary);
     text-wrap: balance;
   }
@@ -41,7 +53,7 @@ const sizes = {
     letter-spacing: -0.02em;
     margin-top: 2.1rem;
     margin-bottom: 0.85rem;
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     color: var(--ink-primary);
     text-wrap: balance;
   }
@@ -50,6 +62,7 @@ const sizes = {
     margin-bottom: 1.25rem;
     color: var(--ink-secondary);
     text-wrap: pretty;
+    max-width: 62ch;
   }
 
   .cm-prose :global(ul),
@@ -98,7 +111,8 @@ const sizes = {
     border-radius: 14px;
     padding: 1rem 1.1rem;
     overflow-x: auto;
-    box-shadow: var(--shadow-soft);
+    box-shadow: var(--shadow-card);
+    max-width: none;
   }
 
   .cm-prose :global(pre code) {
@@ -126,8 +140,9 @@ const sizes = {
 
   .cm-prose :global(img) {
     border-radius: var(--radius-card);
-    box-shadow: var(--shadow-soft);
+    box-shadow: var(--shadow-card);
     border: 1px solid var(--border-subtle);
+    max-width: none;
   }
 </style>
 

@@ -119,39 +119,5 @@ export default config({
         content: fields.markdoc({ label: "Content" }),
       },
     }),
-
-    media: collection({
-      label: "Media Assets",
-      slugField: "title",
-      path: "src/content/media/*",
-      schema: {
-        title: fields.slug({ name: { label: "Title" } }),
-        description: fields.text({ label: "Description", multiline: true }),
-        type: fields.select({
-          label: "Asset Type",
-          options: [
-            { label: "Screenshot", value: "screenshot" },
-            { label: "Icon", value: "icon" },
-            { label: "Banner", value: "banner" },
-          ],
-          defaultValue: "screenshot",
-        }),
-        platform: fields.select({
-          label: "Platform",
-          options: [
-            { label: "All", value: "all" },
-            { label: "macOS", value: "macos" },
-            { label: "iOS", value: "ios" },
-            { label: "iPadOS", value: "ipados" },
-          ],
-          defaultValue: "all",
-        }),
-        image: fields.image({
-          label: "Image",
-          directory: "public/images/media",
-          publicPath: "/images/media/",
-        }),
-      },
-    }),
   },
 });

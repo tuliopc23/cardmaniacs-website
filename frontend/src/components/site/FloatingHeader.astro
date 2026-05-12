@@ -2,6 +2,7 @@
 import ThemeToggle from "../ThemeToggle.astro";
 import Button from "../Button.astro";
 import Surface from "../ui/Surface.astro";
+import PhosphorIcon from "../PhosphorIcon.astro";
 
 interface Props {
   currentPage?: string;
@@ -17,90 +18,117 @@ const links = [
 ];
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 px-3 pt-3 md:px-4">
+<header class="fixed top-0 left-0 right-0 z-50 px-3 pt-[max(0.75rem,env(safe-area-inset-top))] md:px-4">
   <div class="mx-auto max-w-[1160px]">
-    <Surface
-      variant="glass"
-      radius="pill"
-      class="h-[52px] flex items-center justify-between px-3.5 md:px-4 shadow-[var(--shadow-nav)]"
-    >
-      <a href="/" class="flex items-center gap-2.5 shrink-0">
-        <img
-          src="/images/Graphic.png"
-          alt="Cardmaniacs"
-          class="size-7 rounded-[10px] shadow-[var(--shadow-soft)] ring-1 ring-black/5 dark:ring-white/10"
-          width="28"
-          height="28"
-          loading="eager"
-        />
-        <span class="font-display font-semibold text-[14px] tracking-[-0.02em] ink-primary">
-          Cardmaniacs
-        </span>
-      </a>
-
-      <div class="hidden md:flex items-center gap-1 p-1 [border-radius:var(--radius-pill)] bg-[color-mix(in_oklab,var(--surface-overlay)_55%,transparent)] ring-1 ring-black/5 dark:ring-white/10">
-        {links.map((link) => (
-          <a
-            href={link.href}
-            class:list={[
-              "relative px-3.5 py-2 text-[13px] font-display font-semibold transition-all duration-200 [border-radius:var(--radius-pill)]",
-              currentPage === link.key
-                ? "ink-primary bg-[var(--cm-blue-subtle-2)] shadow-[var(--shadow-soft)]"
-                : "ink-secondary hover:ink-primary hover:bg-[color-mix(in_oklab,var(--surface-overlay)_60%,transparent)]",
-            ]}
-          >
-            {link.label}
-          </a>
-        ))}
-      </div>
-
-      <div class="flex items-center gap-2">
-        <ThemeToggle />
-        <Button href="#download" size="sm" class="hidden sm:inline-flex">
-          Download
-        </Button>
-
-        <button
-          id="cm-mobile-menu-btn"
-          type="button"
-          class="md:hidden size-9 flex items-center justify-center [border-radius:var(--radius-pill)] ink-tertiary hover:ink-primary hover:bg-[var(--cm-blue-subtle)] transition-all duration-200"
-          aria-label="Open menu"
-          aria-expanded="false"
+    <Surface variant="glass" radius="pill" class="overflow-visible shadow-[var(--shadow-nav)]">
+      <div
+        class="flex w-full min-h-[52px] items-center gap-3 pl-3.5 pr-2 md:grid md:min-h-[52px] md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:items-center md:gap-4 md:pl-4 md:pr-2.5"
+      >
+        <a
+          href="/"
+          class="relative z-20 flex min-w-0 items-center gap-2.5 shrink-0 justify-self-start group outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-base)] rounded-[12px]"
         >
-          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M4 9h16M4 15h16" />
-          </svg>
-        </button>
+          <span
+            class="relative z-10 flex size-8 shrink-0 items-center justify-center rounded-[12px] bg-transparent shadow-[var(--shadow-logo-mark)] ring-0 transition-[transform,box-shadow] duration-300 ease-out group-hover:scale-[1.04] group-hover:shadow-[var(--shadow-logo-mark-hover)]"
+          >
+            <img
+              src="/images/Cardmaniacs-icon-white.png"
+              alt=""
+              class="size-[22px] object-contain"
+              width="22"
+              height="22"
+              loading="eager"
+            />
+          </span>
+          <span class="font-display font-semibold text-[14px] tracking-[-0.02em] ink-primary truncate">
+            Cardmaniacs
+          </span>
+        </a>
+
+        <nav
+          aria-label="Primary"
+          class="hidden md:flex items-center justify-center gap-0.5 justify-self-center"
+        >
+          {links.map((link) => (
+            <a
+              href={link.href}
+              aria-current={currentPage === link.key ? "page" : undefined}
+              class:list={[
+                "relative px-3 py-1.5 text-[13px] font-display font-medium tracking-[-0.005em] transition-colors duration-200 [border-radius:var(--radius-pill)]",
+                currentPage === link.key
+                  ? "ink-primary bg-[var(--cm-blue-subtle)]"
+                  : "ink-secondary hover:ink-primary hover:bg-[color-mix(in_oklab,var(--surface-overlay)_55%,transparent)]",
+              ]}
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
+
+        <div class="ml-auto flex items-center gap-1.5 justify-self-end md:ml-0">
+          <ThemeToggle />
+          <Button href="#download" size="sm" class="hidden sm:inline-flex">
+            Download
+          </Button>
+
+          <button
+            id="cm-mobile-menu-btn"
+            type="button"
+            class="md:hidden relative size-9 flex items-center justify-center [border-radius:var(--radius-pill)] ink-secondary hover:ink-primary hover:bg-[color-mix(in_oklab,var(--surface-overlay)_55%,transparent)] active:scale-95 transition-all duration-200"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="cm-mobile-menu"
+          >
+            <span
+              data-menu-icon="open"
+              class="absolute inset-0 m-auto flex size-5 items-center justify-center transition-all duration-200"
+            >
+              <PhosphorIcon name="list" size={20} />
+            </span>
+            <span
+              data-menu-icon="close"
+              class="absolute inset-0 m-auto flex size-5 items-center justify-center opacity-0 scale-75 transition-all duration-200"
+            >
+              <PhosphorIcon name="x" size={20} />
+            </span>
+          </button>
+        </div>
       </div>
     </Surface>
 
-    <Surface
+    <div
       id="cm-mobile-menu"
-      variant="glass"
-      radius="panel"
-      class="hidden md:hidden mt-2 p-2.5 shadow-[var(--shadow-elevated)]"
+      class="md:hidden mt-2 origin-top opacity-0 scale-[0.98] -translate-y-1 pointer-events-none transition-all duration-200 ease-out [&[data-open=true]]:opacity-100 [&[data-open=true]]:scale-100 [&[data-open=true]]:translate-y-0 [&[data-open=true]]:pointer-events-auto"
+      data-open="false"
+      inert
+      role="dialog"
+      aria-modal="true"
+      aria-label="Site navigation"
     >
-      <div class="space-y-1">
-        {links.map((link) => (
-          <a
-            href={link.href}
-            class:list={[
-              "block px-4 py-3 text-[15px] font-display font-semibold transition-colors duration-200 [border-radius:var(--radius-card)]",
-              currentPage === link.key
-                ? "ink-primary bg-[var(--cm-blue-subtle-2)]"
-                : "ink-secondary hover:ink-primary hover:bg-[color-mix(in_oklab,var(--surface-overlay)_70%,transparent)]",
-            ]}
-          >
-            {link.label}
-          </a>
-        ))}
-      </div>
-      <div class="mt-2 px-1">
-        <Button href="#download" size="md" class="w-full justify-center">
-          Download
-        </Button>
-      </div>
-    </Surface>
+      <Surface variant="glass" radius="panel" class="p-2.5 shadow-[var(--shadow-elevated)]">
+        <nav class="flex flex-col gap-0.5">
+          {links.map((link) => (
+            <a
+              href={link.href}
+              aria-current={currentPage === link.key ? "page" : undefined}
+              class:list={[
+                "block px-4 py-3 text-[15px] font-display font-medium tracking-[-0.005em] transition-colors duration-200 [border-radius:var(--radius-card)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-base)]",
+                currentPage === link.key
+                  ? "ink-primary bg-[var(--cm-blue-subtle)]"
+                  : "ink-secondary hover:ink-primary hover:bg-[color-mix(in_oklab,var(--surface-overlay)_70%,transparent)]",
+              ]}
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
+        <div class="mt-2 px-1 sm:hidden">
+          <Button href="#download" size="md" class="w-full justify-center">
+            Download
+          </Button>
+        </div>
+      </Surface>
+    </div>
   </div>
 </header>
 
@@ -110,14 +138,84 @@ const links = [
     const menu = document.getElementById("cm-mobile-menu");
     if (!(btn instanceof HTMLButtonElement) || !(menu instanceof HTMLElement)) return;
 
-    btn.addEventListener("click", () => {
-      const isOpen = !menu.classList.contains("hidden");
-      menu.classList.toggle("hidden");
-      btn.setAttribute("aria-expanded", String(!isOpen));
+    const iconOpen = btn.querySelector<HTMLElement>('[data-menu-icon="open"]');
+    const iconClose = btn.querySelector<HTMLElement>('[data-menu-icon="close"]');
+
+    const focusableSelector = 'a[href]:not([disabled]), button:not([disabled])';
+
+    const getFocusable = () => [...menu.querySelectorAll<HTMLElement>(focusableSelector)];
+
+    const setOpen = (open: boolean) => {
+      menu.dataset.open = String(open);
+      btn.setAttribute("aria-expanded", String(open));
+      btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      menu.toggleAttribute("inert", !open);
+      if (iconOpen && iconClose) {
+        iconOpen.classList.toggle("opacity-0", open);
+        iconOpen.classList.toggle("scale-75", open);
+        iconClose.classList.toggle("opacity-0", !open);
+        iconClose.classList.toggle("scale-75", !open);
+      }
+      if (open) {
+        queueMicrotask(() => {
+          const first = getFocusable()[0];
+          first?.focus();
+        });
+      } else {
+        btn.focus();
+      }
+    };
+
+    const isOpen = () => menu.dataset.open === "true";
+
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      setOpen(!isOpen());
     });
+
+    document.addEventListener("click", (e) => {
+      if (!isOpen()) return;
+      const target = e.target;
+      if (!(target instanceof Node)) return;
+      if (menu.contains(target) || btn.contains(target)) return;
+      setOpen(false);
+    });
+
+    menu.addEventListener("keydown", (e) => {
+      if (!isOpen()) return;
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setOpen(false);
+        btn.focus();
+        return;
+      }
+      if (e.key !== "Tab") return;
+      const nodes = getFocusable();
+      if (nodes.length === 0) return;
+      const first = nodes[0]!;
+      const last = nodes.at(-1)!;
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else if (document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    });
+
+    menu.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", () => setOpen(false));
+    });
+
+    const mq = window.matchMedia("(min-width: 768px)");
+    const onMqChange = () => {
+      if (mq.matches && isOpen()) setOpen(false);
+    };
+    mq.addEventListener("change", onMqChange);
   }
 
   initFloatingHeaderMenu();
   document.addEventListener("astro:after-swap", initFloatingHeaderMenu);
 </script>
-

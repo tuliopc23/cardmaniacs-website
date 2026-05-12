@@ -4,7 +4,11 @@ import SiteNav from '../../components/SiteNav.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
 import Container from '../../components/Container.astro';
 import Prose from '../../components/ui/Prose.astro';
+import PhosphorIcon from '../../components/PhosphorIcon.astro';
 import { getCollection, render } from 'astro:content';
+
+/** Static HTML at build for content routes under `output: "server"`. */
+export const prerender = true;
 
 export async function getStaticPaths() {
   const docs = await getCollection('docs');
@@ -38,7 +42,7 @@ sorted.forEach((d) => {
           <nav class="sticky top-28 space-y-6">
             {[...sections.entries()].map(([section, items]) => (
               <div>
-                <p class="caption ink-tertiary mb-2">{section}</p>
+                <p class="editorial-eyebrow ink-tertiary mb-2">{section}</p>
                 <ul class="space-y-1">
                   {items.map((d) => (
                     <li>
@@ -63,11 +67,12 @@ sorted.forEach((d) => {
 
         <!-- Content -->
         <article class="max-w-[680px]">
-          <a href="/docs" class="inline-flex items-center gap-1.5 ink-accent text-[13px] font-display font-medium mb-6 hover:underline underline-offset-2 lg:hidden">
-            ← All docs
+          <a href="/docs" class="mb-6 inline-flex items-center gap-1.5 text-[13px] font-display font-medium ink-accent hover:underline underline-offset-2 lg:hidden">
+            <PhosphorIcon name="arrow-left" size={14} />
+            All docs
           </a>
-          {doc.data.section && <p class="caption ink-tertiary mb-2">{doc.data.section}</p>}
-          <h1 class="display ink-primary mb-8">{doc.data.title}</h1>
+          {doc.data.section && <p class="editorial-eyebrow ink-tertiary mb-2">{doc.data.section}</p>}
+          <h1 class="display-hero ink-primary mb-10 text-balance">{doc.data.title}</h1>
           <Prose>
             <Content />
           </Prose>

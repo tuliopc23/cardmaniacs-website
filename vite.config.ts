@@ -4,6 +4,9 @@ export default defineConfig({
   staged: {
     "*": "vp check --fix",
   },
+  fmt: {
+    ignorePatterns: ["**/dist/**", "**/node_modules/**", "**/.astro/**"],
+  },
   lint: { options: { typeAware: true, typeCheck: true } },
   test: {
     environment: "jsdom",

@@ -8,6 +8,9 @@ import Button from '../../components/Button.astro';
 import Prose from '../../components/ui/Prose.astro';
 import { getCollection, render } from 'astro:content';
 
+/** Static HTML at build for content routes under `output: "server"`. */
+export const prerender = true;
+
 export async function getStaticPaths() {
   const releases = await getCollection('releases');
   return releases.map((release) => ({

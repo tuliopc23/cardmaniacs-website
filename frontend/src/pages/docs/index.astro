@@ -3,7 +3,8 @@ import Layout from '../../layouts/Layout.astro';
 import SiteNav from '../../components/SiteNav.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
 import Container from '../../components/Container.astro';
-import Card from '../../components/Card.astro';
+import BejamasCard from '../../components/ui/bejamas/Card.astro';
+import PhosphorIcon from '../../components/PhosphorIcon.astro';
 import { getCollection } from 'astro:content';
 
 const docs = await getCollection('docs');
@@ -22,9 +23,9 @@ docs.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0)).forEach((doc) => 
     <section class="pt-32 pb-16 md:pt-40 md:pb-20">
       <Container>
         <div class="max-w-[680px]">
-          <p class="caption ink-accent mb-5">Documentation</p>
-          <h1 class="display-xl ink-primary mb-6">Learn Cardmaniacs.</h1>
-          <p class="body-l ink-secondary max-w-[520px]">
+          <p class="editorial-eyebrow editorial-eyebrow-accent mb-4">Documentation</p>
+          <h1 class="display-hero ink-primary mb-6">Learn Cardmaniacs.</h1>
+          <p class="type-lede measure-tight max-w-[520px]">
             Guides, tips, and reference for getting the most out of your reading desk.
           </p>
         </div>
@@ -33,16 +34,21 @@ docs.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0)).forEach((doc) => 
 
     <section class="pb-20">
       <Container>
-        <div class="space-y-10">
+        <div class="space-y-12">
           {[...sections.entries()].map(([section, items]) => (
             <div>
-              <h2 class="heading ink-primary mb-4">{section}</h2>
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <h2 class="type-section-title ink-primary mb-5">{section}</h2>
+              <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {items.map((doc) => (
-                  <Card variant="interactive" href={`/docs/${doc.id}`} class="p-5 block">
-                    <h3 class="subheading ink-primary mb-1">{doc.data.title}</h3>
-                    <p class="body-s ink-tertiary">Read guide →</p>
-                  </Card>
+                  <a href={`/docs/${doc.id}`} class="group block rounded-[var(--radius-card)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-base)]">
+                    <BejamasCard padding="md" hover class="h-full">
+                      <h3 class="subheading ink-primary mb-2 transition-colors group-hover:text-[var(--accent)]">{doc.data.title}</h3>
+                      <p class="body-s ink-tertiary flex items-center gap-1.5">
+                        Read guide
+                        <PhosphorIcon name="arrow-right" size={14} class="text-[var(--accent)] transition-transform group-hover:translate-x-0.5" />
+                      </p>
+                    </BejamasCard>
+                  </a>
                 ))}
               </div>
             </div>

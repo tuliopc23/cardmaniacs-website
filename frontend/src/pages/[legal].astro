@@ -6,6 +6,9 @@ import Container from '../components/Container.astro';
 import Prose from '../components/ui/Prose.astro';
 import { getCollection, render } from 'astro:content';
 
+/** Needed so `getStaticPaths` runs under `output: "server"` (otherwise `page` is undefined). */
+export const prerender = true;
+
 export async function getStaticPaths() {
   const pages = await getCollection('legal');
   return pages.map((page) => ({

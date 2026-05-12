@@ -56,15 +56,4 @@ const legal = defineCollection({
   }),
 });
 
-const media = defineCollection({
-  loader: glob({ base: "./src/content/media", pattern: "**/*.yaml" }),
-  schema: schema.object({
-    title: schema.string(),
-    description: schema.string().optional(),
-    type: schema.enum(["screenshot", "icon", "banner"]).optional(),
-    platform: schema.enum(["all", "macos", "ios", "ipados"]).optional(),
-    image: schema.string().optional(),
-  }),
-});
-
-export const collections = { posts, changelog, docs, releases, legal, media };
+export const collections = { posts, changelog, docs, releases, legal };

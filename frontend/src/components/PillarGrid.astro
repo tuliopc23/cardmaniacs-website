@@ -1,23 +1,23 @@
 ---
 import SectionBlock from './SectionBlock.astro';
-import Surface from './ui/Surface.astro';
-import Pill from './Pill.astro';
+import BejamasCard from './ui/bejamas/Card.astro';
+import PhosphorIcon from './PhosphorIcon.astro';
 
 const pillars = [
   {
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12.75 19.5v-.75a7.5 7.5 0 00-7.5-7.5H4.5m0-6.75h.75c7.87 0 14.25 6.38 14.25 14.25v.75M6 18.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" /></svg>`,
+    icon: 'rss' as const,
     title: 'Feeds',
     description: 'RSS, Atom, YouTube, podcasts, Reddit, Mastodon — every syndication format in one beautiful card-based stream.',
     screenshot: '/images/Cardmaniacs-mac - 2.png',
   },
   {
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" /></svg>`,
+    icon: 'bookmark-simple' as const,
     title: 'Read Later',
     description: 'Quick capture from any app, full-text parsing, specialized renderers for complex sites. Your queue, under control.',
     screenshot: '/images/Cardmaniacs-mac - 5.png',
   },
   {
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" /></svg>`,
+    icon: 'bookmarks' as const,
     title: 'Bookmarks',
     description: 'Tags, smart folders, full-text search across everything. Import PDFs, EPUB & Markdown. Your reference library.',
     screenshot: '/images/Cardmaniacs-mac - 7.png',
@@ -28,30 +28,38 @@ const pillars = [
 <SectionBlock label="Three pillars" heading="One app for your entire reading workflow.">
   <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
     {pillars.map((pillar) => (
-      <Surface href="/features" variant="elevated" interactive class="group p-0">
-        <div class="relative overflow-hidden border-b border-[var(--border-subtle)] bg-[radial-gradient(900px_260px_at_25%_0%,color-mix(in_oklab,var(--cm-blue)_18%,transparent)_0%,transparent_60%),linear-gradient(to_bottom,color-mix(in_oklab,var(--surface-overlay)_45%,transparent),transparent)] h-[172px] [border-top-left-radius:var(--radius-card)] [border-top-right-radius:var(--radius-card)]">
-          <img
-            src={pillar.screenshot}
-            alt={`Cardmaniacs — ${pillar.title}`}
-            loading="lazy"
-            class="absolute inset-0 h-full w-full object-cover opacity-[0.92] transition-transform duration-500 group-hover:scale-[1.02]"
-          />
-          <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.08),transparent_40%,rgba(0,0,0,0.12))] dark:bg-[linear-gradient(to_bottom,rgba(0,0,0,0.25),transparent_45%,rgba(0,0,0,0.35))]"></div>
-          <div class="absolute left-4 top-4 flex items-center gap-2">
-            <span class="inline-flex items-center justify-center size-9 [border-radius:var(--radius-pill)] bg-[color-mix(in_oklab,var(--surface-elevated)_55%,transparent)] ring-1 ring-black/5 dark:ring-white/10 backdrop-blur-md ink-primary">
-              <Fragment set:html={pillar.icon} />
-            </span>
-            <Pill variant="accent">{pillar.title}</Pill>
+      <a href="/features" class="group block rounded-[var(--radius-card)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-base)]">
+        <BejamasCard padding="none" hover class="h-full overflow-hidden">
+          <div class="relative overflow-hidden border-b border-[var(--border-subtle)] bg-[radial-gradient(900px_260px_at_25%_0%,color-mix(in_oklab,var(--cm-blue)_18%,transparent)_0%,transparent_60%),linear-gradient(to_bottom,color-mix(in_oklab,var(--surface-overlay)_45%,transparent),transparent)] h-[172px] [border-top-left-radius:var(--radius-card)] [border-top-right-radius:var(--radius-card)]">
+            <img
+              src={pillar.screenshot}
+              alt={`Cardmaniacs — ${pillar.title}`}
+              loading="lazy"
+              class="absolute inset-0 h-full w-full object-cover opacity-[0.92] transition-transform duration-500 group-hover:scale-[1.02]"
+            />
+            <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.08),transparent_40%,rgba(0,0,0,0.12))] dark:bg-[linear-gradient(to_bottom,rgba(0,0,0,0.25),transparent_45%,rgba(0,0,0,0.35))]"></div>
+            <div class="absolute left-4 top-4 flex items-center gap-2">
+              <span class="inline-flex items-center justify-center size-9 [border-radius:var(--radius-pill)] bg-[color-mix(in_oklab,var(--surface-elevated)_55%,transparent)] ring-1 ring-black/5 dark:ring-white/10 backdrop-blur-md ink-primary shadow-[var(--shadow-pill)]">
+                <PhosphorIcon name={pillar.icon} size={22} />
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 border border-[var(--border-accent)] leading-none [border-radius:var(--radius-pill)] text-[11px] font-display font-semibold bg-[var(--cm-blue-subtle)] text-[var(--cm-blue-ink)] shadow-[var(--shadow-pill)]">
+                {pillar.title}
+              </span>
+            </div>
           </div>
-        </div>
 
-        <div class="p-6">
-          <h3 class="subheading ink-primary mb-2 text-balance">{pillar.title}</h3>
-          <p class="body-s ink-secondary leading-relaxed text-pretty">
-            {pillar.description}
-          </p>
-        </div>
-      </Surface>
+          <div class="p-6">
+            <h3 class="subheading ink-primary mb-2 text-balance">{pillar.title}</h3>
+            <p class="body-s ink-secondary leading-relaxed text-pretty">
+              {pillar.description}
+            </p>
+            <p class="mt-4 inline-flex items-center gap-1.5 text-[13px] font-display font-semibold ink-accent">
+              See on Features
+              <PhosphorIcon name="chevron-right" size={14} class="transition-transform group-hover:translate-x-0.5" />
+            </p>
+          </div>
+        </BejamasCard>
+      </a>
     ))}
   </div>
 </SectionBlock>

@@ -2,28 +2,53 @@
 import Container from "../Container.astro";
 import AppStoreButton from "../AppStoreButton.astro";
 import ProductFrame from "./ProductFrame.astro";
-import Pill from "../Pill.astro";
+import DevicePicker from "./DevicePicker.astro";
+import PhosphorIcon from "../PhosphorIcon.astro";
 
 const chips = ["Feeds", "Read Later", "Bookmarks", "Highlights", "Summaries", "Offline"];
 ---
 
-<section class="relative pt-32 pb-14 md:pt-40 md:pb-22 overflow-hidden">
-  <Container class="relative z-10">
-    <div class="grid grid-cols-1 lg:grid-cols-[1fr_520px] gap-10 lg:gap-14 items-start">
-      <div class="max-w-[720px]">
-        <p class="caption ink-accent mb-5">A calmer home for everything you read</p>
+<section class="relative left-1/2 right-1/2 w-screen -translate-x-1/2 overflow-x-clip pb-14 md:pb-22">
+  <div
+    class="pointer-events-none absolute inset-x-0 top-0 h-[min(72vh,820px)] -z-10"
+    aria-hidden="true"
+  >
+    <div
+      class="absolute inset-0 bg-[radial-gradient(900px_520px_at_50%_-10%,color-mix(in_oklab,var(--cm-blue)_22%,transparent)_0%,transparent_55%),radial-gradient(760px_420px_at_12%_30%,color-mix(in_oklab,var(--bg-atmo-1)_35%,transparent)_0%,transparent_60%),radial-gradient(700px_400px_at_88%_25%,color-mix(in_oklab,var(--bg-atmo-2)_28%,transparent)_0%,transparent_58%),linear-gradient(180deg,color-mix(in_oklab,var(--surface-overlay)_40%,transparent),transparent_72%)]"
+    />
+  </div>
 
-        <h1 class="display-xl ink-primary mb-6 text-balance">
-          Your native reading desk —<br class="hidden sm:block" />
-          collected, triaged, finished.
-        </h1>
+  <Container class="relative z-10 pt-32 md:pt-40">
+    <div data-device-hero class="flex flex-col items-center">
+      <div class="w-full max-w-[760px] mx-auto text-center mb-10 md:mb-12">
+        <p class="editorial-eyebrow editorial-eyebrow-accent mb-4">A calmer home for everything you read</p>
 
-        <p class="body-l ink-secondary max-w-[560px] mb-9 text-pretty">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-center gap-6 md:gap-8 mb-7">
+          <span
+            class="relative mx-auto md:mx-0 flex size-[72px] md:size-[84px] shrink-0 items-center justify-center rounded-[22px] bg-transparent shadow-[var(--shadow-logo-mark)] ring-0 transition-[transform,box-shadow] duration-300 ease-out"
+            aria-hidden="true"
+          >
+            <img
+              src="/images/Cardmaniacs-icon-white.png"
+              alt=""
+              class="size-[52px] md:size-[58px] object-contain"
+              width="58"
+              height="58"
+              loading="eager"
+            />
+          </span>
+          <h1 class="display-hero ink-primary text-balance md:text-left">
+            Your native reading desk —<br class="hidden sm:block" />
+            collected, triaged, finished.
+          </h1>
+        </div>
+
+        <p class="type-lede measure mx-auto mb-9">
           Cardmaniacs unifies feeds, read-later, bookmarks, and highlights into one quiet Apple-native command
           center — so you stop tab-hoarding and start reading.
         </p>
 
-        <div class="flex flex-col sm:flex-row items-start gap-4 mb-8">
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
           <AppStoreButton />
           <a
             href="/features"
@@ -34,28 +59,98 @@ const chips = ["Feeds", "Read Later", "Bookmarks", "Highlights", "Summaries", "O
               class="inline-flex items-center justify-center size-6 [border-radius:var(--radius-pill)] bg-[var(--cm-blue-subtle)] text-[var(--cm-blue-ink)] transition-transform duration-200 group-hover:translate-x-0.5"
               aria-hidden="true"
             >
-              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-              </svg>
+              <PhosphorIcon name="chevron-right" size={16} class="translate-x-px" />
             </span>
           </a>
         </div>
 
-        <div class="flex flex-wrap gap-2">
-          {chips.map((c) => (
-            <Pill variant={c === "Feeds" ? "accent" : "default"}>{c}</Pill>
-          ))}
+        <p class="sr-only">Including {chips.join(", ")}.</p>
+        <div
+          class="hero-chip-rail mx-auto flex w-full max-w-[540px] flex-wrap justify-center gap-0.5 p-1 rounded-[var(--radius-pill)] border border-[var(--border-subtle)] bg-[color-mix(in_oklab,var(--surface-glass)_55%,transparent)] shadow-[var(--shadow-pill)] backdrop-blur-md backdrop-saturate-[var(--sat-glass)] supports-[backdrop-filter]:bg-[color-mix(in_oklab,var(--surface-glass)_42%,transparent)]"
+          aria-hidden="true"
+        >
+          {
+            chips.map((c, i) => (
+              <span
+                class:list={[
+                  "hero-chip-pill select-none rounded-[var(--radius-pill)] px-3 py-1.5 text-[11px] font-display font-semibold tracking-wide text-[var(--ink-secondary)]",
+                  i === 0 && "hero-chip-pill--active",
+                ]}
+              >
+                {c}
+              </span>
+            ))
+          }
         </div>
       </div>
 
-      <div class="lg:pt-2" data-reveal>
-        <ProductFrame
-          srcLight="/images/cardmaniacs-mac-bezel-light.png"
-          srcDark="/images/cardmaniacs-mac-bezel-dark.png"
-          alt="Cardmaniacs on macOS — card-based reading interface"
-        />
+      <DevicePicker />
+
+      <div class="w-full max-w-[920px] mx-auto" data-reveal data-device-showcase>
+        <div
+          id="device-panel-mac"
+          data-device-panel="mac"
+          role="tabpanel"
+          aria-labelledby="device-tab-mac"
+          class="w-full"
+        >
+          <ProductFrame
+            srcLight="/images/cardmaniacs-mac-bezel-light.png"
+            srcDark="/images/cardmaniacs-mac-bezel-dark.png"
+            alt="Cardmaniacs on macOS — card-based reading interface"
+          />
+        </div>
+
+        <div
+          id="device-panel-iphone"
+          data-device-panel="iphone"
+          role="tabpanel"
+          aria-labelledby="device-tab-iphone"
+          hidden
+          class="w-full flex justify-center"
+        >
+          <div
+            class="w-full max-w-[220px] aspect-[9/19] max-h-[min(420px,52vh)] flex flex-col items-center justify-center gap-3 rounded-[var(--radius-hero)] border border-dashed border-[var(--border-strong)] bg-[color-mix(in_oklab,var(--surface-overlay)_40%,transparent)] p-6 text-center shadow-[var(--shadow-pill)] backdrop-blur-sm"
+          >
+            <PhosphorIcon name="device-mobile" size={40} class="ink-tertiary" />
+            <p class="font-display text-[13px] font-medium ink-secondary leading-snug">
+              iPhone preview<br />
+              <span class="ink-tertiary font-normal">Coming soon</span>
+            </p>
+          </div>
+        </div>
+
+        <div
+          id="device-panel-ipad"
+          data-device-panel="ipad"
+          role="tabpanel"
+          aria-labelledby="device-tab-ipad"
+          hidden
+          class="w-full flex justify-center"
+        >
+          <div
+            class="w-full max-w-[min(100%,560px)] aspect-[4/3] max-h-[min(380px,44vh)] flex flex-col items-center justify-center gap-3 rounded-[var(--radius-hero)] border border-dashed border-[var(--border-strong)] bg-[color-mix(in_oklab,var(--surface-overlay)_40%,transparent)] p-8 text-center shadow-[var(--shadow-pill)] backdrop-blur-sm"
+          >
+            <PhosphorIcon name="device-tablet" size={44} class="ink-tertiary" />
+            <p class="font-display text-[13px] font-medium ink-secondary leading-snug">
+              iPad preview<br />
+              <span class="ink-tertiary font-normal">Coming soon</span>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </Container>
 </section>
 
+<style>
+  .hero-chip-pill--active {
+    background: var(--cm-blue-subtle);
+    color: var(--cm-blue-ink);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  }
+
+  :global([data-theme="dark"]) .hero-chip-pill--active {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+</style>

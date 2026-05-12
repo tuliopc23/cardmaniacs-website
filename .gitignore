@@ -22,7 +22,13 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
--e 
+
+# Wrangler local deploy cache (can be written during dev / vp check)
+.wrangler/
+frontend/.wrangler/
+
 # Environment files
 *.env
 *.env.*
+!.env.example
+!**/.env.example

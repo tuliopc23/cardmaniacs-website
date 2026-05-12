@@ -1,4 +1,7 @@
 ---
+import FeatureItem from "./FeatureItem.astro";
+import PhosphorIcon from "./PhosphorIcon.astro";
+
 interface Props {
   icon: string;
   title: string;
@@ -8,12 +11,14 @@ interface Props {
 const { icon, title, description } = Astro.props;
 ---
 
-<div class="flex gap-4">
-  <div class="w-8 h-8 flex items-center justify-center rounded-[var(--radius-sm)] bg-[var(--accent-subtle)] ink-accent shrink-0 mt-0.5">
-    <Fragment set:html={icon} />
-  </div>
-  <div>
-    <h3 class="subheading ink-primary mb-1.5">{title}</h3>
-    <p class="body-s ink-secondary leading-relaxed">{description}</p>
-  </div>
-</div>
+<FeatureItem>
+  <span slot="media" class="inline-flex size-8 items-center justify-center rounded-[var(--radius-sm)] bg-[var(--accent-subtle)] ink-accent shrink-0">
+    <PhosphorIcon name={icon} size={18} />
+  </span>
+  <h3 slot="title" class="subheading ink-primary">
+    {title}
+  </h3>
+  <p slot="description" class="body-s ink-secondary leading-relaxed">
+    {description}
+  </p>
+</FeatureItem>

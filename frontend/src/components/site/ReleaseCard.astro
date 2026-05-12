@@ -2,6 +2,7 @@
 import Surface from "../ui/Surface.astro";
 import Pill from "../Pill.astro";
 import Prose from "../ui/Prose.astro";
+import PhosphorIcon from "../PhosphorIcon.astro";
 
 interface Props {
   version?: string;
@@ -91,10 +92,8 @@ const typeVariant =
             )}
           </div>
 
-          <span class="hidden sm:inline-flex items-center justify-center size-9 [border-radius:var(--radius-pill)] bg-[color-mix(in_oklab,var(--surface-elevated)_60%,transparent)] ring-1 ring-black/5 dark:ring-white/10 backdrop-blur-md">
-            <svg class="w-4 h-4 ink-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-            </svg>
+          <span class="hidden sm:inline-flex items-center justify-center size-9 [border-radius:var(--radius-pill)] bg-[color-mix(in_oklab,var(--surface-elevated)_60%,transparent)] ring-1 ring-black/5 dark:ring-white/10 backdrop-blur-md ink-primary">
+            <PhosphorIcon name="chevron-right" size={16} />
           </span>
         </div>
       </div>

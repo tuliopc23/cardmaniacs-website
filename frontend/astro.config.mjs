@@ -14,5 +14,23 @@ export default defineConfig({
     server: {
       allowedHosts: true,
     },
+    // Keystatic injects `virtual:keystatic-config`; esbuild dep-prebundle cannot resolve it
+    // for `@keystatic/astro/internal/keystatic-api.js`, which breaks `optimizeDeps`.
+    //
+    // Astro dev toolbar (audit / xray apps) is pre-bundled into hashed chunks under
+    // `node_modules/.vite/deps/`. When `optimizeDeps` re-runs, old chunk URLs 404 briefly.
+    // Serving the toolbar entry without dep-prebundle avoids those stale-hash warnings.
+    optimizeDeps: {
+      exclude: ["@keystatic/astro", "astro/runtime/client/dev-toolbar/entrypoint.js"],
+    },
+    ssr: {
+      optimizeDeps: {
+        exclude: ["@keystatic/astro"],
+      },
+    },
+    // Keystatic CMS client bundle is ~2.7 MB minified; Vite’s default 500 kB warning is noise until the admin UI is lazy-islanded.
+    build: {
+      chunkSizeWarningLimit: 3200,
+    },
   },
 });

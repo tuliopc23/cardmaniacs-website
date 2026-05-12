@@ -1,7 +1,8 @@
 ---
-import Surface from "../ui/Surface.astro";
-import Button from "../Button.astro";
+import BejamasCard from "../ui/bejamas/Card.astro";
+import BejamasButton from "../ui/bejamas/Button.astro";
 import Pill from "../Pill.astro";
+import PhosphorIcon from "../PhosphorIcon.astro";
 
 interface Props {
   label: string;
@@ -12,6 +13,7 @@ interface Props {
   ctaVariant?: "primary" | "secondary";
   highlighted?: boolean;
   badge?: string;
+  features?: string[];
 }
 
 const {
@@ -23,42 +25,58 @@ const {
   ctaVariant = "secondary",
   highlighted = false,
   badge,
+  features = [],
 } = Astro.props;
 ---
 
-<Surface
-  variant="elevated"
+<BejamasCard
+  padding="none"
+  hover={false}
   class:list={[
-    "p-7 md:p-8 flex-1",
-    highlighted
-      ? "ring-1 ring-[var(--border-accent)] shadow-[var(--shadow-elevated)]"
-      : "",
+    "flex flex-col h-full p-7 md:p-8 flex-1",
+    highlighted ? "ring-1 ring-[var(--border-accent)] shadow-[var(--shadow-float)]" : "",
   ]}
 >
   {highlighted ? (
     <div class="pointer-events-none absolute inset-0 opacity-80 [background:radial-gradient(900px_420px_at_20%_0%,color-mix(in_oklab,var(--cm-blue)_18%,transparent)_0%,transparent_60%)]"></div>
   ) : null}
 
-  <div class="flex items-start justify-between gap-4 mb-5">
-    <div>
-      <p class="caption ink-tertiary mb-2">{label}</p>
-      <div class="flex items-baseline gap-1.5">
-        <span class="heading ink-primary">{price}</span>
-        <span class="body-s ink-tertiary">{interval}</span>
+  <div class="relative flex flex-col flex-1">
+    <div class="flex items-start justify-between gap-4 mb-5">
+      <div>
+        <p class="editorial-eyebrow editorial-eyebrow-accent mb-2">{label}</p>
+        <div class="flex items-baseline gap-1.5">
+          <span class="type-section-title ink-primary !text-[clamp(1.75rem,3vw,2.25rem)]">{price}</span>
+          <span class="body-s ink-tertiary">{interval}</span>
+        </div>
       </div>
+
+      {badge && (
+        <Pill variant="accent" class="shrink-0">
+          {badge}
+        </Pill>
+      )}
     </div>
 
-    {badge && (
-      <Pill variant="accent" class="shrink-0">
-        {badge}
-      </Pill>
-    )}
+    <p class="body-s ink-secondary mb-5 text-pretty">{description}</p>
+
+    {
+      features.length > 0 && (
+        <ul class="mb-6 space-y-2.5 flex-1">
+          {features.map((line) => (
+            <li class="flex gap-2.5 body-s ink-secondary">
+              <span class="mt-0.5 shrink-0 text-[var(--accent)]" aria-hidden="true">
+                <PhosphorIcon name="check" size={16} />
+              </span>
+              <span>{line}</span>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    <BejamasButton href={ctaHref} variant={ctaVariant} class="w-full justify-center mt-auto">
+      Get started
+    </BejamasButton>
   </div>
-
-  <p class="body-s ink-secondary mb-6 text-pretty">{description}</p>
-
-  <Button href={ctaHref} variant={ctaVariant} class="w-full justify-center">
-    Get started
-  </Button>
-</Surface>
-
+</BejamasCard>

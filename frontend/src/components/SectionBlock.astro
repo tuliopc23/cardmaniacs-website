@@ -6,7 +6,7 @@ const { label, heading, class: className = '', id, as: Tag = 'section', inset = 
 
 <Tag
   id={id}
-  class:list={['py-20 md:py-28 lg:py-32', inset ? 'surface-inset' : '', className]}
+  class:list={['py-20 md:py-28 lg:py-32', inset ? 'section-band' : '', className]}
 >
   <Container>
     {(label || heading) && (

@@ -1,0 +1,16 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+---
+
+<div
+  class:list={[
+    "h-px w-full bg-[linear-gradient(90deg,transparent,color-mix(in_oklab,var(--border-strong)_70%,transparent),transparent)]",
+    className,
+  ]}
+  role="separator"
+  aria-hidden="true"
+/>

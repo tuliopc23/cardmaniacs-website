@@ -5,7 +5,11 @@ import SiteFooter from '../../components/SiteFooter.astro';
 import Container from '../../components/Container.astro';
 import Prose from '../../components/ui/Prose.astro';
 import Pill from '../../components/Pill.astro';
+import PhosphorIcon from '../../components/PhosphorIcon.astro';
 import { getCollection, render } from 'astro:content';
+
+/** Static HTML at build for content routes under `output: "server"`. */
+export const prerender = true;
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
@@ -27,22 +31,20 @@ const { Content } = await render(post);
       <Container narrow>
         <header class="mb-12">
           <a href="/blog" class="inline-flex items-center gap-1.5 ink-accent text-[13px] font-display font-medium mb-8 hover:underline underline-offset-2">
-            <svg class="w-3.5 h-3.5 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-            </svg>
+            <PhosphorIcon name="arrow-left" size={14} class="-translate-y-px" />
             All posts
           </a>
 
           {post.data.date && (
-            <time class="caption ink-tertiary block mb-4" datetime={post.data.date}>
+            <time class="editorial-eyebrow ink-tertiary block mb-4" datetime={post.data.date}>
               {new Date(post.data.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
             </time>
           )}
 
-          <h1 class="display-xl ink-primary mb-5 text-balance">{post.data.title}</h1>
+          <h1 class="display-hero ink-primary mb-5 text-balance">{post.data.title}</h1>
 
           {post.data.summary && (
-            <p class="body-l ink-secondary text-pretty">{post.data.summary}</p>
+            <p class="type-lede measure text-pretty">{post.data.summary}</p>
           )}
 
           <div class="mt-6 flex flex-wrap gap-2">

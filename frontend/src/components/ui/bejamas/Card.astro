@@ -1,0 +1,37 @@
+---
+/**
+ * Bejamas-style card — Astro + CM tokens (copy-and-own primitive).
+ */
+interface Props {
+  class?: string;
+  padding?: "none" | "sm" | "md" | "lg";
+  hover?: boolean;
+}
+
+const { class: className = "", padding = "md", hover = false } = Astro.props;
+
+const pads = {
+  none: "",
+  sm: "p-4",
+  md: "p-6 md:p-7",
+  lg: "p-7 md:p-9",
+} as const;
+---
+
+<div
+  class:list={[
+    "relative overflow-hidden rounded-[var(--radius-card)] border border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-[var(--ink-primary)] shadow-[var(--shadow-card)]",
+    hover &&
+      "transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-[var(--shadow-card-hover)] motion-reduce:hover:translate-y-0",
+    pads[padding],
+    className,
+  ]}
+>
+  <div
+    class="pointer-events-none absolute inset-0 opacity-70 [background:radial-gradient(1200px_600px_at_30%_0%,color-mix(in_oklab,var(--cm-blue)_10%,transparent)_0%,transparent_55%)]"
+    aria-hidden="true"
+  />
+  <div class="relative">
+    <slot />
+  </div>
+</div>

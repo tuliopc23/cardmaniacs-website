@@ -1,0 +1,34 @@
+---
+/**
+ * Product screenshot in a floating elevated frame — no faux window chrome.
+ */
+interface Props {
+  src: string;
+  alt: string;
+  loading?: "eager" | "lazy";
+  class?: string;
+}
+
+const { src, alt, loading = "lazy", class: className = "" } = Astro.props;
+---
+
+<div
+  class:list={[
+    "relative overflow-hidden rounded-[var(--radius-hero)] bg-[color-mix(in_oklab,var(--surface-overlay)_55%,transparent)] shadow-[var(--shadow-card)] ring-1 ring-[var(--border-subtle)] transition-shadow duration-500 hover:shadow-[var(--shadow-card-hover)]",
+    className,
+  ]}
+>
+  <div
+    class="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]"
+    aria-hidden="true"
+  />
+  <div
+    class="pointer-events-none absolute inset-[10px] rounded-[calc(var(--radius-hero)_-_10px)] ring-1 ring-[color-mix(in_oklab,var(--cm-blue)_22%,transparent)] opacity-70 max-sm:inset-[6px] max-sm:rounded-[calc(var(--radius-hero)_-_6px)]"
+    aria-hidden="true"
+  />
+  <div
+    class="pointer-events-none absolute inset-x-0 top-0 h-14 bg-[linear-gradient(180deg,color-mix(in_oklab,var(--surface-overlay)_55%,transparent),transparent)]"
+    aria-hidden="true"
+  />
+  <img src={src} alt={alt} loading={loading} class="relative z-[1] block w-full h-auto" />
+</div>

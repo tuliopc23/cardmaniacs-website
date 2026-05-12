@@ -3,13 +3,11 @@ import Layout from '../layouts/Layout.astro';
 import SiteNav from '../components/SiteNav.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import Container from '../components/Container.astro';
-import DeviceFrame from '../components/DeviceFrame.astro';
+import ProductShowcase from '../components/ProductShowcase.astro';
 import FeatureCard from '../components/FeatureCard.astro';
 import CtaBanner from '../components/CtaBanner.astro';
 import Pill from '../components/Pill.astro';
 import ScrollReveal from '../components/ScrollReveal.astro';
-
-const icon = (d: string) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="${d}" /></svg>`;
 
 const sections = [
   {
@@ -18,9 +16,9 @@ const sections = [
     screenshot: '/images/Cardmaniacs-mac - 2.png',
     screenshotAlt: 'Cardmaniacs — RSS feed view',
     features: [
-      { icon: icon('M12.75 19.5v-.75a7.5 7.5 0 00-7.5-7.5H4.5m0-6.75h.75c7.87 0 14.25 6.38 14.25 14.25v.75M6 18.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0z'), title: 'RSS & Atom feeds', description: 'Subscribe to any site with a feed. Full-text parsing, smart deduplication, and a beautiful card layout.' },
-      { icon: icon('M21 12a9 9 0 11-18 0 9 9 0 0118 0z'), title: 'YouTube, Podcasts, Reddit, Mastodon', description: 'Beyond RSS — add channels, podcasts, subreddits, and Mastodon accounts as first-class sources.' },
-      { icon: icon('M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5'), title: 'Quick save from anywhere', description: 'Share extension, keyboard shortcut, or drag-and-drop. Save anything in under a second.' },
+      { icon: 'rss', title: 'RSS & Atom feeds', description: 'Subscribe to any site with a feed. Full-text parsing, smart deduplication, and a beautiful card layout.' },
+      { icon: 'broadcast', title: 'YouTube, Podcasts, Reddit, Mastodon', description: 'Beyond RSS — add channels, podcasts, subreddits, and Mastodon accounts as first-class sources.' },
+      { icon: 'bookmark-simple', title: 'Quick save from anywhere', description: 'Share extension, keyboard shortcut, or drag-and-drop. Save anything in under a second.' },
     ],
   },
   {
@@ -29,9 +27,9 @@ const sections = [
     screenshot: '/images/Cardmaniacs-mac - 5.png',
     screenshotAlt: 'Cardmaniacs — article reader view',
     features: [
-      { icon: icon('M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z'), title: 'Specialized parsers', description: 'JS-heavy sites, GitHub READMEs, Wikipedia — strips the noise and delivers clean, readable text.' },
-      { icon: icon('M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25'), title: 'PDF, EPUB & Markdown', description: 'Upload documents directly. Read them alongside articles with beautiful typography and search.' },
-      { icon: icon('M3 3v1.5M3 21v-6m0 0l2.77-.693a9 9 0 016.208.682l.108.054a9 9 0 006.086.71l3.114-.732a48.524 48.524 0 01-.005-10.499l-3.11.732a9 9 0 01-6.085-.711l-.108-.054a9 9 0 00-6.208-.682L3 4.5M3 15V4.5'), title: 'Offline reading', description: 'Articles and documents sync for offline access. Read anywhere without a connection.' },
+      { icon: 'file-text', title: 'Specialized parsers', description: 'JS-heavy sites, GitHub READMEs, Wikipedia — strips the noise and delivers clean, readable text.' },
+      { icon: 'book-open-text', title: 'PDF, EPUB & Markdown', description: 'Upload documents directly. Read them alongside articles with beautiful typography and search.' },
+      { icon: 'cloud-arrow-down', title: 'Offline reading', description: 'Articles and documents sync for offline access. Read anywhere without a connection.' },
     ],
   },
   {
@@ -40,9 +38,9 @@ const sections = [
     screenshot: '/images/Cardmaniacs-mac - 7.png',
     screenshotAlt: 'Cardmaniacs — bookmark organization',
     features: [
-      { icon: icon('M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z'), title: 'Tags & smart folders', description: 'Flexible organization with rules, auto-tagging, and smart folders that update themselves.' },
-      { icon: icon('M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z'), title: 'Full-text search', description: 'Search across everything — articles, feeds, bookmarks, documents. Fast, local, private.' },
-      { icon: icon('M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z'), title: 'Vim navigation & shortcuts', description: 'Power-user navigation. Navigate, tag, archive, and manage everything from the keyboard.' },
+      { icon: 'tag', title: 'Tags & smart folders', description: 'Flexible organization with rules, auto-tagging, and smart folders that update themselves.' },
+      { icon: 'magnifying-glass', title: 'Full-text search', description: 'Search across everything — articles, feeds, bookmarks, documents. Fast, local, private.' },
+      { icon: 'keyboard', title: 'Vim navigation & shortcuts', description: 'Power-user navigation. Navigate, tag, archive, and manage everything from the keyboard.' },
     ],
   },
 ];
@@ -52,53 +50,50 @@ const sections = [
   <SiteNav currentPage="features" />
 
   <main>
-    <!-- Hero -->
     <section class="pt-32 pb-16 md:pt-40 md:pb-20">
       <Container>
         <div class="max-w-[680px]">
-          <p class="caption ink-accent mb-5">Features</p>
-          <h1 class="display-xl ink-primary mb-6">Three apps in one.<br/>Zero compromise.</h1>
-          <p class="body-l ink-secondary max-w-[520px]">
+          <p class="editorial-eyebrow editorial-eyebrow-accent mb-4">Features</p>
+          <h1 class="display-hero ink-primary mb-6">Three apps in one.<br />Zero compromise.</h1>
+          <p class="type-lede measure-tight">
             Feeds, Read Later, and Bookmarks — unified in a native Apple experience with power-user features and obsessive craft.
           </p>
         </div>
       </Container>
     </section>
 
-    <!-- Feature sections -->
     {sections.map((s, i) => (
-      <section class:list={['py-20 md:py-28', i % 2 !== 0 ? 'surface-inset' : '']}>
+      <section class:list={['py-20 md:py-28', i % 2 !== 0 ? 'section-band' : '']}>
         <Container>
           <div class="mb-12">
-            <p class="caption ink-accent mb-4">{s.label}</p>
-            <h2 class="display ink-primary">{s.heading}</h2>
+            <p class="editorial-eyebrow editorial-eyebrow-accent mb-3">{s.label}</p>
+            <h2 class="type-section-title ink-primary">{s.heading}</h2>
           </div>
 
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-            <div class="lg:col-span-4 space-y-8">
+            <div class="lg:col-span-4 space-y-7">
               {s.features.map((f) => (
                 <FeatureCard icon={f.icon} title={f.title} description={f.description} />
               ))}
             </div>
             <div class="lg:col-span-8" data-reveal>
-              <DeviceFrame src={s.screenshot} alt={s.screenshotAlt} />
+              <ProductShowcase src={s.screenshot} alt={s.screenshotAlt} />
             </div>
           </div>
         </Container>
       </section>
     ))}
 
-    <!-- Platform section -->
     <section class="py-20 md:py-28">
       <Container>
         <div class="text-center max-w-[560px] mx-auto mb-12">
-          <p class="caption ink-accent mb-4">Platform</p>
-          <h2 class="display ink-primary mb-4">Deeply native. Deeply connected.</h2>
-          <p class="body-l ink-secondary">
+          <p class="editorial-eyebrow editorial-eyebrow-accent mb-3">Platform</p>
+          <h2 class="type-section-title ink-primary mb-4">Deeply native. Deeply connected.</h2>
+          <p class="type-lede">
             Built entirely in Swift. Handoff, iCloud Sync, Widgets, Shortcuts, and Spotlight — every Apple platform feature, supported.
           </p>
         </div>
-        <div class="flex flex-wrap justify-center gap-3">
+        <div class="flex flex-wrap justify-center gap-2">
           <Pill variant="accent">macOS</Pill>
           <Pill variant="accent">iOS</Pill>
           <Pill variant="accent">iPadOS</Pill>

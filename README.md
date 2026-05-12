@@ -1,4 +1,18 @@
-# Astro Starter Kit: Basics
+# Cardmaniacs website
+
+Marketing site and Keystatic CMS for Cardmaniacs (Astro, Cloudflare Workers, Tailwind v4).
+
+**Cloudflare:** use `CLOUDFLARE_API_TOKEN` in your environment (not the deprecated `CF_API_TOKEN`). See `frontend/.env.example`.
+
+```sh
+cd frontend && pnpm install && pnpm run dev
+```
+
+From repo root (with [Vite+](https://viteplus.dev/guide/) installed): `vp check` and `vp test`.
+
+## Legacy starter notes (remove when docs are expanded)
+
+The sections below still describe the default Astro starter layout and are not accurate for this repo’s `frontend/` tree.
 
 ```sh
 pnpm create astro@latest -- --template basics
@@ -8,21 +22,21 @@ pnpm create astro@latest -- --template basics
 
 ## 🚀 Project Structure
 
-Inside of your Astro project, you'll see the following folders and files:
+Inside of your Astro project, you will see the following folders and files:
 
 ```text
 /
 ├── public/
 │   └── favicon.svg
 ├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
+│   ├── assets
+│   │   └── astro.svg
+│   ├── components
+│   │   └── Welcome.astro
+│   ├── layouts
+│   │   └── Layout.astro
+│   └── pages
+│       └── index.astro
 └── package.json
 ```
 

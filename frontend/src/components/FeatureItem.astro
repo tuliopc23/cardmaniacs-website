@@ -1,0 +1,24 @@
+---
+/**
+ * Full Dev Item–style composition in Astro: media + title + description slots.
+ */
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+---
+
+<div class:list={["flex gap-3.5 min-w-0", className]}>
+  <div class="shrink-0 pt-0.5">
+    <slot name="media" />
+  </div>
+  <div class="min-w-0 flex-1 space-y-1">
+    <div class="min-w-0">
+      <slot name="title" />
+    </div>
+    <div class="min-w-0">
+      <slot name="description" />
+    </div>
+  </div>
+</div>
