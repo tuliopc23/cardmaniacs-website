@@ -10,10 +10,11 @@ interface Props {
   interval: string;
   description: string;
   ctaHref: string;
-  ctaVariant?: "primary" | "secondary";
+  ctaLabel?: string;
   highlighted?: boolean;
   badge?: string;
   features?: string[];
+  class?: string;
 }
 
 const {
@@ -22,10 +23,11 @@ const {
   interval,
   description,
   ctaHref,
-  ctaVariant = "secondary",
+  ctaLabel = "Get started",
   highlighted = false,
   badge,
   features = [],
+  class: className = "",
 } = Astro.props;
 ---
 
@@ -33,8 +35,9 @@ const {
   padding="none"
   hover={false}
   class:list={[
-    "flex flex-col h-full p-7 md:p-8 flex-1",
+    "flex flex-col h-full p-6 md:p-7 flex-1",
     highlighted ? "ring-1 ring-[var(--border-accent)] shadow-[var(--shadow-float)]" : "",
+    className,
   ]}
 >
   {highlighted ? (
@@ -75,8 +78,8 @@ const {
       )
     }
 
-    <BejamasButton href={ctaHref} variant={ctaVariant} class="w-full justify-center mt-auto">
-      Get started
+    <BejamasButton href={ctaHref} variant="primary" class="w-full justify-center mt-auto">
+      {ctaLabel}
     </BejamasButton>
   </div>
 </BejamasCard>

@@ -1,56 +1,61 @@
 ---
 import SectionBlock from './SectionBlock.astro';
-import BejamasCard from './ui/bejamas/Card.astro';
 import PhosphorIcon from './PhosphorIcon.astro';
 
 const pillars = [
   {
     icon: 'rss' as const,
     title: 'Feeds',
-    description: 'RSS, Atom, YouTube, podcasts, Reddit, Mastodon — every syndication format in one beautiful card-based stream.',
+    description:
+      'RSS, Atom, YouTube, podcasts, Reddit, Mastodon — every syndication format in one beautiful card-based stream.',
     screenshot: '/images/Cardmaniacs-mac - 2.png',
   },
   {
     icon: 'bookmark-simple' as const,
     title: 'Read Later',
-    description: 'Quick capture from any app, full-text parsing, specialized renderers for complex sites. Your queue, under control.',
+    description:
+      'Quick capture from any app, full-text parsing, specialized renderers for complex sites. Your queue, under control.',
     screenshot: '/images/Cardmaniacs-mac - 5.png',
   },
   {
     icon: 'bookmarks' as const,
     title: 'Bookmarks',
-    description: 'Tags, smart folders, full-text search across everything. Import PDFs, EPUB & Markdown. Your reference library.',
+    description:
+      'Tags, smart folders, full-text search across everything. Import PDFs, EPUB & Markdown. Your reference library.',
     screenshot: '/images/Cardmaniacs-mac - 7.png',
   },
 ];
 ---
 
 <SectionBlock label="Three pillars" heading="One app for your entire reading workflow.">
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-    {pillars.map((pillar) => (
-      <a href="/features" class="group block rounded-[var(--radius-card)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-base)]">
-        <BejamasCard padding="none" hover class="h-full overflow-hidden">
-          <div class="relative overflow-hidden border-b border-[var(--border-subtle)] bg-[radial-gradient(900px_260px_at_25%_0%,color-mix(in_oklab,var(--cm-blue)_18%,transparent)_0%,transparent_60%),linear-gradient(to_bottom,color-mix(in_oklab,var(--surface-overlay)_45%,transparent),transparent)] h-[172px] [border-top-left-radius:var(--radius-card)] [border-top-right-radius:var(--radius-card)]">
-            <img
-              src={pillar.screenshot}
-              alt={`Cardmaniacs — ${pillar.title}`}
-              loading="lazy"
-              class="absolute inset-0 h-full w-full object-cover opacity-[0.92] transition-transform duration-500 group-hover:scale-[1.02]"
-            />
-            <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.08),transparent_40%,rgba(0,0,0,0.12))] dark:bg-[linear-gradient(to_bottom,rgba(0,0,0,0.25),transparent_45%,rgba(0,0,0,0.35))]"></div>
-            <div class="absolute left-4 top-4 flex items-center gap-2">
-              <span class="inline-flex items-center justify-center size-9 [border-radius:var(--radius-pill)] bg-[color-mix(in_oklab,var(--surface-elevated)_55%,transparent)] ring-1 ring-black/5 dark:ring-white/10 backdrop-blur-md ink-primary shadow-[var(--shadow-pill)]">
-                <PhosphorIcon name={pillar.icon} size={22} />
-              </span>
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 border border-[var(--border-accent)] leading-none [border-radius:var(--radius-pill)] text-[11px] font-display font-semibold bg-[var(--cm-blue-subtle)] text-[var(--cm-blue-ink)] shadow-[var(--shadow-pill)]">
-                {pillar.title}
-              </span>
-            </div>
+  <div class="grid grid-cols-1 gap-4 md:gap-5 lg:grid-cols-12">
+    {pillars.map((pillar, i) => (
+      <a
+        href="/features"
+        class:list={[
+          'group relative block overflow-hidden rounded-[var(--radius-feature)] border border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-[var(--ink-primary)] shadow-[var(--shadow-card)] transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-[var(--shadow-card-hover)] motion-reduce:hover:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-base)]',
+          i < 2 ? 'lg:col-span-6' : 'lg:col-span-12',
+        ]}
+      >
+        <div
+          class="pointer-events-none absolute inset-0 opacity-70 [background:radial-gradient(1200px_600px_at_30%_0%,color-mix(in_oklab,var(--cm-blue)_10%,transparent)_0%,transparent_55%)]"
+          aria-hidden="true"
+        />
+        <div class="relative flex flex-col gap-5 p-5 md:p-7 lg:flex-row lg:items-stretch lg:gap-8">
+          <div class="flex shrink-0 flex-wrap items-center gap-2 lg:flex-col lg:items-start">
+            <span class="inline-flex size-11 shrink-0 items-center justify-center [border-radius:var(--radius-pill)] bg-[color-mix(in_oklab,var(--surface-elevated)_55%,transparent)] ring-1 ring-black/5 shadow-[var(--shadow-pill)] backdrop-blur-md ink-primary dark:ring-white/10">
+              <PhosphorIcon name={pillar.icon} size={24} />
+            </span>
+            <span
+              class="inline-flex items-center gap-1.5 border border-[var(--border-accent)] bg-[var(--cm-blue-subtle)] px-2.5 py-1 text-[11px] font-display font-semibold leading-none text-[var(--cm-blue-ink)] shadow-[var(--shadow-pill)] [border-radius:var(--radius-pill)]"
+            >
+              {pillar.title}
+            </span>
           </div>
 
-          <div class="p-6">
+          <div class="min-w-0 flex-1 lg:pt-0.5">
             <h3 class="subheading ink-primary mb-2 text-balance">{pillar.title}</h3>
-            <p class="body-s ink-secondary leading-relaxed text-pretty">
+            <p class="body-s ink-secondary text-pretty leading-relaxed">
               {pillar.description}
             </p>
             <p class="mt-4 inline-flex items-center gap-1.5 text-[13px] font-display font-semibold ink-accent">
@@ -58,7 +63,21 @@ const pillars = [
               <PhosphorIcon name="chevron-right" size={14} class="transition-transform group-hover:translate-x-0.5" />
             </p>
           </div>
-        </BejamasCard>
+
+          <div
+            class="relative aspect-[16/10] w-full shrink-0 overflow-hidden rounded-[var(--radius-card)] border border-[var(--border-subtle)] bg-[var(--surface-overlay)] shadow-[inset_0_1px_0_rgba(255,255,255,0.35)] lg:aspect-auto lg:h-[120px] lg:w-[min(40%,240px)]"
+          >
+            <img
+              src={pillar.screenshot}
+              alt=""
+              loading="lazy"
+              class="absolute inset-0 h-full w-full object-cover object-top opacity-[0.92] transition-transform duration-500 group-hover:scale-[1.03]"
+            />
+            <div
+              class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.06),transparent_50%,rgba(0,0,0,0.08))] dark:bg-[linear-gradient(to_bottom,rgba(0,0,0,0.2),transparent_55%,rgba(0,0,0,0.28))]"
+            />
+          </div>
+        </div>
       </a>
     ))}
   </div>

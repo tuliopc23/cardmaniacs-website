@@ -30,9 +30,9 @@ const sorted = entries.sort((a, b) => {
       </Container>
     </section>
 
-    <section class="pb-24">
-      <Container narrow>
-        <div class="space-y-5">
+    <section class="pb-20 md:pb-24">
+      <Container>
+        <div class="flex flex-col gap-10 md:gap-12">
           {sorted.map(async (entry) => {
             const { Content } = await render(entry);
             return (

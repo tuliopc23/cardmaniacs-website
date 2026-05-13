@@ -22,17 +22,18 @@
   --font-mono:
     "SF Mono", ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, monospace;
 
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 32px;
   --radius-full: 9999px;
 
-  /* Semantic radii (design system) */
+  /* Semantic radii (design system) — substantially rounder surfaces */
   --radius-pill: var(--radius-full);
   --radius-panel: var(--radius-xl);
-  --radius-card: var(--radius-lg);
-  --radius-hero: 28px;
+  --radius-card: var(--radius-xl);
+  --radius-feature: 28px;
+  --radius-hero: 40px;
 
   /* Backdrop levels */
   --blur-glass: 18px;
@@ -110,6 +111,16 @@
     0 18px 60px rgba(6, 10, 20, 0.1);
   --shadow-elevated: 0 30px 90px rgba(6, 10, 20, 0.14);
   --shadow-button: 0 1px 0 rgba(255, 255, 255, 0.24) inset, 0 8px 22px rgba(6, 10, 20, 0.12);
+  /* Accent pill — liquid glass stack (marketing CTAs) */
+  --border-button-liquid: color-mix(in oklab, white 34%, var(--accent));
+  --shadow-button-liquid:
+    0 1px 0 rgba(255, 255, 255, 0.42) inset, 0 1px 2px rgba(6, 10, 20, 0.06),
+    0 10px 26px color-mix(in oklab, var(--accent) 42%, transparent),
+    0 22px 48px rgba(6, 10, 20, 0.12), 0 0 0 1px color-mix(in oklab, var(--accent) 18%, transparent);
+  --shadow-button-liquid-hover:
+    0 1px 0 rgba(255, 255, 255, 0.52) inset, 0 2px 4px rgba(6, 10, 20, 0.07),
+    0 12px 32px color-mix(in oklab, var(--accent) 48%, transparent),
+    0 28px 56px rgba(6, 10, 20, 0.14), 0 0 0 1px color-mix(in oklab, var(--accent) 26%, transparent);
   /* Header logo mark (floating on glass, no color tile): five layers */
   --shadow-logo-mark:
     0 1px 0 rgba(255, 255, 255, 0.88) inset, 0 0.5px 1.5px rgba(6, 10, 20, 0.07),
@@ -195,6 +206,15 @@
     0 28px 90px rgba(0, 0, 0, 0.48);
   --shadow-elevated: 0 70px 180px rgba(0, 0, 0, 0.55);
   --shadow-button: 0 1px 0 rgba(255, 255, 255, 0.08) inset, 0 16px 40px rgba(0, 0, 0, 0.38);
+  --border-button-liquid: color-mix(in oklab, white 22%, var(--accent));
+  --shadow-button-liquid:
+    0 1px 0 rgba(255, 255, 255, 0.16) inset, 0 1px 2px rgba(0, 0, 0, 0.35),
+    0 12px 32px rgba(0, 0, 0, 0.42), 0 0 40px color-mix(in oklab, var(--accent) 38%, transparent),
+    0 0 0 1px color-mix(in oklab, var(--accent) 28%, transparent);
+  --shadow-button-liquid-hover:
+    0 1px 0 rgba(255, 255, 255, 0.22) inset, 0 2px 4px rgba(0, 0, 0, 0.42),
+    0 14px 40px rgba(0, 0, 0, 0.48), 0 0 52px color-mix(in oklab, var(--accent) 45%, transparent),
+    0 0 0 1px color-mix(in oklab, var(--accent) 36%, transparent);
   --shadow-logo-mark:
     0 1px 0 rgba(255, 255, 255, 0.14) inset, 0 1px 2px rgba(0, 0, 0, 0.5),
     0 4px 12px rgba(0, 0, 0, 0.42), 0 0 18px rgba(83, 154, 198, 0.2),
@@ -231,6 +251,14 @@
     --shadow-pill:
       0 1px 0 rgba(255, 255, 255, 0.5) inset, 0 0 0 1px rgba(0, 0, 0, 0.05),
       0 3px 10px rgba(6, 10, 20, 0.06);
+    --shadow-button-liquid:
+      0 1px 0 rgba(255, 255, 255, 0.38) inset,
+      0 6px 16px color-mix(in oklab, var(--accent) 32%, transparent),
+      0 14px 32px rgba(6, 10, 20, 0.1);
+    --shadow-button-liquid-hover:
+      0 1px 0 rgba(255, 255, 255, 0.45) inset,
+      0 8px 20px color-mix(in oklab, var(--accent) 38%, transparent),
+      0 18px 36px rgba(6, 10, 20, 0.12);
     --blur-nav: 14px;
     --blur-glass: 12px;
   }
@@ -248,6 +276,12 @@
     --shadow-pill:
       0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 0 0 1px rgba(255, 255, 255, 0.06),
       0 4px 14px rgba(0, 0, 0, 0.35);
+    --shadow-button-liquid:
+      0 1px 0 rgba(255, 255, 255, 0.12) inset, 0 8px 22px rgba(0, 0, 0, 0.38),
+      0 0 32px color-mix(in oklab, var(--accent) 32%, transparent);
+    --shadow-button-liquid-hover:
+      0 1px 0 rgba(255, 255, 255, 0.16) inset, 0 10px 28px rgba(0, 0, 0, 0.42),
+      0 0 42px color-mix(in oklab, var(--accent) 40%, transparent);
     --blur-nav: 14px;
     --blur-glass: 12px;
   }
@@ -531,6 +565,114 @@ body::after {
     backdrop-filter: blur(calc(var(--blur-glass) * 0.55)) saturate(1.12);
     -webkit-backdrop-filter: blur(calc(var(--blur-glass) * 0.55)) saturate(1.12);
   }
+}
+
+/* ---- Liquid glass accent pills (marketing CTAs) ---- */
+.cm-btn-liquid {
+  position: relative;
+  color: #fff;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-button-liquid);
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, white 26%, var(--accent)) 0%,
+    color-mix(in oklab, var(--accent) 88%, black) 100%
+  );
+  box-shadow: var(--shadow-button-liquid);
+  backdrop-filter: blur(10px) saturate(1.35);
+  -webkit-backdrop-filter: blur(10px) saturate(1.35);
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.cm-btn-liquid:hover {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, white 32%, var(--accent-hover)) 0%,
+    color-mix(in oklab, var(--accent-hover) 90%, black) 100%
+  );
+  box-shadow: var(--shadow-button-liquid-hover);
+}
+
+.cm-btn-liquid--soft {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, white 40%, var(--accent)) 0%,
+    color-mix(in oklab, var(--accent) 70%, white) 100%
+  );
+}
+
+.cm-btn-liquid--soft:hover {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, white 44%, var(--accent-hover)) 0%,
+    color-mix(in oklab, var(--accent-hover) 74%, white) 100%
+  );
+  box-shadow: var(--shadow-button-liquid-hover);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .cm-btn-liquid,
+  .cm-btn-liquid--soft {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+/* Theme segmented control (floating header) */
+.cm-theme-segment {
+  display: inline-flex;
+  align-items: stretch;
+  gap: 2px;
+  padding: 3px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-glass);
+  background: color-mix(in oklab, var(--surface-overlay) 52%, transparent);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.45) inset;
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+}
+
+[data-theme="dark"] .cm-theme-segment {
+  background: color-mix(in oklab, var(--surface-overlay) 65%, transparent);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset;
+}
+
+.cm-theme-segment__btn {
+  flex: 1 1 auto;
+  min-width: 0;
+  border-radius: var(--radius-pill);
+  padding: 0.32rem 0.55rem;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  color: var(--ink-secondary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition:
+    color 0.15s ease,
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.cm-theme-segment__btn:hover {
+  color: var(--ink-primary);
+}
+
+.cm-theme-segment__btn[aria-checked="true"] {
+  color: var(--ink-primary);
+  background: color-mix(in oklab, var(--cm-blue-subtle) 92%, transparent);
+  box-shadow: var(--shadow-pill);
+}
+
+.cm-theme-segment__btn:focus-visible {
+  outline: 2px solid var(--ring-focus);
+  outline-offset: 2px;
 }
 
 /* ---- Footer top hairline + ambient lift ---- */

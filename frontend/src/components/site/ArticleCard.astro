@@ -36,8 +36,8 @@ const tagList = (tags ?? "")
   <div
     class:list={[
       "relative overflow-hidden",
-      "h-[172px] md:h-[188px]",
-      featured ? "lg:h-[220px]" : "",
+      "h-[156px] md:h-[176px]",
+      featured ? "lg:h-[200px]" : "",
       "[border-top-left-radius:var(--radius-card)] [border-top-right-radius:var(--radius-card)]",
       "border-b border-[var(--border-subtle)]",
       "bg-[radial-gradient(900px_260px_at_20%_0%,color-mix(in_oklab,var(--cm-blue)_20%,transparent)_0%,transparent_60%),radial-gradient(900px_260px_at_70%_0%,color-mix(in_oklab,var(--cm-blue)_14%,transparent)_0%,transparent_60%),linear-gradient(to_bottom,color-mix(in_oklab,var(--surface-overlay)_45%,transparent),transparent)]",
@@ -73,7 +73,7 @@ const tagList = (tags ?? "")
     )}
   </div>
 
-  <div class="p-6 md:p-7">
+  <div class="p-5 md:p-6 lg:p-7">
     {eyebrow && <p class="caption ink-accent mb-3">{eyebrow}</p>}
 
     <h2 class:list={["ink-primary text-balance", featured ? "display" : "subheading", "mb-2"]}>

@@ -8,6 +8,12 @@ interface Props {
 
 const { compact = false } = Astro.props;
 
+const trialFeatures = [
+  'Full app access for 7 days',
+  'Every feature on macOS, iOS & iPadOS',
+  'Choose Monthly or Annual when you subscribe',
+];
+
 const monthlyFeatures = [
   'Every feature on macOS, iOS & iPadOS',
   'iCloud sync & offline reading',
@@ -28,18 +34,31 @@ const annualFeatures = [
 >
   {!compact && (
     <p class="type-lede measure-tight -mt-8 mb-12">
-      No free tier, no feature gates, no upsell pressure. One plan with everything included.
+      Start with a 7-day trial, then choose Monthly or Annual. No feature gates — the same app on every plan.
     </p>
   )}
 
-  <div class="flex flex-col sm:flex-row gap-5 max-w-[640px]">
+  <div
+    class="mx-auto grid w-full max-w-[1120px] grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 md:gap-5 lg:grid-cols-3 lg:gap-6"
+  >
+    <PricingCard
+      class="md:col-span-2 lg:col-span-1"
+      label="7-day trial"
+      price="$0"
+      interval="/ trial"
+      description="Try everything before you subscribe."
+      ctaHref="#download"
+      ctaLabel="Start free trial"
+      badge="Try it"
+      features={trialFeatures}
+    />
+
     <PricingCard
       label="Monthly"
       price="$4.99"
       interval="/month"
       description="Full access, cancel anytime."
       ctaHref="#download"
-      ctaVariant="secondary"
       features={monthlyFeatures}
     />
 
@@ -49,7 +68,6 @@ const annualFeatures = [
       interval="/year"
       description="Best value — $2.50/month."
       ctaHref="#download"
-      ctaVariant="primary"
       highlighted
       badge="Save 50%"
       features={annualFeatures}

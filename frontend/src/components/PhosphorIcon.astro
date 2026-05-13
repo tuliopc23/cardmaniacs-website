@@ -1,15 +1,17 @@
 ---
 /**
- * Renders Phosphor icons from @phosphor-icons/core (regular weight fallback).
+ * Renders Phosphor icons from @phosphor-icons/core (regular outline or bold filled).
  * Semantic aliases map marketing / nav ids to asset file names.
  */
 interface Props {
   name: string;
   size?: number;
   class?: string;
+  /** Filled Phosphor assets (`*-bold.svg`); stronger at small sizes (e.g. nav). */
+  weight?: "regular" | "bold";
 }
 
-const { name, size = 24, class: className = "" } = Astro.props;
+const { name, size = 24, class: className = "", weight = "regular" } = Astro.props;
 
 const normalized = name.trim().toLowerCase();
 
@@ -28,7 +30,9 @@ const iconMap: Record<string, string> = {
   x: "x",
   close: "x",
   sun: "sun",
+  "sun-dim": "sun-dim",
   moon: "moon",
+  "moon-stars": "moon-stars",
   check: "check",
   "check-circle": "check-circle",
   plus: "plus",
@@ -49,21 +53,31 @@ const iconMap: Record<string, string> = {
 
 const phosphorName = iconMap[normalized] ?? normalized;
 
-/* Explicit glob so Vite resolves only used icons (extend when adding new `name`s). */
-const phosphorAssetModules = import.meta.glob(
-  "../../node_modules/@phosphor-icons/core/assets/regular/{arrow-left,arrow-right,article,broadcast,bookmark-simple,bookmarks,book-open-text,caret-right,check,check-circle,clock,cloud-arrow-down,code,device-mobile,device-tablet,file-text,folder,heart,keyboard,list,magnifying-glass,moon,plus,rss,shield-check,sparkle,sun,tag,x}.svg",
+const iconFolder = weight === "bold" ? "bold" : "regular";
+const iconFile = weight === "bold" ? `${phosphorName}-bold.svg` : `${phosphorName}.svg`;
+
+/* Explicit glob so Vite resolves only used icons (extend when adding new `name`s / weights). */
+const phosphorRegularModules = import.meta.glob(
+  "../../node_modules/@phosphor-icons/core/assets/regular/{arrow-left,arrow-right,article,broadcast,bookmark-simple,bookmarks,book-open-text,caret-right,check,check-circle,clock,cloud-arrow-down,code,device-mobile,device-tablet,file-text,folder,heart,keyboard,list,magnifying-glass,moon,moon-stars,plus,rss,shield-check,sparkle,sun,sun-dim,tag,x}.svg",
   { eager: true, query: "?raw", import: "default" },
 ) as Record<string, string>;
 
+const phosphorBoldModules = import.meta.glob(
+  "../../node_modules/@phosphor-icons/core/assets/bold/{moon-stars-bold,sun-dim-bold}.svg",
+  { eager: true, query: "?raw", import: "default" },
+) as Record<string, string>;
+
+const phosphorAssetModules = { ...phosphorRegularModules, ...phosphorBoldModules };
+
 let svgContent = "";
-const iconPath = `../../node_modules/@phosphor-icons/core/assets/regular/${phosphorName}.svg`;
+const iconPath = `../../node_modules/@phosphor-icons/core/assets/${iconFolder}/${iconFile}`;
 const asset = phosphorAssetModules[iconPath];
 if (typeof asset === "string" && asset.length > 0) {
   svgContent = asset;
 }
 
 if (!svgContent && import.meta.env.DEV) {
-  console.warn(`[PhosphorIcon] Missing asset: ${phosphorName}`);
+  console.warn(`[PhosphorIcon] Missing asset: ${iconPath}`);
 }
 ---
 

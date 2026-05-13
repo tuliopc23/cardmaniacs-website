@@ -2,33 +2,92 @@
 import PhosphorIcon from "./PhosphorIcon.astro";
 ---
 
-<button
-  id="theme-toggle"
-  type="button"
-  class="relative w-8 h-8 flex items-center justify-center rounded-[var(--radius-full)] ink-tertiary hover:ink-primary hover:bg-[var(--accent-subtle)] transition-all duration-200"
-  aria-label="Toggle theme"
+<div
+  id="theme-segment"
+  class="cm-theme-segment shrink-0"
+  role="radiogroup"
+  aria-label="Color theme"
 >
-  <span class="theme-only-dark absolute inset-0 m-auto flex items-center justify-center">
-    <PhosphorIcon name="sun" size={18} />
-  </span>
-  <span class="theme-only-light absolute inset-0 m-auto flex items-center justify-center">
-    <PhosphorIcon name="moon" size={18} />
-  </span>
-</button>
+  <button
+    type="button"
+    id="theme-segment-light"
+    class="cm-theme-segment__btn min-w-[3.25rem]"
+    role="radio"
+    aria-checked="false"
+    data-theme-pick="light"
+  >
+    <span class="inline-flex items-center justify-center gap-1">
+      <PhosphorIcon name="sun-dim" size={14} weight="bold" class="opacity-90" />
+      <span class="inline">Light</span>
+    </span>
+  </button>
+  <button
+    type="button"
+    id="theme-segment-dark"
+    class="cm-theme-segment__btn min-w-[3.25rem]"
+    role="radio"
+    aria-checked="false"
+    data-theme-pick="dark"
+  >
+    <span class="inline-flex items-center justify-center gap-1">
+      <PhosphorIcon name="moon-stars" size={14} weight="bold" class="opacity-90" />
+      <span class="inline">Dark</span>
+    </span>
+  </button>
+</div>
 
 <script>
-  function initThemeToggle() {
-    const btn = document.getElementById('theme-toggle');
-    if (!btn) return;
+  function initThemeSegment() {
+    const group = document.getElementById("theme-segment");
+    const light = document.getElementById("theme-segment-light");
+    const dark = document.getElementById("theme-segment-dark");
+    if (
+      !(group instanceof HTMLElement) ||
+      !(light instanceof HTMLButtonElement) ||
+      !(dark instanceof HTMLButtonElement)
+    )
+      return;
 
-    btn.addEventListener('click', () => {
-      const current = document.documentElement.getAttribute('data-theme');
-      const next = current === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('cm-theme', next);
+    const readTheme = () =>
+      document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+
+    const applySegment = () => {
+      const t = readTheme();
+      const isLight = t === "light";
+      light.setAttribute("aria-checked", String(isLight));
+      dark.setAttribute("aria-checked", String(!isLight));
+      light.tabIndex = isLight ? 0 : -1;
+      dark.tabIndex = isLight ? -1 : 0;
+    };
+
+    const setTheme = (next: "light" | "dark") => {
+      document.documentElement.setAttribute("data-theme", next);
+      try {
+        localStorage.setItem("cm-theme", next);
+      } catch {
+        /* ignore quota / private mode */
+      }
+      applySegment();
+    };
+
+    applySegment();
+
+    light.addEventListener("click", () => setTheme("light"));
+    dark.addEventListener("click", () => setTheme("dark"));
+
+    group.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+        e.preventDefault();
+        setTheme("dark");
+        dark.focus();
+      } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+        e.preventDefault();
+        setTheme("light");
+        light.focus();
+      }
     });
   }
 
-  initThemeToggle();
-  document.addEventListener('astro:after-swap', initThemeToggle);
+  initThemeSegment();
+  document.addEventListener("astro:after-swap", initThemeSegment);
 </script>

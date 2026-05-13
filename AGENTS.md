@@ -18,6 +18,8 @@ Docs are local at `node_modules/vite-plus/docs` or online at https://viteplus.de
 
 - Aim for premium, app-caliber marketing visuals (Apple-native / Liquid Glass–inspired editorial feel); avoid generic SaaS landing pages, default Tailwind templates, and flat-only polish.
 - Use brand accent blue `#539AC6` for primary blue accents unless design tokens specify otherwise.
+- When building or refactoring UI, prefer modular Astro components and Tailwind or design tokens over scattered inline CSS (`style` attributes and ad-hoc one-off rules).
+- Prefer SVGs and other static assets already in the repository (for example root-level icons or files under `public/`) instead of substituting unrelated third-party artwork.
 
 ## Learned Workspace Facts
 
@@ -28,3 +30,4 @@ Docs are local at `node_modules/vite-plus/docs` or online at https://viteplus.de
 - Routes that use `getStaticPaths` while `output` is `"server"` need `export const prerender = true` when those URLs should be generated as static HTML at build time.
 - Keep the frontend `vite` major version aligned with what the installed Astro release supports (e.g. Astro 6 expects Vite 7) to avoid adapter and build-tooling mismatches.
 - Vite+ walks upward to resolve `vite.config.ts`; a config file outside the repo (such as in the home directory) can shadow the project. Run `vp check` from the repo root, and ensure the root `vite.config.ts` defines `fmt` (and related Vite+ fields) so `vp check` can load project config reliably.
+- The frontend uses the `motion` package (motion.dev) for animation; reach for it when adding motion rather than introducing a parallel animation stack.
