@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import SiteAmbient from '../components/site/SiteAmbient.astro';
 
 interface Props {
   title?: string;
@@ -21,10 +22,19 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://cardmani
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta id="cm-theme-color" name="theme-color" content="#f5f7fa" />
 
     <!-- Theme flash prevention — runs before paint -->
     <script is:inline>
       (function() {
+        var themeColors = { light: '#f5f7fa', dark: '#1a1d26' };
+        function syncThemeColor() {
+          var theme =
+            document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+          var meta = document.getElementById('cm-theme-color');
+          if (meta) meta.setAttribute('content', themeColors[theme]);
+        }
+        window.cmSyncThemeColor = syncThemeColor;
         var stored = localStorage.getItem('cm-theme');
         if (stored === 'dark' || stored === 'light') {
           document.documentElement.setAttribute('data-theme', stored);
@@ -33,6 +43,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://cardmani
         } else {
           document.documentElement.setAttribute('data-theme', 'light');
         }
+        syncThemeColor();
       })();
     </script>
 
@@ -69,6 +80,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://cardmani
     <meta name="twitter:image" content={ogImage} />
   </head>
   <body>
-    <slot />
+    <SiteAmbient />
+    <a class="skip-to-main" href="#main-content">Skip to content</a>
+    <div class="relative z-[1] min-h-dvh">
+      <slot />
+    </div>
   </body>
 </html>
