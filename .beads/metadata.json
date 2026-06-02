@@ -1,0 +1,7 @@
+{
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "embedded",
+  "dolt_database": "cardmaniacs_website",
+  "project_id": "fbcfdf92-0ed7-4017-a9ab-36e12b2198bf"
+}
