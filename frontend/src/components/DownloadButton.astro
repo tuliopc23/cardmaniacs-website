@@ -1,0 +1,24 @@
+---
+import Button from "./Button.astro";
+import { downloadCta } from "../lib/site-cta";
+
+interface Props {
+  size?: "sm" | "md" | "lg";
+  class?: string;
+  variant?: "primary" | "secondary" | "ghost";
+}
+
+const { size = "sm", class: className = "", variant = "primary" } = Astro.props;
+---
+
+{
+  downloadCta.isAvailable ? (
+    <Button href={downloadCta.href} size={size} class={className} variant={variant}>
+      <slot>Download</slot>
+    </Button>
+  ) : (
+    <Button href="/features" size={size} class={className} variant="secondary">
+      <slot>Explore features</slot>
+    </Button>
+  )
+}

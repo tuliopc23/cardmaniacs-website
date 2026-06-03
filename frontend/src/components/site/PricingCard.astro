@@ -9,7 +9,7 @@ interface Props {
   price: string;
   interval: string;
   description: string;
-  ctaHref: string;
+  ctaHref?: string;
   ctaLabel?: string;
   highlighted?: boolean;
   badge?: string;
@@ -78,8 +78,19 @@ const {
       )
     }
 
-    <BejamasButton href={ctaHref} variant="primary" class="w-full justify-center mt-auto">
-      {ctaLabel}
-    </BejamasButton>
+    {
+      ctaHref ? (
+        <BejamasButton href={ctaHref} variant="primary" class="w-full justify-center mt-auto">
+          {ctaLabel}
+        </BejamasButton>
+      ) : (
+        <span
+          class="mt-auto inline-flex w-full items-center justify-center rounded-[var(--radius-pill)] border border-[var(--border-subtle)] bg-[color-mix(in_oklab,var(--surface-overlay)_55%,transparent)] px-5 py-2.5 font-display text-[14px] font-semibold ink-secondary"
+          role="status"
+        >
+          {ctaLabel}
+        </span>
+      )
+    }
   </div>
 </BejamasCard>

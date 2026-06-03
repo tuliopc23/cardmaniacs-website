@@ -1,0 +1,570 @@
+{
+  "version": 1,
+  "linearProject": "Cardmaniacs Marketing Website",
+  "openspecChange": "reader-first-launch-redesign",
+  "milestones": [
+    {
+      "id": "M0",
+      "title": "Source-of-truth alignment",
+      "description": "Audit app, website, and personal-site Reader; produce implementation direction note before code.",
+      "labels": ["area:alignment"],
+      "sections": [
+        {
+          "id": "M0.0",
+          "title": "Implementation note",
+          "epic": true,
+          "tasks": [
+            {
+              "id": "M0.0.1",
+              "title": "Audit Cardmaniacs app UI",
+              "acceptance": "Reader, cards, highlights, triage/focused layouts, typography, surfaces, floating controls, sidebars, toolbar pills, dark/light documented."
+            },
+            {
+              "id": "M0.0.2",
+              "title": "Audit cardmaniacs-website repo",
+              "acceptance": "Routes, tokens, Hero/ProductFrame, pricing, blog/changelog/releases/docs/press/legal, collections, CTA/footer/nav documented.",
+              "description": "frontend/src/pages, global.css, site components."
+            },
+            {
+              "id": "M0.0.3",
+              "title": "Audit personal-site Reader",
+              "acceptance": "Prose rhythm, article layout, MDX callouts (PullQuote, Callout, KeyTakeaway, Figure, CodeBlock) documented.",
+              "description": "~/Developer/tulio-personal-website"
+            },
+            {
+              "id": "M0.0.4",
+              "title": "Write reader-first-launch-direction.md",
+              "acceptance": "docs/implementation-notes/reader-first-launch-direction.md with design sources, adapt rules, token mapping, screenshot rules, CTA/pricing table."
+            },
+            {
+              "id": "M0.0.5",
+              "title": "Copy guardrails — unsupported/planned features list",
+              "acceptance": "No-overclaim list for Reddit/Mastodon/Bluesky/X, share extension, Handoff, etc."
+            },
+            {
+              "id": "M0.0.6",
+              "title": "Sign-off checkpoint before M1+",
+              "acceptance": "Direction note reviewed; M1+ unblocked."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M1",
+      "title": "Remove launch-grade embarrassment",
+      "description": "Remove Coming soon hero panels, fix CTAs, audit nav/footer, pricing truth.",
+      "labels": ["area:launch-hardening", "blocker:launch"],
+      "sections": [
+        {
+          "id": "M1.1",
+          "title": "Hero device placeholders",
+          "epic": true,
+          "tasks": [
+            {
+              "id": "M1.1.1",
+              "title": "Remove/replace hero iPhone/iPad Coming soon panels",
+              "acceptance": "Mac/Reader-first hero; no Coming soon on primary hero.",
+              "blockedBy": ["M0"]
+            },
+            {
+              "id": "M1.1.2",
+              "title": "DevicePicker — hide or honest mobile slots",
+              "acceptance": "No fake tabs with Coming soon copy.",
+              "blockedBy": ["M0"]
+            }
+          ]
+        },
+        {
+          "id": "M1.2",
+          "title": "Download CTA strategy",
+          "epic": true,
+          "tasks": [
+            {
+              "id": "M1.2.1",
+              "title": "Define download strategy in direction note",
+              "acceptance": "App Store vs TestFlight vs waitlist documented.",
+              "blockedBy": ["M0"]
+            },
+            {
+              "id": "M1.2.2",
+              "title": "Fix AppStoreButton CTA",
+              "acceptance": "No fake #download pretending to be App Store.",
+              "blockedBy": ["M0"]
+            },
+            {
+              "id": "M1.2.3",
+              "title": "Fix PricingSection CTAs",
+              "blockedBy": ["M0"]
+            },
+            {
+              "id": "M1.2.4",
+              "title": "Fix FloatingHeader download buttons",
+              "blockedBy": ["M0"]
+            },
+            {
+              "id": "M1.2.5",
+              "title": "Fix SiteFooter Download links",
+              "blockedBy": ["M0"]
+            },
+            {
+              "id": "M1.2.6",
+              "title": "Audit all pages for stray #download",
+              "blockedBy": ["M0"]
+            }
+          ]
+        },
+        {
+          "id": "M1.3",
+          "title": "Footer and nav audit",
+          "epic": true,
+          "tasks": [
+            {
+              "id": "M1.3.1",
+              "title": "Footer/nav audit matrix",
+              "acceptance": "Privacy, Terms, Press, Docs, Blog, Changelog, Releases, Support — launch-grade vs hide.",
+              "blockedBy": ["M0"]
+            },
+            {
+              "id": "M1.3.2",
+              "title": "Hide or minimal-stub failed audit links",
+              "blockedBy": ["M0"]
+            },
+            {
+              "id": "M1.3.3",
+              "title": "Docs index/content pass if public",
+              "blockedBy": ["M0"]
+            },
+            {
+              "id": "M1.3.4",
+              "title": "Press kit — real assets or hide from nav",
+              "blockedBy": ["M0"]
+            }
+          ]
+        },
+        {
+          "id": "M1.4",
+          "title": "Pricing audit",
+          "epic": true,
+          "tasks": [
+            {
+              "id": "M1.4.1",
+              "title": "Confirm final App Store / RevenueCat prices",
+              "blockedBy": ["M0"]
+            },
+            {
+              "id": "M1.4.2",
+              "title": "Placeholder-safe pricing copy if not final",
+              "blockedBy": ["M0"]
+            },
+            {
+              "id": "M1.4.3",
+              "title": "Align pricing.astro and PricingSection",
+              "blockedBy": ["M0"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M2",
+      "title": "Cardmaniacs Reader design system (web)",
+      "description": "MarketingReaderSurface, Highlight, Triage, Command, Media, DeviceComposition components.",
+      "labels": ["area:reader-system"],
+      "sections": [
+        {
+          "id": "M2.0",
+          "title": "Shared primitives",
+          "epic": true,
+          "tasks": [
+            {
+              "id": "M2.0.1",
+              "title": "Extend global.css Reader tokens",
+              "blockedBy": ["M0", "M1"]
+            },
+            { "id": "M2.0.2", "title": "Reader chrome primitives", "blockedBy": ["M0", "M1"] },
+            {
+              "id": "M2.0.3",
+              "title": "Dark/light parity for marketing surfaces",
+              "blockedBy": ["M0", "M1"]
+            },
+            {
+              "id": "M2.0.4",
+              "title": "Reduced-motion and focus ring contract",
+              "blockedBy": ["M0", "M1"]
+            }
+          ]
+        },
+        {
+          "id": "M2.1",
+          "title": "MarketingReaderSurface",
+          "epic": true,
+          "tasks": [
+            { "id": "M2.1.1", "title": "Editorial title hierarchy", "blockedBy": ["M2.0"] },
+            { "id": "M2.1.2", "title": "Metadata/source row", "blockedBy": ["M2.0"] },
+            {
+              "id": "M2.1.3",
+              "title": "Body typography from personal-site rhythm",
+              "blockedBy": ["M2.0"]
+            },
+            { "id": "M2.1.4", "title": "Optional hero/source preview slot", "blockedBy": ["M2.0"] },
+            { "id": "M2.1.5", "title": "Highlight marks in article body", "blockedBy": ["M2.0"] },
+            {
+              "id": "M2.1.6",
+              "title": "Callout/admonition styling for Markdoc",
+              "blockedBy": ["M2.0"]
+            },
+            { "id": "M2.1.7", "title": "Chapter-like vertical rhythm", "blockedBy": ["M2.0"] },
+            {
+              "id": "M2.1.8",
+              "title": "Elevated rounded surface + native chrome hints",
+              "blockedBy": ["M2.0"]
+            },
+            { "id": "M2.1.9", "title": "Responsive mobile reader layout", "blockedBy": ["M2.0"] },
+            { "id": "M2.1.10", "title": "Component usage README", "blockedBy": ["M2.0"] }
+          ]
+        },
+        {
+          "id": "M2.2",
+          "title": "MarketingHighlightSurface",
+          "epic": true,
+          "tasks": [
+            { "id": "M2.2.1", "title": "Highlighted excerpt presentation", "blockedBy": ["M2.0"] },
+            { "id": "M2.2.2", "title": "Source metadata and tags", "blockedBy": ["M2.0"] },
+            { "id": "M2.2.3", "title": "Stored reference visual language", "blockedBy": ["M2.0"] },
+            { "id": "M2.2.4", "title": "Library/grid variant", "blockedBy": ["M2.0"] },
+            { "id": "M2.2.5", "title": "Homepage killer-section demo slot", "blockedBy": ["M2.0"] }
+          ]
+        },
+        {
+          "id": "M2.3",
+          "title": "MarketingTriageSurface",
+          "epic": true,
+          "tasks": [
+            { "id": "M2.3.1", "title": "Card-based feed stream", "blockedBy": ["M2.0"] },
+            {
+              "id": "M2.3.2",
+              "title": "Source pills and unread/saved states",
+              "blockedBy": ["M2.0"]
+            },
+            { "id": "M2.3.3", "title": "Quick actions on cards", "blockedBy": ["M2.0"] },
+            { "id": "M2.3.4", "title": "Keyboard navigation hints", "blockedBy": ["M2.0"] }
+          ]
+        },
+        {
+          "id": "M2.4",
+          "title": "MarketingCommandSurface",
+          "epic": true,
+          "tasks": [
+            { "id": "M2.4.1", "title": "Quick Add entry visual", "blockedBy": ["M2.0"] },
+            { "id": "M2.4.2", "title": "Command palette composition", "blockedBy": ["M2.0"] },
+            { "id": "M2.4.3", "title": "Search and actions list", "blockedBy": ["M2.0"] },
+            { "id": "M2.4.4", "title": "Vim/key hint strip", "blockedBy": ["M2.0"] }
+          ]
+        },
+        {
+          "id": "M2.5",
+          "title": "MarketingMediaSurface",
+          "epic": true,
+          "tasks": [
+            { "id": "M2.5.1", "title": "YouTube in-app player showcase", "blockedBy": ["M2.0"] },
+            { "id": "M2.5.2", "title": "Podcast player showcase", "blockedBy": ["M2.0"] },
+            { "id": "M2.5.3", "title": "No browser chaos copy integration", "blockedBy": ["M2.0"] }
+          ]
+        },
+        {
+          "id": "M2.6",
+          "title": "MarketingDeviceComposition",
+          "epic": true,
+          "tasks": [
+            {
+              "id": "M2.6.1",
+              "title": "Mac/iPhone/iPad aspect ratio slots",
+              "blockedBy": ["M2.0"]
+            },
+            { "id": "M2.6.2", "title": "Light/dark asset variants", "blockedBy": ["M2.0"] },
+            { "id": "M2.6.3", "title": "Alt text and responsive loading", "blockedBy": ["M2.0"] },
+            {
+              "id": "M2.6.4",
+              "title": "Graceful fallback without Coming soon",
+              "blockedBy": ["M2.0"]
+            },
+            {
+              "id": "M2.6.5",
+              "title": "Refactor ProductFrame/DevicePicker to composition API",
+              "blockedBy": ["M2.0"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M3",
+      "title": "Homepage product loop rewrite",
+      "labels": ["area:homepage"],
+      "sections": [
+        {
+          "id": "M3.0",
+          "title": "Homepage sections",
+          "epic": true,
+          "tasks": [
+            {
+              "id": "M3.1",
+              "title": "Hero — native reading desk + Reader/triage composition",
+              "blockedBy": ["M2"]
+            },
+            { "id": "M3.2", "title": "Problem — scattered reading", "blockedBy": ["M2"] },
+            {
+              "id": "M3.3",
+              "title": "Core loop Collect→Triage→Read→Highlight→Revisit",
+              "blockedBy": ["M2"]
+            },
+            { "id": "M3.4", "title": "Feeds and syndication section", "blockedBy": ["M2"] },
+            { "id": "M3.5", "title": "Read Later and parsing section", "blockedBy": ["M2"] },
+            { "id": "M3.6", "title": "Highlights killer section", "blockedBy": ["M2"] },
+            { "id": "M3.7", "title": "Native control section", "blockedBy": ["M2"] },
+            { "id": "M3.8", "title": "Organization section", "blockedBy": ["M2"] },
+            { "id": "M3.9", "title": "Extensions and integrations section", "blockedBy": ["M2"] },
+            { "id": "M3.10", "title": "Platform craft section", "blockedBy": ["M2"] },
+            { "id": "M3.11", "title": "Pricing/trial teaser", "blockedBy": ["M2"] },
+            { "id": "M3.12", "title": "Final CTA section", "blockedBy": ["M2"] },
+            { "id": "M3.13", "title": "Remove generic SaaS hero feel", "blockedBy": ["M2"] },
+            { "id": "M3.14", "title": "ScrollReveal/motion + reduced-motion", "blockedBy": ["M2"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M4",
+      "title": "Features page product encyclopedia",
+      "labels": ["area:features"],
+      "sections": [
+        {
+          "id": "M4.1",
+          "title": "Feeds and Syndication",
+          "epic": true,
+          "tasks": [
+            { "id": "M4.1.1", "title": "Feeds section copy", "blockedBy": ["M2"] },
+            { "id": "M4.1.2", "title": "Feeds visual surface", "blockedBy": ["M2"] },
+            { "id": "M4.1.3", "title": "Feeds screenshot slot", "blockedBy": ["M2"] },
+            { "id": "M4.1.4", "title": "Feeds mobile layout", "blockedBy": ["M2"] }
+          ]
+        },
+        {
+          "id": "M4.2",
+          "title": "Read Later and Parsing",
+          "epic": true,
+          "tasks": [
+            { "id": "M4.2.1", "title": "Read Later section copy", "blockedBy": ["M2"] },
+            { "id": "M4.2.2", "title": "Read Later visual surface", "blockedBy": ["M2"] },
+            { "id": "M4.2.3", "title": "Read Later screenshot slot", "blockedBy": ["M2"] },
+            { "id": "M4.2.4", "title": "Read Later mobile layout", "blockedBy": ["M2"] }
+          ]
+        },
+        {
+          "id": "M4.3",
+          "title": "Reader and Highlights",
+          "epic": true,
+          "tasks": [
+            { "id": "M4.3.1", "title": "Reader/Highlights section copy", "blockedBy": ["M2"] },
+            { "id": "M4.3.2", "title": "Reader/Highlights visual surface", "blockedBy": ["M2"] },
+            { "id": "M4.3.3", "title": "Reader/Highlights screenshot slot", "blockedBy": ["M2"] },
+            { "id": "M4.3.4", "title": "Reader/Highlights mobile layout", "blockedBy": ["M2"] }
+          ]
+        },
+        {
+          "id": "M4.4",
+          "title": "Read Aloud",
+          "epic": true,
+          "tasks": [
+            { "id": "M4.4.1", "title": "Read Aloud section copy", "blockedBy": ["M2"] },
+            { "id": "M4.4.2", "title": "Read Aloud visual surface", "blockedBy": ["M2"] },
+            { "id": "M4.4.3", "title": "Read Aloud screenshot slot", "blockedBy": ["M2"] },
+            { "id": "M4.4.4", "title": "Read Aloud mobile layout", "blockedBy": ["M2"] }
+          ]
+        },
+        {
+          "id": "M4.5",
+          "title": "Navigation and Power User",
+          "epic": true,
+          "tasks": [
+            { "id": "M4.5.1", "title": "Power user section copy", "blockedBy": ["M2"] },
+            { "id": "M4.5.2", "title": "Power user visual surface", "blockedBy": ["M2"] },
+            { "id": "M4.5.3", "title": "Power user screenshot slot", "blockedBy": ["M2"] },
+            { "id": "M4.5.4", "title": "Power user mobile layout", "blockedBy": ["M2"] }
+          ]
+        },
+        {
+          "id": "M4.6",
+          "title": "Organization",
+          "epic": true,
+          "tasks": [
+            { "id": "M4.6.1", "title": "Organization section copy", "blockedBy": ["M2"] },
+            { "id": "M4.6.2", "title": "Organization visual surface", "blockedBy": ["M2"] },
+            { "id": "M4.6.3", "title": "Organization screenshot slot", "blockedBy": ["M2"] },
+            { "id": "M4.6.4", "title": "Organization mobile layout", "blockedBy": ["M2"] }
+          ]
+        },
+        {
+          "id": "M4.7",
+          "title": "Native Extensions",
+          "epic": true,
+          "tasks": [
+            { "id": "M4.7.1", "title": "Extensions section copy", "blockedBy": ["M2"] },
+            { "id": "M4.7.2", "title": "Extensions visual surface", "blockedBy": ["M2"] },
+            { "id": "M4.7.3", "title": "Extensions screenshot slot", "blockedBy": ["M2"] },
+            { "id": "M4.7.4", "title": "Extensions mobile layout", "blockedBy": ["M2"] }
+          ]
+        },
+        {
+          "id": "M4.8",
+          "title": "Designed for Every Apple Device",
+          "epic": true,
+          "tasks": [
+            { "id": "M4.8.1", "title": "Platform section copy", "blockedBy": ["M2"] },
+            { "id": "M4.8.2", "title": "Platform visual surface", "blockedBy": ["M2"] },
+            { "id": "M4.8.3", "title": "Platform screenshot slot", "blockedBy": ["M2"] },
+            { "id": "M4.8.4", "title": "Platform mobile layout", "blockedBy": ["M2"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M5",
+      "title": "Blog changelog releases pricing Reader surfaces",
+      "labels": ["area:editorial"],
+      "sections": [
+        {
+          "id": "M5.0",
+          "title": "Editorial surfaces",
+          "epic": true,
+          "tasks": [
+            { "id": "M5.1.1", "title": "Blog index reading library", "blockedBy": ["M2"] },
+            { "id": "M5.1.2", "title": "Blog detail MarketingReaderSurface", "blockedBy": ["M2"] },
+            {
+              "id": "M5.1.3",
+              "title": "Markdoc callouts code images highlights",
+              "blockedBy": ["M2"]
+            },
+            {
+              "id": "M5.2.1",
+              "title": "Changelog index version cards timeline",
+              "blockedBy": ["M2"]
+            },
+            { "id": "M5.2.2", "title": "Changelog detail Reader layout", "blockedBy": ["M2"] },
+            { "id": "M5.3.1", "title": "Releases pages Reader treatment", "blockedBy": ["M2"] },
+            { "id": "M5.4.1", "title": "Pricing native surface plan cards", "blockedBy": ["M2"] },
+            { "id": "M5.4.2", "title": "Pricing trust privacy native bands", "blockedBy": ["M2"] },
+            { "id": "M5.4.3", "title": "Pricing FAQ and final CTA", "blockedBy": ["M2"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M6",
+      "title": "Screenshot and marketing asset system",
+      "labels": ["area:assets"],
+      "sections": [
+        {
+          "id": "M6.0",
+          "title": "Asset slots",
+          "epic": true,
+          "tasks": [
+            {
+              "id": "M6.1",
+              "title": "mac-hero-light and mac-hero-dark slots",
+              "blockedBy": ["M0"]
+            },
+            { "id": "M6.2", "title": "mac-reader-focused slot", "blockedBy": ["M0"] },
+            { "id": "M6.3", "title": "mac-triage-feed slot", "blockedBy": ["M0"] },
+            { "id": "M6.4", "title": "mac-highlights slot", "blockedBy": ["M0"] },
+            { "id": "M6.5", "title": "mac-command-palette slot", "blockedBy": ["M0"] },
+            { "id": "M6.6", "title": "mac-media-player slot", "blockedBy": ["M0"] },
+            { "id": "M6.7", "title": "iphone-reader-queue slot", "blockedBy": ["M0"] },
+            { "id": "M6.8", "title": "iphone-quick-add-share slot", "blockedBy": ["M0"] },
+            { "id": "M6.9", "title": "ipad-workspace-split slot", "blockedBy": ["M0"] },
+            { "id": "M6.10", "title": "feature-crops per M4 section", "blockedBy": ["M0"] },
+            { "id": "M6.11", "title": "press-kit assets", "blockedBy": ["M0"] },
+            { "id": "M6.12", "title": "og-image slot", "blockedBy": ["M0"] },
+            { "id": "M6.13", "title": "docs/marketing-assets.md conventions", "blockedBy": ["M0"] },
+            {
+              "id": "M6.14",
+              "title": "Wire slots into DeviceComposition and pages",
+              "blockedBy": ["M2"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M7",
+      "title": "Content hardening",
+      "labels": ["area:copy"],
+      "sections": [
+        {
+          "id": "M7.0",
+          "title": "Copy pass",
+          "epic": true,
+          "tasks": [
+            { "id": "M7.1", "title": "Core brand copy pass", "blockedBy": ["M3", "M4"] },
+            { "id": "M7.2", "title": "Highlights killer copy", "blockedBy": ["M3", "M4"] },
+            { "id": "M7.3", "title": "Parsing differentiator copy", "blockedBy": ["M3", "M4"] },
+            { "id": "M7.4", "title": "Media playback copy", "blockedBy": ["M3", "M4"] },
+            { "id": "M7.5", "title": "Power-user copy", "blockedBy": ["M3", "M4"] },
+            { "id": "M7.6", "title": "Device craft copy", "blockedBy": ["M3", "M4"] },
+            {
+              "id": "M7.7",
+              "title": "Remove generic productivity language",
+              "blockedBy": ["M3", "M4"]
+            },
+            { "id": "M7.8", "title": "Fact-check vs M0.5 guardrails", "blockedBy": ["M0"] },
+            { "id": "M7.9", "title": "Integrate core workflow tagline", "blockedBy": ["M3", "M4"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M8",
+      "title": "QA and acceptance",
+      "labels": ["area:qa"],
+      "sections": [
+        {
+          "id": "M8.0",
+          "title": "Acceptance criteria",
+          "epic": true,
+          "tasks": [
+            {
+              "id": "M8.1",
+              "title": "No Coming soon on primary surfaces",
+              "blockedBy": ["M1", "M3"]
+            },
+            { "id": "M8.2", "title": "No fake download CTAs", "blockedBy": ["M1"] },
+            { "id": "M8.3", "title": "No generic SaaS hero", "blockedBy": ["M3"] },
+            {
+              "id": "M8.4",
+              "title": "Website/app Reader visual parity",
+              "blockedBy": ["M2", "M5"]
+            },
+            { "id": "M8.5", "title": "All major features represented", "blockedBy": ["M4"] },
+            {
+              "id": "M8.6",
+              "title": "Features page launch reference quality",
+              "blockedBy": ["M4"]
+            },
+            { "id": "M8.7", "title": "Blog/changelog/pricing alignment", "blockedBy": ["M5"] },
+            { "id": "M8.8", "title": "Intentional dark and light", "blockedBy": ["M2"] },
+            { "id": "M8.9", "title": "Mobile polish", "blockedBy": ["M3", "M4", "M5"] },
+            { "id": "M8.10", "title": "a11y focus contrast reduced-motion", "blockedBy": ["M2"] },
+            { "id": "M8.11", "title": "Images alt responsive stable layout", "blockedBy": ["M6"] },
+            {
+              "id": "M8.12",
+              "title": "vp check and vp test pass",
+              "blockedBy": ["M1", "M2", "M3", "M4", "M5"]
+            },
+            { "id": "M8.13", "title": "Ship report document", "blockedBy": ["M8.12"] }
+          ]
+        }
+      ]
+    }
+  ]
+}

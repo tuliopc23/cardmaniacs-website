@@ -1,6 +1,6 @@
 ---
 import ThemeToggle from "../ThemeToggle.astro";
-import Button from "../Button.astro";
+import DownloadButton from "../DownloadButton.astro";
 import Surface from "../ui/Surface.astro";
 import PhosphorIcon from "../PhosphorIcon.astro";
 
@@ -67,9 +67,7 @@ const links = [
 
         <div class="ml-auto flex items-center gap-2 justify-self-end md:ml-0">
           <ThemeToggle />
-          <Button href="#download" size="sm" class="hidden sm:inline-flex">
-            Download
-          </Button>
+          <DownloadButton size="sm" class="hidden sm:inline-flex" />
 
           <button
             id="cm-mobile-menu-btn"
@@ -123,9 +121,7 @@ const links = [
           ))}
         </nav>
         <div class="mt-2 px-1 sm:hidden">
-          <Button href="#download" size="md" class="w-full justify-center">
-            Download
-          </Button>
+          <DownloadButton size="md" class="w-full justify-center" />
         </div>
       </Surface>
     </div>

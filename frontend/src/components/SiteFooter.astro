@@ -2,6 +2,10 @@
 import Container from './Container.astro';
 import BejamasSeparator from './ui/bejamas/Separator.astro';
 import PhosphorIcon from './PhosphorIcon.astro';
+import { downloadCta } from '../lib/site-cta';
+
+const footerDownloadHref = downloadCta.href ?? '/features';
+const footerDownloadLabel = downloadCta.isAvailable ? 'Download' : 'Get the app';
 
 const footerLinkClass =
   'group flex items-center justify-between gap-2 body-s font-medium ink-secondary hover:ink-primary transition-colors rounded-[var(--radius-sm)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-base)]';
@@ -36,7 +40,7 @@ const chevronClass =
             A calmer home for everything you read — feeds, read-later, bookmarks, highlights, and the things you actually want to revisit.
           </p>
           <div class="mt-5 flex flex-wrap gap-x-3 gap-y-2 text-[13px] font-display font-semibold">
-            <a href="#download" class="ink-accent hover:underline underline-offset-4">Download</a>
+            <a href={footerDownloadHref} class="ink-accent hover:underline underline-offset-4" {...downloadCta.isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}}>{footerDownloadLabel}</a>
             <span class="ink-faint">·</span>
             <a href="/features" class="ink-secondary hover:ink-primary transition-colors">Explore features</a>
           </div>
@@ -66,8 +70,8 @@ const chevronClass =
                   </a>
                 </li>
                 <li>
-                  <a href="#download" class={footerLinkClass}>
-                    <span>Download</span>
+                  <a href={footerDownloadHref} class={footerLinkClass} {...downloadCta.isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}}>
+                    <span>{footerDownloadLabel}</span>
                     <PhosphorIcon name="chevron-right" size={14} class={chevronClass} />
                   </a>
                 </li>

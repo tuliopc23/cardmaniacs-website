@@ -1,0 +1,40 @@
+---
+import Surface from "../ui/Surface.astro";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+
+const actions = [
+  { label: "Quick Add URL", keys: "⌘⇧N" },
+  { label: "Search library", keys: "⌘K" },
+  { label: "Archive & next", keys: "E" },
+  { label: "Vim: next article", keys: "j" },
+];
+---
+
+<Surface variant="glass" radius="panel" class:list={["p-5 md:p-6 overflow-hidden", className]}>
+  <p class="editorial-eyebrow mb-3">Command palette</p>
+  <div class="rounded-[var(--radius-card)] border border-[var(--border-subtle)] bg-[var(--surface-inset)] p-3 mb-3">
+    <span class="body-s ink-tertiary">Search or run an action…</span>
+  </div>
+  <ul class="space-y-1">
+    {
+      actions.map((a, i) => (
+        <li
+          class:list={[
+            "flex items-center justify-between gap-3 rounded-[var(--radius-md)] px-3 py-2",
+            i === 0 && "bg-[var(--cm-blue-subtle)]",
+          ]}
+        >
+          <span class="body-s font-medium ink-primary">{a.label}</span>
+          <kbd class="font-mono text-[11px] px-2 py-0.5 rounded-[var(--radius-sm)] bg-[var(--surface-overlay)] ink-tertiary border border-[var(--border-subtle)]">
+            {a.keys}
+          </kbd>
+        </li>
+      ))
+    }
+  </ul>
+</Surface>

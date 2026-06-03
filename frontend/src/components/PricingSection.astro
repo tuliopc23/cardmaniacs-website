@@ -1,12 +1,16 @@
 ---
 import SectionBlock from './SectionBlock.astro';
 import PricingCard from './site/PricingCard.astro';
+import { appStoreUrl, hasAppStoreUrl } from '../lib/site-cta';
 
 interface Props {
   compact?: boolean;
 }
 
 const { compact = false } = Astro.props;
+
+const planCtaHref = hasAppStoreUrl ? appStoreUrl : undefined;
+const planCtaLabel = hasAppStoreUrl ? undefined : 'Coming to the App Store';
 
 const trialFeatures = [
   'Full app access for 7 days',
@@ -35,6 +39,11 @@ const annualFeatures = [
   {!compact && (
     <p class="type-lede measure-tight -mt-8 mb-12">
       Start with a 7-day trial, then choose Monthly or Annual. No feature gates — the same app on every plan.
+      {!hasAppStoreUrl && (
+        <span class="block mt-3 body-s ink-tertiary">
+          Subscription pricing below is illustrative until App Store launch.
+        </span>
+      )}
     </p>
   )}
 
@@ -47,8 +56,8 @@ const annualFeatures = [
       price="$0"
       interval="/ trial"
       description="Try everything before you subscribe."
-      ctaHref="#download"
-      ctaLabel="Start free trial"
+      ctaHref={planCtaHref}
+      ctaLabel={planCtaLabel ?? 'Start free trial'}
       badge="Try it"
       features={trialFeatures}
     />
@@ -58,7 +67,8 @@ const annualFeatures = [
       price="$4.99"
       interval="/month"
       description="Full access, cancel anytime."
-      ctaHref="#download"
+      ctaHref={planCtaHref}
+      ctaLabel={planCtaLabel}
       features={monthlyFeatures}
     />
 
@@ -67,7 +77,8 @@ const annualFeatures = [
       price="$29.99"
       interval="/year"
       description="Best value — $2.50/month."
-      ctaHref="#download"
+      ctaHref={planCtaHref}
+      ctaLabel={planCtaLabel}
       highlighted
       badge="Save 50%"
       features={annualFeatures}

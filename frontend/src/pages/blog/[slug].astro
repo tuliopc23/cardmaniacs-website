@@ -4,7 +4,7 @@ import SiteNav from '../../components/SiteNav.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
 import Container from '../../components/Container.astro';
 import Prose from '../../components/ui/Prose.astro';
-import Pill from '../../components/Pill.astro';
+import MarketingReaderSurface from '../../components/marketing/MarketingReaderSurface.astro';
 import PhosphorIcon from '../../components/PhosphorIcon.astro';
 import { getCollection, render } from 'astro:content';
 
@@ -29,33 +29,24 @@ const { Content } = await render(post);
   <main id="main-content">
     <article class="pt-32 pb-20 md:pt-40 md:pb-28">
       <Container narrow>
-        <header class="mb-12">
-          <a href="/blog" class="inline-flex items-center gap-1.5 ink-accent text-[13px] font-display font-medium mb-8 hover:underline underline-offset-2">
-            <PhosphorIcon name="arrow-left" size={14} class="-translate-y-px" />
-            All posts
-          </a>
+        <a href="/blog" class="inline-flex items-center gap-1.5 ink-accent text-[13px] font-display font-medium mb-8 hover:underline underline-offset-2">
+          <PhosphorIcon name="arrow-left" size={14} class="-translate-y-px" />
+          All posts
+        </a>
 
-          {post.data.date && (
-            <time class="editorial-eyebrow ink-tertiary block mb-4" datetime={post.data.date}>
-              {new Date(post.data.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
-            </time>
-          )}
-
-          <h1 class="display-hero ink-primary mb-5 text-balance">{post.data.title}</h1>
-
-          {post.data.summary && (
-            <p class="type-lede measure text-pretty">{post.data.summary}</p>
-          )}
-
-          <div class="mt-6 flex flex-wrap gap-2">
-            <Pill variant="accent">Blog</Pill>
-            <Pill variant="muted">Reading desk</Pill>
-          </div>
-        </header>
-
-        <Prose>
-          <Content />
-        </Prose>
+        <MarketingReaderSurface
+          title={post.data.title}
+          source="Cardmaniacs Blog"
+          meta={post.data.date
+            ? new Date(post.data.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+            : undefined}
+          tags={['Blog', 'Reading desk']}
+        >
+          {post.data.summary && <p class="text-[1.125rem] ink-secondary mb-6">{post.data.summary}</p>}
+          <Prose>
+            <Content />
+          </Prose>
+        </MarketingReaderSurface>
       </Container>
     </article>
   </main>

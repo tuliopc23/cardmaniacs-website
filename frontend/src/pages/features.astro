@@ -3,47 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import SiteNav from '../components/SiteNav.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import Container from '../components/Container.astro';
-import ProductShowcase from '../components/ProductShowcase.astro';
-import FeatureCard from '../components/FeatureCard.astro';
+import FeatureEncyclopedia from '../components/features/FeatureEncyclopedia.astro';
 import CtaBanner from '../components/CtaBanner.astro';
-import Pill from '../components/Pill.astro';
 import ScrollReveal from '../components/ScrollReveal.astro';
-
-const sections = [
-  {
-    label: 'Feeds',
-    heading: 'All your sources, one stream.',
-    screenshot: '/images/Cardmaniacs-mac - 2.png',
-    screenshotAlt: 'Cardmaniacs — RSS feed view',
-    features: [
-      { icon: 'rss', title: 'RSS & Atom feeds', description: 'Subscribe to any site with a feed. Full-text parsing, smart deduplication, and a beautiful card layout.' },
-      { icon: 'broadcast', title: 'YouTube, Podcasts, Reddit, Mastodon', description: 'Beyond RSS — add channels, podcasts, subreddits, and Mastodon accounts as first-class sources.' },
-      { icon: 'bookmark-simple', title: 'Quick save from anywhere', description: 'Share extension, keyboard shortcut, or drag-and-drop. Save anything in under a second.' },
-    ],
-  },
-  {
-    label: 'Read Later',
-    heading: 'The best reading experience on Apple platforms.',
-    screenshot: '/images/Cardmaniacs-mac - 5.png',
-    screenshotAlt: 'Cardmaniacs — article reader view',
-    features: [
-      { icon: 'file-text', title: 'Specialized parsers', description: 'JS-heavy sites, GitHub READMEs, Wikipedia — strips the noise and delivers clean, readable text.' },
-      { icon: 'book-open-text', title: 'PDF, EPUB & Markdown', description: 'Upload documents directly. Read them alongside articles with beautiful typography and search.' },
-      { icon: 'cloud-arrow-down', title: 'Offline reading', description: 'Articles and documents sync for offline access. Read anywhere without a connection.' },
-    ],
-  },
-  {
-    label: 'Bookmarks',
-    heading: 'Organize once, find instantly.',
-    screenshot: '/images/Cardmaniacs-mac - 7.png',
-    screenshotAlt: 'Cardmaniacs — bookmark organization',
-    features: [
-      { icon: 'tag', title: 'Tags & smart folders', description: 'Flexible organization with rules, auto-tagging, and smart folders that update themselves.' },
-      { icon: 'magnifying-glass', title: 'Full-text search', description: 'Search across everything — articles, feeds, bookmarks, documents. Fast, local, private.' },
-      { icon: 'keyboard', title: 'Vim navigation & shortcuts', description: 'Power-user navigation. Navigate, tag, archive, and manage everything from the keyboard.' },
-    ],
-  },
-];
 ---
 
 <Layout title="Features — Cardmaniacs">
@@ -54,57 +16,16 @@ const sections = [
       <Container>
         <div class="max-w-[680px]">
           <p class="editorial-eyebrow editorial-eyebrow-accent mb-4">Features</p>
-          <h1 class="display-hero ink-primary mb-6">Three apps in one.<br />Zero compromise.</h1>
+          <h1 class="display-hero ink-primary mb-6 text-balance">Your native reading desk.</h1>
           <p class="type-lede measure-tight">
-            Feeds, Read Later, and Bookmarks — unified in a native Apple experience with power-user features and obsessive craft.
+            Collect, triage, read, highlight, and revisit — feeds, read-later, parsing, media, and power-user tools in
+            one calm Apple-native app.
           </p>
         </div>
       </Container>
     </section>
 
-    {sections.map((s, i) => (
-      <section class:list={['py-20 md:py-28', i % 2 !== 0 ? 'section-band' : '']}>
-        <Container>
-          <div class="mb-12">
-            <p class="editorial-eyebrow editorial-eyebrow-accent mb-3">{s.label}</p>
-            <h2 class="type-section-title ink-primary">{s.heading}</h2>
-          </div>
-
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-            <div class="lg:col-span-4 space-y-7">
-              {s.features.map((f) => (
-                <FeatureCard icon={f.icon} title={f.title} description={f.description} />
-              ))}
-            </div>
-            <div class="lg:col-span-8" data-reveal>
-              <ProductShowcase src={s.screenshot} alt={s.screenshotAlt} />
-            </div>
-          </div>
-        </Container>
-      </section>
-    ))}
-
-    <section class="py-20 md:py-28">
-      <Container>
-        <div class="text-center max-w-[560px] mx-auto mb-12">
-          <p class="editorial-eyebrow editorial-eyebrow-accent mb-3">Platform</p>
-          <h2 class="type-section-title ink-primary mb-4">Deeply native. Deeply connected.</h2>
-          <p class="type-lede">
-            Built entirely in Swift. Handoff, iCloud Sync, Widgets, Shortcuts, and Spotlight — every Apple platform feature, supported.
-          </p>
-        </div>
-        <div class="flex flex-wrap justify-center gap-2">
-          <Pill variant="accent">macOS</Pill>
-          <Pill variant="accent">iOS</Pill>
-          <Pill variant="accent">iPadOS</Pill>
-          <Pill>iCloud Sync</Pill>
-          <Pill>Widgets</Pill>
-          <Pill>Shortcuts</Pill>
-          <Pill>Spotlight</Pill>
-          <Pill>Handoff</Pill>
-        </div>
-      </Container>
-    </section>
+    <FeatureEncyclopedia />
 
     <CtaBanner />
   </main>

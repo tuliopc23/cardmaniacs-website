@@ -1,0 +1,37 @@
+---
+import Surface from "../ui/Surface.astro";
+import PhosphorIcon from "../PhosphorIcon.astro";
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  class?: string;
+}
+
+const {
+  title = "Watch & listen without browser chaos",
+  subtitle = "YouTube and podcasts inside a calm native player.",
+  class: className = "",
+} = Astro.props;
+---
+
+<Surface variant="elevated" radius="panel" class:list={["p-6 md:p-8", className]}>
+  <div class="flex items-start gap-4">
+    <span
+      class="flex size-12 shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-[var(--cm-blue-subtle)] text-[var(--cm-blue-ink)]"
+      aria-hidden="true"
+    >
+      <PhosphorIcon name="sparkle" size={28} />
+    </span>
+    <div>
+      <p class="font-display text-[15px] font-semibold ink-primary mb-1">{title}</p>
+      <p class="body-s ink-secondary">{subtitle}</p>
+    </div>
+  </div>
+  <div
+    class="mt-6 aspect-video w-full rounded-[var(--radius-card)] bg-[color-mix(in_oklab,var(--surface-inset)_80%,transparent)] border border-[var(--border-subtle)] flex items-center justify-center"
+    aria-hidden="true"
+  >
+    <PhosphorIcon name="rss" size={40} class="ink-tertiary opacity-60" />
+  </div>
+</Surface>

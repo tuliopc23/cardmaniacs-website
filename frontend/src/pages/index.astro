@@ -2,10 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import SiteNav from '../components/SiteNav.astro';
 import HeroSection from '../components/HeroSection.astro';
-import PillarGrid from '../components/PillarGrid.astro';
-import NarrativeSection from '../components/NarrativeSection.astro';
-import PricingSection from '../components/PricingSection.astro';
-import CtaBanner from '../components/CtaBanner.astro';
+import LaunchStory from '../components/home/LaunchStory.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import ScrollReveal from '../components/ScrollReveal.astro';
 ---
@@ -17,47 +14,7 @@ import ScrollReveal from '../components/ScrollReveal.astro';
     <HeroSection />
 
     <div data-reveal>
-      <PillarGrid />
-    </div>
-
-    <div data-reveal>
-      <NarrativeSection
-        label="All your sources"
-        heading="One reading stream."
-        description="RSS, Atom, YouTube, podcasts, Reddit, Mastodon — every syndication format unified in a single, beautiful card-based feed. No more tab hoarding."
-        screenshot="/images/Cardmaniacs-mac - 4.png"
-        screenshotAlt="Cardmaniacs — unified feed stream"
-      />
-    </div>
-
-    <div data-reveal>
-      <NarrativeSection
-        label="Save anything"
-        heading="Finish everything."
-        description="Quick capture from any app. Full-text parsing with specialized renderers for GitHub READMEs, Wikipedia, and JS-heavy sites. Your reading queue, finally under control."
-        screenshot="/images/Cardmaniacs-mac - 3.png"
-        screenshotAlt="Cardmaniacs — read later queue"
-        reverse
-        inset
-      />
-    </div>
-
-    <div data-reveal>
-      <NarrativeSection
-        label="Organize once"
-        heading="Find it forever."
-        description="Tags, smart folders, full-text search across everything you've saved. Import PDFs, EPUB, and Markdown. Your personal reference library, always at hand."
-        screenshot="/images/Cardmaniacs-mac - 8.png"
-        screenshotAlt="Cardmaniacs — organized bookmarks"
-      />
-    </div>
-
-    <div data-reveal>
-      <PricingSection compact />
-    </div>
-
-    <div data-reveal>
-      <CtaBanner />
+      <LaunchStory />
     </div>
   </main>
 

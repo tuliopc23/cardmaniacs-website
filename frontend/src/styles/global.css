@@ -53,25 +53,22 @@
   --cm-blue-subtle: color-mix(in oklab, var(--cm-blue) 10%, white);
   --cm-blue-subtle-2: color-mix(in oklab, var(--cm-blue) 16%, white);
 
-  /* Background atmosphere — liquid glass (cool base + ambient blobs) */
+  /* Background atmosphere — frosted ambient (no gradient mesh) */
   --bg-liquid-base: oklch(0.988 0.006 250);
   --bg-paper: var(--bg-liquid-base);
   --bg-paper-warm: oklch(0.986 0.005 255);
   --bg-atmo-1: color-mix(in oklab, var(--cm-blue) 18%, white);
   --bg-atmo-2: color-mix(in oklab, var(--cm-blue) 10%, white);
   --bg-vignette: rgba(6, 10, 20, 0.04);
-  --ambient-blur: 72px;
-  --ambient-blob-1: color-mix(in oklab, var(--cm-blue) 52%, transparent);
-  --ambient-blob-2: color-mix(in oklab, oklch(0.72 0.11 155) 38%, transparent);
-  --ambient-blob-3: color-mix(in oklab, oklch(0.86 0.07 92) 28%, transparent);
-  --ambient-blob-4: color-mix(in oklab, var(--cm-blue) 32%, white);
-  --ambient-sheen: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.42) 0%,
-    rgba(255, 255, 255, 0.08) 28%,
-    transparent 52%
-  );
-  --ambient-sheen-blend: screen;
+  --ambient-haze: color-mix(in oklab, var(--cm-blue) 6%, var(--bg-liquid-base));
+  --ambient-bloom: color-mix(in oklab, var(--cm-blue) 14%, white);
+  --ambient-bloom-opacity: 0.32;
+  --ambient-bloom-blur: 110px;
+  --ambient-frost-tint: rgba(255, 255, 255, 0.2);
+  --ambient-frost-blur: 34px;
+  --ambient-glint-line: rgba(255, 255, 255, 0.72);
+  --ambient-glint-glow: rgba(255, 255, 255, 0.06);
+  --ambient-edge: rgba(6, 10, 20, 0.035);
 
   /* Surfaces */
   --surface-base: color-mix(in oklab, var(--bg-liquid-base) 82%, var(--bg-paper-warm));
@@ -163,25 +160,22 @@
   --cm-blue-subtle: color-mix(in oklab, var(--cm-blue) 18%, transparent);
   --cm-blue-subtle-2: color-mix(in oklab, var(--cm-blue) 26%, transparent);
 
-  /* Background atmosphere — liquid glass */
+  /* Background atmosphere — frosted ambient (no gradient mesh) */
   --bg-liquid-base: oklch(0.14 0.028 255);
   --bg-night: var(--bg-liquid-base);
   --bg-night-deep: oklch(0.11 0.035 255);
   --bg-atmo-1: color-mix(in oklab, var(--cm-blue) 26%, black);
   --bg-atmo-2: color-mix(in oklab, var(--cm-blue) 18%, black);
   --bg-vignette: rgba(0, 0, 0, 0.38);
-  --ambient-blur: 80px;
-  --ambient-blob-1: color-mix(in oklab, var(--cm-blue) 58%, transparent);
-  --ambient-blob-2: color-mix(in oklab, oklch(0.62 0.12 195) 42%, transparent);
-  --ambient-blob-3: color-mix(in oklab, var(--cm-blue) 36%, transparent);
-  --ambient-blob-4: color-mix(in oklab, oklch(0.55 0.08 280) 28%, transparent);
-  --ambient-sheen: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.09) 0%,
-    rgba(255, 255, 255, 0.03) 22%,
-    transparent 48%
-  );
-  --ambient-sheen-blend: normal;
+  --ambient-haze: color-mix(in oklab, var(--cm-blue) 9%, var(--bg-liquid-base));
+  --ambient-bloom: color-mix(in oklab, var(--cm-blue) 24%, transparent);
+  --ambient-bloom-opacity: 0.42;
+  --ambient-bloom-blur: 120px;
+  --ambient-frost-tint: rgba(255, 255, 255, 0.035);
+  --ambient-frost-blur: 40px;
+  --ambient-glint-line: rgba(255, 255, 255, 0.1);
+  --ambient-glint-glow: rgba(83, 154, 198, 0.05);
+  --ambient-edge: rgba(0, 0, 0, 0.26);
 
   /* Surfaces */
   --surface-base: color-mix(in oklab, var(--bg-liquid-base) 78%, var(--bg-night-deep));
@@ -287,7 +281,8 @@
       0 18px 36px rgba(6, 10, 20, 0.12);
     --blur-nav: 14px;
     --blur-glass: 12px;
-    --ambient-blur: 48px;
+    --ambient-bloom-blur: 72px;
+    --ambient-frost-blur: 22px;
   }
 
   [data-theme="dark"] {
@@ -311,7 +306,8 @@
       0 0 42px color-mix(in oklab, var(--accent) 40%, transparent);
     --blur-nav: 14px;
     --blur-glass: 12px;
-    --ambient-blur: 52px;
+    --ambient-bloom-blur: 80px;
+    --ambient-frost-blur: 26px;
   }
 }
 
@@ -338,7 +334,7 @@ body {
 }
 
 /* ==============================================
-   LIQUID GLASS AMBIENT BACKDROP
+   FROSTED GLASS AMBIENT BACKDROP (no gradient mesh)
    ============================================== */
 .cm-ambient {
   position: fixed;
@@ -356,139 +352,119 @@ body {
   transition: background-color 0.35s ease;
 }
 
-.cm-ambient__blob {
+/* Uniform color wash — depth without gradients */
+.cm-ambient__haze {
+  position: absolute;
+  inset: 0;
+  background: var(--ambient-haze);
+  opacity: 0.92;
+  animation: cm-ambient-breathe 88s ease-in-out infinite;
+}
+
+/* Soft light pools: solid fills + blur only */
+.cm-ambient__bloom {
   position: absolute;
   border-radius: 50%;
-  filter: blur(var(--ambient-blur)) saturate(1.2);
+  background-color: var(--ambient-bloom);
+  opacity: var(--ambient-bloom-opacity);
+  filter: blur(var(--ambient-bloom-blur)) saturate(1.08);
   transform: translateZ(0);
-  will-change: transform;
-  animation: cm-ambient-drift 72s ease-in-out infinite;
 }
 
-.cm-ambient__blob--1 {
-  width: min(68vw, 720px);
-  height: min(68vw, 720px);
-  top: -18%;
-  left: -12%;
-  background: radial-gradient(circle at 40% 40%, var(--ambient-blob-1) 0%, transparent 68%);
-  animation-duration: 68s;
+.cm-ambient__bloom--a {
+  width: min(92vw, 980px);
+  height: min(72vw, 640px);
+  top: -28%;
+  left: -22%;
 }
 
-.cm-ambient__blob--2 {
-  width: min(58vw, 620px);
-  height: min(58vw, 620px);
-  top: 8%;
-  right: -14%;
-  background: radial-gradient(circle at 55% 45%, var(--ambient-blob-2) 0%, transparent 70%);
-  animation-duration: 84s;
-  animation-delay: -18s;
+.cm-ambient__bloom--b {
+  width: min(78vw, 820px);
+  height: min(64vw, 560px);
+  bottom: -24%;
+  right: -18%;
 }
 
-.cm-ambient__blob--3 {
-  width: min(72vw, 780px);
-  height: min(52vw, 560px);
-  bottom: -8%;
-  left: 18%;
-  background: radial-gradient(
-    ellipse 70% 60% at 50% 50%,
-    var(--ambient-blob-3) 0%,
-    transparent 72%
-  );
-  animation-duration: 90s;
-  animation-delay: -36s;
-}
-
-.cm-ambient__blob--4 {
-  width: min(50vw, 540px);
-  height: min(50vw, 540px);
-  bottom: 12%;
-  right: 8%;
-  background: radial-gradient(circle at 50% 50%, var(--ambient-blob-4) 0%, transparent 65%);
-  animation-duration: 76s;
-  animation-delay: -52s;
-}
-
-.cm-ambient__sheen {
+/* Frosted veil — blurs layers beneath like looking through glass */
+.cm-ambient__frost {
   position: absolute;
   inset: 0;
-  background: var(--ambient-sheen);
-  mix-blend-mode: var(--ambient-sheen-blend);
-  opacity: 0.85;
+  background: var(--ambient-frost-tint);
+  backdrop-filter: blur(var(--ambient-frost-blur)) saturate(var(--sat-glass));
+  -webkit-backdrop-filter: blur(var(--ambient-frost-blur)) saturate(var(--sat-glass));
 }
 
-.cm-ambient__depth {
+/* Specular + edge depth via inset light, not gradient backgrounds */
+.cm-ambient__glint {
   position: absolute;
   inset: 0;
-  background: radial-gradient(1200px 900px at 50% 38%, transparent 52%, var(--bg-vignette) 100%);
-  opacity: 0.55;
+  box-shadow:
+    inset 0 1px 0 var(--ambient-glint-line),
+    inset 0 28px 96px var(--ambient-glint-glow),
+    inset 0 0 120px var(--ambient-edge);
 }
 
-/* Optical film — anti-banding only, not paper grain */
+/* Optical film — anti-banding only */
 .cm-ambient__film {
   position: absolute;
   inset: 0;
-  opacity: 0.028;
+  opacity: 0.022;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
   background-size: 180px 180px;
   mix-blend-mode: overlay;
 }
 
-@supports (mix-blend-mode: plus-lighter) {
-  :root .cm-ambient__sheen,
-  [data-theme="light"] .cm-ambient__sheen {
-    mix-blend-mode: plus-lighter;
-  }
-}
-
-@keyframes cm-ambient-drift {
+@keyframes cm-ambient-breathe {
   0%,
   100% {
-    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.88;
   }
 
-  33% {
-    transform: translate3d(2.5%, -2%, 0) scale(1.025);
-  }
-
-  66% {
-    transform: translate3d(-2%, 2.5%, 0) scale(0.975);
+  50% {
+    opacity: 0.96;
   }
 }
 
 @media (max-width: 1024px) {
-  .cm-ambient__blob--4 {
-    display: none;
+  .cm-ambient__bloom--b {
+    opacity: calc(var(--ambient-bloom-opacity) * 0.72);
   }
 
-  .cm-ambient__blob {
+  .cm-ambient__haze {
     animation: none;
-    will-change: auto;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cm-ambient__blob {
+  .cm-ambient__haze {
     animation: none;
-    will-change: auto;
   }
 }
 
 @media (prefers-reduced-transparency: reduce) {
-  .cm-ambient__blob {
-    filter: blur(calc(var(--ambient-blur) * 0.45)) saturate(1.05);
-    opacity: 0.55;
+  .cm-ambient__frost {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: color-mix(in oklab, var(--ambient-frost-tint) 40%, var(--bg-liquid-base));
   }
 
-  .cm-ambient__sheen {
-    opacity: 0.35;
+  .cm-ambient__bloom {
+    filter: blur(calc(var(--ambient-bloom-blur) * 0.5));
+    opacity: calc(var(--ambient-bloom-opacity) * 0.65);
   }
 
-  .cm-ambient__depth {
-    opacity: 0.4;
+  .cm-ambient__glint {
+    box-shadow: inset 0 0 80px var(--ambient-edge);
   }
 
   .cm-ambient__film {
     opacity: 0;
+  }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .cm-ambient__frost {
+    background: color-mix(in oklab, var(--ambient-frost-tint) 55%, var(--bg-liquid-base));
   }
 }
 
@@ -653,6 +629,62 @@ body {
 
 .measure-tight {
   max-width: 52ch;
+}
+
+/* ---- Reader marketing surfaces (M2) ---- */
+:root,
+[data-theme="light"] {
+  --reader-measure: 42rem;
+  --reader-highlight: color-mix(in oklab, var(--cm-blue) 22%, transparent);
+  --reader-highlight-ink: var(--cm-blue-ink);
+  --reader-toolbar-bg: color-mix(in oklab, var(--surface-glass) 72%, transparent);
+}
+
+[data-theme="dark"] {
+  --reader-highlight: color-mix(in oklab, var(--cm-blue) 35%, transparent);
+  --reader-highlight-ink: color-mix(in oklab, var(--cm-blue) 75%, white);
+}
+
+.marketing-reader-prose {
+  max-width: var(--reader-measure);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.68;
+  letter-spacing: -0.012em;
+  color: var(--ink-primary);
+  text-wrap: pretty;
+}
+
+.marketing-reader-prose h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+  font-weight: 650;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin: 2rem 0 0.75rem;
+  text-wrap: balance;
+}
+
+.marketing-reader-prose p {
+  margin: 0 0 1.15rem;
+}
+
+.marketing-reader-prose mark,
+.marketing-reader-prose .reader-highlight {
+  background: var(--reader-highlight);
+  color: var(--reader-highlight-ink);
+  border-radius: 4px;
+  padding: 0 0.15em;
+}
+
+.marketing-reader-chrome {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 /* ==============================================

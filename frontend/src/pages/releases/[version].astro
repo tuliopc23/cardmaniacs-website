@@ -3,9 +3,9 @@ import Layout from '../../layouts/Layout.astro';
 import SiteNav from '../../components/SiteNav.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
 import Container from '../../components/Container.astro';
-import Pill from '../../components/Pill.astro';
 import Button from '../../components/Button.astro';
 import Prose from '../../components/ui/Prose.astro';
+import MarketingReaderSurface from '../../components/marketing/MarketingReaderSurface.astro';
 import { getCollection, render } from 'astro:content';
 
 /** Static HTML at build for content routes under `output: "server"`. */
@@ -29,38 +29,33 @@ const { Content } = await render(release);
   <main id="main-content">
     <article class="pt-32 pb-20 md:pt-40 md:pb-28">
       <Container narrow>
-        <header class="mb-10">
-          <a href="/changelog" class="inline-flex items-center gap-1.5 ink-accent text-[13px] font-display font-medium mb-6 hover:underline underline-offset-2">
-            ← Back to changelog
-          </a>
+        <a href="/changelog" class="inline-flex items-center gap-1.5 ink-accent text-[13px] font-display font-medium mb-8 hover:underline underline-offset-2">
+          ← Back to changelog
+        </a>
 
-          <div class="flex flex-wrap items-center gap-2 mb-4">
-            {release.data.version && <Pill variant="accent">v{release.data.version}</Pill>}
-            {release.data.platforms && <Pill variant="muted">{release.data.platforms}</Pill>}
-          </div>
-
-          {release.data.date && (
-            <time class="caption ink-tertiary block mb-4" datetime={release.data.date}>
-              {new Date(release.data.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
-            </time>
-          )}
-
-          <h1 class="display ink-primary mb-4">{release.data.title}</h1>
-
+        <MarketingReaderSurface
+          title={release.data.title}
+          source="Release notes"
+          meta={release.data.date
+            ? new Date(release.data.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+            : undefined}
+          tags={[
+            release.data.version ? `v${release.data.version}` : '',
+            release.data.platforms ?? '',
+          ].filter(Boolean)}
+        >
           {release.data.highlights && (
-            <p class="body-l ink-secondary leading-relaxed">{release.data.highlights}</p>
+            <p class="text-[1.125rem] ink-secondary mb-6">{release.data.highlights}</p>
           )}
-
           {release.data.downloadUrl && (
-            <div class="mt-6">
+            <div class="mb-8">
               <Button href={release.data.downloadUrl}>Download</Button>
             </div>
           )}
-        </header>
-
-        <Prose>
-          <Content />
-        </Prose>
+          <Prose>
+            <Content />
+          </Prose>
+        </MarketingReaderSurface>
       </Container>
     </article>
   </main>

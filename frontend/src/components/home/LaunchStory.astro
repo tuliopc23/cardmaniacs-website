@@ -1,0 +1,184 @@
+---
+import Container from "../Container.astro";
+import NarrativeSection from "../NarrativeSection.astro";
+import MarketingTriageSurface from "../marketing/MarketingTriageSurface.astro";
+import MarketingReaderSurface from "../marketing/MarketingReaderSurface.astro";
+import MarketingHighlightSurface from "../marketing/MarketingHighlightSurface.astro";
+import MarketingCommandSurface from "../marketing/MarketingCommandSurface.astro";
+import MarketingMediaSurface from "../marketing/MarketingMediaSurface.astro";
+import MarketingDeviceComposition from "../marketing/MarketingDeviceComposition.astro";
+import PricingSection from "../PricingSection.astro";
+import CtaBanner from "../CtaBanner.astro";
+
+const loop = [
+  { step: "Collect", desc: "Feeds, saves, shares, and imports land in one inbox." },
+  { step: "Triage", desc: "Card-based queue — skim, tag, archive without tab chaos." },
+  { step: "Read", desc: "Beautiful Reader for articles, PDFs, EPUB, and more." },
+  { step: "Highlight", desc: "Mark what matters inside the Reader or on the web." },
+  { step: "Revisit", desc: "Find highlights and saved references when they become useful." },
+];
+---
+
+<section class="py-16 md:py-24 section-band">
+  <Container>
+    <div class="max-w-[680px] mx-auto text-center mb-12">
+      <p class="editorial-eyebrow editorial-eyebrow-accent mb-3">The problem</p>
+      <h2 class="type-section-title ink-primary mb-5">Your reading life is scattered.</h2>
+      <p class="type-lede measure-tight mx-auto">
+        Tabs, RSS, read-later queues, PDFs, videos, podcasts, and highlights live in different apps. Cardmaniacs gives
+        them one calm native home.
+      </p>
+    </div>
+  </Container>
+</section>
+
+<section class="py-16 md:py-20">
+  <Container>
+    <p class="editorial-eyebrow editorial-eyebrow-accent mb-3 text-center">Core workflow</p>
+    <h2 class="type-section-title ink-primary text-center mb-10 text-balance">
+      Collect → Triage → Read → Highlight → Revisit
+    </h2>
+    <ol class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+      {
+        loop.map((item, i) => (
+          <li class="rounded-[var(--radius-card)] border border-[var(--border-subtle)] bg-[color-mix(in_oklab,var(--surface-elevated)_75%,transparent)] p-4 shadow-[var(--shadow-soft)]">
+            <span class="font-display text-[13px] font-bold text-[var(--cm-blue-ink)] mb-2 block">{String(i + 1).padStart(2, "0")}</span>
+            <p class="font-display text-[15px] font-semibold ink-primary mb-1">{item.step}</p>
+            <p class="body-s ink-secondary">{item.desc}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </Container>
+</section>
+
+<section class="py-16 md:py-24">
+  <Container>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+      <div>
+        <p class="editorial-eyebrow editorial-eyebrow-accent mb-3">Feeds & syndication</p>
+        <h2 class="type-section-title ink-primary mb-5">Every source, one card stream.</h2>
+        <p class="type-lede measure-tight">
+          RSS, Atom, JSON Feed, and media channels — triaged in a calm native feed. Built-in players for YouTube and
+          podcasts, not another browser tab.
+        </p>
+      </div>
+      <MarketingTriageSurface />
+    </div>
+  </Container>
+</section>
+
+<section class="py-16 md:py-24">
+  <Container>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+      <div>
+        <p class="editorial-eyebrow editorial-eyebrow-accent mb-3">Read later & parsing</p>
+        <h2 class="type-section-title ink-primary mb-5">Articles, READMEs, Wikipedia, PDFs, EPUB.</h2>
+        <p class="type-lede measure-tight">
+          Specialized parsers for complex web pages, GitHub READMEs, and Wikipedia. Import Markdown notes, PDFs, and
+          eBooks — read offline on every Apple device.
+        </p>
+      </div>
+      <MarketingReaderSurface title="The craft of calm reading" source="Article · Web" meta="8 min read">
+        <p>
+          Cardmaniacs strips the noise from long-form pages and presents them in a native Reader — the same surface you
+          use for highlights and revisit later.
+        </p>
+        <p>
+          <mark class="reader-highlight">Highlight text in context</mark> and build a personal reference library without
+          leaving the app.
+        </p>
+      </MarketingReaderSurface>
+    </div>
+  </Container>
+</section>
+
+<section class="py-16 md:py-24 section-band">
+  <Container>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+      <MarketingHighlightSurface
+        excerpt="The best ideas are the ones you can find again when the moment is right."
+        source="Reader highlight"
+        tags={["research", "read-later"]}
+      />
+      <div>
+        <p class="editorial-eyebrow editorial-eyebrow-accent mb-3">Highlights</p>
+        <h2 class="type-section-title ink-primary mb-5">Highlight now. Revisit when it counts.</h2>
+        <p class="type-lede measure-tight">
+          Highlight in the Reader or on web content — stored as rendered references with tags and source metadata. A
+          dedicated highlights library, Cardmaniacs-native.
+        </p>
+      </div>
+    </div>
+  </Container>
+</section>
+
+<section class="py-16 md:py-24">
+  <Container>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+      <div>
+        <p class="editorial-eyebrow editorial-eyebrow-accent mb-3">Native control</p>
+        <h2 class="type-section-title ink-primary mb-5">Quick Add, palette, Vim.</h2>
+        <p class="type-lede measure-tight">
+          Capture from anywhere, search your library, and run actions from the command palette. Power users can surf
+          articles with keyboard-first navigation.
+        </p>
+      </div>
+      <MarketingCommandSurface />
+    </div>
+  </Container>
+</section>
+
+<NarrativeSection
+  label="Organization"
+  heading="Tags, Smart Lists, full-text search."
+  description="Frictionless tagging, smart folders, bookmarks, and reading states — your personal reference library stays searchable and calm."
+  screenshot="/images/Cardmaniacs-mac - 8.png"
+  screenshotAlt="Organized library on Mac"
+  reverse
+/>
+
+<section class="py-16 md:py-24">
+  <Container>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+      <MarketingMediaSurface />
+      <div>
+        <p class="editorial-eyebrow editorial-eyebrow-accent mb-3">Extensions</p>
+        <h2 class="type-section-title ink-primary mb-5">Fits your Apple workflow.</h2>
+        <p class="type-lede measure-tight mb-6">
+          App Intents, web extension, and widgets — plus iCloud sync and offline reading where supported.
+        </p>
+        <ul class="space-y-2 body-s ink-secondary">
+          <li>App Intents & Shortcuts</li>
+          <li>Safari web extension</li>
+          <li>Home Screen widgets</li>
+          <li>iCloud sync across devices</li>
+        </ul>
+      </div>
+    </div>
+  </Container>
+</section>
+
+<section class="py-16 md:py-24 section-band">
+  <Container>
+    <p class="editorial-eyebrow editorial-eyebrow-accent mb-3 text-center">Platform craft</p>
+    <h2 class="type-section-title ink-primary text-center mb-8">Mac, iPhone, and iPad — each considered.</h2>
+    <MarketingDeviceComposition
+      srcLight="/images/cardmaniacs-mac-bezel-light.png"
+      srcDark="/images/cardmaniacs-mac-bezel-dark.png"
+      alt="Cardmaniacs on macOS"
+      class="mx-auto"
+    />
+    <p class="type-lede measure-tight mx-auto text-center mt-8 max-w-[520px]">
+      Keyboard-first on Mac. Touch-first capture on iPhone. Workspace-ready on iPad. Dark and light modes throughout.
+    </p>
+  </Container>
+</section>
+
+<div data-reveal>
+  <PricingSection compact />
+</div>
+
+<div data-reveal>
+  <CtaBanner />
+</div>

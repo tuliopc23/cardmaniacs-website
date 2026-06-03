@@ -45,10 +45,12 @@ const formattedDate =
     }
   </div>
 
-  <Surface variant="elevated" radius="card" class="p-6 md:p-8">
+  <Surface variant="elevated" radius="card" class="p-6 md:p-8 marketing-reader-chrome">
     <h2 class="heading ink-primary mb-5 text-balance">{title}</h2>
-    <Prose size="sm">
-      <slot />
-    </Prose>
+    <div class="marketing-reader-prose">
+      <Prose size="sm">
+        <slot />
+      </Prose>
+    </div>
   </Surface>
 </div>

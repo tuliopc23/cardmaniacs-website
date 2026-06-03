@@ -1,0 +1,23 @@
+---
+import Pill from "../Pill.astro";
+
+interface Props {
+  source?: string;
+  meta?: string;
+  tags?: string[];
+}
+
+const { source, meta, tags = [] } = Astro.props;
+---
+
+{
+  (source || meta || tags.length > 0) && (
+    <div class="marketing-reader-chrome">
+      {source && <Pill variant="muted">{source}</Pill>}
+      {meta && <span class="body-s ink-tertiary">{meta}</span>}
+      {tags.map((tag) => (
+        <Pill variant="accent">{tag}</Pill>
+      ))}
+    </div>
+  )
+}
