@@ -2,13 +2,15 @@
 
 Marketing site and Keystatic CMS for Cardmaniacs (Astro, Cloudflare Workers, Tailwind v4).
 
-**Cloudflare:** use `CLOUDFLARE_API_TOKEN` in your environment (not the deprecated `CF_API_TOKEN`). See `frontend/.env.example`.
+**Cloudflare:** use **your** `CLOUDFLARE_API_TOKEN` + `CLOUDFLARE_ACCOUNT_ID` (not a client account). Run `pnpm exec wrangler whoami` in `frontend/` before deploying. See [`docs/deploy-cloudflare.md`](docs/deploy-cloudflare.md) and `frontend/.env.example`.
 
 ```sh
 cd frontend && pnpm install && pnpm run dev
 ```
 
 From repo root (with [Vite+](https://viteplus.dev/guide/) installed): `vp check` and `vp test`.
+
+**Deploy:** GitHub Actions ([`.github/workflows/deploy-cloudflare.yml`](.github/workflows/deploy-cloudflare.yml)) on push to `main`, or `cd frontend && pnpm run deploy` locally after `whoami` checks out.
 
 ## Legacy starter notes (remove when docs are expanded)
 

@@ -17,7 +17,7 @@ Docs are local at `node_modules/vite-plus/docs` or online at https://viteplus.de
 
 ## Learned User Preferences
 
-- Aim for premium, app-caliber marketing visuals (Apple-native / Liquid Glass–inspired editorial feel); avoid generic SaaS landing pages, default Tailwind templates, and flat-only polish.
+- Aim for premium, app-caliber marketing visuals (Apple-native / Liquid Glass–inspired editorial feel); site-wide ambience uses `SiteAmbient` frosted blur (haze, blooms, backdrop-filter)—not paper grain or gradient-mesh color blobs. Avoid generic SaaS landing pages, default Tailwind templates, and flat-only polish.
 - Use brand accent blue `#539AC6` for primary blue accents unless design tokens specify otherwise.
 - When building or refactoring UI, prefer modular Astro components and Tailwind or design tokens over scattered inline CSS (`style` attributes and ad-hoc one-off rules).
 - Prefer SVGs and other static assets already in the repository (for example root-level icons or files under `public/`) instead of substituting unrelated third-party artwork.
@@ -32,6 +32,9 @@ Docs are local at `node_modules/vite-plus/docs` or online at https://viteplus.de
 - Keep the frontend `vite` major version aligned with what the installed Astro release supports (e.g. Astro 6 expects Vite 7) to avoid adapter and build-tooling mismatches.
 - Vite+ walks upward to resolve `vite.config.ts`; a config file outside the repo (such as in the home directory) can shadow the project. Run `vp check` from the repo root, and ensure the root `vite.config.ts` defines `fmt` (and related Vite+ fields) so `vp check` can load project config reliably.
 - The frontend uses the `motion` package (motion.dev) for animation; reach for it when adding motion rather than introducing a parallel animation stack.
+- `pnpm-workspace.yaml` `allowBuilds` must include `esbuild`, `sharp`, and `workerd` for Astro/Cloudflare; after a pnpm major bump, remove stale `node_modules` and rerun `vp install` if you hit `ERR_PNPM_UNEXPECTED_STORE`.
+- Marketing image slots are centralized in `frontend/src/lib/marketing-images.ts` under `/images/marketing/*`.
+- App Store CTAs use `PUBLIC_APP_STORE_URL` via `frontend/src/lib/site-cta.ts`; when unset, keep honest “Coming to the App Store” labels—never fake download links.
 
 <!-- BEGIN BEADS INTEGRATION v:1 profile:minimal hash:7510c1e2 -->
 
