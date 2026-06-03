@@ -3,6 +3,7 @@ import Container from "../Container.astro";
 import AppStoreButton from "../AppStoreButton.astro";
 import ProductFrame from "./ProductFrame.astro";
 import PhosphorIcon from "../PhosphorIcon.astro";
+import { marketingImages } from "../../lib/marketing-images";
 
 const chips = ["Feeds", "Read Later", "Bookmarks", "Highlights", "Summaries", "Offline"];
 ---
@@ -85,8 +86,8 @@ const chips = ["Feeds", "Read Later", "Bookmarks", "Highlights", "Summaries", "O
 
       <div class="w-full max-w-[920px] mx-auto" data-reveal>
         <ProductFrame
-          srcLight="/images/cardmaniacs-mac-bezel-light.png"
-          srcDark="/images/cardmaniacs-mac-bezel-dark.png"
+          srcLight={marketingImages.macHeroLight}
+          srcDark={marketingImages.macHeroDark}
           alt="Cardmaniacs on macOS — card-based reading interface"
         />
         <p class="mt-4 text-center font-display text-[12px] font-medium ink-tertiary tracking-wide">

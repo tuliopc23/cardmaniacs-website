@@ -7,6 +7,7 @@ import MarketingHighlightSurface from "../marketing/MarketingHighlightSurface.as
 import MarketingCommandSurface from "../marketing/MarketingCommandSurface.astro";
 import MarketingMediaSurface from "../marketing/MarketingMediaSurface.astro";
 import MarketingDeviceComposition from "../marketing/MarketingDeviceComposition.astro";
+import { marketingImages } from "../../lib/marketing-images";
 import PricingSection from "../PricingSection.astro";
 import CtaBanner from "../CtaBanner.astro";
 
@@ -133,7 +134,7 @@ const loop = [
   label="Organization"
   heading="Tags, Smart Lists, full-text search."
   description="Frictionless tagging, smart folders, bookmarks, and reading states — your personal reference library stays searchable and calm."
-  screenshot="/images/Cardmaniacs-mac - 8.png"
+  screenshot={marketingImages.macCommand}
   screenshotAlt="Organized library on Mac"
   reverse
 />
@@ -164,8 +165,8 @@ const loop = [
     <p class="editorial-eyebrow editorial-eyebrow-accent mb-3 text-center">Platform craft</p>
     <h2 class="type-section-title ink-primary text-center mb-8">Mac, iPhone, and iPad — each considered.</h2>
     <MarketingDeviceComposition
-      srcLight="/images/cardmaniacs-mac-bezel-light.png"
-      srcDark="/images/cardmaniacs-mac-bezel-dark.png"
+      srcLight={marketingImages.macHeroLight}
+      srcDark={marketingImages.macHeroDark}
       alt="Cardmaniacs on macOS"
       class="mx-auto"
     />

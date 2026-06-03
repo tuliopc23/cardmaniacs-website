@@ -9,6 +9,7 @@ import MarketingCommandSurface from "../marketing/MarketingCommandSurface.astro"
 import MarketingMediaSurface from "../marketing/MarketingMediaSurface.astro";
 import MarketingDeviceComposition from "../marketing/MarketingDeviceComposition.astro";
 import { featureSections } from "../../data/feature-sections";
+import { marketingImages } from "../../lib/marketing-images";
 ---
 
 {
@@ -32,8 +33,8 @@ import { featureSections } from "../../data/feature-sections";
               {
                 s.surface === "device" ? (
                   <MarketingDeviceComposition
-                    srcLight="/images/cardmaniacs-mac-bezel-light.png"
-                    srcDark="/images/cardmaniacs-mac-bezel-dark.png"
+                    srcLight={marketingImages.macHeroLight}
+                    srcDark={marketingImages.macHeroDark}
                     alt={s.screenshotAlt}
                   />
                 ) : s.surface === "reader" ? (

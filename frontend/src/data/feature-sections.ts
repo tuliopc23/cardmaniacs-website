@@ -1,3 +1,5 @@
+import { marketingImages } from "../lib/marketing-images";
+
 export type FeatureBullet = { icon: string; title: string; description: string };
 
 export type FeatureSection = {
@@ -18,7 +20,7 @@ export const featureSections: FeatureSection[] = [
     heading: "RSS, social, and media — one stream.",
     description:
       "Subscribe with RSS, Atom, or JSON Feed. Add Reddit, Mastodon, and media channels as first-class sources — with more social integrations on the roadmap.",
-    screenshot: "/images/Cardmaniacs-mac - 4.png",
+    screenshot: marketingImages.macTriage,
     screenshotAlt: "Cardmaniacs feed triage on Mac",
     surface: "triage",
     bullets: [
@@ -45,7 +47,7 @@ export const featureSections: FeatureSection[] = [
     heading: "Every format, one Reader.",
     description:
       "Articles, Wikipedia, GitHub READMEs, JS-heavy pages, Markdown notes, PDFs, and EPUB — offline when you need it.",
-    screenshot: "/images/Cardmaniacs-mac - 5.png",
+    screenshot: marketingImages.macReader,
     screenshotAlt: "Cardmaniacs Reader on Mac",
     surface: "reader",
     bullets: [
@@ -68,7 +70,7 @@ export const featureSections: FeatureSection[] = [
     heading: "Beautiful reading. Lasting highlights.",
     description:
       "Highlight in the Reader or on web content — stored references with tags and a dedicated highlights library.",
-    screenshot: "/images/Cardmaniacs-mac - 3.png",
+    screenshot: marketingImages.macHighlights,
     screenshotAlt: "Highlights in Cardmaniacs",
     surface: "highlight",
     bullets: [
@@ -91,7 +93,7 @@ export const featureSections: FeatureSection[] = [
     heading: "Listen on your terms.",
     description:
       "Text-to-speech with native playback controls — reading continues when your eyes cannot.",
-    screenshot: "/images/Cardmaniacs-mac - 3.png",
+    screenshot: marketingImages.macReader,
     screenshotAlt: "Read aloud in Cardmaniacs",
     surface: "reader",
     bullets: [
@@ -109,7 +111,7 @@ export const featureSections: FeatureSection[] = [
     heading: "Keyboard-first when you want it.",
     description:
       "Quick Add, command palette, search, and Vim-style navigation for fast triage and reading.",
-    screenshot: "/images/Cardmaniacs-mac - 2.png",
+    screenshot: marketingImages.macCommand,
     screenshotAlt: "Command palette on Mac",
     surface: "command",
     bullets: [
@@ -128,7 +130,7 @@ export const featureSections: FeatureSection[] = [
     heading: "Find everything later.",
     description:
       "Frictionless tagging, Smart Lists, full-text search, bookmarks, and reading states.",
-    screenshot: "/images/Cardmaniacs-mac - 8.png",
+    screenshot: marketingImages.macCommand,
     screenshotAlt: "Library organization",
     surface: "none",
     bullets: [
@@ -143,7 +145,7 @@ export const featureSections: FeatureSection[] = [
     heading: "Plugs into Apple platforms.",
     description:
       "App Intents, web extension, widgets, and iCloud sync — where supported on your devices.",
-    screenshot: "/images/Cardmaniacs-mac - 1.png",
+    screenshot: marketingImages.macMedia,
     screenshotAlt: "Cardmaniacs integrations",
     surface: "media",
     bullets: [
@@ -158,7 +160,7 @@ export const featureSections: FeatureSection[] = [
     heading: "Crafted for Mac, iPhone, and iPad.",
     description:
       "Keyboard-first Mac workspace, touch-first iPhone capture, iPad multitasking — with dark mode and offline reading.",
-    screenshot: "/images/cardmaniacs-mac-bezel-light.png",
+    screenshot: marketingImages.macHeroLight,
     screenshotAlt: "Cardmaniacs on Apple platforms",
     surface: "device",
     bullets: [
