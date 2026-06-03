@@ -1,7 +1,9 @@
 {
   "version": 1,
   "linearProject": "Cardmaniacs Marketing Website",
-  "openspecChange": "reader-first-launch-redesign",
+  "openspecChange": "launch-day-operations",
+  "openspecLaunchImplementation": "archive/2026-06-03-reader-first-launch-redesign",
+  "openspecUmbrellaChange": "archive/2026-06-03-craft-cardmaniacs-marketing-site",
   "milestones": [
     {
       "id": "M0",

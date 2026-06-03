@@ -1,12 +1,6 @@
-# Keystatic (GitHub mode)
+# Keystatic (GitHub mode) — copy to .dev.vars locally; set as Worker secrets in production.
 KEYSTATIC_GITHUB_CLIENT_ID=
 KEYSTATIC_GITHUB_CLIENT_SECRET=
 KEYSTATIC_SECRET=
 PUBLIC_KEYSTATIC_GITHUB_APP_SLUG=
-
-## Keystatic (GitHub mode)
-# KEYSTATIC_GITHUB_CLIENT_ID=Iv1....
-# KEYSTATIC_GITHUB_CLIENT_SECRET=....
-# KEYSTATIC_SECRET=....
-# PUBLIC_KEYSTATIC_GITHUB_APP_SLUG=your-github-app-slug
 

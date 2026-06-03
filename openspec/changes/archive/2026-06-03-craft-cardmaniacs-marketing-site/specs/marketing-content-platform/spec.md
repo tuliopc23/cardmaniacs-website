@@ -1,8 +1,8 @@
 ## ADDED Requirements
 
-### Requirement: Sanity owns editorial content and bounded marketing edits
+### Requirement: Keystatic and Markdoc own editorial content and bounded marketing edits
 
-The website SHALL use Sanity as the content source for blog posts, changelog entries, and clearly bounded editable marketing sections without handing full layout composition to the CMS.
+The website SHALL use Keystatic collections and Markdoc-backed content for blog posts, changelog entries, and clearly bounded editable marketing sections without handing full layout composition to the CMS.
 
 #### Scenario: CMS ownership boundaries
 

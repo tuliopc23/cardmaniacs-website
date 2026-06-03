@@ -2,7 +2,7 @@
 
 ### Requirement: The marketing site uses the agreed implementation stack
 
-The website SHALL be specified for Astro with Vite, Tailwind CSS v4, Motion.dev for meaningful animation, Sanity-backed editorial content, and deployment through Cloudflare Workers.
+The website SHALL be specified for Astro with Vite, Tailwind CSS v4, Motion.dev for meaningful animation, Keystatic/Markdoc editorial content, and deployment through Cloudflare Workers.
 
 #### Scenario: Implementation foundation
 
@@ -56,9 +56,18 @@ The implementation SHALL optimize app screenshots and visual media to avoid layo
 
 ### Requirement: Delivery remains static-first
 
-The marketing system SHALL keep top-level marketing pages and editorial routes compatible with a static-first deployment model on Workers, even when content is sourced from Sanity.
+The marketing system SHALL keep top-level marketing pages and editorial routes compatible with a static-first deployment model on Workers, even when content is sourced from Keystatic/Markdoc.
 
 #### Scenario: Building for production
 
 - **WHEN** the production build is generated for Workers deployment
 - **THEN** the site can render the required marketing and editorial routes without depending on a client-heavy runtime to assemble core page content
+
+### Requirement: Workers Builds is the production deploy path
+
+The production deployment SHALL use Cloudflare Workers Builds (Git integration) with `wrangler.jsonc` bindings for SESSION KV and IMAGES, documented in `docs/deploy-cloudflare.md`.
+
+#### Scenario: Shipping to production
+
+- **WHEN** code is pushed to the connected production branch
+- **THEN** Workers Builds runs install, `cd frontend && pnpm run build`, and `cd frontend && npx wrangler deploy` against account `e328c1497ae7e9a61aea8ca119af439d`

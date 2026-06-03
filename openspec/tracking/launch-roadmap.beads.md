@@ -2,7 +2,7 @@
 
 Canonical machine manifest: [`launch-roadmap.json`](launch-roadmap.json)
 
-OpenSpec change: `reader-first-launch-redesign`
+OpenSpec: launch ops `launch-day-operations`; launch impl archived `2026-06-03-reader-first-launch-redesign`; umbrella `craft-cardmaniacs-marketing-site`
 
 Linear project: [Cardmaniacs Marketing Website](https://linear.app/tulio-cunha-dev/project/cardmaniacs-marketing-website-fcfb1d7677e5/overview)
 

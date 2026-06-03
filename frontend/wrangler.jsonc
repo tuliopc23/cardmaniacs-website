@@ -3,4 +3,17 @@
   "name": "cardmaniacs-website",
   "account_id": "e328c1497ae7e9a61aea8ca119af439d",
   "compatibility_date": "2026-04-27",
+  "compatibility_flags": ["nodejs_compat"],
+  "kv_namespaces": [
+    {
+      "binding": "SESSION",
+      "id": "3a8c1f24c1b54398bee2691c46eb1f09",
+    },
+  ],
+  "images": {
+    "binding": "IMAGES",
+  },
+  "observability": {
+    "enabled": true,
+  },
 }

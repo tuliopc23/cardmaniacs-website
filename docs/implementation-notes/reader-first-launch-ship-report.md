@@ -1,8 +1,8 @@
 # Reader-first launch — ship report
 
 **Date:** 2026-06-02  
-**OpenSpec change:** `reader-first-launch-redesign`  
-**Tracking:** Beads + `openspec/changes/reader-first-launch-redesign/tasks.md`
+**OpenSpec change:** `reader-first-launch-redesign` (archived)  
+**Tracking:** Beads + [`openspec/changes/archive/2026-06-03-reader-first-launch-redesign/tasks.md`](../../openspec/changes/archive/2026-06-03-reader-first-launch-redesign/tasks.md); active ops in `launch-day-operations`
 
 ## Summary
 

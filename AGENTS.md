@@ -21,10 +21,12 @@ Docs are local at `node_modules/vite-plus/docs` or online at https://viteplus.de
 - Use brand accent blue `#539AC6` for primary blue accents unless design tokens specify otherwise.
 - When building or refactoring UI, prefer modular Astro components and Tailwind or design tokens over scattered inline CSS (`style` attributes and ad-hoc one-off rules).
 - Prefer SVGs and other static assets already in the repository (for example root-level icons or files under `public/`) instead of substituting unrelated third-party artwork.
+- Run agent shell commands in **fish** syntax; avoid bash-only constructs that hang in the user's shell.
 
 ## Learned Workspace Facts
 
-- Primary Astro site lives under `frontend/` with SSR via `@astrojs/cloudflare`; Keystatic is integrated with Markdoc-backed collections; deployment targets Cloudflare Workers (Wrangler).
+- Primary Astro site lives under `frontend/` with SSR via `@astrojs/cloudflare`; CMS is **Keystatic** with Markdoc-backed collections (not Sanity). Production deploy uses **Cloudflare Workers Builds** (git push); there is no GitHub Actions deploy workflow in this repo.
+- `frontend/wrangler.jsonc` binds `SESSION` (KV) and `IMAGES` for the Astro Cloudflare adapter; from `frontend/`, `pnpm run deploy` runs build plus `wrangler deploy`. Before deploy, ensure Wrangler auth matches `account_id` in that file—unset `CLOUDFLARE_API_TOKEN` / `CF_API_TOKEN` when they target a different Cloudflare account.
 - For Tailwind v4 with Astro, use `@tailwindcss/vite` in the Astro/Vite config; do not use `@astrojs/tailwind` for Tailwind v4.
 - `Surface` wraps slot children in an inner `relative` container, so flex/grid on the `Surface` root does not arrange slot siblings—apply layout on an explicit wrapper inside the slot.
 - In `frontend/astro.config.mjs`, exclude `@keystatic/astro` from Vite `optimizeDeps` and `ssr.optimizeDeps` so dependency pre-bundling does not try to resolve `virtual:keystatic-config` without Keystatic’s plugin.

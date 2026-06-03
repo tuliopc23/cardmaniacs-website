@@ -1,12 +1,12 @@
 ## Context
 
-The current repository is still the Astro starter scaffold, while the Cardmaniacs app already presents a distinct product identity: a native reading desk for feeds, read-later capture, bookmarks, and imported documents. The visible app references show a consistent visual language built around large rounded cards, soft glass-like chrome, thin floating toolbars, quiet sidebars, editorial article titles, and layered content surfaces rather than dashboard density.
+The marketing site in `frontend/` implements the Cardmaniacs app’s visual language, while the app already presents a distinct product identity: a native reading desk for feeds, read-later capture, bookmarks, and imported documents. The visible app references show a consistent visual language built around large rounded cards, soft glass-like chrome, thin floating toolbars, quiet sidebars, editorial article titles, and layered content surfaces rather than dashboard density.
 
 This change defines the website before implementation so the build can translate that identity into a lean marketing system for Home, Features, Pricing, and editorial content surfaces. The site must feel Apple-native and premium-indie without becoming a direct clone of Apple.com, and it must preserve the product’s calm, reading-focused character described in the app metadata and welcome content.
 
 The reference boundary is deliberate: adapt the editorial asymmetry and object-like staging seen in premium Apple-platform apps such as Bear, Things, and Craft, plus the restraint of Apple developer marketing, but keep Cardmaniacs’ own palette, iconography, screenshot language, and product framing. The strongest product-specific cues from the visible app imagery are the translucent sidebars, pill controls, floating bottom tools, soft contrast, and wide article cards that feel like reading objects on a desk.
 
-Technical constraints are already clear: Astro latest with Vite, Tailwind CSS v4, Motion.dev for animation, Sanity for blog/changelog and selective marketing edits, and Cloudflare Workers deployment. The site also needs a durable token and component system because the current codebase has no established design primitives yet.
+Technical constraints are implemented: Astro with Vite, Tailwind CSS v4, Motion.dev for animation, Keystatic/Markdoc for blog/changelog and selective marketing edits, and Cloudflare Workers deployment (Workers Builds). The site also needs a durable token and component system because the current codebase has no established design primitives yet.
 
 ## Goals / Non-Goals
 
@@ -23,7 +23,7 @@ Technical constraints are already clear: Astro latest with Vite, Tailwind CSS v4
 
 - Implementing the website in this change.
 - Finalizing commercial pricing copy or App Store submission details.
-- Creating exhaustive Sanity schema field definitions for every content type.
+- Creating exhaustive Keystatic schema field definitions for every content type.
 - Building a docs portal, customer support center, or application dashboard.
 - Reproducing Apple marketing pages literally or copying Bear/Craft aesthetics verbatim.
 - Inventing pricing structure, social proof, or product claims that the app does not support.
@@ -77,9 +77,9 @@ Technical constraints are already clear: Astro latest with Vite, Tailwind CSS v4
 - **Alternatives considered:**
   - **Large phone or laptop mock-device hero compositions:** Rejected because they over-index on hardware presence and underplay the reading-desk metaphor.
 
-### 5. Keep Sanity selective and editorial, not all-powerful
+### 5. Keep Keystatic selective and editorial, not all-powerful
 
-- **Decision:** Sanity owns blog posts, changelog entries, and selected editable marketing sections, while page layout, component structure, and token logic remain in code.
+- **Decision:** Keystatic/Markdoc owns blog posts, changelog entries, and selected editable marketing sections, while page layout, component structure, and token logic remain in code.
 - **Rationale:** This balances content flexibility with the need to preserve visual quality and motion behavior in a highly art-directed site.
 - **Alternatives considered:**
   - **All-content in code:** Rejected because changelog and blog workflows would become too rigid.
@@ -109,7 +109,7 @@ Technical constraints are already clear: Astro latest with Vite, Tailwind CSS v4
 
 ### 7. Default to static-first delivery on Workers with strong media discipline
 
-- **Decision:** The site should be designed as a static-first marketing surface that can pull editorial content from Sanity while keeping image handling, loading, and animation budgets controlled.
+- **Decision:** The site should be designed as a static-first marketing surface that can pull editorial content from Keystatic/Markdoc while keeping image handling, loading, and animation budgets controlled.
 - **Rationale:** Cardmaniacs is a download-focused product site, so fast first paint and stable layouts matter more than heavy interactivity.
 - **Alternatives considered:**
   - **Client-heavy runtime rendering:** Rejected because it adds cost and performance risk without clear product benefit.
@@ -126,7 +126,7 @@ Technical constraints are already clear: Astro latest with Vite, Tailwind CSS v4
 - **[Risk]** Editorial asymmetry can become unstable on smaller viewports.  
   **Mitigation:** Specify one focal moment per viewport, mobile-first stacking rules, and predictable collapse behavior.
 
-- **[Risk]** Sanity can expand scope if too much of the marketing surface becomes editable.  
+- **[Risk]** Keystatic can expand scope if too much of the marketing surface becomes editable.  
   **Mitigation:** Keep layout, tokens, and composition primitives in code; expose only clearly bounded content slots in CMS.
 
 - **[Risk]** Premium motion may introduce performance or accessibility regressions.  
@@ -140,7 +140,7 @@ Technical constraints are already clear: Astro latest with Vite, Tailwind CSS v4
 1. Approve this OpenSpec change as the source of truth before code implementation begins.
 2. During implementation, establish tokens, page shells, screenshot staging rules, and art-direction primitives before building individual pages.
 3. Build the homepage first, then Features, Pricing, and editorial surfaces using the same primitives.
-4. Introduce Sanity only after static content contracts are stable enough to map into schemas cleanly.
+4. Keystatic collections map to stable content contracts; layout and tokens remain in code.
 5. Validate accessibility, responsive behavior, anti-pattern compliance, and performance before any production deployment to Workers.
 
 **Rollback:** If implementation drifts or proves too ambitious, revert to the last stable branch and retain these artifacts as the design contract while reducing scope page-by-page rather than abandoning the whole system.
@@ -149,6 +149,6 @@ Technical constraints are already clear: Astro latest with Vite, Tailwind CSS v4
 
 - Is pricing intended to launch as a live commercial offer immediately, or should the first release keep placeholder-friendly structure with limited transactional detail?
 - Should the download CTA always resolve to the Mac App Store first, or should platform-specific destinations be selectable for macOS, iPhone, and iPad?
-- Which marketing sections beyond blog/changelog need Sanity editability in v1: homepage hero, proof strip, comparison copy, pricing FAQ, CTA band, or all of them?
+- Which marketing sections beyond blog/changelog need Keystatic editability in v1: homepage hero, proof strip, comparison copy, pricing FAQ, CTA band, or all of them?
 - Should changelog entries and blog posts share a mostly common editorial schema, or does the changelog need a lighter structured model?
 - Should the first release include platform-specific download badges or a simpler unified download CTA with platform support shown nearby?

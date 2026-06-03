@@ -2,7 +2,7 @@
 
 Marketing site and Keystatic CMS for Cardmaniacs (Astro, Cloudflare Workers, Tailwind v4).
 
-**Cloudflare:** use **your** `CLOUDFLARE_API_TOKEN` + `CLOUDFLARE_ACCOUNT_ID` (not a client account). Run `pnpm exec wrangler whoami` in `frontend/` before deploying. See [`docs/deploy-cloudflare.md`](docs/deploy-cloudflare.md) and `frontend/.env.example`.
+**Cloudflare:** Workers Builds from Git on **your** account (`e328c149…`). Bindings are in `frontend/wrangler.jsonc`. See [`docs/deploy-cloudflare.md`](docs/deploy-cloudflare.md).
 
 ```sh
 cd frontend && pnpm install && pnpm run dev
@@ -10,7 +10,7 @@ cd frontend && pnpm install && pnpm run dev
 
 From repo root (with [Vite+](https://viteplus.dev/guide/) installed): `vp check` and `vp test`.
 
-**Deploy:** GitHub Actions ([`.github/workflows/deploy-cloudflare.yml`](.github/workflows/deploy-cloudflare.yml)) on push to `main`, or `cd frontend && pnpm run deploy` locally after `whoami` checks out.
+**Deploy:** Connect `tuliopc23/cardmaniacs-website` in [Workers Builds](https://dash.cloudflare.com/e328c1497ae7e9a61aea8ca119af439d/workers-and-pages/create) (see deploy doc). Optional local: `cd frontend && pnpm run deploy`.
 
 ## Legacy starter notes (remove when docs are expanded)
 

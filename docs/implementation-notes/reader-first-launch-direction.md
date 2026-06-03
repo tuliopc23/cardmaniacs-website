@@ -1,6 +1,6 @@
 # Reader-first launch — implementation direction
 
-**OpenSpec:** `reader-first-launch-redesign`  
+**OpenSpec:** `archive/2026-06-03-reader-first-launch-redesign` (launch ops: `launch-day-operations`)  
 **Tracking:** `openspec/tracking/launch-roadmap.json` · Beads · [Linear project](https://linear.app/tulio-cunha-dev/project/cardmaniacs-marketing-website-fcfb1d7677e5/overview)
 
 ## Design sources
