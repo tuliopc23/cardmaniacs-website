@@ -1,6 +1,8 @@
 ---
 import Surface from "../ui/Surface.astro";
 import Pill from "../Pill.astro";
+import EyebrowLabel from "../ui/EyebrowLabel.astro";
+import LucideIcon from "../LucideIcon.astro";
 
 interface Props {
   excerpt: string;
@@ -13,15 +15,26 @@ const { excerpt, source, tags = [], class: className = "" } = Astro.props;
 ---
 
 <Surface variant="glass" radius="card" class:list={["p-5 md:p-6", className]}>
-  <p class="editorial-eyebrow editorial-eyebrow-accent mb-3">Saved highlight</p>
+  <EyebrowLabel icon="highlighter" class="mb-3">Saved highlight</EyebrowLabel>
   <blockquote class="font-display text-[1.125rem] md:text-[1.25rem] font-medium leading-snug tracking-[-0.02em] ink-primary text-pretty mb-4">
     <mark class="reader-highlight bg-transparent px-0">{excerpt}</mark>
   </blockquote>
   <div class="flex flex-wrap items-center gap-2">
-    {source && <span class="body-s ink-secondary">{source}</span>}
+    {source && (
+      <span class="type-card-meta inline-flex items-center gap-1.5">
+        <LucideIcon name="bookmark-check" size={13} />
+        {source}
+      </span>
+    )}
     {tags.map((tag) => (
-      <Pill variant="muted">{tag}</Pill>
+      <Pill variant="muted" class="gap-1">
+        <LucideIcon name="tag" size={11} />
+        {tag}
+      </Pill>
     ))}
   </div>
-  <p class="caption ink-tertiary mt-4">Stored for later reference — revisit when it matters.</p>
+  <p class="caption ink-tertiary mt-4 inline-flex items-center gap-1.5">
+    <LucideIcon name="rotate-ccw" size={12} />
+    Stored for later reference — revisit when it matters.
+  </p>
 </Surface>

@@ -1,0 +1,35 @@
+---
+import LucideIcon from "../LucideIcon.astro";
+
+interface Props {
+  icon: string;
+  size?: "sm" | "md" | "lg";
+  tone?: "accent" | "muted" | "inverse";
+  iconSize?: number;
+  class?: string;
+}
+
+const { icon, size = "md", tone = "accent", iconSize, class: className = "" } = Astro.props;
+
+const wellSize = size === "sm" ? "size-9" : size === "lg" ? "size-12" : "size-11";
+const defaultIconSize = size === "sm" ? 18 : size === "lg" ? 24 : 20;
+const resolvedIconSize = iconSize ?? defaultIconSize;
+
+const toneClass =
+  tone === "inverse"
+    ? "bg-[color-mix(in_oklab,var(--surface-elevated)_70%,transparent)] ink-primary ring-white/10"
+    : tone === "muted"
+      ? "bg-[color-mix(in_oklab,var(--surface-overlay)_55%,transparent)] ink-tertiary ring-[var(--border-subtle)]"
+      : "bg-[radial-gradient(120%_120%_at_30%_0%,color-mix(in_oklab,var(--cm-blue)_18%,transparent),color-mix(in_oklab,var(--surface-elevated)_55%,transparent))] text-[var(--cm-blue-ink)] ring-[var(--border-accent)] shadow-[var(--shadow-pill)]";
+---
+
+<span
+  class:list={[
+    "inline-flex shrink-0 items-center justify-center rounded-[var(--radius-md)] ring-1 backdrop-blur-md",
+    wellSize,
+    toneClass,
+    className,
+  ]}
+>
+  <LucideIcon name={icon} size={resolvedIconSize} strokeWidth={2.25} />
+</span>

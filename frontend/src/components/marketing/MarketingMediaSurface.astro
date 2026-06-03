@@ -1,6 +1,8 @@
 ---
 import Surface from "../ui/Surface.astro";
-import PhosphorIcon from "../PhosphorIcon.astro";
+import IconWell from "../ui/IconWell.astro";
+import LucideIcon from "../LucideIcon.astro";
+import EyebrowLabel from "../ui/EyebrowLabel.astro";
 
 interface Props {
   title?: string;
@@ -16,22 +18,19 @@ const {
 ---
 
 <Surface variant="elevated" radius="panel" class:list={["p-6 md:p-8", className]}>
+  <EyebrowLabel icon="youtube" class="mb-4">Media channels</EyebrowLabel>
   <div class="flex items-start gap-4">
-    <span
-      class="flex size-12 shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-[var(--cm-blue-subtle)] text-[var(--cm-blue-ink)]"
-      aria-hidden="true"
-    >
-      <PhosphorIcon name="sparkle" size={28} />
-    </span>
+    <IconWell icon="broadcast" size="lg" />
     <div>
-      <p class="font-display text-[15px] font-semibold ink-primary mb-1">{title}</p>
-      <p class="body-s ink-secondary">{subtitle}</p>
+      <p class="type-card-title mb-1">{title}</p>
+      <p class="type-card-meta text-[var(--ink-secondary)]">{subtitle}</p>
     </div>
   </div>
   <div
-    class="mt-6 aspect-video w-full rounded-[var(--radius-card)] bg-[color-mix(in_oklab,var(--surface-inset)_80%,transparent)] border border-[var(--border-subtle)] flex items-center justify-center"
+    class="mt-6 aspect-video w-full rounded-[var(--radius-card)] bg-[color-mix(in_oklab,var(--surface-inset)_80%,transparent)] border border-[var(--border-subtle)] flex items-center justify-center gap-3"
     aria-hidden="true"
   >
-    <PhosphorIcon name="rss" size={40} class="ink-tertiary opacity-60" />
+    <LucideIcon name="youtube" size={36} class="ink-tertiary opacity-70" />
+    <LucideIcon name="rss" size={32} class="ink-tertiary opacity-50" />
   </div>
 </Surface>

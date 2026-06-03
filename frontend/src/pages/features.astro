@@ -4,6 +4,7 @@ import SiteNav from '../components/SiteNav.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import Container from '../components/Container.astro';
 import FeatureEncyclopedia from '../components/features/FeatureEncyclopedia.astro';
+import PageHero from '../components/ui/PageHero.astro';
 import CtaBanner from '../components/CtaBanner.astro';
 import ScrollReveal from '../components/ScrollReveal.astro';
 ---
@@ -14,14 +15,12 @@ import ScrollReveal from '../components/ScrollReveal.astro';
   <main id="main-content">
     <section class="pt-32 pb-16 md:pt-40 md:pb-20">
       <Container>
-        <div class="max-w-[680px]">
-          <p class="editorial-eyebrow editorial-eyebrow-accent mb-4">Features</p>
-          <h1 class="display-hero ink-primary mb-6 text-balance">Your native reading desk.</h1>
-          <p class="type-lede measure-tight">
-            Collect, triage, read, highlight, and revisit — feeds, read-later, parsing, media, and power-user tools in
-            one calm Apple-native app.
-          </p>
-        </div>
+        <PageHero
+          eyebrow="Features"
+          eyebrowIcon="sparkles"
+          title="Your native reading desk."
+          lede="Collect, triage, read, highlight, and revisit — feeds, read-later, parsing, media, and power-user tools in one calm Apple-native app."
+        />
       </Container>
     </section>
 

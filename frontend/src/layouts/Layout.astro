@@ -27,7 +27,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://cardmani
     <!-- Theme flash prevention — runs before paint -->
     <script is:inline>
       (function() {
-        var themeColors = { light: '#f5f7fa', dark: '#1a1d26' };
+        var themeColors = { light: '#f5f7fa', dark: '#0e1012' };
         function syncThemeColor() {
           var theme =
             document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';

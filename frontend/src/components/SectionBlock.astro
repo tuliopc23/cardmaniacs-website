@@ -1,7 +1,18 @@
 ---
 import Container from './Container.astro';
+import SectionHeader from './ui/SectionHeader.astro';
 
-const { label, heading, class: className = '', id, as: Tag = 'section', inset = false } = Astro.props;
+interface Props {
+  label?: string;
+  heading?: string;
+  icon?: string;
+  class?: string;
+  id?: string;
+  as?: keyof HTMLElementTagNameMap;
+  inset?: boolean;
+}
+
+const { label, heading, icon, class: className = '', id, as: Tag = 'section', inset = false } = Astro.props;
 ---
 
 <Tag
@@ -10,9 +21,8 @@ const { label, heading, class: className = '', id, as: Tag = 'section', inset = 
 >
   <Container>
     {(label || heading) && (
-      <div class="mb-12 md:mb-16 max-w-[560px]">
-        {label && <p class="caption ink-accent mb-4">{label}</p>}
-        {heading && <h2 class="display ink-primary">{heading}</h2>}
+      <div class="mb-12 md:mb-16">
+        <SectionHeader eyebrow={label} heading={heading} icon={icon} iconPlacement="eyebrow" />
       </div>
     )}
     <slot />

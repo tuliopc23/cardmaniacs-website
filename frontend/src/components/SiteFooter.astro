@@ -1,16 +1,17 @@
 ---
 import Container from './Container.astro';
 import BejamasSeparator from './ui/bejamas/Separator.astro';
-import PhosphorIcon from './PhosphorIcon.astro';
+import LucideIcon from './LucideIcon.astro';
+import EyebrowLabel from './ui/EyebrowLabel.astro';
 import { downloadCta } from '../lib/site-cta';
 
 const footerDownloadHref = downloadCta.href ?? '/features';
 const footerDownloadLabel = downloadCta.isAvailable ? 'Download' : 'Get the app';
 
 const footerLinkClass =
-  'group flex items-center justify-between gap-2 body-s font-medium ink-secondary hover:ink-primary transition-colors rounded-[var(--radius-sm)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-base)]';
+  'group flex items-center gap-2 body-s font-medium ink-secondary hover:ink-primary transition-colors rounded-[var(--radius-sm)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-base)]';
 const chevronClass =
-  'shrink-0 text-[var(--ink-tertiary)] transition-transform group-hover:translate-x-0.5';
+  'shrink-0 text-[var(--ink-tertiary)] opacity-0 transition-[opacity,transform] duration-200 group-hover:opacity-100 group-hover:translate-x-0.5 motion-reduce:opacity-100 motion-reduce:transform-none';
 ---
 
 <footer class="pt-12 pb-10 footer-ambient-edge md:pt-14 md:pb-11">
@@ -27,94 +28,109 @@ const chevronClass =
             >
               <img
                 src="/images/Cardmaniacs-icon-white.png"
-                alt="Cardmaniacs"
+                alt=""
                 class="size-[22px] object-contain"
                 width="22"
                 height="22"
                 loading="lazy"
               />
             </span>
-            <span class="font-display font-semibold text-[15px] tracking-[-0.02em] ink-primary">Cardmaniacs</span>
+            <span class="font-display font-semibold text-[15px] tracking-[-0.02em] ink-primary" translate="no">Cardmaniacs</span>
           </a>
           <p class="type-lede measure-tight !text-[0.98rem]">
             A calmer home for everything you read — feeds, read-later, bookmarks, highlights, and the things you actually want to revisit.
           </p>
-          <div class="mt-5 flex flex-wrap gap-x-3 gap-y-2 text-[13px] font-display font-semibold">
-            <a href={footerDownloadHref} class="ink-accent hover:underline underline-offset-4" {...downloadCta.isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}}>{footerDownloadLabel}</a>
+          <div class="mt-5 flex flex-wrap gap-x-3 gap-y-2 text-[14px] font-display font-semibold">
+            <a href={footerDownloadHref} class="ink-accent hover:underline underline-offset-4 inline-flex items-center gap-1.5" {...downloadCta.isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}}>
+              <LucideIcon name="download" size={14} />
+              {footerDownloadLabel}
+            </a>
             <span class="ink-faint">·</span>
-            <a href="/features" class="ink-secondary hover:ink-primary transition-colors">Explore features</a>
+            <a href="/features" class="ink-secondary hover:ink-primary transition-colors inline-flex items-center gap-1.5">
+              <LucideIcon name="compass" size={14} />
+              Explore features
+            </a>
           </div>
         </div>
 
         <div class="lg:col-span-8">
           <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-5 md:grid-cols-3 md:gap-6">
             <div>
-              <p class="editorial-eyebrow mb-4">Product</p>
+              <EyebrowLabel icon="sparkles" class="mb-4">Product</EyebrowLabel>
               <ul class="space-y-2.5">
                 <li>
                   <a href="/features" class={footerLinkClass}>
-                    <span>Features</span>
-                    <PhosphorIcon name="chevron-right" size={14} class={chevronClass} />
+                    <LucideIcon name="sparkles" size={14} class="text-[var(--accent)]" />
+                    Features
+                    <LucideIcon name="chevron-right" size={14} class:list={['ml-auto', chevronClass]} />
                   </a>
                 </li>
                 <li>
                   <a href="/pricing" class={footerLinkClass}>
-                    <span>Pricing</span>
-                    <PhosphorIcon name="chevron-right" size={14} class={chevronClass} />
+                    <LucideIcon name="credit-card" size={14} class="text-[var(--accent)]" />
+                    Pricing
+                    <LucideIcon name="chevron-right" size={14} class:list={['ml-auto', chevronClass]} />
                   </a>
                 </li>
                 <li>
                   <a href="/changelog" class={footerLinkClass}>
-                    <span>Changelog</span>
-                    <PhosphorIcon name="chevron-right" size={14} class={chevronClass} />
+                    <LucideIcon name="history" size={14} class="text-[var(--accent)]" />
+                    Changelog
+                    <LucideIcon name="chevron-right" size={14} class:list={['ml-auto', chevronClass]} />
                   </a>
                 </li>
                 <li>
                   <a href={footerDownloadHref} class={footerLinkClass} {...downloadCta.isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}}>
-                    <span>{footerDownloadLabel}</span>
-                    <PhosphorIcon name="chevron-right" size={14} class={chevronClass} />
+                    <LucideIcon name="download" size={14} class="text-[var(--accent)]" />
+                    {footerDownloadLabel}
+                    <LucideIcon name="chevron-right" size={14} class:list={['ml-auto', chevronClass]} />
                   </a>
                 </li>
               </ul>
             </div>
 
             <div>
-              <p class="editorial-eyebrow mb-4">Resources</p>
+              <EyebrowLabel icon="book-open" class="mb-4">Resources</EyebrowLabel>
               <ul class="space-y-2.5">
                 <li>
                   <a href="/blog" class={footerLinkClass}>
-                    <span>Blog</span>
-                    <PhosphorIcon name="chevron-right" size={14} class={chevronClass} />
+                    <LucideIcon name="newspaper" size={14} class="text-[var(--accent)]" />
+                    Blog
+                    <LucideIcon name="chevron-right" size={14} class:list={['ml-auto', chevronClass]} />
                   </a>
                 </li>
                 <li>
                   <a href="/docs" class={footerLinkClass}>
-                    <span>Docs</span>
-                    <PhosphorIcon name="chevron-right" size={14} class={chevronClass} />
+                    <LucideIcon name="file-text" size={14} class="text-[var(--accent)]" />
+                    Docs
+                    <LucideIcon name="chevron-right" size={14} class:list={['ml-auto', chevronClass]} />
                   </a>
                 </li>
                 <li>
                   <a href="/press" class={footerLinkClass}>
-                    <span>Press kit</span>
-                    <PhosphorIcon name="chevron-right" size={14} class={chevronClass} />
+                    <LucideIcon name="press" size={14} class="text-[var(--accent)]" />
+                    Press kit
+                    <LucideIcon name="chevron-right" size={14} class:list={['ml-auto', chevronClass]} />
                   </a>
                 </li>
               </ul>
             </div>
 
             <div>
-              <p class="editorial-eyebrow mb-4">Legal</p>
+              <EyebrowLabel icon="shield-check" class="mb-4">Legal</EyebrowLabel>
               <ul class="space-y-2.5">
                 <li>
                   <a href="/privacy" class={footerLinkClass}>
-                    <span>Privacy</span>
-                    <PhosphorIcon name="chevron-right" size={14} class={chevronClass} />
+                    <LucideIcon name="shield-check" size={14} class="text-[var(--accent)]" />
+                    Privacy
+                    <LucideIcon name="chevron-right" size={14} class:list={['ml-auto', chevronClass]} />
                   </a>
                 </li>
                 <li>
                   <a href="/terms" class={footerLinkClass}>
-                    <span>Terms</span>
-                    <PhosphorIcon name="chevron-right" size={14} class={chevronClass} />
+                    <LucideIcon name="file-text" size={14} class="text-[var(--accent)]" />
+                    Terms
+                    <LucideIcon name="chevron-right" size={14} class:list={['ml-auto', chevronClass]} />
                   </a>
                 </li>
               </ul>
@@ -127,9 +143,12 @@ const chevronClass =
 
       <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <p class="body-s ink-tertiary">
-          &copy; {new Date().getFullYear()} Cardmaniacs. All rights reserved.
+          &copy; {new Date().getFullYear()} <span translate="no">Cardmaniacs</span>. All rights reserved.
         </p>
-        <p class="body-s ink-tertiary">Crafted for macOS, iOS & iPadOS</p>
+        <p class="body-s ink-tertiary inline-flex items-center gap-1.5">
+          <LucideIcon name="apple" size={14} />
+          Crafted for macOS, iOS & iPadOS
+        </p>
       </div>
     </div>
   </Container>

@@ -1,0 +1,52 @@
+---
+import EyebrowLabel from "./EyebrowLabel.astro";
+import LucideIcon from "../LucideIcon.astro";
+
+interface Props {
+  eyebrow?: string;
+  heading?: string;
+  description?: string;
+  icon?: string;
+  /** Where the single semantic icon appears — never duplicated. */
+  iconPlacement?: "eyebrow" | "heading";
+  headingClass?: string;
+  class?: string;
+}
+
+const {
+  eyebrow,
+  heading,
+  description,
+  icon,
+  iconPlacement = "eyebrow",
+  headingClass = "display ink-primary text-balance",
+  class: className = "",
+} = Astro.props;
+
+const showEyebrowIcon = icon && iconPlacement === "eyebrow";
+const showHeadingIcon = icon && iconPlacement === "heading";
+---
+
+<div class:list={["max-w-[560px]", className]}>
+  {eyebrow && (
+    <EyebrowLabel icon={showEyebrowIcon ? icon : undefined} class="mb-4">
+      {eyebrow}
+    </EyebrowLabel>
+  )}
+  {heading && (
+    <h2
+      class:list={[
+        headingClass,
+        "inline-flex items-start gap-3",
+        !eyebrow && !description ? "" : eyebrow && !description ? "mb-0" : "",
+        eyebrow && description ? "mb-5" : description ? "mb-5" : eyebrow ? "mb-5" : "",
+      ]}
+    >
+      {showHeadingIcon && (
+        <LucideIcon name={icon} size={28} class="shrink-0 mt-1.5 text-[var(--accent)]" />
+      )}
+      <span>{heading}</span>
+    </h2>
+  )}
+  {description && <p class="type-lede measure-tight">{description}</p>}
+</div>

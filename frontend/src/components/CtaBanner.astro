@@ -1,22 +1,37 @@
 ---
 import Container from './Container.astro';
 import AppStoreButton from './AppStoreButton.astro';
+import LucideIcon from './LucideIcon.astro';
+import EyebrowLabel from './ui/EyebrowLabel.astro';
 ---
 
 <section class="relative py-24 md:py-32 text-center overflow-hidden" id="get-the-app">
-  <!-- Subtle warm radial -->
   <div
-    class="absolute inset-0 pointer-events-none opacity-[0.06] [background:radial-gradient(ellipse_70%_50%_at_50%_50%,color-mix(in_oklab,var(--cm-blue)_55%,transparent)_0%,transparent_70%)]"
+    class="absolute inset-0 pointer-events-none opacity-[0.06] [background:radial-gradient(ellipse_70%_50%_at_50%_50%,var(--accent-atmo-cta-wash)_0%,transparent_70%)]"
   ></div>
 
   <Container class="relative z-10">
-    <h2 class="display-xl ink-primary mb-6 max-w-[600px] mx-auto">
-      Start reading,<br/>stop tab-hoarding.
+    <EyebrowLabel icon="download" class="mb-5 justify-center">Get the app</EyebrowLabel>
+    <h2 class="display-xl ink-primary mb-6 max-w-[600px] mx-auto text-balance">
+      Start reading,<br />stop tab-hoarding.
     </h2>
     <p class="body-l ink-secondary mb-10 max-w-[440px] mx-auto leading-relaxed">
       Cardmaniacs is built natively for macOS, iOS, and iPadOS — one calm reading desk for everything you collect.
     </p>
     <AppStoreButton class="mx-auto" />
-    <p class="caption ink-tertiary mt-6">Available on macOS, iOS & iPadOS</p>
+    <p class="caption ink-tertiary mt-6 inline-flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
+      <span class="inline-flex items-center gap-1">
+        <LucideIcon name="device-mobile" size={12} />
+        iOS
+      </span>
+      <span class="inline-flex items-center gap-1">
+        <LucideIcon name="device-tablet" size={12} />
+        iPadOS
+      </span>
+      <span class="inline-flex items-center gap-1">
+        <LucideIcon name="keyboard" size={12} />
+        macOS
+      </span>
+    </p>
   </Container>
 </section>

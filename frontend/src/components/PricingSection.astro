@@ -33,6 +33,7 @@ const annualFeatures = [
 
 <SectionBlock
   label={compact ? undefined : 'Pricing'}
+  icon={compact ? undefined : 'credit-card'}
   heading={compact ? undefined : 'Simple, fair pricing.'}
   class={compact ? 'py-12 md:py-16' : ''}
 >
@@ -48,10 +49,9 @@ const annualFeatures = [
   )}
 
   <div
-    class="mx-auto grid w-full max-w-[1120px] grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 md:gap-5 lg:grid-cols-3 lg:gap-6"
+    class="mx-auto grid w-full max-w-[1120px] grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 md:gap-5 lg:grid-cols-3 lg:gap-6 items-stretch justify-items-center"
   >
     <PricingCard
-      class="md:col-span-2 lg:col-span-1"
       label="7-day trial"
       price="$0"
       interval="/ trial"

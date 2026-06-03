@@ -1,6 +1,6 @@
 ---
 import FeatureItem from "./FeatureItem.astro";
-import PhosphorIcon from "./PhosphorIcon.astro";
+import IconWell from "./ui/IconWell.astro";
 
 interface Props {
   icon: string;
@@ -12,13 +12,9 @@ const { icon, title, description } = Astro.props;
 ---
 
 <FeatureItem>
-  <span slot="media" class="inline-flex size-8 items-center justify-center rounded-[var(--radius-sm)] bg-[var(--accent-subtle)] ink-accent shrink-0">
-    <PhosphorIcon name={icon} size={18} />
-  </span>
-  <h3 slot="title" class="subheading ink-primary">
-    {title}
-  </h3>
-  <p slot="description" class="body-s ink-secondary leading-relaxed">
+  <IconWell slot="media" icon={icon} size="md" />
+  <h3 slot="title" class="type-card-title">{title}</h3>
+  <p slot="description" class="type-card-meta leading-relaxed text-[var(--ink-secondary)]">
     {description}
   </p>
 </FeatureItem>

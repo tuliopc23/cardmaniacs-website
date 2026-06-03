@@ -4,6 +4,7 @@ import SiteNav from '../../components/SiteNav.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
 import Container from '../../components/Container.astro';
 import PostCard from '../../components/PostCard.astro';
+import PageHero from '../../components/ui/PageHero.astro';
 import { getCollection } from 'astro:content';
 
 const posts = await getCollection('posts');
@@ -25,19 +26,19 @@ const rest = featured ? sortedPosts.filter((p) => p.id !== featured.id) : sorted
   <main id="main-content">
     <section class="pt-32 pb-14 md:pt-40 md:pb-18">
       <Container>
-        <div class="max-w-[760px]">
-          <p class="editorial-eyebrow editorial-eyebrow-accent mb-4">Notes from the reading desk</p>
-          <h1 class="display-hero ink-primary mb-6 text-balance">Calm thoughts on reading, craft, and native software.</h1>
-          <p class="type-lede measure-tight max-w-[560px]">
-            Updates, thoughts, and stories about building a calm reading experience for Apple platforms.
-          </p>
-        </div>
+        <PageHero
+          eyebrow="Notes from the reading desk"
+          eyebrowIcon="notebook-pen"
+          title="Calm thoughts on reading, craft, and native software."
+          lede="Updates, thoughts, and stories about building a calm reading experience for Apple platforms."
+          maxWidth="760px"
+        />
       </Container>
     </section>
 
     <section class="pb-24">
       <Container>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-center">
           {featured && (
             <PostCard
               href={`/blog/${featured.id}`}

@@ -59,6 +59,13 @@
   --bg-paper-warm: oklch(0.986 0.005 255);
   --bg-atmo-1: color-mix(in oklab, var(--cm-blue) 18%, white);
   --bg-atmo-2: color-mix(in oklab, var(--cm-blue) 10%, white);
+  --bg-accent-atmo-1: var(--bg-atmo-1);
+  --bg-accent-atmo-2: var(--bg-atmo-2);
+  --accent-atmo-sheen: color-mix(in oklab, var(--cm-blue) 10%, transparent);
+  --accent-atmo-hero-spot: color-mix(in oklab, var(--cm-blue) 22%, transparent);
+  --accent-atmo-card-primary: color-mix(in oklab, var(--cm-blue) 20%, transparent);
+  --accent-atmo-card-secondary: color-mix(in oklab, var(--cm-blue) 14%, transparent);
+  --accent-atmo-cta-wash: color-mix(in oklab, var(--cm-blue) 55%, transparent);
   --bg-vignette: rgba(6, 10, 20, 0.04);
   --ambient-haze: color-mix(in oklab, var(--cm-blue) 6%, var(--bg-liquid-base));
   --ambient-bloom: color-mix(in oklab, var(--cm-blue) 14%, white);
@@ -153,32 +160,41 @@
 }
 
 [data-theme="dark"] {
-  /* Brand (keep hue, tuned for dark) */
+  /* Brand — accent UI only; canvas stays neutral */
   --cm-blue: #539ac6;
   --cm-blue-hover: #65b0dc;
   --cm-blue-ink: #b8e7ff;
-  --cm-blue-subtle: color-mix(in oklab, var(--cm-blue) 18%, transparent);
-  --cm-blue-subtle-2: color-mix(in oklab, var(--cm-blue) 26%, transparent);
+  --cm-blue-subtle: color-mix(in oklab, var(--cm-blue) 12%, transparent);
+  --cm-blue-subtle-2: color-mix(in oklab, var(--cm-blue) 16%, transparent);
 
-  /* Background atmosphere — frosted ambient (no gradient mesh) */
-  --bg-liquid-base: oklch(0.14 0.028 255);
+  /* Canvas — near-black neutral (not blue-tinted wallpaper) */
+  --bg-liquid-base: oklch(0.12 0.008 260);
   --bg-night: var(--bg-liquid-base);
-  --bg-night-deep: oklch(0.11 0.035 255);
-  --bg-atmo-1: color-mix(in oklab, var(--cm-blue) 26%, black);
-  --bg-atmo-2: color-mix(in oklab, var(--cm-blue) 18%, black);
-  --bg-vignette: rgba(0, 0, 0, 0.38);
-  --ambient-haze: color-mix(in oklab, var(--cm-blue) 9%, var(--bg-liquid-base));
-  --ambient-bloom: color-mix(in oklab, var(--cm-blue) 24%, transparent);
-  --ambient-bloom-opacity: 0.42;
+  --bg-night-deep: oklch(0.09 0.006 260);
+  --bg-accent-atmo-1: color-mix(in oklab, var(--cm-blue) 9%, var(--bg-liquid-base));
+  --bg-accent-atmo-2: color-mix(in oklab, var(--cm-blue) 5%, var(--bg-liquid-base));
+  --bg-atmo-1: var(--bg-accent-atmo-1);
+  --bg-atmo-2: var(--bg-accent-atmo-2);
+  --bg-vignette: rgba(0, 0, 0, 0.42);
+  --ambient-haze: color-mix(in oklab, var(--cm-blue) 2%, var(--bg-liquid-base));
+  --ambient-bloom: color-mix(in oklab, var(--cm-blue) 16%, transparent);
+  --ambient-bloom-opacity: 0.2;
   --ambient-bloom-blur: 120px;
-  --ambient-frost-tint: rgba(255, 255, 255, 0.035);
+  --ambient-frost-tint: rgba(255, 255, 255, 0.03);
   --ambient-frost-blur: 40px;
-  --ambient-glint-line: rgba(255, 255, 255, 0.1);
-  --ambient-glint-glow: rgba(83, 154, 198, 0.05);
-  --ambient-edge: rgba(0, 0, 0, 0.26);
+  --ambient-glint-line: rgba(255, 255, 255, 0.09);
+  --ambient-glint-glow: rgba(83, 154, 198, 0.04);
+  --ambient-edge: rgba(0, 0, 0, 0.32);
 
-  /* Surfaces */
-  --surface-base: color-mix(in oklab, var(--bg-liquid-base) 78%, var(--bg-night-deep));
+  /* Section / hero accent washes (low % — not full-page blue) */
+  --accent-atmo-sheen: color-mix(in oklab, var(--cm-blue) 5%, transparent);
+  --accent-atmo-hero-spot: color-mix(in oklab, var(--cm-blue) 10%, transparent);
+  --accent-atmo-card-primary: color-mix(in oklab, var(--bg-accent-atmo-1) 55%, transparent);
+  --accent-atmo-card-secondary: color-mix(in oklab, var(--bg-accent-atmo-2) 45%, transparent);
+  --accent-atmo-cta-wash: color-mix(in oklab, var(--cm-blue) 12%, transparent);
+
+  /* Surfaces — neutral glass on charcoal */
+  --surface-base: color-mix(in oklab, var(--bg-liquid-base) 88%, var(--bg-night-deep));
   --surface-raised: rgba(255, 255, 255, 0.06);
   --surface-elevated: rgba(255, 255, 255, 0.085);
   --surface-glass: rgba(255, 255, 255, 0.055);
@@ -205,15 +221,15 @@
   --shadow-card:
     0 1px 0 rgba(255, 255, 255, 0.08) inset, 0 1px 2px rgba(0, 0, 0, 0.45),
     0 10px 28px rgba(0, 0, 0, 0.42), 0 28px 72px rgba(0, 0, 0, 0.48),
-    0 0 0 1px rgba(255, 255, 255, 0.06), 0 0 56px rgba(83, 154, 198, 0.14);
+    0 0 0 1px rgba(255, 255, 255, 0.06), 0 0 48px rgba(83, 154, 198, 0.1);
   --shadow-card-hover:
     0 1px 0 rgba(255, 255, 255, 0.1) inset, 0 2px 4px rgba(0, 0, 0, 0.5),
     0 14px 36px rgba(0, 0, 0, 0.5), 0 40px 96px rgba(0, 0, 0, 0.55),
-    0 0 0 1px rgba(83, 154, 198, 0.22), 0 0 72px rgba(83, 154, 198, 0.18);
+    0 0 0 1px rgba(83, 154, 198, 0.18), 0 0 60px rgba(83, 154, 198, 0.12);
   --shadow-float:
     0 1px 0 rgba(255, 255, 255, 0.09) inset, 0 4px 12px rgba(0, 0, 0, 0.48),
     0 22px 56px rgba(0, 0, 0, 0.52), 0 64px 140px rgba(0, 0, 0, 0.55),
-    0 0 0 1px rgba(255, 255, 255, 0.07), 0 0 90px rgba(83, 154, 198, 0.16);
+    0 0 0 1px rgba(255, 255, 255, 0.07), 0 0 72px rgba(83, 154, 198, 0.11);
   --shadow-pill:
     0 1px 0 rgba(255, 255, 255, 0.08) inset, 0 0 0 1px rgba(255, 255, 255, 0.08),
     0 6px 18px rgba(0, 0, 0, 0.38), 0 0 32px rgba(83, 154, 198, 0.1);
@@ -321,6 +337,7 @@ html {
   scroll-behavior: smooth;
   color-scheme: var(--color-scheme);
   background: var(--bg-liquid-base);
+  touch-action: manipulation;
 }
 
 body {
@@ -359,6 +376,25 @@ body {
   background: var(--ambient-haze);
   opacity: 0.92;
   animation: cm-ambient-breathe 88s ease-in-out infinite;
+}
+
+[data-theme="dark"] .cm-ambient__haze {
+  opacity: 0.48;
+}
+
+[data-theme="dark"] .cm-ambient__bloom {
+  filter: blur(var(--ambient-bloom-blur)) saturate(1.12);
+}
+
+[data-theme="dark"] .cm-ambient__bloom--a {
+  width: min(78vw, 820px);
+  height: min(58vw, 520px);
+}
+
+[data-theme="dark"] .cm-ambient__bloom--b {
+  width: min(68vw, 700px);
+  height: min(52vw, 460px);
+  opacity: calc(var(--ambient-bloom-opacity) * 0.85);
 }
 
 /* Soft light pools: solid fills + blur only */
@@ -631,6 +667,37 @@ body {
   max-width: 52ch;
 }
 
+/* ---- Card-interior typography (dense UI) ---- */
+.type-card-title {
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: 650;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  color: var(--ink-primary);
+}
+
+.type-card-meta {
+  font-size: 0.75rem;
+  line-height: 1.45;
+  letter-spacing: -0.004em;
+  color: var(--ink-tertiary);
+}
+
+.type-card-eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.6875rem;
+  font-weight: 650;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-tertiary);
+}
+
+.type-card-eyebrow-accent {
+  color: var(--accent);
+}
+
 /* ---- Reader marketing surfaces (M2) ---- */
 :root,
 [data-theme="light"] {
@@ -641,8 +708,8 @@ body {
 }
 
 [data-theme="dark"] {
-  --reader-highlight: color-mix(in oklab, var(--cm-blue) 35%, transparent);
-  --reader-highlight-ink: color-mix(in oklab, var(--cm-blue) 75%, white);
+  --reader-highlight: color-mix(in oklab, var(--cm-blue) 22%, transparent);
+  --reader-highlight-ink: color-mix(in oklab, var(--cm-blue) 68%, white);
 }
 
 .marketing-reader-prose {
@@ -655,6 +722,13 @@ body {
   text-wrap: pretty;
 }
 
+.marketing-reader-prose h2,
+.marketing-reader-prose h3,
+.cm-prose :global(h2),
+.cm-prose :global(h3) {
+  scroll-margin-top: 5rem;
+}
+
 .marketing-reader-prose h2 {
   font-family: var(--font-display);
   font-size: clamp(1.35rem, 2.2vw, 1.75rem);
@@ -663,6 +737,24 @@ body {
   letter-spacing: -0.03em;
   margin: 2rem 0 0.75rem;
   text-wrap: balance;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.scroll-anchor {
+  scroll-margin-top: 5rem;
+}
+
+.type-page-eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.6875rem;
+  font-weight: 650;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  color: var(--ink-tertiary);
 }
 
 .marketing-reader-prose p {
@@ -915,6 +1007,20 @@ body {
    REDUCED MOTION
    ============================================== */
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  #cm-mobile-menu,
+  #cm-mobile-menu-btn [data-menu-icon] {
+    transition: none !important;
+  }
+
   *,
   *::before,
   *::after {

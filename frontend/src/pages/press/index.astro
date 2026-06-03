@@ -3,8 +3,11 @@ import Layout from '../../layouts/Layout.astro';
 import SiteNav from '../../components/SiteNav.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
 import Container from '../../components/Container.astro';
+import PageHero from '../../components/ui/PageHero.astro';
 import Card from '../../components/Card.astro';
 import Pill from '../../components/Pill.astro';
+import LucideIcon from '../../components/LucideIcon.astro';
+import EyebrowLabel from '../../components/ui/EyebrowLabel.astro';
 ---
 
 <Layout title="Press Kit — Cardmaniacs">
@@ -13,33 +16,38 @@ import Pill from '../../components/Pill.astro';
   <main id="main-content">
     <section class="pt-32 pb-16 md:pt-40 md:pb-20">
       <Container>
-        <div class="max-w-[680px]">
-          <p class="editorial-eyebrow editorial-eyebrow-accent mb-4">Press Kit</p>
-          <h1 class="display-hero ink-primary mb-6">Media & assets.</h1>
-          <p class="type-lede measure-tight max-w-[520px]">
-            Download app icons, screenshots, and branding assets for press coverage and reviews.
-          </p>
-        </div>
+        <PageHero
+          eyebrow="Press Kit"
+          eyebrowIcon="newspaper"
+          title="Media & assets."
+          lede="Download app icons, screenshots, and branding assets for press coverage and reviews."
+        />
       </Container>
     </section>
 
     <section class="pb-20">
       <Container>
-        <!-- App icon -->
         <div class="mb-16">
-          <h2 class="heading ink-primary mb-6">App Icon</h2>
+          <EyebrowLabel icon="screenshot" class="mb-5">App Icon</EyebrowLabel>
           <div class="flex items-center gap-6">
             <img src="/images/Graphic.png" alt="Cardmaniacs App Icon" class="w-24 h-24 rounded-[20px] shadow-[var(--shadow-card)]" />
             <div>
               <p class="body-s ink-secondary mb-2">Cardmaniacs app icon in PNG format.</p>
-              <a href="/images/Graphic.png" download class="body-s ink-accent font-medium hover:underline underline-offset-2">Download PNG →</a>
+              <a
+                href="/images/Graphic.png"
+                download
+                class="body-s ink-accent font-medium hover:underline underline-offset-2 inline-flex items-center gap-1.5"
+              >
+                <LucideIcon name="download" size={14} />
+                Download PNG
+                <LucideIcon name="arrow-up-right" size={12} class="opacity-70" />
+              </a>
             </div>
           </div>
         </div>
 
-        <!-- Screenshots -->
         <div>
-          <h2 class="heading ink-primary mb-6">Screenshots</h2>
+          <EyebrowLabel icon="screenshot" class="mb-5">Screenshots</EyebrowLabel>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
             {[
               { src: '/images/Cardmaniacs-mac - 1.png', label: 'Empty state', platform: 'macOS' },
@@ -52,18 +60,27 @@ import Pill from '../../components/Pill.astro';
                 <div class="p-4 flex items-center justify-between">
                   <div class="flex items-center gap-2">
                     <span class="body-s ink-primary font-medium">{s.label}</span>
-                    <Pill variant="muted">{s.platform}</Pill>
+                    <Pill variant="muted" class="gap-1">
+                      <LucideIcon name="keyboard" size={11} />
+                      {s.platform}
+                    </Pill>
                   </div>
-                  <a href={s.src} download class="body-s ink-accent font-medium hover:underline underline-offset-2">Download</a>
+                  <a
+                    href={s.src}
+                    download
+                    class="body-s ink-accent font-medium hover:underline underline-offset-2 inline-flex items-center gap-1.5"
+                  >
+                    <LucideIcon name="download" size={14} />
+                    Download
+                  </a>
                 </div>
               </Card>
             ))}
           </div>
         </div>
 
-        <!-- About blurb -->
         <div class="mt-16 max-w-[560px]">
-          <h2 class="heading ink-primary mb-4">About Cardmaniacs</h2>
+          <EyebrowLabel icon="file-text" class="mb-4">About Cardmaniacs</EyebrowLabel>
           <p class="body ink-secondary leading-relaxed mb-3">
             Cardmaniacs is a native Apple app that unifies RSS feeds, Read Later, and Bookmarks into one beautifully crafted reading experience. Built entirely in Swift for macOS, iOS, and iPadOS, it features card-based content presentation, full-text search, offline reading, iCloud sync, and power-user features like Vim navigation.
           </p>

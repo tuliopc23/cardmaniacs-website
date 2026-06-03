@@ -4,6 +4,7 @@ import SiteNav from '../../components/SiteNav.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
 import Container from '../../components/Container.astro';
 import Button from '../../components/Button.astro';
+import LucideIcon from '../../components/LucideIcon.astro';
 import Prose from '../../components/ui/Prose.astro';
 import MarketingReaderSurface from '../../components/marketing/MarketingReaderSurface.astro';
 import { getCollection, render } from 'astro:content';
@@ -30,7 +31,8 @@ const { Content } = await render(release);
     <article class="pt-32 pb-20 md:pt-40 md:pb-28">
       <Container narrow>
         <a href="/changelog" class="inline-flex items-center gap-1.5 ink-accent text-[13px] font-display font-medium mb-8 hover:underline underline-offset-2">
-          ← Back to changelog
+          <LucideIcon name="arrow-left" size={14} />
+          Back to changelog
         </a>
 
         <MarketingReaderSurface

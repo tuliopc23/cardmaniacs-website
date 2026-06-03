@@ -8,6 +8,7 @@ import MarketingHighlightSurface from "../marketing/MarketingHighlightSurface.as
 import MarketingCommandSurface from "../marketing/MarketingCommandSurface.astro";
 import MarketingMediaSurface from "../marketing/MarketingMediaSurface.astro";
 import MarketingDeviceComposition from "../marketing/MarketingDeviceComposition.astro";
+import SectionHeader from "../ui/SectionHeader.astro";
 import { featureSections } from "../../data/feature-sections";
 import { marketingImages } from "../../lib/marketing-images";
 ---
@@ -18,9 +19,14 @@ import { marketingImages } from "../../lib/marketing-images";
       <section class:list={["py-20 md:py-28", i % 2 !== 0 ? "section-band" : ""]}>
         <Container>
           <div class="mb-10 max-w-[720px]">
-            <p class="editorial-eyebrow editorial-eyebrow-accent mb-3">{s.label}</p>
-            <h2 class="type-section-title ink-primary mb-4">{s.heading}</h2>
-            <p class="type-lede measure-tight">{s.description}</p>
+            <SectionHeader
+              eyebrow={s.label}
+              heading={s.heading}
+              description={s.description}
+              icon={s.icon}
+              iconPlacement="eyebrow"
+              headingClass="type-section-title ink-primary text-balance"
+            />
           </div>
 
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">

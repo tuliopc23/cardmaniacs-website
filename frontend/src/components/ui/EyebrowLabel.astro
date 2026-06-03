@@ -1,0 +1,22 @@
+---
+import LucideIcon from "../LucideIcon.astro";
+
+interface Props {
+  icon?: string;
+  accent?: boolean;
+  class?: string;
+}
+
+const { icon, accent = true, class: className = "" } = Astro.props;
+---
+
+<p
+  class:list={[
+    "editorial-eyebrow inline-flex items-center gap-2",
+    accent && "editorial-eyebrow-accent",
+    className,
+  ]}
+>
+  {icon && <LucideIcon name={icon} size={14} class="shrink-0 opacity-90" strokeWidth={2.25} />}
+  <slot />
+</p>

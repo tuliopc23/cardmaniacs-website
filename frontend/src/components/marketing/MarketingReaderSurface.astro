@@ -1,6 +1,8 @@
 ---
 import Surface from "../ui/Surface.astro";
 import ReaderChrome from "./ReaderChrome.astro";
+import EyebrowLabel from "../ui/EyebrowLabel.astro";
+import LucideIcon from "../LucideIcon.astro";
 
 interface Props {
   title: string;
@@ -20,16 +22,14 @@ const { title, source, meta, tags, class: className = "", showToolbar = true } =
       class="mb-6 flex items-center gap-2 rounded-[var(--radius-pill)] border border-[var(--border-subtle)] bg-[var(--reader-toolbar-bg)] px-3 py-1.5 w-fit shadow-[var(--shadow-pill)]"
       aria-hidden="true"
     >
-      <span class="size-2 rounded-full bg-[var(--cm-blue)] opacity-80" />
-      <span class="size-2 rounded-full bg-[var(--ink-faint)]" />
-      <span class="size-2 rounded-full bg-[var(--ink-faint)]" />
-      <span class="ml-2 font-display text-[11px] font-semibold tracking-wide ink-tertiary">Reader</span>
+      <LucideIcon name="book-open" size={14} class="text-[var(--cm-blue-ink)]" />
+      <span class="type-card-eyebrow !normal-case !tracking-wide ink-tertiary">Reader</span>
     </div>
   )}
 
   <ReaderChrome source={source} meta={meta} tags={tags} />
 
-  <h2 class="type-section-title ink-primary mb-6 text-balance">{title}</h2>
+  <h2 class="type-section-title ink-primary mb-6 text-balance text-[1.5rem] md:text-[1.75rem]">{title}</h2>
 
   <div class="marketing-reader-prose">
     <slot />

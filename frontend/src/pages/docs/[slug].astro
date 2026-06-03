@@ -4,7 +4,8 @@ import SiteNav from '../../components/SiteNav.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
 import Container from '../../components/Container.astro';
 import Prose from '../../components/ui/Prose.astro';
-import PhosphorIcon from '../../components/PhosphorIcon.astro';
+import LucideIcon from '../../components/LucideIcon.astro';
+import EyebrowLabel from '../../components/ui/EyebrowLabel.astro';
 import { getCollection, render } from 'astro:content';
 
 /** Static HTML at build for content routes under `output: "server"`. */
@@ -42,7 +43,7 @@ sorted.forEach((d) => {
           <nav class="sticky top-28 space-y-6">
             {[...sections.entries()].map(([section, items]) => (
               <div>
-                <p class="editorial-eyebrow ink-tertiary mb-2">{section}</p>
+                <EyebrowLabel class="mb-2 ink-tertiary">{section}</EyebrowLabel>
                 <ul class="space-y-1">
                   {items.map((d) => (
                     <li>
@@ -68,10 +69,10 @@ sorted.forEach((d) => {
         <!-- Content -->
         <article class="max-w-[680px]">
           <a href="/docs" class="mb-6 inline-flex items-center gap-1.5 text-[13px] font-display font-medium ink-accent hover:underline underline-offset-2 lg:hidden">
-            <PhosphorIcon name="arrow-left" size={14} />
+            <LucideIcon name="arrow-left" size={14} />
             All docs
           </a>
-          {doc.data.section && <p class="editorial-eyebrow ink-tertiary mb-2">{doc.data.section}</p>}
+          {doc.data.section && <EyebrowLabel class="mb-2 ink-tertiary">{doc.data.section}</EyebrowLabel>}
           <h1 class="display-hero ink-primary mb-10 text-balance">{doc.data.title}</h1>
           <Prose>
             <Content />

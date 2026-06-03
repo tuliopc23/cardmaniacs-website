@@ -1,7 +1,7 @@
 ---
 import Surface from "../ui/Surface.astro";
 import Pill from "../Pill.astro";
-import PhosphorIcon from "../PhosphorIcon.astro";
+import LucideIcon from "../LucideIcon.astro";
 
 interface Props {
   href: string;
@@ -21,6 +21,10 @@ const tagList = (tags ?? "")
   .map((t) => t.trim())
   .filter(Boolean)
   .slice(0, 2);
+
+const formattedDate =
+  date &&
+  new Date(date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
 ---
 
 <Surface
@@ -28,19 +32,17 @@ const tagList = (tags ?? "")
   variant="elevated"
   interactive
   class:list={[
-    "group p-0",
-    featured ? "lg:col-span-2" : "",
+    "group w-full max-w-[400px] p-0",
+    featured && "ring-1 ring-[var(--border-accent)] shadow-[var(--shadow-soft)]",
   ]}
 >
-  <!-- Media header -->
   <div
     class:list={[
-      "relative overflow-hidden",
-      "h-[156px] md:h-[176px]",
-      featured ? "lg:h-[200px]" : "",
+      "relative overflow-hidden aspect-[16/10] max-h-[200px]",
+      featured && "max-h-[220px]",
       "[border-top-left-radius:var(--radius-card)] [border-top-right-radius:var(--radius-card)]",
       "border-b border-[var(--border-subtle)]",
-      "bg-[radial-gradient(900px_260px_at_20%_0%,color-mix(in_oklab,var(--cm-blue)_20%,transparent)_0%,transparent_60%),radial-gradient(900px_260px_at_70%_0%,color-mix(in_oklab,var(--cm-blue)_14%,transparent)_0%,transparent_60%),linear-gradient(to_bottom,color-mix(in_oklab,var(--surface-overlay)_45%,transparent),transparent)]",
+      "bg-[radial-gradient(900px_260px_at_20%_0%,var(--accent-atmo-card-primary)_0%,transparent_60%),radial-gradient(900px_260px_at_70%_0%,var(--accent-atmo-card-secondary)_0%,transparent_60%),linear-gradient(to_bottom,color-mix(in_oklab,var(--surface-overlay)_45%,transparent),transparent)]",
     ]}
   >
     {cover ? (
@@ -54,46 +56,53 @@ const tagList = (tags ?? "")
 
     <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.08),transparent_38%,rgba(0,0,0,0.12))] dark:bg-[linear-gradient(to_bottom,rgba(0,0,0,0.25),transparent_45%,rgba(0,0,0,0.35))]"></div>
 
-    <div class="absolute left-4 right-4 top-4 flex items-center justify-between gap-3">
-      <div class="flex flex-wrap items-center gap-2">
-        <Pill variant="accent">Notes</Pill>
-        {tagList.map((t) => (
-          <Pill variant="muted">{t}</Pill>
-        ))}
-      </div>
-      <span class="hidden sm:inline-flex items-center justify-center size-9 [border-radius:var(--radius-pill)] bg-[color-mix(in_oklab,var(--surface-elevated)_60%,transparent)] ring-1 ring-black/5 dark:ring-white/10 backdrop-blur-md ink-primary">
-        <PhosphorIcon name="chevron-right" size={16} />
-      </span>
+    <div class="absolute left-4 right-4 top-4 flex flex-wrap items-center gap-2">
+      {featured ? (
+        <Pill variant="accent" class="gap-1">
+          <LucideIcon name="sparkles" size={11} />
+          Featured
+        </Pill>
+      ) : (
+        <Pill variant="accent" class="gap-1">
+          <LucideIcon name="notebook-pen" size={11} />
+          Notes
+        </Pill>
+      )}
+      {tagList.map((t) => (
+        <Pill variant="muted" class="gap-1">
+          <LucideIcon name="tag" size={11} />
+          {t}
+        </Pill>
+      ))}
     </div>
-
-    {date && (
-      <time class="absolute left-4 bottom-4 caption text-white/80 [text-shadow:0_1px_10px_rgba(0,0,0,0.25)]" datetime={date}>
-        {new Date(date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
-      </time>
-    )}
   </div>
 
-  <div class="p-5 md:p-6 lg:p-7">
-    {eyebrow && <p class="caption ink-accent mb-3">{eyebrow}</p>}
-
-    <h2 class:list={["ink-primary text-balance", featured ? "display" : "subheading", "mb-2"]}>
-      {title}
-    </h2>
-
-    {summary && (
-      <p class="body-s ink-secondary leading-relaxed text-pretty line-clamp-3">
-        {summary}
+  <div class="p-5 md:p-6">
+    {formattedDate && (
+      <p class="type-card-eyebrow type-card-eyebrow-accent mb-3 inline-flex items-center gap-1.5">
+        <LucideIcon name="calendar-days" size={13} />
+        <time datetime={date}>{formattedDate}</time>
       </p>
     )}
 
+    {eyebrow && (
+      <p class="type-card-eyebrow type-card-eyebrow-accent mb-2 inline-flex items-center gap-1.5">
+        <LucideIcon name="sparkles" size={13} />
+        {eyebrow}
+      </p>
+    )}
+
+    <h2 class="subheading ink-primary text-balance mb-2 text-[1.125rem] md:text-[1.2rem]">{title}</h2>
+
+    {summary && (
+      <p class="body-s ink-secondary leading-relaxed text-pretty line-clamp-3">{summary}</p>
+    )}
+
     <div class="mt-5 flex items-center gap-2">
-      <span class="text-[13px] font-display font-semibold ink-accent">
-        Read article
-      </span>
+      <span class="text-[13px] font-display font-semibold ink-accent">Read article</span>
       <span class="inline-flex items-center justify-center size-6 [border-radius:var(--radius-pill)] bg-[var(--cm-blue-subtle)] text-[var(--cm-blue-ink)] transition-transform duration-200 group-hover:translate-x-0.5">
-        <PhosphorIcon name="chevron-right" size={16} />
+        <LucideIcon name="arrow-up-right" size={15} />
       </span>
     </div>
   </div>
 </Surface>
-

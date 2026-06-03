@@ -1,5 +1,6 @@
 ---
 import Pill from "../Pill.astro";
+import LucideIcon from "../LucideIcon.astro";
 
 interface Props {
   source?: string;
@@ -13,10 +14,23 @@ const { source, meta, tags = [] } = Astro.props;
 {
   (source || meta || tags.length > 0) && (
     <div class="marketing-reader-chrome">
-      {source && <Pill variant="muted">{source}</Pill>}
-      {meta && <span class="body-s ink-tertiary">{meta}</span>}
+      {source && (
+        <Pill variant="muted" class="gap-1">
+          <LucideIcon name="rss" size={11} />
+          {source}
+        </Pill>
+      )}
+      {meta && (
+        <span class="type-card-meta inline-flex items-center gap-1">
+          <LucideIcon name="clock" size={12} />
+          {meta}
+        </span>
+      )}
       {tags.map((tag) => (
-        <Pill variant="accent">{tag}</Pill>
+        <Pill variant="accent" class="gap-1">
+          <LucideIcon name="tag" size={11} />
+          {tag}
+        </Pill>
       ))}
     </div>
   )

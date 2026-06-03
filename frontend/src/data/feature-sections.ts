@@ -5,6 +5,8 @@ export type FeatureBullet = { icon: string; title: string; description: string }
 export type FeatureSection = {
   id: string;
   label: string;
+  /** Lucide registry key for section eyebrow */
+  icon: string;
   heading: string;
   description: string;
   screenshot: string;
@@ -17,6 +19,7 @@ export const featureSections: FeatureSection[] = [
   {
     id: "feeds",
     label: "Feeds & syndication",
+    icon: "rss",
     heading: "RSS, social, and media — one stream.",
     description:
       "Subscribe with RSS, Atom, or JSON Feed. Add Reddit, Mastodon, and media channels as first-class sources — with more social integrations on the roadmap.",
@@ -44,6 +47,7 @@ export const featureSections: FeatureSection[] = [
   {
     id: "read-later",
     label: "Read later & parsing",
+    icon: "book-open",
     heading: "Every format, one Reader.",
     description:
       "Articles, Wikipedia, GitHub READMEs, JS-heavy pages, Markdown notes, PDFs, and EPUB — offline when you need it.",
@@ -67,6 +71,7 @@ export const featureSections: FeatureSection[] = [
   {
     id: "reader-highlights",
     label: "Reader & highlights",
+    icon: "highlighter",
     heading: "Beautiful reading. Lasting highlights.",
     description:
       "Highlight in the Reader or on web content — stored references with tags and a dedicated highlights library.",
@@ -90,6 +95,7 @@ export const featureSections: FeatureSection[] = [
   {
     id: "read-aloud",
     label: "Read aloud",
+    icon: "article",
     heading: "Listen on your terms.",
     description:
       "Text-to-speech with native playback controls — reading continues when your eyes cannot.",
@@ -108,6 +114,7 @@ export const featureSections: FeatureSection[] = [
   {
     id: "power-user",
     label: "Navigation & power user",
+    icon: "keyboard",
     heading: "Keyboard-first when you want it.",
     description:
       "Quick Add, command palette, search, and Vim-style navigation for fast triage and reading.",
@@ -127,6 +134,7 @@ export const featureSections: FeatureSection[] = [
   {
     id: "organization",
     label: "Organization",
+    icon: "folder",
     heading: "Find everything later.",
     description:
       "Frictionless tagging, Smart Lists, full-text search, bookmarks, and reading states.",
@@ -142,6 +150,7 @@ export const featureSections: FeatureSection[] = [
   {
     id: "extensions",
     label: "Native extensions",
+    icon: "sparkles",
     heading: "Plugs into Apple platforms.",
     description:
       "App Intents, web extension, widgets, and iCloud sync — where supported on your devices.",
@@ -157,6 +166,7 @@ export const featureSections: FeatureSection[] = [
   {
     id: "platform",
     label: "Every Apple device",
+    icon: "device-mobile",
     heading: "Crafted for Mac, iPhone, and iPad.",
     description:
       "Keyboard-first Mac workspace, touch-first iPhone capture, iPad multitasking — with dark mode and offline reading.",

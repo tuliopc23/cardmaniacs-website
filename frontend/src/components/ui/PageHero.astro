@@ -1,0 +1,54 @@
+---
+import EyebrowLabel from "./EyebrowLabel.astro";
+
+interface Props {
+  eyebrow?: string;
+  eyebrowIcon?: string;
+  title: string;
+  lede?: string;
+  align?: "left" | "center";
+  class?: string;
+  maxWidth?: string;
+}
+
+const {
+  eyebrow,
+  eyebrowIcon,
+  title,
+  lede,
+  align = "left",
+  class: className = "",
+  maxWidth = "680px",
+} = Astro.props;
+---
+
+<div
+  class:list={[
+    align === "center" && "mx-auto text-center",
+    className,
+  ]}
+  style={`max-width: ${maxWidth}`}
+>
+  {eyebrow && (
+    <EyebrowLabel
+      icon={eyebrowIcon}
+      class:list={[align === "center" && "justify-center", "mb-4"]}
+    >
+      {eyebrow}
+    </EyebrowLabel>
+  )}
+  <h1 class:list={["display-hero ink-primary mb-6 text-balance", align === "center" && "mx-auto"]}>
+    <slot name="title">{title}</slot>
+  </h1>
+  {lede && (
+    <p
+      class:list={[
+        "type-lede measure-tight",
+        align === "center" && "mx-auto",
+        maxWidth === "760px" ? "max-w-[560px]" : "max-w-[520px]",
+      ]}
+    >
+      {lede}
+    </p>
+  )}
+</div>

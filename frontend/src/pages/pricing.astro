@@ -6,7 +6,10 @@ import Container from '../components/Container.astro';
 import PricingSection from '../components/PricingSection.astro';
 import CtaBanner from '../components/CtaBanner.astro';
 import BejamasCard from '../components/ui/bejamas/Card.astro';
-import PhosphorIcon from '../components/PhosphorIcon.astro';
+import LucideIcon from '../components/LucideIcon.astro';
+import IconWell from '../components/ui/IconWell.astro';
+import PageHero from '../components/ui/PageHero.astro';
+import { faqIcons } from '../lib/icons/registry';
 
 const faqs = [
   { q: 'What platforms does Cardmaniacs support?', a: 'Cardmaniacs is built natively for macOS, iOS, and iPadOS. Each version is optimized for its platform — full keyboard navigation on Mac, touch-first on iOS, and multitasking-ready on iPad.' },
@@ -30,13 +33,17 @@ const trustItems = [
   <main id="main-content">
     <section class="pt-32 pb-8 md:pt-40 md:pb-12">
       <Container>
-        <div class="max-w-[680px]">
-          <p class="editorial-eyebrow editorial-eyebrow-accent mb-4">Pricing</p>
-          <h1 class="display-hero ink-primary mb-6">One plan.<br />Everything included.</h1>
-          <p class="type-lede measure-tight">
-            One subscription unlocks the full app on Mac, iPhone, and iPad. Trial first, then Monthly or Annual when the App Store listing is live.
-          </p>
-        </div>
+        <PageHero
+          eyebrow="Pricing"
+          eyebrowIcon="credit-card"
+          title=""
+          lede="One subscription unlocks the full app on Mac, iPhone, and iPad. Trial first, then Monthly or Annual when the App Store listing is live."
+        >
+          <span slot="title">
+            One plan.<br />
+            Everything included.
+          </span>
+        </PageHero>
       </Container>
     </section>
 
@@ -45,20 +52,23 @@ const trustItems = [
     <section class="py-20 md:py-28">
       <Container>
         <div class="max-w-[560px] mb-12">
-          <h2 class="type-section-title ink-primary">Questions & answers</h2>
+          <h2 class="type-section-title ink-primary scroll-anchor">Questions & answers</h2>
         </div>
 
         <div class="max-w-[720px]">
           <BejamasCard padding="none" class="divide-y divide-[var(--border-subtle)] overflow-hidden">
-            {faqs.map((faq) => (
+            {faqs.map((faq, i) => (
               <details class="group">
                 <summary class="flex cursor-pointer list-none items-center justify-between px-6 py-5 outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ring-focus)]">
-                  <h3 class="subheading ink-primary pr-8 text-[15px]">{faq.q}</h3>
+                  <h3 class="type-card-title pr-4 inline-flex items-center gap-2.5 !text-[15px]">
+                    <LucideIcon name={faqIcons[i]} size={18} class="text-[var(--accent)] shrink-0" />
+                    {faq.q}
+                  </h3>
                   <span class="ink-tertiary shrink-0 transition-transform duration-200 group-open:rotate-45">
-                    <PhosphorIcon name="plus" size={18} />
+                    <LucideIcon name="plus" size={18} />
                   </span>
                 </summary>
-                <p class="body-s ink-secondary px-6 pb-5 pr-14 leading-relaxed">{faq.a}</p>
+                <p class="body-s ink-secondary px-6 pb-5 pl-[3.25rem] pr-14 leading-relaxed">{faq.a}</p>
               </details>
             ))}
           </BejamasCard>
@@ -71,12 +81,10 @@ const trustItems = [
         <div class="flex flex-col items-start gap-6 md:flex-row md:items-center md:gap-10">
           {trustItems.map((item) => (
             <div class="flex items-center gap-3">
-              <div class="ink-tertiary">
-                <PhosphorIcon name={item.icon} size={22} />
-              </div>
+              <IconWell icon={item.icon} size="md" />
               <div>
-                <p class="body-s font-medium ink-primary">{item.title}</p>
-                <p class="text-[12px] ink-tertiary">{item.desc}</p>
+                <p class="type-card-title !text-[0.875rem]">{item.title}</p>
+                <p class="type-card-meta">{item.desc}</p>
               </div>
             </div>
           ))}

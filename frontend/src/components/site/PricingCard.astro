@@ -2,7 +2,9 @@
 import BejamasCard from "../ui/bejamas/Card.astro";
 import BejamasButton from "../ui/bejamas/Button.astro";
 import Pill from "../Pill.astro";
-import PhosphorIcon from "../PhosphorIcon.astro";
+import LucideIcon from "../LucideIcon.astro";
+import IconWell from "../ui/IconWell.astro";
+import { pricingLabelIcons, type IconKey } from "../../lib/icons/registry";
 
 interface Props {
   label: string;
@@ -29,33 +31,43 @@ const {
   features = [],
   class: className = "",
 } = Astro.props;
+
+const labelKey = label.trim().toLowerCase();
+const labelIcon: IconKey =
+  labelKey.includes("trial")
+    ? pricingLabelIcons["7-day trial"]
+    : labelKey.includes("annual")
+      ? pricingLabelIcons.annual
+      : pricingLabelIcons.monthly;
 ---
 
 <BejamasCard
   padding="none"
   hover={false}
   class:list={[
-    "flex flex-col h-full p-6 md:p-7 flex-1",
+    "flex flex-col h-full p-6 md:p-7 flex-1 w-full max-w-[380px] mx-auto",
     highlighted ? "ring-1 ring-[var(--border-accent)] shadow-[var(--shadow-float)]" : "",
     className,
   ]}
 >
   {highlighted ? (
-    <div class="pointer-events-none absolute inset-0 opacity-80 [background:radial-gradient(900px_420px_at_20%_0%,color-mix(in_oklab,var(--cm-blue)_18%,transparent)_0%,transparent_60%)]"></div>
+    <div class="pointer-events-none absolute inset-0 opacity-80 [background:radial-gradient(900px_420px_at_20%_0%,var(--accent-atmo-card-primary)_0%,transparent_60%)]"></div>
   ) : null}
 
   <div class="relative flex flex-col flex-1">
-    <div class="flex items-start justify-between gap-4 mb-5">
-      <div>
-        <p class="editorial-eyebrow editorial-eyebrow-accent mb-2">{label}</p>
-        <div class="flex items-baseline gap-1.5">
+    <div class="flex items-start gap-3 mb-5">
+      <IconWell icon={labelIcon} size="md" class="mt-0.5" />
+      <div class="min-w-0 flex-1">
+        <p class="type-card-eyebrow type-card-eyebrow-accent mb-2">{label}</p>
+        <div class="flex items-baseline gap-1.5 flex-wrap tabular-nums">
           <span class="type-section-title ink-primary !text-[clamp(1.75rem,3vw,2.25rem)]">{price}</span>
-          <span class="body-s ink-tertiary">{interval}</span>
+          <span class="type-card-meta">{interval}</span>
         </div>
       </div>
 
       {badge && (
-        <Pill variant="accent" class="shrink-0">
+        <Pill variant="accent" class="shrink-0 gap-1">
+          <LucideIcon name="sparkles" size={11} />
           {badge}
         </Pill>
       )}
@@ -67,11 +79,11 @@ const {
       features.length > 0 && (
         <ul class="mb-6 space-y-2.5 flex-1">
           {features.map((line) => (
-            <li class="flex gap-2.5 body-s ink-secondary">
+            <li class="flex gap-2.5 type-card-meta items-start">
               <span class="mt-0.5 shrink-0 text-[var(--accent)]" aria-hidden="true">
-                <PhosphorIcon name="check" size={16} />
+                <LucideIcon name="check" size={15} strokeWidth={2.5} />
               </span>
-              <span>{line}</span>
+              <span class="text-[var(--ink-secondary)]">{line}</span>
             </li>
           ))}
         </ul>
@@ -80,14 +92,16 @@ const {
 
     {
       ctaHref ? (
-        <BejamasButton href={ctaHref} variant="primary" class="w-full justify-center mt-auto">
+        <BejamasButton href={ctaHref} variant="primary" class="w-full justify-center gap-2 mt-auto">
+          <LucideIcon name="download" size={16} />
           {ctaLabel}
         </BejamasButton>
       ) : (
         <span
-          class="mt-auto inline-flex w-full items-center justify-center rounded-[var(--radius-pill)] border border-[var(--border-subtle)] bg-[color-mix(in_oklab,var(--surface-overlay)_55%,transparent)] px-5 py-2.5 font-display text-[14px] font-semibold ink-secondary"
+          class="mt-auto inline-flex w-full items-center justify-center gap-2 rounded-[var(--radius-pill)] border border-[var(--border-subtle)] bg-[color-mix(in_oklab,var(--surface-overlay)_55%,transparent)] px-5 py-2.5 font-display text-[14px] font-semibold ink-secondary"
           role="status"
         >
+          <LucideIcon name="apple" size={16} />
           {ctaLabel}
         </span>
       )

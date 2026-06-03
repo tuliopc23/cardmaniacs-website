@@ -1,5 +1,6 @@
 ---
 import Button from "./Button.astro";
+import LucideIcon from "./LucideIcon.astro";
 import { downloadCta } from "../lib/site-cta";
 
 interface Props {
@@ -14,10 +15,12 @@ const { size = "sm", class: className = "", variant = "primary" } = Astro.props;
 {
   downloadCta.isAvailable ? (
     <Button href={downloadCta.href} size={size} class={className} variant={variant}>
+      <LucideIcon name="download" size={16} />
       <slot>Download</slot>
     </Button>
   ) : (
     <Button href="/features" size={size} class={className} variant="secondary">
+      <LucideIcon name="compass" size={16} />
       <slot>Explore features</slot>
     </Button>
   )

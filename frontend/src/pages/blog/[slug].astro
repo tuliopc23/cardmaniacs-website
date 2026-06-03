@@ -5,7 +5,7 @@ import SiteFooter from '../../components/SiteFooter.astro';
 import Container from '../../components/Container.astro';
 import Prose from '../../components/ui/Prose.astro';
 import MarketingReaderSurface from '../../components/marketing/MarketingReaderSurface.astro';
-import PhosphorIcon from '../../components/PhosphorIcon.astro';
+import LucideIcon from '../../components/LucideIcon.astro';
 import { getCollection, render } from 'astro:content';
 
 /** Static HTML at build for content routes under `output: "server"`. */
@@ -30,7 +30,7 @@ const { Content } = await render(post);
     <article class="pt-32 pb-20 md:pt-40 md:pb-28">
       <Container narrow>
         <a href="/blog" class="inline-flex items-center gap-1.5 ink-accent text-[13px] font-display font-medium mb-8 hover:underline underline-offset-2">
-          <PhosphorIcon name="arrow-left" size={14} class="-translate-y-px" />
+          <LucideIcon name="arrow-left" size={14} class="-translate-y-px" />
           All posts
         </a>
 

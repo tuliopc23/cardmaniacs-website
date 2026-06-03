@@ -2,6 +2,8 @@
 import Surface from "../ui/Surface.astro";
 import Pill from "../Pill.astro";
 import Prose from "../ui/Prose.astro";
+import LucideIcon from "../LucideIcon.astro";
+import { resolveIconKey, type IconKey } from "../../lib/icons/registry";
 
 interface Props {
   version?: string;
@@ -15,6 +17,17 @@ const { version, type, platform, date, title } = Astro.props;
 
 const typeVariant =
   type === "feature" ? "accent" : type === "fix" ? "muted" : "default";
+
+const typeIcon: IconKey | undefined = type
+  ? type === "feature"
+    ? "sparkles"
+    : type === "fix"
+      ? "check"
+      : resolveIconKey(type)
+  : undefined;
+
+const platformIcon: IconKey | undefined =
+  platform && platform !== "all" ? resolveIconKey(platform) ?? "keyboard" : undefined;
 
 const formattedDate =
   date &&
@@ -32,13 +45,38 @@ const formattedDate =
     class="flex flex-col gap-3 border-b border-[var(--border-subtle)] pb-5 md:border-b-0 md:border-r md:pb-0 md:pr-6 lg:pr-8"
   >
     <div class="flex flex-wrap gap-2">
-      {version && <Pill variant="accent">v{version}</Pill>}
-      {type && <Pill variant={typeVariant}>{type}</Pill>}
-      {platform && platform !== "all" && <Pill variant="muted">{platform}</Pill>}
+      {
+        version && (
+          <Pill variant="accent" class="gap-1 tabular-nums">
+            <LucideIcon name="tag" size={11} />
+            v{version}
+          </Pill>
+        )
+      }
+      {
+        type && (
+          <Pill variant={typeVariant} class="gap-1">
+            {typeIcon && <LucideIcon name={typeIcon} size={11} />}
+            {type}
+          </Pill>
+        )
+      }
+      {
+        platform && platform !== "all" && (
+          <Pill variant="muted" class="gap-1">
+            {platformIcon && <LucideIcon name={platformIcon} size={11} />}
+            {platform}
+          </Pill>
+        )
+      }
     </div>
     {
       formattedDate && date && (
-        <time class="caption ink-tertiary mt-auto pt-1 md:pt-4 md:border-t md:border-[var(--border-subtle)]" datetime={date}>
+        <time
+          class="caption ink-tertiary mt-auto inline-flex items-center gap-1.5 pt-1 md:border-t md:border-[var(--border-subtle)] md:pt-4"
+          datetime={date}
+        >
+          <LucideIcon name="calendar-days" size={12} />
           {formattedDate}
         </time>
       )

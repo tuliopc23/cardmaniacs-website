@@ -1,6 +1,7 @@
 ---
 import SectionBlock from './SectionBlock.astro';
-import PhosphorIcon from './PhosphorIcon.astro';
+import IconWell from './ui/IconWell.astro';
+import LucideIcon from './LucideIcon.astro';
 
 const pillars = [
   {
@@ -27,7 +28,7 @@ const pillars = [
 ];
 ---
 
-<SectionBlock label="Three pillars" heading="One app for your entire reading workflow.">
+<SectionBlock label="Three pillars" heading="One app for your entire reading workflow." icon="library">
   <div class="grid grid-cols-1 gap-4 md:gap-5 lg:grid-cols-12">
     {pillars.map((pillar, i) => (
       <a
@@ -38,16 +39,14 @@ const pillars = [
         ]}
       >
         <div
-          class="pointer-events-none absolute inset-0 opacity-70 [background:radial-gradient(1200px_600px_at_30%_0%,color-mix(in_oklab,var(--cm-blue)_10%,transparent)_0%,transparent_55%)]"
+          class="pointer-events-none absolute inset-0 opacity-70 [background:radial-gradient(1200px_600px_at_30%_0%,var(--accent-atmo-sheen)_0%,transparent_55%)]"
           aria-hidden="true"
         />
         <div class="relative flex flex-col gap-5 p-5 md:p-7 lg:flex-row lg:items-stretch lg:gap-8">
           <div class="flex shrink-0 flex-wrap items-center gap-2 lg:flex-col lg:items-start">
-            <span class="inline-flex size-11 shrink-0 items-center justify-center [border-radius:var(--radius-pill)] bg-[color-mix(in_oklab,var(--surface-elevated)_55%,transparent)] ring-1 ring-black/5 shadow-[var(--shadow-pill)] backdrop-blur-md ink-primary dark:ring-white/10">
-              <PhosphorIcon name={pillar.icon} size={24} />
-            </span>
+            <IconWell icon={pillar.icon} size="lg" />
             <span
-              class="inline-flex items-center gap-1.5 border border-[var(--border-accent)] bg-[var(--cm-blue-subtle)] px-2.5 py-1 text-[11px] font-display font-semibold leading-none text-[var(--cm-blue-ink)] shadow-[var(--shadow-pill)] [border-radius:var(--radius-pill)]"
+              class="inline-flex items-center border border-[var(--border-accent)] bg-[var(--cm-blue-subtle)] px-2.5 py-1 text-[11px] font-display font-semibold leading-none text-[var(--cm-blue-ink)] shadow-[var(--shadow-pill)] [border-radius:var(--radius-pill)]"
             >
               {pillar.title}
             </span>
@@ -60,7 +59,7 @@ const pillars = [
             </p>
             <p class="mt-4 inline-flex items-center gap-1.5 text-[13px] font-display font-semibold ink-accent">
               See on Features
-              <PhosphorIcon name="chevron-right" size={14} class="transition-transform group-hover:translate-x-0.5" />
+              <LucideIcon name="chevron-right" size={14} class="transition-transform group-hover:translate-x-0.5" />
             </p>
           </div>
 

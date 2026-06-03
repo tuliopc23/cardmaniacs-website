@@ -28,7 +28,8 @@ const radii: Record<NonNullable<Props["radius"]>, string> = {
   hero: "[border-radius:var(--radius-hero)]",
 };
 
-const base = "relative overflow-hidden border transition-all duration-300";
+const base =
+  "relative overflow-hidden border transition-[box-shadow,background-color,border-color,transform] duration-300";
 
 const variants: Record<NonNullable<Props["variant"]>, string> = {
   paper: "bg-[var(--surface-base)] border-[var(--border-subtle)]",
@@ -57,7 +58,7 @@ const interaction = interactive
       className,
     ]}
   >
-    <div class="pointer-events-none absolute inset-0 opacity-70 [background:radial-gradient(1200px_600px_at_30%_0%,color-mix(in_oklab,var(--cm-blue)_10%,transparent)_0%,transparent_55%)]"></div>
+    <div class="pointer-events-none absolute inset-0 opacity-70 [background:radial-gradient(1200px_600px_at_30%_0%,var(--accent-atmo-sheen)_0%,transparent_55%)]"></div>
     <div class="relative">
       <slot />
     </div>
@@ -75,7 +76,7 @@ const interaction = interactive
         className,
       ]}
     >
-      <div class="pointer-events-none absolute inset-0 opacity-70 [background:radial-gradient(1200px_600px_at_30%_0%,color-mix(in_oklab,var(--cm-blue)_10%,transparent)_0%,transparent_55%)]"></div>
+      <div class="pointer-events-none absolute inset-0 opacity-70 [background:radial-gradient(1200px_600px_at_30%_0%,var(--accent-atmo-sheen)_0%,transparent_55%)]"></div>
       <div class="relative">
         <slot />
       </div>
@@ -92,7 +93,7 @@ const interaction = interactive
         className,
       ]}
     >
-      <div class="pointer-events-none absolute inset-0 opacity-70 [background:radial-gradient(1200px_600px_at_30%_0%,color-mix(in_oklab,var(--cm-blue)_10%,transparent)_0%,transparent_55%)]"></div>
+      <div class="pointer-events-none absolute inset-0 opacity-70 [background:radial-gradient(1200px_600px_at_30%_0%,var(--accent-atmo-sheen)_0%,transparent_55%)]"></div>
       <div class="relative">
         <slot />
       </div>
@@ -109,7 +110,7 @@ const interaction = interactive
         className,
       ]}
     >
-      <div class="pointer-events-none absolute inset-0 opacity-70 [background:radial-gradient(1200px_600px_at_30%_0%,color-mix(in_oklab,var(--cm-blue)_10%,transparent)_0%,transparent_55%)]"></div>
+      <div class="pointer-events-none absolute inset-0 opacity-70 [background:radial-gradient(1200px_600px_at_30%_0%,var(--accent-atmo-sheen)_0%,transparent_55%)]"></div>
       <div class="relative">
         <slot />
       </div>

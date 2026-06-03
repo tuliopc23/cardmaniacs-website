@@ -1,6 +1,7 @@
 ---
 import Container from './Container.astro';
 import ProductShowcase from './ProductShowcase.astro';
+import SectionHeader from './ui/SectionHeader.astro';
 
 interface Props {
   label: string;
@@ -9,11 +10,11 @@ interface Props {
   screenshot: string;
   screenshotAlt: string;
   reverse?: boolean;
-  /** Subtle vertical rhythm band — not full grey inset slab */
+  icon?: string;
   inset?: boolean;
 }
 
-const { label, heading, description, screenshot, screenshotAlt, reverse = false, inset = false } = Astro.props;
+const { label, heading, description, screenshot, screenshotAlt, reverse = false, inset = false, icon } = Astro.props;
 ---
 
 <section class:list={['py-20 md:py-28 lg:py-32', inset ? 'section-band' : '']}>
@@ -25,9 +26,14 @@ const { label, heading, description, screenshot, screenshotAlt, reverse = false,
         'lg:col-span-4',
         reverse ? 'lg:col-start-9 lg:order-2' : '',
       ]}>
-        <p class="editorial-eyebrow editorial-eyebrow-accent mb-3">{label}</p>
-        <h2 class="type-section-title ink-primary mb-5">{heading}</h2>
-        <p class="type-lede measure-tight">{description}</p>
+        <SectionHeader
+          eyebrow={label}
+          heading={heading}
+          description={description}
+          icon={icon}
+          iconPlacement="eyebrow"
+          headingClass="type-section-title ink-primary text-balance"
+        />
       </div>
 
       <div class:list={[

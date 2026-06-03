@@ -1,5 +1,7 @@
 ---
 import Surface from "../ui/Surface.astro";
+import EyebrowLabel from "../ui/EyebrowLabel.astro";
+import LucideIcon from "../LucideIcon.astro";
 
 interface Props {
   class?: string;
@@ -8,17 +10,18 @@ interface Props {
 const { class: className = "" } = Astro.props;
 
 const actions = [
-  { label: "Quick Add URL", keys: "⌘⇧N" },
-  { label: "Search library", keys: "⌘K" },
-  { label: "Archive & next", keys: "E" },
-  { label: "Vim: next article", keys: "j" },
+  { label: "Quick Add URL", keys: "⌘⇧N", icon: "plus" },
+  { label: "Search library", keys: "⌘K", icon: "search" },
+  { label: "Archive & next", keys: "E", icon: "archive" },
+  { label: "Vim: next article", keys: "j", icon: "keyboard" },
 ];
 ---
 
 <Surface variant="glass" radius="panel" class:list={["p-5 md:p-6 overflow-hidden", className]}>
-  <p class="editorial-eyebrow mb-3">Command palette</p>
-  <div class="rounded-[var(--radius-card)] border border-[var(--border-subtle)] bg-[var(--surface-inset)] p-3 mb-3">
-    <span class="body-s ink-tertiary">Search or run an action…</span>
+  <EyebrowLabel icon="command" class="mb-3">Command palette</EyebrowLabel>
+  <div class="rounded-[var(--radius-card)] border border-[var(--border-subtle)] bg-[var(--surface-inset)] p-3 mb-3 flex items-center gap-2">
+    <LucideIcon name="search" size={16} class="ink-tertiary shrink-0" />
+    <span class="type-card-meta">Search or run an action…</span>
   </div>
   <ul class="space-y-1">
     {
@@ -29,7 +32,10 @@ const actions = [
             i === 0 && "bg-[var(--cm-blue-subtle)]",
           ]}
         >
-          <span class="body-s font-medium ink-primary">{a.label}</span>
+          <span class="type-card-title inline-flex items-center gap-2 !text-[0.875rem]">
+            <LucideIcon name={a.icon} size={15} class="text-[var(--accent)] shrink-0" />
+            {a.label}
+          </span>
           <kbd class="font-mono text-[11px] px-2 py-0.5 rounded-[var(--radius-sm)] bg-[var(--surface-overlay)] ink-tertiary border border-[var(--border-subtle)]">
             {a.keys}
           </kbd>

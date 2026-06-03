@@ -12,7 +12,7 @@ interface Props {
 const { variant = "primary", size = "md", href, class: className = "" } = Astro.props;
 
 const base =
-  "inline-flex items-center justify-center gap-2 font-display font-semibold transition-all duration-200 [border-radius:var(--radius-pill)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-base)] active:scale-[0.985] motion-reduce:active:scale-100";
+  "inline-flex items-center justify-center gap-2 font-display font-semibold transition-[transform,opacity,box-shadow,background-color,border-color] duration-200 [border-radius:var(--radius-pill)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-base)] active:scale-[0.985] motion-reduce:active:scale-100";
 
 const sizes = {
   sm: "text-[13px] px-4 py-2 min-h-[40px]",

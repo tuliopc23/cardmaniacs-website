@@ -2,7 +2,8 @@
 import ThemeToggle from "../ThemeToggle.astro";
 import DownloadButton from "../DownloadButton.astro";
 import Surface from "../ui/Surface.astro";
-import PhosphorIcon from "../PhosphorIcon.astro";
+import LucideIcon from "../LucideIcon.astro";
+import { navIcons } from "../../lib/icons/registry";
 
 interface Props {
   currentPage?: string;
@@ -11,10 +12,10 @@ interface Props {
 const { currentPage = "" } = Astro.props;
 
 const links = [
-  { href: "/features", label: "Features", key: "features" },
-  { href: "/pricing", label: "Pricing", key: "pricing" },
-  { href: "/blog", label: "Blog", key: "blog" },
-  { href: "/changelog", label: "Changelog", key: "changelog" },
+  { href: "/features", label: "Features", key: "features", icon: navIcons.features },
+  { href: "/pricing", label: "Pricing", key: "pricing", icon: navIcons.pricing },
+  { href: "/blog", label: "Blog", key: "blog", icon: navIcons.blog },
+  { href: "/changelog", label: "Changelog", key: "changelog", icon: navIcons.changelog },
 ];
 ---
 
@@ -40,7 +41,7 @@ const links = [
               loading="eager"
             />
           </span>
-          <span class="font-display font-semibold text-[14px] tracking-[-0.02em] ink-primary truncate">
+          <span class="font-display font-semibold text-[14px] tracking-[-0.02em] ink-primary truncate" translate="no">
             Cardmaniacs
           </span>
         </a>
@@ -54,12 +55,13 @@ const links = [
               href={link.href}
               aria-current={currentPage === link.key ? "page" : undefined}
               class:list={[
-                "relative px-3 py-1.5 text-[13px] font-display font-medium tracking-[-0.005em] transition-colors duration-200 [border-radius:var(--radius-pill)]",
+                "relative inline-flex items-center gap-1.5 px-3 py-1.5 text-[14px] font-display font-medium tracking-[-0.005em] transition-colors duration-200 [border-radius:var(--radius-pill)]",
                 currentPage === link.key
                   ? "ink-primary bg-[var(--cm-blue-subtle)]"
                   : "ink-secondary hover:ink-primary hover:bg-[color-mix(in_oklab,var(--surface-overlay)_55%,transparent)]",
               ]}
             >
+              <LucideIcon name={link.icon} size={14} class="shrink-0 opacity-85" />
               {link.label}
             </a>
           ))}
@@ -72,22 +74,22 @@ const links = [
           <button
             id="cm-mobile-menu-btn"
             type="button"
-            class="md:hidden relative size-9 flex items-center justify-center [border-radius:var(--radius-pill)] ink-secondary hover:ink-primary hover:bg-[color-mix(in_oklab,var(--surface-overlay)_55%,transparent)] active:scale-95 transition-all duration-200"
+            class="md:hidden relative size-11 min-size-11 flex items-center justify-center [border-radius:var(--radius-pill)] ink-secondary hover:ink-primary hover:bg-[color-mix(in_oklab,var(--surface-overlay)_55%,transparent)] active:scale-95 transition-[transform,opacity,background-color] duration-200 motion-reduce:transition-none"
             aria-label="Open menu"
             aria-expanded="false"
             aria-controls="cm-mobile-menu"
           >
             <span
               data-menu-icon="open"
-              class="absolute inset-0 m-auto flex size-5 items-center justify-center transition-all duration-200"
+              class="absolute inset-0 m-auto flex size-5 items-center justify-center transition-[opacity,transform] duration-200 motion-reduce:transition-none"
             >
-              <PhosphorIcon name="list" size={20} />
+              <LucideIcon name="menu" size={20} />
             </span>
             <span
               data-menu-icon="close"
-              class="absolute inset-0 m-auto flex size-5 items-center justify-center opacity-0 scale-75 transition-all duration-200"
+              class="absolute inset-0 m-auto flex size-5 items-center justify-center opacity-0 scale-75 transition-[opacity,transform] duration-200 motion-reduce:transition-none"
             >
-              <PhosphorIcon name="x" size={20} />
+              <LucideIcon name="x" size={20} />
             </span>
           </button>
         </div>
@@ -96,7 +98,7 @@ const links = [
 
     <div
       id="cm-mobile-menu"
-      class="md:hidden mt-2 origin-top opacity-0 scale-[0.98] -translate-y-1 pointer-events-none transition-all duration-200 ease-out [&[data-open=true]]:opacity-100 [&[data-open=true]]:scale-100 [&[data-open=true]]:translate-y-0 [&[data-open=true]]:pointer-events-auto"
+      class="md:hidden mt-2 origin-top opacity-0 scale-[0.98] -translate-y-1 pointer-events-none transition-[opacity,transform] duration-200 ease-out motion-reduce:transition-none motion-reduce:opacity-100 motion-reduce:scale-100 motion-reduce:translate-y-0 [&[data-open=true]]:opacity-100 [&[data-open=true]]:scale-100 [&[data-open=true]]:translate-y-0 [&[data-open=true]]:pointer-events-auto"
       data-open="false"
       inert
       role="dialog"
@@ -110,12 +112,13 @@ const links = [
               href={link.href}
               aria-current={currentPage === link.key ? "page" : undefined}
               class:list={[
-                "block px-4 py-3 text-[15px] font-display font-medium tracking-[-0.005em] transition-colors duration-200 [border-radius:var(--radius-card)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-base)]",
+                "flex items-center gap-2.5 px-4 py-3 text-[15px] font-display font-medium tracking-[-0.005em] transition-colors duration-200 [border-radius:var(--radius-card)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-base)]",
                 currentPage === link.key
                   ? "ink-primary bg-[var(--cm-blue-subtle)]"
                   : "ink-secondary hover:ink-primary hover:bg-[color-mix(in_oklab,var(--surface-overlay)_70%,transparent)]",
               ]}
             >
+              <LucideIcon name={link.icon} size={16} class="shrink-0" />
               {link.label}
             </a>
           ))}

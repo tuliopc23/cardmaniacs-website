@@ -2,10 +2,12 @@
 import Container from "../Container.astro";
 import AppStoreButton from "../AppStoreButton.astro";
 import ProductFrame from "./ProductFrame.astro";
-import PhosphorIcon from "../PhosphorIcon.astro";
+import LucideIcon from "../LucideIcon.astro";
+import EyebrowLabel from "../ui/EyebrowLabel.astro";
 import { marketingImages } from "../../lib/marketing-images";
+import { heroChipIcons } from "../../lib/icons/registry";
 
-const chips = ["Feeds", "Read Later", "Bookmarks", "Highlights", "Summaries", "Offline"];
+const chips = ["Feeds", "Read Later", "Bookmarks", "Highlights", "Summaries", "Offline"] as const;
 ---
 
 <section class="relative left-1/2 right-1/2 w-screen -translate-x-1/2 overflow-x-clip pb-14 md:pb-22">
@@ -14,14 +16,14 @@ const chips = ["Feeds", "Read Later", "Bookmarks", "Highlights", "Summaries", "O
     aria-hidden="true"
   >
     <div
-      class="absolute inset-0 bg-[radial-gradient(900px_520px_at_50%_-10%,color-mix(in_oklab,var(--cm-blue)_22%,transparent)_0%,transparent_55%),radial-gradient(760px_420px_at_12%_30%,color-mix(in_oklab,var(--bg-atmo-1)_35%,transparent)_0%,transparent_60%),radial-gradient(700px_400px_at_88%_25%,color-mix(in_oklab,var(--bg-atmo-2)_28%,transparent)_0%,transparent_58%),linear-gradient(180deg,color-mix(in_oklab,var(--surface-overlay)_40%,transparent),transparent_72%)]"
+      class="absolute inset-0 bg-[radial-gradient(900px_520px_at_50%_-10%,var(--accent-atmo-hero-spot)_0%,transparent_55%),radial-gradient(760px_420px_at_12%_30%,color-mix(in_oklab,var(--bg-accent-atmo-1)_32%,transparent)_0%,transparent_60%),radial-gradient(700px_400px_at_88%_25%,color-mix(in_oklab,var(--bg-accent-atmo-2)_24%,transparent)_0%,transparent_58%),linear-gradient(180deg,color-mix(in_oklab,var(--surface-overlay)_40%,transparent),transparent_72%)]"
     />
   </div>
 
   <Container class="relative z-10 pt-32 md:pt-40">
     <div data-device-hero class="flex flex-col items-center">
       <div class="w-full max-w-[760px] mx-auto text-center mb-10 md:mb-12">
-        <p class="editorial-eyebrow editorial-eyebrow-accent mb-4">A calmer home for everything you read</p>
+        <EyebrowLabel icon="library" class="mb-4 justify-center">A calmer home for everything you read</EyebrowLabel>
 
         <div class="flex flex-col md:flex-row md:items-center md:justify-center gap-6 md:gap-8 mb-7">
           <span
@@ -59,7 +61,7 @@ const chips = ["Feeds", "Read Later", "Bookmarks", "Highlights", "Summaries", "O
               class="inline-flex items-center justify-center size-6 [border-radius:var(--radius-pill)] bg-[var(--cm-blue-subtle)] text-[var(--cm-blue-ink)] transition-transform duration-200 group-hover:translate-x-0.5"
               aria-hidden="true"
             >
-              <PhosphorIcon name="chevron-right" size={16} class="translate-x-px" />
+              <LucideIcon name="compass" size={16} class="translate-x-px" />
             </span>
           </a>
         </div>
@@ -73,10 +75,11 @@ const chips = ["Feeds", "Read Later", "Bookmarks", "Highlights", "Summaries", "O
             chips.map((c, i) => (
               <span
                 class:list={[
-                  "hero-chip-pill select-none rounded-[var(--radius-pill)] px-3 py-1.5 text-[11px] font-display font-semibold tracking-wide text-[var(--ink-secondary)]",
+                  "hero-chip-pill inline-flex items-center gap-1.5 select-none rounded-[var(--radius-pill)] px-3 py-1.5 text-[11px] font-display font-semibold tracking-wide text-[var(--ink-secondary)]",
                   i === 0 && "hero-chip-pill--active",
                 ]}
               >
+                <LucideIcon name={heroChipIcons[c]} size={12} class="opacity-90" />
                 {c}
               </span>
             ))

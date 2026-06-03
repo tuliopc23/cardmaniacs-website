@@ -1,6 +1,9 @@
 ---
 import Surface from "../ui/Surface.astro";
 import Pill from "../Pill.astro";
+import IconWell from "../ui/IconWell.astro";
+import LucideIcon from "../LucideIcon.astro";
+import EyebrowLabel from "../ui/EyebrowLabel.astro";
 
 interface Props {
   class?: string;
@@ -9,32 +12,67 @@ interface Props {
 const { class: className = "" } = Astro.props;
 
 const cards = [
-  { title: "The calm web reader returns", source: "RSS · Daring Fireball", state: "Unread" },
-  { title: "Swift concurrency in practice", source: "GitHub README", state: "Saved" },
-  { title: "Why feeds still win", source: "Article", state: "Unread" },
+  {
+    title: "The calm web reader returns",
+    source: "RSS · Daring Fireball",
+    state: "Unread",
+    sourceIcon: "rss",
+    stateIcon: "unread",
+  },
+  {
+    title: "Swift concurrency in practice",
+    source: "GitHub README",
+    state: "Saved",
+    sourceIcon: "github",
+    stateIcon: "saved",
+  },
+  {
+    title: "Why feeds still win",
+    source: "Article",
+    state: "Unread",
+    sourceIcon: "article",
+    stateIcon: "unread",
+  },
 ];
 ---
 
 <Surface variant="elevated" radius="panel" class:list={["p-4 md:p-5", className]}>
+  <EyebrowLabel icon="list-checks" class="mb-4">Inbox preview</EyebrowLabel>
   <div class="flex flex-col gap-2">
     {
       cards.map((card, i) => (
         <div
           class:list={[
-            "flex items-start justify-between gap-3 rounded-[var(--radius-card)] border border-[var(--border-subtle)] bg-[color-mix(in_oklab,var(--surface-overlay)_40%,transparent)] p-3 md:p-4 transition-shadow",
+            "flex items-center gap-3 rounded-[var(--radius-card)] border border-[var(--border-subtle)] bg-[color-mix(in_oklab,var(--surface-overlay)_40%,transparent)] p-3 md:px-4 md:py-3.5 transition-shadow",
             i === 0 && "shadow-[var(--shadow-soft)] ring-1 ring-[var(--border-accent)]",
           ]}
         >
-          <div class="min-w-0">
-            <p class="font-display text-[14px] font-semibold tracking-[-0.02em] ink-primary leading-snug mb-1">
-              {card.title}
+          <IconWell icon={card.sourceIcon} size="sm" />
+          <div class="min-w-0 flex-1">
+            <p class="type-card-title mb-1 leading-snug">{card.title}</p>
+            <p class="type-card-meta inline-flex items-center gap-1.5">
+              <LucideIcon name={card.sourceIcon} size={12} class="shrink-0 opacity-80" />
+              <span>{card.source}</span>
             </p>
-            <p class="body-s ink-tertiary">{card.source}</p>
           </div>
-          <Pill variant={card.state === "Unread" ? "accent" : "muted"}>{card.state}</Pill>
+          <Pill variant={card.state === "Unread" ? "accent" : "muted"} class="shrink-0 gap-1.5 !px-2.5 !py-1">
+            <LucideIcon name={card.stateIcon} size={12} />
+            {card.state}
+          </Pill>
         </div>
       ))
     }
   </div>
-  <p class="caption ink-tertiary mt-4 text-center">Keyboard-first triage · j/k to move · enter to read</p>
+  <p class="caption ink-tertiary mt-4 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center">
+    <span class="inline-flex items-center gap-1">
+      <LucideIcon name="arrow-down" size={12} />
+      <LucideIcon name="arrow-up" size={12} />
+      move
+    </span>
+    <span class="ink-faint">·</span>
+    <span class="inline-flex items-center gap-1">
+      <LucideIcon name="corner-down-left" size={12} />
+      read
+    </span>
+  </p>
 </Surface>
