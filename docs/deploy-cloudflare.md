@@ -48,16 +48,16 @@ Workers Builds MCP can **list builds and logs** after the Worker exists; it cann
 
 Use the **repository root** as the project path so the root `pnpm-lock.yaml` is used:
 
-| Setting         | Value                                |
-| --------------- | ------------------------------------ |
-| Root directory  | `/` (repo root)                      |
-| Install command | `pnpm install --frozen-lockfile`     |
-| Build command   | `cd frontend && pnpm run build`      |
-| Deploy command  | `cd frontend && npx wrangler deploy` |
+| Setting         | Value                            |
+| --------------- | -------------------------------- |
+| Root directory  | `/` (repo root)                  |
+| Install command | `pnpm install --frozen-lockfile` |
+| Build command   | `cd frontend && pnpm run build`  |
+| Deploy command  | `npx wrangler deploy`            |
 
-If the UI only allows a subdirectory root, set **Root directory** to `frontend` and **Install command** to `cd .. && pnpm install --frozen-lockfile`.
+The frontend build writes a generated `/wrangler.jsonc` at the repo root (via `frontend/scripts/sync-root-wrangler.mjs`) so Wrangler can deploy from the monorepo root without the workspace-detection error. Do **not** use bare `npx wrangler deploy` at the repo root unless that build step has run.
 
-Use the default deploy command `npx wrangler deploy` only when the root directory is `frontend` (so Wrangler runs inside `frontend/`).
+If the UI only allows a subdirectory root, set **Root directory** to `frontend` and **Install command** to `cd .. && pnpm install --frozen-lockfile`, then use deploy command `npx wrangler deploy` (no `cd` needed).
 
 ### Build-time env (App Store CTA)
 
