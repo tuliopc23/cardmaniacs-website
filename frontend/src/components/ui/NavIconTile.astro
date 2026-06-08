@@ -1,0 +1,23 @@
+---
+import LucideIcon from "../LucideIcon.astro";
+import type { IconKey } from "../../lib/icons/registry";
+
+interface Props {
+  icon: IconKey | string;
+  active?: boolean;
+}
+
+const { icon, active = false } = Astro.props;
+---
+
+<span
+  class:list={[
+    "flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-[12px] transition-[background-color,box-shadow,color] duration-200",
+    active
+      ? "bg-[var(--accent)] text-white shadow-[var(--shadow-pill)]"
+      : "bg-[var(--surface-elevated)] text-[var(--ink-secondary)] shadow-[var(--shadow-soft)]",
+  ]}
+  aria-hidden="true"
+>
+  <LucideIcon name={icon} size={18} class:list={[active ? "text-white" : "opacity-90"]} />
+</span>

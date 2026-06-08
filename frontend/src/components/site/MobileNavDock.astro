@@ -1,0 +1,260 @@
+---
+import Surface from "../ui/Surface.astro";
+import LucideIcon from "../LucideIcon.astro";
+import EyebrowLabel from "../ui/EyebrowLabel.astro";
+import NavIconTile from "../ui/NavIconTile.astro";
+import ThemeDockButton from "../ThemeDockButton.astro";
+import { navIcons, type IconKey } from "../../lib/icons/registry";
+import { downloadCta, hasAppStoreUrl } from "../../lib/site-cta";
+
+interface Props {
+  currentPage?: string;
+}
+
+const { currentPage = "" } = Astro.props;
+
+const pageLabels: Record<string, string> = {
+  home: "Home",
+  features: "Features",
+  pricing: "Pricing",
+  blog: "Blog",
+  changelog: "Changelog",
+};
+
+const currentLabel = pageLabels[currentPage] ?? "Home";
+
+const exploreLinks: { href: string; label: string; key: string; icon: IconKey }[] = [
+  { href: "/", label: "Home", key: "home", icon: "library" },
+  { href: "/features", label: "Features", key: "features", icon: navIcons.features },
+  { href: "/pricing", label: "Pricing", key: "pricing", icon: navIcons.pricing },
+  { href: "/blog", label: "Blog", key: "blog", icon: navIcons.blog },
+  { href: "/changelog", label: "Changelog", key: "changelog", icon: navIcons.changelog },
+];
+
+const elsewhereLinks: { href: string; label: string; key: string; icon: IconKey; external?: boolean }[] = [
+  { href: "/docs", label: "Docs", key: "docs", icon: "file-text" },
+  { href: "/press", label: "Press kit", key: "press", icon: "press" },
+  {
+    href: hasAppStoreUrl ? (downloadCta.href ?? "/features") : "/features",
+    label: hasAppStoreUrl ? "Get the app" : "Explore features",
+    key: "cta",
+    icon: hasAppStoreUrl ? "download" : "compass",
+    external: hasAppStoreUrl,
+  },
+  { href: "/privacy", label: "Privacy", key: "privacy", icon: "shield-check" },
+  { href: "/terms", label: "Terms", key: "terms", icon: "file-text" },
+];
+
+const drawerRowClass =
+  "cm-drawer-link flex items-center gap-3 rounded-[var(--radius-card)] px-3 py-2.5 font-display text-[15px] font-medium tracking-[-0.005em] transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-base)]";
+---
+
+<nav class="md:hidden" aria-label="Mobile navigation">
+  <div
+    id="cm-mobile-drawer-backdrop"
+    class="cm-mobile-drawer-backdrop fixed inset-0 z-[54] bg-[color-mix(in_oklab,var(--ink-primary)_18%,transparent)] opacity-0 pointer-events-none backdrop-blur-[2px] transition-opacity duration-200 ease-out motion-reduce:transition-none [&[data-open=true]]:opacity-100 [&[data-open=true]]:pointer-events-auto"
+    data-open="false"
+    aria-hidden="true"
+  />
+
+  <div
+    id="cm-mobile-drawer"
+    class="cm-mobile-drawer fixed inset-0 z-[55] flex flex-col bg-[var(--surface-base)] opacity-0 pointer-events-none transition-[opacity,transform] duration-200 ease-out motion-reduce:transition-none motion-reduce:opacity-100 motion-reduce:translate-y-0 translate-y-4 [&[data-open=true]]:opacity-100 [&[data-open=true]]:pointer-events-auto [&[data-open=true]]:translate-y-0"
+    data-open="false"
+    inert
+    role="dialog"
+    aria-modal="true"
+    aria-label="Site menu"
+  >
+    <div class="flex items-start justify-between gap-4 px-5 pb-4 pt-[max(1.25rem,env(safe-area-inset-top))]">
+      <div class="min-w-0">
+        <EyebrowLabel class="mb-2 !text-[11px] tracking-[0.14em]">Menu</EyebrowLabel>
+        <h2 class="type-section-title ink-primary text-balance">{currentLabel}</h2>
+        <p class="mt-1 body-s ink-tertiary">Navigation and links.</p>
+      </div>
+      <button
+        id="cm-mobile-drawer-close"
+        type="button"
+        class="flex size-11 shrink-0 items-center justify-center rounded-full border border-[var(--border-subtle)] bg-[var(--surface-overlay)] ink-secondary hover:ink-primary active:scale-95 transition-[transform,color,background-color] duration-200 motion-reduce:transition-none outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)]"
+        aria-label="Close menu"
+      >
+        <LucideIcon name="x" size={20} />
+      </button>
+    </div>
+
+    <div class="flex-1 overflow-y-auto px-4 pb-6">
+      <p class="cm-drawer-section-label mb-2 px-1">Explore</p>
+      <div class="mb-6 flex flex-col gap-0.5">
+        {
+          exploreLinks.map((link) => (
+            <a
+              href={link.href}
+              data-drawer-link
+              aria-current={currentPage === link.key ? "page" : undefined}
+              class:list={[
+                drawerRowClass,
+                currentPage === link.key
+                  ? "bg-[var(--cm-blue-subtle)] ink-primary"
+                  : "ink-secondary hover:ink-primary hover:bg-[color-mix(in_oklab,var(--surface-overlay)_65%,transparent)]",
+              ]}
+            >
+              <NavIconTile icon={link.icon} active={currentPage === link.key} />
+              {link.label}
+            </a>
+          ))
+        }
+      </div>
+
+      <p class="cm-drawer-section-label mb-2 px-1">Elsewhere</p>
+      <div class="mb-6 flex flex-col gap-0.5">
+        {
+          elsewhereLinks.map((link) => (
+            <a
+              href={link.href}
+              data-drawer-link
+              class:list={[
+                drawerRowClass,
+                "ink-secondary hover:ink-primary hover:bg-[color-mix(in_oklab,var(--surface-overlay)_65%,transparent)]",
+              ]}
+              {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            >
+              <NavIconTile icon={link.icon} />
+              {link.label}
+            </a>
+          ))
+        }
+      </div>
+
+      <p class="cm-drawer-section-label mb-2 px-1">Quick jump</p>
+      <label class="sr-only" for="cm-mobile-drawer-jump">Jump to a page</label>
+      <input
+        id="cm-mobile-drawer-jump"
+        type="search"
+        inputmode="search"
+        autocomplete="off"
+        placeholder="Jump to a page…"
+        class="w-full rounded-[var(--radius-card)] border border-[var(--border-subtle)] bg-[var(--surface-overlay)] px-4 py-3 font-display text-[15px] ink-primary placeholder:ink-tertiary outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)]"
+      />
+    </div>
+  </div>
+
+  <div
+    class="cm-mobile-dock fixed inset-x-0 bottom-0 z-50 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2 pointer-events-none"
+  >
+    <div class="mx-auto flex max-w-[540px] items-center gap-2.5 pointer-events-auto">
+      <Surface variant="glass" radius="pill" class="min-w-0 flex-1 shadow-[var(--shadow-nav)]">
+        <button
+          id="cm-mobile-dock-menu-btn"
+          type="button"
+          class="flex w-full min-h-[52px] items-center gap-3 px-4 py-2.5 font-display text-[15px] font-semibold tracking-[-0.02em] ink-primary outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-inset active:scale-[0.99] transition-transform duration-200 motion-reduce:transition-none"
+          aria-expanded="false"
+          aria-controls="cm-mobile-drawer"
+          aria-label="Open site menu"
+        >
+          <LucideIcon name="menu" size={20} class="shrink-0 ink-secondary" />
+          <span class="truncate">{currentLabel}</span>
+        </button>
+      </Surface>
+      <ThemeDockButton />
+    </div>
+  </div>
+</nav>
+
+<script>
+  function initMobileNavDock() {
+    const menuBtn = document.getElementById("cm-mobile-dock-menu-btn");
+    const closeBtn = document.getElementById("cm-mobile-drawer-close");
+    const drawer = document.getElementById("cm-mobile-drawer");
+    const backdrop = document.getElementById("cm-mobile-drawer-backdrop");
+    const jumpInput = document.getElementById("cm-mobile-drawer-jump");
+
+    if (
+      !(menuBtn instanceof HTMLButtonElement) ||
+      !(closeBtn instanceof HTMLButtonElement) ||
+      !(drawer instanceof HTMLElement) ||
+      !(backdrop instanceof HTMLElement)
+    )
+      return;
+
+    const focusableSelector =
+      'a[href]:not([disabled]), button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+    const getFocusable = () => [...drawer.querySelectorAll<HTMLElement>(focusableSelector)];
+
+    const setOpen = (open: boolean) => {
+      drawer.dataset.open = String(open);
+      backdrop.dataset.open = String(open);
+      menuBtn.setAttribute("aria-expanded", String(open));
+      menuBtn.setAttribute("aria-label", open ? "Close site menu" : "Open site menu");
+      drawer.toggleAttribute("inert", !open);
+      document.documentElement.classList.toggle("cm-drawer-open", open);
+
+      if (open) {
+        queueMicrotask(() => closeBtn.focus());
+      } else {
+        menuBtn.focus();
+        if (jumpInput instanceof HTMLInputElement) jumpInput.value = "";
+        drawer.querySelectorAll<HTMLElement>("[data-drawer-link]").forEach((el) => {
+          el.classList.remove("hidden");
+        });
+      }
+    };
+
+    const isOpen = () => drawer.dataset.open === "true";
+
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      setOpen(!isOpen());
+    });
+
+    closeBtn.addEventListener("click", () => setOpen(false));
+
+    backdrop.addEventListener("click", () => setOpen(false));
+
+    drawer.addEventListener("keydown", (e) => {
+      if (!isOpen()) return;
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setOpen(false);
+        return;
+      }
+      if (e.key !== "Tab") return;
+      const nodes = getFocusable();
+      if (nodes.length === 0) return;
+      const first = nodes[0]!;
+      const last = nodes.at(-1)!;
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else if (document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    });
+
+    drawer.querySelectorAll("a[data-drawer-link]").forEach((a) => {
+      a.addEventListener("click", () => setOpen(false));
+    });
+
+    if (jumpInput instanceof HTMLInputElement) {
+      jumpInput.addEventListener("input", () => {
+        const q = jumpInput.value.trim().toLowerCase();
+        drawer.querySelectorAll<HTMLElement>("[data-drawer-link]").forEach((link) => {
+          const text = link.textContent?.trim().toLowerCase() ?? "";
+          link.classList.toggle("hidden", q.length > 0 && !text.includes(q));
+        });
+      });
+    }
+
+    const mq = window.matchMedia("(min-width: 768px)");
+    const onMqChange = () => {
+      if (mq.matches && isOpen()) setOpen(false);
+    };
+    mq.addEventListener("change", onMqChange);
+  }
+
+  initMobileNavDock();
+  document.addEventListener("astro:after-swap", initMobileNavDock);
+</script>

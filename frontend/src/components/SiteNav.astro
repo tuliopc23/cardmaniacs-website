@@ -1,5 +1,6 @@
 ---
 import FloatingHeader from './site/FloatingHeader.astro';
+import MobileNavDock from './site/MobileNavDock.astro';
 
 interface Props {
   currentPage?: string;
@@ -9,3 +10,4 @@ const { currentPage = '' } = Astro.props;
 ---
 
 <FloatingHeader currentPage={currentPage} />
+<MobileNavDock currentPage={currentPage} />

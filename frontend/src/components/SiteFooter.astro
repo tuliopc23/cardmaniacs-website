@@ -3,6 +3,7 @@ import Container from './Container.astro';
 import BejamasSeparator from './ui/bejamas/Separator.astro';
 import LucideIcon from './LucideIcon.astro';
 import EyebrowLabel from './ui/EyebrowLabel.astro';
+import LogoMark from './ui/LogoMark.astro';
 import { downloadCta } from '../lib/site-cta';
 
 const footerDownloadHref = downloadCta.href ?? '/features';
@@ -23,18 +24,7 @@ const chevronClass =
             href="/"
             class="mb-4 inline-flex items-center gap-2.5 rounded-[var(--radius-sm)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-base)]"
           >
-            <span
-              class="flex size-9 shrink-0 items-center justify-center rounded-[var(--radius-md)] shadow-[var(--shadow-logo-mark)]"
-            >
-              <img
-                src="/images/Cardmaniacs-icon-white.png"
-                alt=""
-                class="size-[22px] object-contain"
-                width="22"
-                height="22"
-                loading="lazy"
-              />
-            </span>
+            <LogoMark size="sm" class="size-9 rounded-[var(--radius-md)]" />
             <span class="font-display font-semibold text-[15px] tracking-[-0.02em] ink-primary" translate="no">Cardmaniacs</span>
           </a>
           <p class="type-lede measure-tight !text-[0.98rem]">

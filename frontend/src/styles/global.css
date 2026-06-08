@@ -1004,6 +1004,28 @@ body {
 }
 
 /* ==============================================
+   MOBILE BOTTOM DOCK
+   ============================================== */
+@media (max-width: 767px) {
+  .cm-mobile-dock-pad {
+    padding-bottom: calc(5.5rem + env(safe-area-inset-bottom));
+  }
+}
+
+.cm-drawer-section-label {
+  font-family: var(--font-display);
+  font-size: 0.6875rem;
+  font-weight: 650;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-tertiary);
+}
+
+html.cm-drawer-open {
+  overflow: hidden;
+}
+
+/* ==============================================
    REDUCED MOTION
    ============================================== */
 @media (prefers-reduced-motion: reduce) {
@@ -1016,8 +1038,9 @@ body {
     transform: none !important;
   }
 
-  #cm-mobile-menu,
-  #cm-mobile-menu-btn [data-menu-icon] {
+  .cm-mobile-drawer,
+  .cm-mobile-drawer-backdrop,
+  #cm-theme-dock-btn [data-theme-dock-icon] {
     transition: none !important;
   }
 

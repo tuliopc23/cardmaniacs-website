@@ -1,0 +1,67 @@
+---
+import Surface from "./ui/Surface.astro";
+import LucideIcon from "./LucideIcon.astro";
+---
+
+<Surface variant="glass" radius="pill" class="size-12 shrink-0 shadow-[var(--shadow-nav)]">
+  <button
+    type="button"
+    id="cm-theme-dock-btn"
+    class="relative flex size-full items-center justify-center rounded-[inherit] ink-secondary hover:ink-primary active:scale-95 transition-[transform,color] duration-200 motion-reduce:transition-none outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-base)]"
+    aria-label="Toggle color theme"
+  >
+    <span data-theme-dock-icon="light" class="absolute inset-0 m-auto flex size-5 items-center justify-center">
+      <LucideIcon name="sun" size={20} weight="bold" />
+    </span>
+    <span
+      data-theme-dock-icon="dark"
+      class="absolute inset-0 m-auto flex size-5 items-center justify-center opacity-0 scale-75"
+    >
+      <LucideIcon name="moon" size={20} weight="bold" />
+    </span>
+  </button>
+</Surface>
+
+<script>
+  function initThemeDockButton() {
+    const btn = document.getElementById("cm-theme-dock-btn");
+    if (!(btn instanceof HTMLButtonElement)) return;
+
+    const lightIcon = btn.querySelector<HTMLElement>('[data-theme-dock-icon="light"]');
+    const darkIcon = btn.querySelector<HTMLElement>('[data-theme-dock-icon="dark"]');
+
+    const readTheme = () =>
+      document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+
+    const applyIcons = () => {
+      const isDark = readTheme() === "dark";
+      if (lightIcon && darkIcon) {
+        lightIcon.classList.toggle("opacity-0", isDark);
+        lightIcon.classList.toggle("scale-75", isDark);
+        darkIcon.classList.toggle("opacity-0", !isDark);
+        darkIcon.classList.toggle("scale-75", !isDark);
+      }
+      btn.setAttribute("aria-label", isDark ? "Switch to light theme" : "Switch to dark theme");
+    };
+
+    const setTheme = (next: "light" | "dark") => {
+      document.documentElement.setAttribute("data-theme", next);
+      try {
+        localStorage.setItem("cm-theme", next);
+      } catch {
+        /* ignore */
+      }
+      applyIcons();
+      window.cmSyncThemeColor?.();
+    };
+
+    applyIcons();
+
+    btn.addEventListener("click", () => {
+      setTheme(readTheme() === "dark" ? "light" : "dark");
+    });
+  }
+
+  initThemeDockButton();
+  document.addEventListener("astro:after-swap", initThemeDockButton);
+</script>

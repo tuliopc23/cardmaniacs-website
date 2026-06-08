@@ -4,6 +4,7 @@ import AppStoreButton from "../AppStoreButton.astro";
 import ProductFrame from "./ProductFrame.astro";
 import LucideIcon from "../LucideIcon.astro";
 import EyebrowLabel from "../ui/EyebrowLabel.astro";
+import LogoMark from "../ui/LogoMark.astro";
 import { marketingImages } from "../../lib/marketing-images";
 import { heroChipIcons } from "../../lib/icons/registry";
 
@@ -20,25 +21,13 @@ const chips = ["Feeds", "Read Later", "Bookmarks", "Highlights", "Summaries", "O
     />
   </div>
 
-  <Container class="relative z-10 pt-32 md:pt-40">
+  <Container class="relative z-10 pt-16 md:pt-40">
     <div data-device-hero class="flex flex-col items-center">
       <div class="w-full max-w-[760px] mx-auto text-center mb-10 md:mb-12">
         <EyebrowLabel icon="library" class="mb-4 justify-center">A calmer home for everything you read</EyebrowLabel>
 
         <div class="flex flex-col md:flex-row md:items-center md:justify-center gap-6 md:gap-8 mb-7">
-          <span
-            class="relative mx-auto md:mx-0 flex size-[72px] md:size-[84px] shrink-0 items-center justify-center rounded-[22px] bg-transparent shadow-[var(--shadow-logo-mark)] ring-0 transition-[transform,box-shadow] duration-300 ease-out"
-            aria-hidden="true"
-          >
-            <img
-              src="/images/Cardmaniacs-icon-white.png"
-              alt=""
-              class="size-[52px] md:size-[58px] object-contain"
-              width="58"
-              height="58"
-              loading="eager"
-            />
-          </span>
+          <LogoMark size="lg" class="mx-auto md:mx-0" />
           <h1 class="display-hero ink-primary text-balance md:text-left">
             Your native reading desk —<br class="hidden sm:block" />
             collected, triaged, finished.
