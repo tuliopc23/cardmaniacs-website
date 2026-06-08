@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "vp run frontend:dev",
     "build": "vp run frontend:build",
+    "deploy": "npx wrangler deploy",
     "preview": "vp run frontend:preview",
     "astro": "cd frontend && vp run astro",
     "check": "vp check",

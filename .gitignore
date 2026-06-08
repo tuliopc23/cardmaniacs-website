@@ -27,6 +27,9 @@ pnpm-debug.log*
 .wrangler/
 frontend/.wrangler/
 
+# Generated from frontend build for monorepo root deploy (Workers Builds)
+/wrangler.jsonc
+
 # Environment files
 *.env
 *.env.*
