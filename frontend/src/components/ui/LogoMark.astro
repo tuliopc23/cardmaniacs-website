@@ -8,7 +8,12 @@ const { size = "sm", class: className = "" } = Astro.props;
 
 const sizes = {
   sm: "size-8 rounded-[12px]",
-  lg: "size-[72px] md:size-[84px] rounded-[22px]",
+  lg: "size-[72px] md:size-[84px] rounded-[22px] shadow-[var(--shadow-soft)]",
+} as const;
+
+const scales = {
+  sm: "scale-105",
+  lg: "scale-[1.06]",
 } as const;
 ---
 
@@ -19,7 +24,7 @@ const sizes = {
   <img
     src="/images/Cardmaniacs-icon-white.png"
     alt=""
-    class="size-full object-cover scale-[1.08]"
+    class:list={["size-full object-cover", scales[size]]}
     width={size === "lg" ? 84 : 32}
     height={size === "lg" ? 84 : 32}
     loading={size === "lg" ? "eager" : "lazy"}

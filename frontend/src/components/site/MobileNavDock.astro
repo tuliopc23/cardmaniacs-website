@@ -2,10 +2,15 @@
 import Surface from "../ui/Surface.astro";
 import LucideIcon from "../LucideIcon.astro";
 import EyebrowLabel from "../ui/EyebrowLabel.astro";
-import NavIconTile from "../ui/NavIconTile.astro";
+import LogoMark from "../ui/LogoMark.astro";
+import MobileDrawerLink from "./MobileDrawerLink.astro";
 import ThemeDockButton from "../ThemeDockButton.astro";
-import { navIcons, type IconKey } from "../../lib/icons/registry";
-import { downloadCta, hasAppStoreUrl } from "../../lib/site-cta";
+import {
+  exploreNavLinks,
+  elsewhereNavLinks,
+  getPageLabel,
+  isActiveNavLink,
+} from "../../lib/site-nav";
 
 interface Props {
   currentPage?: string;
@@ -13,146 +18,130 @@ interface Props {
 
 const { currentPage = "" } = Astro.props;
 
-const pageLabels: Record<string, string> = {
-  home: "Home",
-  features: "Features",
-  pricing: "Pricing",
-  blog: "Blog",
-  changelog: "Changelog",
-};
+const currentLabel = getPageLabel(currentPage);
 
-const currentLabel = pageLabels[currentPage] ?? "Home";
-
-const exploreLinks: { href: string; label: string; key: string; icon: IconKey }[] = [
-  { href: "/", label: "Home", key: "home", icon: "library" },
-  { href: "/features", label: "Features", key: "features", icon: navIcons.features },
-  { href: "/pricing", label: "Pricing", key: "pricing", icon: navIcons.pricing },
-  { href: "/blog", label: "Blog", key: "blog", icon: navIcons.blog },
-  { href: "/changelog", label: "Changelog", key: "changelog", icon: navIcons.changelog },
-];
-
-const elsewhereLinks: { href: string; label: string; key: string; icon: IconKey; external?: boolean }[] = [
-  { href: "/docs", label: "Docs", key: "docs", icon: "file-text" },
-  { href: "/press", label: "Press kit", key: "press", icon: "press" },
-  {
-    href: hasAppStoreUrl ? (downloadCta.href ?? "/features") : "/features",
-    label: hasAppStoreUrl ? "Get the app" : "Explore features",
-    key: "cta",
-    icon: hasAppStoreUrl ? "download" : "compass",
-    external: hasAppStoreUrl,
-  },
-  { href: "/privacy", label: "Privacy", key: "privacy", icon: "shield-check" },
-  { href: "/terms", label: "Terms", key: "terms", icon: "file-text" },
-];
-
-const drawerRowClass =
-  "cm-drawer-link flex items-center gap-3 rounded-[var(--radius-card)] px-3 py-2.5 font-display text-[15px] font-medium tracking-[-0.005em] transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-base)]";
+const sectionInsetClass =
+  "rounded-[var(--radius-panel)] border border-[var(--border-subtle)] bg-[color-mix(in_oklab,var(--surface-glass)_55%,transparent)] p-1.5 shadow-[var(--shadow-soft)] backdrop-blur-[calc(var(--blur-glass)*0.5)] backdrop-saturate-[var(--sat-glass)]";
 ---
 
 <nav class="md:hidden" aria-label="Mobile navigation">
   <div
     id="cm-mobile-drawer-backdrop"
-    class="cm-mobile-drawer-backdrop fixed inset-0 z-[54] bg-[color-mix(in_oklab,var(--ink-primary)_18%,transparent)] opacity-0 pointer-events-none backdrop-blur-[2px] transition-opacity duration-200 ease-out motion-reduce:transition-none [&[data-open=true]]:opacity-100 [&[data-open=true]]:pointer-events-auto"
+    class="cm-mobile-drawer-backdrop fixed inset-0 z-[54] bg-[color-mix(in_oklab,var(--ink-primary)_26%,transparent)] opacity-0 pointer-events-none backdrop-blur-md backdrop-saturate-[var(--sat-glass)] motion-reduce:transition-none [&[data-open=true]]:opacity-100 [&[data-open=true]]:pointer-events-auto"
     data-open="false"
     aria-hidden="true"
   />
 
   <div
     id="cm-mobile-drawer"
-    class="cm-mobile-drawer fixed inset-0 z-[55] flex flex-col bg-[var(--surface-base)] opacity-0 pointer-events-none transition-[opacity,transform] duration-200 ease-out motion-reduce:transition-none motion-reduce:opacity-100 motion-reduce:translate-y-0 translate-y-4 [&[data-open=true]]:opacity-100 [&[data-open=true]]:pointer-events-auto [&[data-open=true]]:translate-y-0"
+    class="cm-mobile-drawer fixed inset-0 z-[55] flex flex-col border-[var(--border-glass)] bg-[var(--surface-glass)] opacity-0 pointer-events-none shadow-[var(--shadow-glass)] backdrop-blur-[var(--blur-glass)] backdrop-saturate-[var(--sat-glass)] motion-reduce:transition-none motion-reduce:opacity-100 [&[data-open=true]]:opacity-100 [&[data-open=true]]:pointer-events-auto"
     data-open="false"
     inert
     role="dialog"
     aria-modal="true"
     aria-label="Site menu"
+    style="transform: translateY(100%)"
   >
     <div class="flex items-start justify-between gap-4 px-5 pb-4 pt-[max(1.25rem,env(safe-area-inset-top))]">
       <div class="min-w-0">
-        <EyebrowLabel class="mb-2 !text-[11px] tracking-[0.14em]">Menu</EyebrowLabel>
+        <EyebrowLabel class="mb-2">Menu</EyebrowLabel>
         <h2 class="type-section-title ink-primary text-balance">{currentLabel}</h2>
-        <p class="mt-1 body-s ink-tertiary">Navigation and links.</p>
+        <p class="mt-1 body-s ink-tertiary measure-tight">
+          Feeds, pricing, docs, and the app — all in one place.
+        </p>
       </div>
-      <button
-        id="cm-mobile-drawer-close"
-        type="button"
-        class="flex size-11 shrink-0 items-center justify-center rounded-full border border-[var(--border-subtle)] bg-[var(--surface-overlay)] ink-secondary hover:ink-primary active:scale-95 transition-[transform,color,background-color] duration-200 motion-reduce:transition-none outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)]"
-        aria-label="Close menu"
-      >
-        <LucideIcon name="x" size={20} />
-      </button>
+      <div class="size-11 shrink-0 rounded-full shadow-[var(--shadow-nav)]">
+        <Surface variant="glass" radius="pill" class="size-full overflow-hidden rounded-full">
+          <button
+            id="cm-mobile-drawer-close"
+            type="button"
+            class="flex size-full items-center justify-center rounded-full ink-secondary hover:ink-primary active:scale-95 transition-[transform,color] duration-200 motion-reduce:transition-none outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-inset"
+            aria-label="Close menu"
+          >
+            <LucideIcon name="x" size={20} />
+          </button>
+        </Surface>
+      </div>
     </div>
 
-    <div class="flex-1 overflow-y-auto px-4 pb-6">
-      <p class="cm-drawer-section-label mb-2 px-1">Explore</p>
-      <div class="mb-6 flex flex-col gap-0.5">
-        {
-          exploreLinks.map((link) => (
-            <a
-              href={link.href}
-              data-drawer-link
-              aria-current={currentPage === link.key ? "page" : undefined}
-              class:list={[
-                drawerRowClass,
-                currentPage === link.key
-                  ? "bg-[var(--cm-blue-subtle)] ink-primary"
-                  : "ink-secondary hover:ink-primary hover:bg-[color-mix(in_oklab,var(--surface-overlay)_65%,transparent)]",
-              ]}
-            >
-              <NavIconTile icon={link.icon} active={currentPage === link.key} />
-              {link.label}
-            </a>
-          ))
-        }
+    <div class="flex-1 overflow-y-auto px-4 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
+      <div id="cm-drawer-section-explore" class="mb-6" data-drawer-section>
+        <p class="type-card-eyebrow mb-2 px-1">Explore</p>
+        <div class:list={[sectionInsetClass, "flex flex-col gap-0.5"]}>
+          {
+            exploreNavLinks.map((link) => (
+              <MobileDrawerLink
+                href={link.href}
+                label={link.label}
+                icon={link.icon}
+                active={isActiveNavLink(link.key, currentPage)}
+              />
+            ))
+          }
+        </div>
       </div>
 
-      <p class="cm-drawer-section-label mb-2 px-1">Elsewhere</p>
-      <div class="mb-6 flex flex-col gap-0.5">
-        {
-          elsewhereLinks.map((link) => (
-            <a
-              href={link.href}
-              data-drawer-link
-              class:list={[
-                drawerRowClass,
-                "ink-secondary hover:ink-primary hover:bg-[color-mix(in_oklab,var(--surface-overlay)_65%,transparent)]",
-              ]}
-              {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-            >
-              <NavIconTile icon={link.icon} />
-              {link.label}
-            </a>
-          ))
-        }
+      <div id="cm-drawer-section-elsewhere" class="mb-6" data-drawer-section>
+        <p class="type-card-eyebrow mb-2 px-1">Elsewhere</p>
+        <div class:list={[sectionInsetClass, "flex flex-col gap-0.5"]}>
+          {
+            elsewhereNavLinks.map((link) => (
+              <MobileDrawerLink
+                href={link.href}
+                label={link.label}
+                icon={link.icon}
+                active={isActiveNavLink(link.key, currentPage)}
+                external={link.external}
+              />
+            ))
+          }
+        </div>
       </div>
 
-      <p class="cm-drawer-section-label mb-2 px-1">Quick jump</p>
-      <label class="sr-only" for="cm-mobile-drawer-jump">Jump to a page</label>
-      <input
-        id="cm-mobile-drawer-jump"
-        type="search"
-        inputmode="search"
-        autocomplete="off"
-        placeholder="Jump to a page…"
-        class="w-full rounded-[var(--radius-card)] border border-[var(--border-subtle)] bg-[var(--surface-overlay)] px-4 py-3 font-display text-[15px] ink-primary placeholder:ink-tertiary outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)]"
-      />
+      <div id="cm-drawer-section-jump" data-drawer-section>
+        <p class="type-card-eyebrow mb-2 px-1">Quick jump</p>
+        <label class="sr-only" for="cm-mobile-drawer-jump">Jump to a page</label>
+        <input
+          id="cm-mobile-drawer-jump"
+          type="search"
+          inputmode="search"
+          autocomplete="off"
+          placeholder="Jump to a page…"
+          class="cm-drawer-jump-input w-full rounded-[var(--radius-card)] border border-[var(--border-glass)] bg-[color-mix(in_oklab,var(--surface-inset)_55%,transparent)] px-4 py-3 font-display text-[15px] ink-primary shadow-[inset_0_1px_2px_color-mix(in_oklab,var(--ink-primary)_6%,transparent)] placeholder:ink-tertiary outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)]"
+        />
+      </div>
     </div>
   </div>
 
   <div
-    class="cm-mobile-dock fixed inset-x-0 bottom-0 z-50 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2 pointer-events-none"
+    class="cm-mobile-dock fixed inset-x-0 bottom-0 z-50 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2 pointer-events-none before:pointer-events-none before:absolute before:inset-x-4 before:top-0 before:h-px before:bg-[var(--ambient-glint-line)]"
   >
     <div class="mx-auto flex max-w-[540px] items-center gap-2.5 pointer-events-auto">
       <Surface variant="glass" radius="pill" class="min-w-0 flex-1 shadow-[var(--shadow-nav)]">
         <button
           id="cm-mobile-dock-menu-btn"
           type="button"
-          class="flex w-full min-h-[52px] items-center gap-3 px-4 py-2.5 font-display text-[15px] font-semibold tracking-[-0.02em] ink-primary outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-inset active:scale-[0.99] transition-transform duration-200 motion-reduce:transition-none"
+          class="relative flex w-full min-h-[52px] items-center gap-2.5 px-3.5 py-2.5 font-display text-[15px] font-semibold tracking-[-0.02em] ink-primary outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-inset active:scale-[0.99] transition-transform duration-200 motion-reduce:transition-none"
           aria-expanded="false"
           aria-controls="cm-mobile-drawer"
           aria-label="Open site menu"
         >
-          <LucideIcon name="menu" size={20} class="shrink-0 ink-secondary" />
-          <span class="truncate">{currentLabel}</span>
+          <LogoMark size="sm" class="shrink-0" />
+          <span class="relative flex size-5 shrink-0 items-center justify-center">
+            <span
+              data-dock-icon="menu"
+              class="absolute inset-0 flex items-center justify-center transition-[opacity,transform] duration-200 motion-reduce:transition-none"
+            >
+              <LucideIcon name="menu" size={18} class="ink-secondary" />
+            </span>
+            <span
+              data-dock-icon="close"
+              class="absolute inset-0 flex items-center justify-center opacity-0 scale-75 transition-[opacity,transform] duration-200 motion-reduce:transition-none pointer-events-none"
+            >
+              <LucideIcon name="x" size={18} class="ink-secondary" />
+            </span>
+          </span>
+          <span class="min-w-0 truncate">{currentLabel}</span>
         </button>
       </Surface>
       <ThemeDockButton />
@@ -161,6 +150,8 @@ const drawerRowClass =
 </nav>
 
 <script>
+  import { animate } from "motion";
+
   function initMobileNavDock() {
     const menuBtn = document.getElementById("cm-mobile-dock-menu-btn");
     const closeBtn = document.getElementById("cm-mobile-drawer-close");
@@ -176,10 +167,32 @@ const drawerRowClass =
     )
       return;
 
+    const iconMenu = menuBtn.querySelector<HTMLElement>('[data-dock-icon="menu"]');
+    const iconClose = menuBtn.querySelector<HTMLElement>('[data-dock-icon="close"]');
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     const focusableSelector =
       'a[href]:not([disabled]), button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
     const getFocusable = () => [...drawer.querySelectorAll<HTMLElement>(focusableSelector)];
+
+    const syncDockIcons = (open: boolean) => {
+      if (iconMenu && iconClose) {
+        iconMenu.classList.toggle("opacity-0", open);
+        iconMenu.classList.toggle("scale-75", open);
+        iconClose.classList.toggle("opacity-0", !open);
+        iconClose.classList.toggle("scale-75", !open);
+        iconClose.classList.toggle("pointer-events-none", !open);
+      }
+    };
+
+    const updateSectionVisibility = () => {
+      drawer.querySelectorAll<HTMLElement>("[data-drawer-section]").forEach((section) => {
+        const links = section.querySelectorAll<HTMLElement>("[data-drawer-link]");
+        const visible = [...links].some((link) => !link.classList.contains("hidden"));
+        section.classList.toggle("hidden", !visible);
+      });
+    };
 
     const setOpen = (open: boolean) => {
       drawer.dataset.open = String(open);
@@ -188,6 +201,26 @@ const drawerRowClass =
       menuBtn.setAttribute("aria-label", open ? "Close site menu" : "Open site menu");
       drawer.toggleAttribute("inert", !open);
       document.documentElement.classList.toggle("cm-drawer-open", open);
+      syncDockIcons(open);
+
+      if (reducedMotion) {
+        drawer.style.transform = open ? "translateY(0)" : "translateY(100%)";
+        backdrop.style.opacity = open ? "1" : "0";
+      } else if (open) {
+        animate(backdrop, { opacity: [0, 1] }, { duration: 0.22, easing: "ease-out" });
+        animate(
+          drawer,
+          { transform: ["translateY(100%)", "translateY(0)"] },
+          { duration: 0.38, easing: [0.22, 1, 0.36, 1] }
+        );
+      } else {
+        animate(backdrop, { opacity: [1, 0] }, { duration: 0.18, easing: "ease-in" });
+        animate(
+          drawer,
+          { transform: ["translateY(0)", "translateY(100%)"] },
+          { duration: 0.28, easing: [0.4, 0, 1, 1] }
+        );
+      }
 
       if (open) {
         queueMicrotask(() => closeBtn.focus());
@@ -195,6 +228,9 @@ const drawerRowClass =
         menuBtn.focus();
         if (jumpInput instanceof HTMLInputElement) jumpInput.value = "";
         drawer.querySelectorAll<HTMLElement>("[data-drawer-link]").forEach((el) => {
+          el.classList.remove("hidden");
+        });
+        drawer.querySelectorAll<HTMLElement>("[data-drawer-section]").forEach((el) => {
           el.classList.remove("hidden");
         });
       }
@@ -245,6 +281,7 @@ const drawerRowClass =
           const text = link.textContent?.trim().toLowerCase() ?? "";
           link.classList.toggle("hidden", q.length > 0 && !text.includes(q));
         });
+        updateSectionVisibility();
       });
     }
 

@@ -6,6 +6,7 @@ import Container from '../components/Container.astro';
 import PageHero from '../components/ui/PageHero.astro';
 import Prose from '../components/ui/Prose.astro';
 import { getCollection, render } from 'astro:content';
+import { legalPageKeys } from '../lib/site-nav';
 
 /** Needed so `getStaticPaths` runs under `output: "server"` (otherwise `page` is undefined). */
 export const prerender = true;
@@ -13,7 +14,7 @@ export const prerender = true;
 export async function getStaticPaths() {
   const pages = await getCollection('legal');
   return pages.map((page) => ({
-    params: { legal: page.id },
+    params: { legal: legalPageKeys[page.id] ?? page.id },
     props: { page },
   }));
 }
@@ -23,7 +24,7 @@ const { Content } = await render(page);
 ---
 
 <Layout title={`${page.data.title} — Cardmaniacs`}>
-  <SiteNav />
+  <SiteNav currentPage={legalPageKeys[page.id] ?? page.id} />
 
   <main id="main-content">
     <article class="pt-16 pb-20 md:pt-40 md:pb-28">

@@ -3,24 +3,26 @@ import Surface from "./ui/Surface.astro";
 import LucideIcon from "./LucideIcon.astro";
 ---
 
-<Surface variant="glass" radius="pill" class="size-12 shrink-0 shadow-[var(--shadow-nav)]">
-  <button
-    type="button"
-    id="cm-theme-dock-btn"
-    class="relative flex size-full items-center justify-center rounded-[inherit] ink-secondary hover:ink-primary active:scale-95 transition-[transform,color] duration-200 motion-reduce:transition-none outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-base)]"
-    aria-label="Toggle color theme"
-  >
-    <span data-theme-dock-icon="light" class="absolute inset-0 m-auto flex size-5 items-center justify-center">
-      <LucideIcon name="sun" size={20} weight="bold" />
-    </span>
-    <span
-      data-theme-dock-icon="dark"
-      class="absolute inset-0 m-auto flex size-5 items-center justify-center opacity-0 scale-75"
+<div class="size-[52px] shrink-0 rounded-full shadow-[var(--shadow-nav)]">
+  <Surface variant="glass" radius="pill" class="size-full overflow-hidden rounded-full">
+    <button
+      type="button"
+      id="cm-theme-dock-btn"
+      class="relative flex size-full items-center justify-center rounded-full ink-secondary hover:ink-primary active:scale-95 transition-[transform,color] duration-200 motion-reduce:transition-none outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-base)]"
+      aria-label="Toggle color theme"
     >
-      <LucideIcon name="moon" size={20} weight="bold" />
-    </span>
-  </button>
-</Surface>
+      <span data-theme-dock-icon="light" class="absolute inset-0 m-auto flex size-5 items-center justify-center transition-[opacity,transform] duration-200 motion-reduce:transition-none">
+        <LucideIcon name="sun" size={20} weight="bold" />
+      </span>
+      <span
+        data-theme-dock-icon="dark"
+        class="absolute inset-0 m-auto flex size-5 items-center justify-center opacity-0 scale-75 transition-[opacity,transform] duration-200 motion-reduce:transition-none"
+      >
+        <LucideIcon name="moon" size={20} weight="bold" />
+      </span>
+    </button>
+  </Surface>
+</div>
 
 <script>
   function initThemeDockButton() {

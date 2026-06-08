@@ -1,0 +1,37 @@
+---
+import LucideIcon from "../LucideIcon.astro";
+import NavIconTile from "../ui/NavIconTile.astro";
+import type { IconKey } from "../../lib/icons/registry";
+
+interface Props {
+  href: string;
+  label: string;
+  icon: IconKey | string;
+  active?: boolean;
+  external?: boolean;
+}
+
+const { href, label, icon, active = false, external = false } = Astro.props;
+
+const rowClass =
+  "cm-drawer-link group flex items-center gap-3 rounded-[var(--radius-card)] px-3 py-3 font-display text-[15px] font-medium tracking-[-0.005em] transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-base)]";
+const chevronClass =
+  "ml-auto shrink-0 text-[var(--ink-tertiary)] opacity-0 transition-[opacity,transform] duration-200 group-hover:opacity-100 group-hover:translate-x-0.5 motion-reduce:opacity-100 motion-reduce:transform-none";
+---
+
+<a
+  href={href}
+  data-drawer-link
+  aria-current={active ? "page" : undefined}
+  class:list={[
+    rowClass,
+    active
+      ? "bg-[var(--cm-blue-subtle)] ink-primary"
+      : "ink-secondary hover:ink-primary hover:bg-[color-mix(in_oklab,var(--surface-overlay)_65%,transparent)]",
+  ]}
+  {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+>
+  <NavIconTile icon={icon} active={active} />
+  <span class="min-w-0 truncate">{label}</span>
+  <LucideIcon name="chevron-right" size={16} class:list={[chevronClass, active && "!opacity-100"]} />
+</a>
