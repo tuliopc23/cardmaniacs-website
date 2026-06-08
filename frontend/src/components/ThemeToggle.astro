@@ -11,27 +11,27 @@ import LucideIcon from "./LucideIcon.astro";
   <button
     type="button"
     id="theme-segment-light"
-    class="cm-theme-segment__btn min-w-[3.25rem]"
+    class="cm-theme-segment__btn min-w-[2.25rem] sm:min-w-[3.25rem]"
     role="radio"
     aria-checked="false"
     data-theme-pick="light"
   >
     <span class="inline-flex items-center justify-center gap-1">
       <LucideIcon name="sun" size={14} weight="bold" class="opacity-90" />
-      <span class="inline">Light</span>
+      <span class="hidden sm:inline">Light</span>
     </span>
   </button>
   <button
     type="button"
     id="theme-segment-dark"
-    class="cm-theme-segment__btn min-w-[3.25rem]"
+    class="cm-theme-segment__btn min-w-[2.25rem] sm:min-w-[3.25rem]"
     role="radio"
     aria-checked="false"
     data-theme-pick="dark"
   >
     <span class="inline-flex items-center justify-center gap-1">
       <LucideIcon name="moon" size={14} weight="bold" class="opacity-90" />
-      <span class="inline">Dark</span>
+      <span class="hidden sm:inline">Dark</span>
     </span>
   </button>
 </div>

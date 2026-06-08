@@ -27,7 +27,7 @@ const links = [
       >
         <a
           href="/"
-          class="relative z-20 flex min-w-0 items-center gap-2.5 shrink-0 justify-self-start group outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-base)] rounded-[12px]"
+          class="relative z-20 flex min-w-0 flex-1 items-center gap-2.5 justify-self-start group outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-base)] rounded-[12px] md:flex-none"
         >
           <span
             class="relative z-10 flex size-8 shrink-0 items-center justify-center rounded-[12px] bg-transparent shadow-[var(--shadow-logo-mark)] ring-0 transition-[transform,box-shadow] duration-300 ease-out group-hover:scale-[1.04] group-hover:shadow-[var(--shadow-logo-mark-hover)]"
@@ -67,9 +67,9 @@ const links = [
           ))}
         </nav>
 
-        <div class="ml-auto flex items-center gap-2 justify-self-end md:ml-0">
+        <div class="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2 justify-self-end md:ml-0">
           <ThemeToggle />
-          <DownloadButton size="sm" class="hidden sm:inline-flex" />
+          <DownloadButton size="sm" class="hidden md:inline-flex" />
 
           <button
             id="cm-mobile-menu-btn"
@@ -123,7 +123,7 @@ const links = [
             </a>
           ))}
         </nav>
-        <div class="mt-2 px-1 sm:hidden">
+        <div class="mt-2 px-1 md:hidden">
           <DownloadButton size="md" class="w-full justify-center" />
         </div>
       </Surface>
