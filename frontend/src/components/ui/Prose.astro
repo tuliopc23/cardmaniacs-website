@@ -125,10 +125,13 @@ const sizes = {
   }
 
   .cm-prose :global(blockquote) {
-    border-left: 3px solid color-mix(in oklab, var(--cm-blue) 50%, var(--border-strong));
-    padding-left: 1.25rem;
     margin: 1.75rem 0;
-    color: var(--ink-tertiary);
+    padding: 1.15rem 1.35rem;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    background: color-mix(in oklab, var(--cm-blue) 7%, var(--surface-elevated));
+    box-shadow: var(--shadow-soft);
+    color: var(--ink-secondary);
     font-style: italic;
   }
 

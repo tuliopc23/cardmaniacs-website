@@ -22,23 +22,23 @@ const chips = ["Feeds", "Read Later", "Bookmarks", "Highlights", "Summaries", "O
 
   <Container class="relative z-10 pt-16 md:pt-40">
     <div data-device-hero class="flex flex-col items-center">
-      <div class="w-full max-w-[760px] mx-auto text-center mb-10 md:mb-12">
-        <EyebrowLabel icon="library" class="mb-4 justify-center">A calmer home for everything you read</EyebrowLabel>
+      <div class="w-full max-w-[620px] mx-auto mb-10 md:mb-12">
+        <EyebrowLabel icon="library" class="mb-4">A calmer home for everything you read</EyebrowLabel>
 
-        <div class="flex flex-col md:flex-row md:items-center md:justify-center gap-6 md:gap-8 mb-7">
-          <LogoMark size="lg" class="mx-auto md:mx-0" />
-          <h1 class="display-hero ink-primary text-balance md:text-left">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-6 mb-7">
+          <LogoMark size="lg" class="shrink-0" />
+          <h1 class="display-hero ink-primary text-balance flex-1 min-w-0">
             Your native reading desk —<br class="hidden sm:block" />
             collected, triaged, finished.
           </h1>
         </div>
 
-        <p class="type-lede measure mx-auto mb-9">
+        <p class="type-lede measure mb-9">
           Cardmaniacs unifies feeds, read-later, bookmarks, and highlights into one quiet Apple-native command
           center — so you stop tab-hoarding and start reading.
         </p>
 
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-8">
           <AppStoreButton />
           <a
             href="/features"
@@ -56,7 +56,7 @@ const chips = ["Feeds", "Read Later", "Bookmarks", "Highlights", "Summaries", "O
 
         <p class="sr-only">Including {chips.join(", ")}.</p>
         <div
-          class="hero-chip-rail mx-auto mb-2 flex w-full max-w-[540px] flex-wrap justify-center gap-0.5 p-1 rounded-[var(--radius-pill)] border border-[var(--border-subtle)] bg-[color-mix(in_oklab,var(--surface-glass)_55%,transparent)] shadow-[var(--shadow-pill)] backdrop-blur-md backdrop-saturate-[var(--sat-glass)] supports-[backdrop-filter]:bg-[color-mix(in_oklab,var(--surface-glass)_42%,transparent)] md:mb-0"
+          class="hero-chip-rail mb-2 flex w-full flex-wrap justify-start gap-0.5 p-1 rounded-[var(--radius-pill)] border border-[var(--border-subtle)] bg-[color-mix(in_oklab,var(--surface-glass)_55%,transparent)] shadow-[var(--shadow-pill)] backdrop-blur-md backdrop-saturate-[var(--sat-glass)] supports-[backdrop-filter]:bg-[color-mix(in_oklab,var(--surface-glass)_42%,transparent)] md:mb-0"
           aria-hidden="true"
         >
           {
