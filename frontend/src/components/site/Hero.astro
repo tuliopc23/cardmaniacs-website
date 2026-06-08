@@ -1,11 +1,10 @@
 ---
 import Container from "../Container.astro";
 import AppStoreButton from "../AppStoreButton.astro";
-import ProductFrame from "./ProductFrame.astro";
+import MarketingPlatformShowcase from "../marketing/MarketingPlatformShowcase.astro";
 import LucideIcon from "../LucideIcon.astro";
 import EyebrowLabel from "../ui/EyebrowLabel.astro";
 import LogoMark from "../ui/LogoMark.astro";
-import { marketingImages } from "../../lib/marketing-images";
 import { heroChipIcons } from "../../lib/icons/registry";
 
 const chips = ["Feeds", "Read Later", "Bookmarks", "Highlights", "Summaries", "Offline"] as const;
@@ -77,14 +76,11 @@ const chips = ["Feeds", "Read Later", "Bookmarks", "Highlights", "Summaries", "O
       </div>
 
       <div class="w-full max-w-[920px] mx-auto" data-reveal>
-        <ProductFrame
-          srcLight={marketingImages.macHeroLight}
-          srcDark={marketingImages.macHeroDark}
-          alt="Cardmaniacs on macOS — card-based reading interface"
+        <MarketingPlatformShowcase
+          macAlt="Cardmaniacs on macOS — card-based reading interface"
+          iphoneAlt="Cardmaniacs on iPhone — reading queue"
+          ipadAlt="Cardmaniacs on iPad — workspace"
         />
-        <p class="mt-4 text-center font-display text-[12px] font-medium ink-tertiary tracking-wide">
-          macOS · iPhone & iPad previews coming with launch assets
-        </p>
       </div>
     </div>
   </Container>

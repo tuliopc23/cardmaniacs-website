@@ -1,40 +1,26 @@
 ---
 import Container from "../Container.astro";
-import NarrativeSection from "../NarrativeSection.astro";
-import MarketingTriageSurface from "../marketing/MarketingTriageSurface.astro";
-import MarketingReaderSurface from "../marketing/MarketingReaderSurface.astro";
-import MarketingHighlightSurface from "../marketing/MarketingHighlightSurface.astro";
-import MarketingCommandSurface from "../marketing/MarketingCommandSurface.astro";
-import MarketingMediaSurface from "../marketing/MarketingMediaSurface.astro";
-import MarketingDeviceComposition from "../marketing/MarketingDeviceComposition.astro";
-import EyebrowLabel from "../ui/EyebrowLabel.astro";
-import IconWell from "../ui/IconWell.astro";
-import LucideIcon from "../LucideIcon.astro";
+import ProductShowcase from "../ProductShowcase.astro";
 import { marketingImages } from "../../lib/marketing-images";
-import { workflowStepIcons } from "../../lib/icons/registry";
+import MarketingPlatformStills from "../marketing/MarketingPlatformStills.astro";
+import LucideIcon from "../LucideIcon.astro";
+import IconWell from "../ui/IconWell.astro";
 import PricingSection from "../PricingSection.astro";
 import CtaBanner from "../CtaBanner.astro";
+import { workflowStepIcons } from "../../lib/icons/registry";
 
-const loop = [
-  { step: "Collect", desc: "Feeds, saves, shares, and imports land in one inbox." },
-  { step: "Triage", desc: "Card-based queue — skim, tag, archive without tab chaos." },
-  { step: "Read", desc: "Beautiful Reader for articles, PDFs, EPUB, and more." },
-  { step: "Highlight", desc: "Mark what matters inside the Reader or on the web." },
-  { step: "Revisit", desc: "Find highlights and saved references when they become useful." },
-];
-
-const extensionItems = [
-  { icon: "sparkles", text: "App Intents & Shortcuts" },
-  { icon: "code", text: "Safari web extension" },
-  { icon: "heart", text: "Home Screen widgets" },
-  { icon: "cloud", text: "iCloud sync across devices" },
+const workflowSteps = [
+  { step: "Collect", desc: "Feeds, saves, and imports land in one inbox." },
+  { step: "Triage", desc: "Skim, tag, and archive without tab chaos." },
+  { step: "Read", desc: "Articles, PDFs, and EPUB in one Reader." },
+  { step: "Highlight", desc: "Mark what matters inside the app." },
+  { step: "Revisit", desc: "Find saved references when they count." },
 ];
 ---
 
 <section class="py-16 md:py-24 section-band">
   <Container>
     <div class="max-w-[680px] mx-auto text-center mb-12">
-      <EyebrowLabel icon="inbox" class="mb-3 justify-center">The problem</EyebrowLabel>
       <h2 class="type-section-title ink-primary mb-5">Your reading life is scattered.</h2>
       <p class="type-lede measure-tight mx-auto">
         Tabs, RSS, read-later queues, PDFs, videos, podcasts, and highlights live in different apps. Cardmaniacs gives
@@ -46,83 +32,20 @@ const extensionItems = [
 
 <section class="py-16 md:py-20">
   <Container>
-    <EyebrowLabel icon="list-checks" class="mb-3 justify-center">Core workflow</EyebrowLabel>
-    <h2 class="type-section-title ink-primary text-center mb-10 text-balance">
-      Collect → Triage → Read → Highlight → Revisit
-    </h2>
-    <ol class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-      {
-        loop.map((item, i) => (
-          <li class="rounded-[var(--radius-card)] border border-[var(--border-subtle)] bg-[color-mix(in_oklab,var(--surface-elevated)_75%,transparent)] p-4 shadow-[var(--shadow-soft)]">
-            <div class="flex items-center gap-2 mb-3">
+    <div class="max-w-[720px] mx-auto text-center">
+      <p class="type-lede measure-tight mx-auto mb-8">
+        One loop for everything you save — collect in a single inbox, triage in cards, read in a native Reader,
+        highlight what matters, and revisit when the idea becomes useful.
+      </p>
+      <div class="flex flex-wrap justify-center gap-2">
+        {
+          workflowSteps.map((item, i) => (
+            <span class="inline-flex items-center gap-2 rounded-[var(--radius-pill)] border border-[var(--border-subtle)] bg-[color-mix(in_oklab,var(--surface-elevated)_75%,transparent)] px-3 py-2 shadow-[var(--shadow-soft)]">
               <IconWell icon={workflowStepIcons[i]} size="sm" />
-              <span class="type-card-eyebrow type-card-eyebrow-accent">{String(i + 1).padStart(2, "0")}</span>
-            </div>
-            <p class="type-card-title mb-1">{item.step}</p>
-            <p class="type-card-meta leading-relaxed text-[var(--ink-secondary)]">{item.desc}</p>
-          </li>
-        ))
-      }
-    </ol>
-  </Container>
-</section>
-
-<section class="py-16 md:py-24">
-  <Container>
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-      <div>
-        <EyebrowLabel icon="rss" class="mb-3">Feeds & syndication</EyebrowLabel>
-        <h2 class="type-section-title ink-primary mb-5">Every source, one card stream.</h2>
-        <p class="type-lede measure-tight">
-          RSS, Atom, JSON Feed, and media channels — triaged in a calm native feed. Built-in players for YouTube and
-          podcasts, not another browser tab.
-        </p>
-      </div>
-      <MarketingTriageSurface />
-    </div>
-  </Container>
-</section>
-
-<section class="py-16 md:py-24">
-  <Container>
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-      <div>
-        <EyebrowLabel icon="book-open" class="mb-3">Read later & parsing</EyebrowLabel>
-        <h2 class="type-section-title ink-primary mb-5">Articles, READMEs, Wikipedia, PDFs, EPUB.</h2>
-        <p class="type-lede measure-tight">
-          Specialized parsers for complex web pages, GitHub READMEs, and Wikipedia. Import Markdown notes, PDFs, and
-          eBooks — read offline on every Apple device.
-        </p>
-      </div>
-      <MarketingReaderSurface title="The craft of calm reading" source="Article · Web" meta="8 min read">
-        <p>
-          Cardmaniacs strips the noise from long-form pages and presents them in a native Reader — the same surface you
-          use for highlights and revisit later.
-        </p>
-        <p>
-          <mark class="reader-highlight">Highlight text in context</mark> and build a personal reference library without
-          leaving the app.
-        </p>
-      </MarketingReaderSurface>
-    </div>
-  </Container>
-</section>
-
-<section class="py-16 md:py-24 section-band">
-  <Container>
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-      <MarketingHighlightSurface
-        excerpt="The best ideas are the ones you can find again when the moment is right."
-        source="Reader highlight"
-        tags={["research", "read-later"]}
-      />
-      <div>
-        <EyebrowLabel icon="highlighter" class="mb-3">Highlights</EyebrowLabel>
-        <h2 class="type-section-title ink-primary mb-5">Highlight now. Revisit when it counts.</h2>
-        <p class="type-lede measure-tight">
-          Highlight in the Reader or on web content — stored as rendered references with tags and source metadata. A
-          dedicated highlights library, Cardmaniacs-native.
-        </p>
+              <span class="type-card-title !text-[0.8125rem]">{item.step}</span>
+            </span>
+          ))
+        }
       </div>
     </div>
   </Container>
@@ -132,48 +55,29 @@ const extensionItems = [
   <Container>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
       <div>
-        <EyebrowLabel icon="keyboard" class="mb-3">Native control</EyebrowLabel>
-        <h2 class="type-section-title ink-primary mb-5">Quick Add, palette, Vim.</h2>
-        <p class="type-lede measure-tight">
-          Capture from anywhere, search your library, and run actions from the command palette. Power users can surf
-          articles with keyboard-first navigation.
-        </p>
-      </div>
-      <MarketingCommandSurface />
-    </div>
-  </Container>
-</section>
-
-<NarrativeSection
-  icon="folder"
-  label="Organization"
-  heading="Tags, Smart Lists, full-text search."
-  description="Frictionless tagging, smart folders, bookmarks, and reading states — your personal reference library stays searchable and calm."
-  screenshot={marketingImages.macCommand}
-  screenshotAlt="Organized library on Mac"
-  reverse
-/>
-
-<section class="py-16 md:py-24">
-  <Container>
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-      <MarketingMediaSurface />
-      <div>
-        <EyebrowLabel icon="sparkles" class="mb-3">Extensions</EyebrowLabel>
-        <h2 class="type-section-title ink-primary mb-5">Fits your Apple workflow.</h2>
+        <h2 class="type-section-title ink-primary mb-5">See the desk in action.</h2>
         <p class="type-lede measure-tight mb-6">
-          App Intents, web extension, and widgets — plus iCloud sync and offline reading where supported.
+          Feeds, read-later, bookmarks, and highlights share one calm card stream. The app chrome is the proof — explore
+          the full feature set when you are ready.
         </p>
-        <ul class="space-y-2.5">
-          {
-            extensionItems.map((item) => (
-              <li class="type-card-meta inline-flex items-center gap-2 text-[var(--ink-secondary)]">
-                <LucideIcon name={item.icon} size={15} class="text-[var(--accent)] shrink-0" />
-                {item.text}
-              </li>
-            ))
-          }
-        </ul>
+        <a
+          href="/features"
+          class="inline-flex items-center gap-2 font-display font-semibold text-[15px] ink-primary py-2 group"
+        >
+          Explore all features
+          <span
+            class="inline-flex items-center justify-center size-6 [border-radius:var(--radius-pill)] bg-[var(--cm-blue-subtle)] text-[var(--cm-blue-ink)] transition-transform duration-200 group-hover:translate-x-0.5"
+            aria-hidden="true"
+          >
+            <LucideIcon name="compass" size={16} class="translate-x-px" />
+          </span>
+        </a>
+      </div>
+      <div data-reveal>
+        <ProductShowcase
+          src={marketingImages.macTriage}
+          alt="Cardmaniacs feed triage on Mac — calm card stream"
+        />
       </div>
     </div>
   </Container>
@@ -181,24 +85,18 @@ const extensionItems = [
 
 <section class="py-16 md:py-24 section-band">
   <Container>
-    <EyebrowLabel icon="device-mobile" class="mb-3 justify-center">Platform craft</EyebrowLabel>
-    <h2 class="type-section-title ink-primary text-center mb-8">Mac, iPhone, and iPad — each considered.</h2>
-    <MarketingDeviceComposition
-      srcLight={marketingImages.macHeroLight}
-      srcDark={marketingImages.macHeroDark}
-      alt="Cardmaniacs on macOS"
-      class="mx-auto"
-    />
-    <p class="type-lede measure-tight mx-auto text-center mt-8 max-w-[520px]">
-      Keyboard-first on Mac. Touch-first capture on iPhone. Workspace-ready on iPad. Dark and light modes throughout.
-    </p>
+    <div class="max-w-[680px] mx-auto text-center mb-10">
+      <h2 class="type-section-title ink-primary mb-5 text-balance">Mac, iPhone, and iPad — each considered.</h2>
+      <p class="type-lede measure-tight mx-auto">
+        Keyboard-first on Mac. Touch-first capture on iPhone. Workspace-ready on iPad. Dark and light modes throughout.
+      </p>
+    </div>
+    <div data-reveal>
+      <MarketingPlatformStills />
+    </div>
   </Container>
 </section>
 
-<div data-reveal>
-  <PricingSection compact />
-</div>
+<PricingSection compact />
 
-<div data-reveal>
-  <CtaBanner />
-</div>
+<CtaBanner />

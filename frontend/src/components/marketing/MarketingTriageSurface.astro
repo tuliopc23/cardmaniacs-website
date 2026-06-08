@@ -3,7 +3,6 @@ import Surface from "../ui/Surface.astro";
 import Pill from "../Pill.astro";
 import IconWell from "../ui/IconWell.astro";
 import LucideIcon from "../LucideIcon.astro";
-import EyebrowLabel from "../ui/EyebrowLabel.astro";
 
 interface Props {
   class?: string;
@@ -37,7 +36,10 @@ const cards = [
 ---
 
 <Surface variant="elevated" radius="panel" class:list={["p-4 md:p-5", className]}>
-  <EyebrowLabel icon="list-checks" class="mb-4">Inbox preview</EyebrowLabel>
+  <p class="type-card-meta ink-secondary mb-4 inline-flex items-center gap-1.5">
+    <LucideIcon name="list-checks" size={13} />
+    Inbox
+  </p>
   <div class="flex flex-col gap-2">
     {
       cards.map((card, i) => (

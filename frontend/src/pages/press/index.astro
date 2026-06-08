@@ -7,7 +7,6 @@ import PageHero from '../../components/ui/PageHero.astro';
 import Card from '../../components/Card.astro';
 import Pill from '../../components/Pill.astro';
 import LucideIcon from '../../components/LucideIcon.astro';
-import EyebrowLabel from '../../components/ui/EyebrowLabel.astro';
 ---
 
 <Layout title="Press Kit — Cardmaniacs">
@@ -28,7 +27,7 @@ import EyebrowLabel from '../../components/ui/EyebrowLabel.astro';
     <section class="pb-20">
       <Container>
         <div class="mb-16">
-          <EyebrowLabel icon="screenshot" class="mb-5">App Icon</EyebrowLabel>
+          <h2 class="type-section-title ink-primary mb-5">App icon</h2>
           <div class="flex items-center gap-6">
             <img src="/images/Graphic.png" alt="Cardmaniacs App Icon" class="w-24 h-24 rounded-[20px] shadow-[var(--shadow-card)]" />
             <div>
@@ -47,7 +46,7 @@ import EyebrowLabel from '../../components/ui/EyebrowLabel.astro';
         </div>
 
         <div>
-          <EyebrowLabel icon="screenshot" class="mb-5">Screenshots</EyebrowLabel>
+          <h2 class="type-section-title ink-primary mb-5">Screenshots</h2>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
             {[
               { src: '/images/Cardmaniacs-mac - 1.png', label: 'Empty state', platform: 'macOS' },
@@ -80,7 +79,7 @@ import EyebrowLabel from '../../components/ui/EyebrowLabel.astro';
         </div>
 
         <div class="mt-16 max-w-[560px]">
-          <EyebrowLabel icon="file-text" class="mb-4">About Cardmaniacs</EyebrowLabel>
+          <h2 class="type-section-title ink-primary mb-4">About Cardmaniacs</h2>
           <p class="body ink-secondary leading-relaxed mb-3">
             Cardmaniacs is a native Apple app that unifies RSS feeds, Read Later, and Bookmarks into one beautifully crafted reading experience. Built entirely in Swift for macOS, iOS, and iPadOS, it features card-based content presentation, full-text search, offline reading, iCloud sync, and power-user features like Vim navigation.
           </p>

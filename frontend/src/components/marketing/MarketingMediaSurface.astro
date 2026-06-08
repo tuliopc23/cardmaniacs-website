@@ -2,7 +2,6 @@
 import Surface from "../ui/Surface.astro";
 import IconWell from "../ui/IconWell.astro";
 import LucideIcon from "../LucideIcon.astro";
-import EyebrowLabel from "../ui/EyebrowLabel.astro";
 
 interface Props {
   title?: string;
@@ -18,7 +17,6 @@ const {
 ---
 
 <Surface variant="elevated" radius="panel" class:list={["p-6 md:p-8", className]}>
-  <EyebrowLabel icon="youtube" class="mb-4">Media channels</EyebrowLabel>
   <div class="flex items-start gap-4">
     <IconWell icon="broadcast" size="lg" />
     <div>

@@ -2,7 +2,6 @@
 import Container from './Container.astro';
 import BejamasSeparator from './ui/bejamas/Separator.astro';
 import LucideIcon from './LucideIcon.astro';
-import EyebrowLabel from './ui/EyebrowLabel.astro';
 import LogoMark from './ui/LogoMark.astro';
 import { downloadCta } from '../lib/site-cta';
 
@@ -46,7 +45,7 @@ const chevronClass =
         <div class="lg:col-span-8">
           <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-5 md:grid-cols-3 md:gap-6">
             <div>
-              <EyebrowLabel icon="sparkles" class="mb-4">Product</EyebrowLabel>
+              <h3 class="type-card-title mb-4 ink-primary">Product</h3>
               <ul class="space-y-2.5">
                 <li>
                   <a href="/features" class={footerLinkClass}>
@@ -80,7 +79,7 @@ const chevronClass =
             </div>
 
             <div>
-              <EyebrowLabel icon="book-open" class="mb-4">Resources</EyebrowLabel>
+              <h3 class="type-card-title mb-4 ink-primary">Resources</h3>
               <ul class="space-y-2.5">
                 <li>
                   <a href="/blog" class={footerLinkClass}>
@@ -107,7 +106,7 @@ const chevronClass =
             </div>
 
             <div>
-              <EyebrowLabel icon="shield-check" class="mb-4">Legal</EyebrowLabel>
+              <h3 class="type-card-title mb-4 ink-primary">Legal</h3>
               <ul class="space-y-2.5">
                 <li>
                   <a href="/privacy" class={footerLinkClass}>

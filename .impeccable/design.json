@@ -1,0 +1,205 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-08T00:00:00.000Z",
+  "title": "Design System: Cardmaniacs Marketing",
+  "extensions": {
+    "colorMeta": {
+      "cm-blue": {
+        "role": "primary",
+        "displayName": "Cardmaniacs Blue",
+        "canonical": "oklch(0.68 0.09 230)",
+        "tonalRamp": [
+          "oklch(0.22 0.06 230)",
+          "oklch(0.32 0.07 230)",
+          "oklch(0.42 0.08 230)",
+          "oklch(0.52 0.085 230)",
+          "oklch(0.58 0.09 230)",
+          "oklch(0.64 0.09 230)",
+          "oklch(0.68 0.09 230)",
+          "oklch(0.88 0.04 230)"
+        ]
+      },
+      "bg-liquid-base": {
+        "role": "neutral",
+        "displayName": "Liquid Base",
+        "canonical": "oklch(0.988 0.006 250)",
+        "tonalRamp": [
+          "oklch(0.12 0.008 260)",
+          "oklch(0.18 0.007 255)",
+          "oklch(0.28 0.006 252)",
+          "oklch(0.45 0.005 250)",
+          "oklch(0.62 0.005 250)",
+          "oklch(0.78 0.005 250)",
+          "oklch(0.92 0.006 250)",
+          "oklch(0.988 0.006 250)"
+        ]
+      },
+      "ink-primary": {
+        "role": "neutral",
+        "displayName": "Ink Primary",
+        "canonical": "oklch(0.22 0.005 260)",
+        "tonalRamp": [
+          "oklch(0.15 0.004 260)",
+          "oklch(0.22 0.005 260)",
+          "oklch(0.35 0.004 260)",
+          "oklch(0.48 0.003 260)",
+          "oklch(0.62 0.003 260)",
+          "oklch(0.75 0.002 260)",
+          "oklch(0.88 0.002 260)",
+          "oklch(0.96 0.001 260)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display Hero",
+        "purpose": "Homepage and page hero headlines only."
+      },
+      "headline": {
+        "displayName": "Section Title",
+        "purpose": "Major section headings across marketing pages."
+      },
+      "body": {
+        "displayName": "Lede / Body",
+        "purpose": "Supporting prose; max 62ch measure."
+      },
+      "label": {
+        "displayName": "Editorial Eyebrow",
+        "purpose": "Sparse uppercase kickers; not per-section scaffolding."
+      }
+    },
+    "shadows": [
+      {
+        "name": "card",
+        "value": "0 1px 0 rgba(255,255,255,0.72) inset, 0 8px 22px rgba(6,10,20,0.07), 0 22px 52px rgba(6,10,20,0.09), 0 0 48px rgba(83,154,198,0.07)",
+        "purpose": "Default elevated card surfaces."
+      },
+      {
+        "name": "button-liquid",
+        "value": "0 10px 26px color-mix(in oklab, var(--accent) 42%, transparent), 0 22px 48px rgba(6,10,20,0.12)",
+        "purpose": "Primary CTA accent diffusion."
+      },
+      {
+        "name": "float",
+        "value": "0 16px 40px rgba(6,10,20,0.11), 0 48px 100px rgba(6,10,20,0.12), 0 0 80px rgba(83,154,198,0.1)",
+        "purpose": "Hero product frames and device compositions."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-standard",
+        "value": "cubic-bezier(0.25, 0.1, 0.25, 1)",
+        "purpose": "Default 200ms state transitions on buttons and surfaces."
+      },
+      {
+        "name": "ambient-breathe",
+        "value": "88s ease-in-out infinite",
+        "purpose": "Slow haze opacity cycle on SiteAmbient backdrop."
+      }
+    ],
+    "breakpoints": [
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Liquid glass pill CTA; main conversion action.",
+      "html": "<button class=\"ds-btn-primary\">Download on the App Store</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: Satoshi, -apple-system, sans-serif; font-size: 14px; font-weight: 600; color: #fff; padding: 10px 28px; border: 1px solid color-mix(in oklab, white 34%, #539AC6); border-radius: 9999px; background: linear-gradient(180deg, color-mix(in oklab, white 26%, #539AC6) 0%, color-mix(in oklab, #539AC6 88%, black) 100%); box-shadow: 0 10px 26px color-mix(in oklab, #539AC6 42%, transparent), 0 22px 48px rgba(6,10,20,0.12); transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease; cursor: pointer; } .ds-btn-primary:hover { background: linear-gradient(180deg, color-mix(in oklab, white 32%, #4B90BC) 0%, color-mix(in oklab, #4B90BC 90%, black) 100%); transform: translateY(-1px); } .ds-btn-primary:focus-visible { outline: 2px solid color-mix(in oklab, #539AC6 70%, white); outline-offset: 2px; } .ds-btn-primary:active { transform: scale(0.985); }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary text action without fill.",
+      "html": "<button class=\"ds-btn-ghost\">Explore features</button>",
+      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; gap: 8px; font-family: Satoshi, -apple-system, sans-serif; font-size: 15px; font-weight: 600; color: #6E6E73; padding: 12px 16px; border: none; border-radius: 9999px; background: transparent; cursor: pointer; transition: color 0.2s ease, background 0.2s ease; } .ds-btn-ghost:hover { color: #1D1D1F; background: color-mix(in oklab, #539AC6 12%, transparent); } .ds-btn-ghost:focus-visible { outline: 2px solid color-mix(in oklab, #539AC6 70%, white); outline-offset: 2px; }"
+    },
+    {
+      "name": "Elevated Surface",
+      "kind": "card",
+      "refersTo": "surface-elevated",
+      "description": "Default marketing card with sculpted shadow stack.",
+      "html": "<div class=\"ds-surface\"><p class=\"ds-surface-title\">Reading desk</p><p class=\"ds-surface-body\">Feeds, read-later, and bookmarks in one calm surface.</p></div>",
+      "css": ".ds-surface { position: relative; padding: 24px; border-radius: 32px; background: rgba(255,255,255,0.98); border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 1px 0 rgba(255,255,255,0.72) inset, 0 8px 22px rgba(6,10,20,0.07), 0 22px 52px rgba(6,10,20,0.09), 0 0 48px rgba(83,154,198,0.07); overflow: hidden; } .ds-surface::before { content: ''; position: absolute; inset: 0; background: radial-gradient(1200px 600px at 30% 0%, color-mix(in oklab, #539AC6 10%, transparent) 0%, transparent 55%); opacity: 0.7; pointer-events: none; } .ds-surface-title { position: relative; font-family: Satoshi, sans-serif; font-size: 15px; font-weight: 650; color: #1D1D1F; margin: 0 0 8px; } .ds-surface-body { position: relative; font-size: 14px; line-height: 1.55; color: #6E6E73; margin: 0; max-width: 52ch; }"
+    },
+    {
+      "name": "Feature Chip",
+      "kind": "chip",
+      "refersTo": "chip-pill",
+      "description": "Hero chip rail item; feature name pill.",
+      "html": "<span class=\"ds-chip\">Read Later</span>",
+      "css": ".ds-chip { display: inline-flex; align-items: center; padding: 6px 14px; font-family: Satoshi, sans-serif; font-size: 13px; font-weight: 600; color: #1A5D7A; background: color-mix(in oklab, #539AC6 10%, white); border-radius: 9999px; border: 1px solid rgba(0,0,0,0.05); }"
+    },
+    {
+      "name": "Editorial Eyebrow",
+      "kind": "custom",
+      "description": "Sparse section kicker; use deliberately, not on every band.",
+      "html": "<p class=\"ds-eyebrow\">A calmer home for everything you read</p>",
+      "css": ".ds-eyebrow { font-family: Satoshi, sans-serif; font-size: 11px; font-weight: 650; letter-spacing: 0.12em; text-transform: uppercase; color: #539AC6; margin: 0 0 16px; }"
+    },
+    {
+      "name": "Floating Nav Link",
+      "kind": "nav",
+      "description": "Header navigation link on glass chrome.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link ds-nav-link--active\" href=\"/\">Home</a><a class=\"ds-nav-link\" href=\"/features\">Features</a></nav>",
+      "css": ".ds-nav { display: inline-flex; gap: 4px; padding: 4px; border-radius: 9999px; background: color-mix(in oklab, rgba(255,255,255,0.64) 55%, transparent); border: 1px solid rgba(255,255,255,0.46); backdrop-filter: blur(22px) saturate(1.35); } .ds-nav-link { padding: 8px 16px; font-family: Satoshi, sans-serif; font-size: 14px; font-weight: 600; color: #6E6E73; text-decoration: none; border-radius: 9999px; transition: color 0.2s ease, background 0.2s ease; } .ds-nav-link:hover { color: #1D1D1F; background: rgba(255,255,255,0.5); } .ds-nav-link--active { color: #1D1D1F; background: rgba(255,255,255,0.72); } .ds-nav-link:focus-visible { outline: 2px solid color-mix(in oklab, #539AC6 70%, white); outline-offset: 2px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Native Reading Desk",
+    "overview": "Cardmaniacs marketing translates the app's calm reading desk into web editorial surfaces: frosted ambient atmosphere, oversized rounded cards, pill controls, and real product imagery staged as reading objects. The system is premium and native without mimicking Apple.com or third-party reference apps. Design continuity with the iOS/macOS app is mandatory.",
+    "keyCharacteristics": [
+      "Cardmaniacs blue (#539AC6) as the sole accent",
+      "Satoshi display + system body stack",
+      "Multi-layer shadows with subtle blue glow",
+      "Large radii (32px cards, pill controls)",
+      "Real app screenshots as primary visual artifacts",
+      "Dual light/dark theme via data-theme"
+    ],
+    "rules": [
+      {
+        "name": "The App Continuity Rule",
+        "body": "Marketing colors, radii, shadow vocabulary, and surface treatments must trace directly to the Cardmaniacs app chrome. When the app is unavailable as reference, preserve existing site tokens in global.css.",
+        "section": "colors"
+      },
+      {
+        "name": "The Frosted Ambient Rule",
+        "body": "Background depth comes from SiteAmbient (haze, bloom pools, frost veil, glint). Prohibited: full-page gradient meshes, paper-grain overlays, or warm neutral body backgrounds.",
+        "section": "colors"
+      },
+      {
+        "name": "The Accent Restraint Rule",
+        "body": "Cardmaniacs blue carries CTAs, focus, chips, and low-opacity washes. It must not flood large flat surfaces.",
+        "section": "colors"
+      },
+      {
+        "name": "The Eyebrow Sparingly Rule",
+        "body": "Uppercase tracked eyebrows are deliberate brand punctuation, not default section scaffolding.",
+        "section": "typography"
+      },
+      {
+        "name": "The Sculpted Object Rule",
+        "body": "Shadows combine inset specular highlights, ambient depth, and accent glow.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do preserve Cardmaniacs blue #539AC6 and existing global.css tokens when extending the site.",
+      "Do use SiteAmbient for site-wide atmosphere and real app imagery for proof.",
+      "Do honor prefers-reduced-motion and prefers-reduced-transparency.",
+      "Do use Motion.dev for high-value reveals; keep CSS transitions at 200–300ms."
+    ],
+    "donts": [
+      "Don't ship generic SaaS landing patterns: hero metrics, identical icon-card grids, cream or sand body backgrounds, buzzword copy.",
+      "Don't clone Apple.com, Bear, Craft, or reference apps verbatim.",
+      "Don't invent new accent colors or diverge from the app's visual language.",
+      "Don't put an uppercase tracked eyebrow above every section or numbered section markers as default scaffolding.",
+      "Don't gate content visibility on scroll-reveal animations."
+    ]
+  }
+}

@@ -1,6 +1,5 @@
 ---
 import Surface from "../ui/Surface.astro";
-import EyebrowLabel from "../ui/EyebrowLabel.astro";
 import LucideIcon from "../LucideIcon.astro";
 
 interface Props {
@@ -18,7 +17,6 @@ const actions = [
 ---
 
 <Surface variant="glass" radius="panel" class:list={["p-5 md:p-6 overflow-hidden", className]}>
-  <EyebrowLabel icon="command" class="mb-3">Command palette</EyebrowLabel>
   <div class="rounded-[var(--radius-card)] border border-[var(--border-subtle)] bg-[var(--surface-inset)] p-3 mb-3 flex items-center gap-2">
     <LucideIcon name="search" size={16} class="ink-tertiary shrink-0" />
     <span class="type-card-meta">Search or run an action…</span>

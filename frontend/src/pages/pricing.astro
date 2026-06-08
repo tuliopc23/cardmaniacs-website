@@ -7,8 +7,8 @@ import PricingSection from '../components/PricingSection.astro';
 import CtaBanner from '../components/CtaBanner.astro';
 import BejamasCard from '../components/ui/bejamas/Card.astro';
 import LucideIcon from '../components/LucideIcon.astro';
-import IconWell from '../components/ui/IconWell.astro';
 import PageHero from '../components/ui/PageHero.astro';
+import Surface from '../components/ui/Surface.astro';
 import { faqIcons } from '../lib/icons/registry';
 
 const faqs = [
@@ -20,11 +20,6 @@ const faqs = [
   { q: 'Can I import from other apps?', a: 'Yes. Cardmaniacs supports OPML import for RSS feeds, and can import bookmarks, PDFs, EPUB files, and Markdown documents.' },
 ];
 
-const trustItems = [
-  { icon: 'shield-check' as const, title: 'Privacy first', desc: 'All data stays on your devices via iCloud' },
-  { icon: 'code' as const, title: '100% native Swift', desc: 'No Electron, no web views' },
-  { icon: 'heart' as const, title: 'Indie crafted', desc: 'Built with care, not VC pressure' },
-];
 ---
 
 <Layout title="Pricing — Cardmaniacs">
@@ -78,17 +73,12 @@ const trustItems = [
 
     <section class="section-band py-12">
       <Container>
-        <div class="flex flex-col items-start gap-6 md:flex-row md:items-center md:gap-10">
-          {trustItems.map((item) => (
-            <div class="flex items-center gap-3">
-              <IconWell icon={item.icon} size="md" />
-              <div>
-                <p class="type-card-title !text-[0.875rem]">{item.title}</p>
-                <p class="type-card-meta">{item.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+        <Surface variant="elevated" radius="card" class="max-w-[720px] mx-auto p-6 md:p-8">
+          <p class="type-lede measure-tight !text-[1rem] ink-secondary">
+            Cardmaniacs is 100% native Swift on Apple platforms — no Electron, no embedded web views. Your library
+            stays on your devices with iCloud sync, built by an indie team that cares about calm software.
+          </p>
+        </Surface>
       </Container>
     </section>
 

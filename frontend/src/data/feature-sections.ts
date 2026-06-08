@@ -2,17 +2,23 @@ import { marketingImages } from "../lib/marketing-images";
 
 export type FeatureBullet = { icon: string; title: string; description: string };
 
+export type FeatureLayout = "split" | "surfaceFirst" | "fullBleed" | "stacked" | "platform";
+
+export type FeatureBulletStyle = "cards" | "prose";
+
 export type FeatureSection = {
   id: string;
   label: string;
-  /** Lucide registry key for section eyebrow */
   icon: string;
   heading: string;
   description: string;
   screenshot: string;
   screenshotAlt: string;
   bullets: FeatureBullet[];
+  bulletStyle?: FeatureBulletStyle;
   surface: "triage" | "reader" | "highlight" | "command" | "media" | "device" | "none";
+  layout: FeatureLayout;
+  reverse?: boolean;
 };
 
 export const featureSections: FeatureSection[] = [
@@ -26,6 +32,8 @@ export const featureSections: FeatureSection[] = [
     screenshot: marketingImages.macTriage,
     screenshotAlt: "Cardmaniacs feed triage on Mac",
     surface: "triage",
+    layout: "split",
+    bulletStyle: "prose",
     bullets: [
       {
         icon: "rss",
@@ -54,6 +62,8 @@ export const featureSections: FeatureSection[] = [
     screenshot: marketingImages.macReader,
     screenshotAlt: "Cardmaniacs Reader on Mac",
     surface: "reader",
+    layout: "surfaceFirst",
+    bulletStyle: "prose",
     bullets: [
       { icon: "file-text", title: "Web articles", description: "Clean text from complex pages." },
       {
@@ -78,6 +88,8 @@ export const featureSections: FeatureSection[] = [
     screenshot: marketingImages.macHighlights,
     screenshotAlt: "Highlights in Cardmaniacs",
     surface: "highlight",
+    layout: "fullBleed",
+    bulletStyle: "prose",
     bullets: [
       {
         icon: "article",
@@ -101,7 +113,9 @@ export const featureSections: FeatureSection[] = [
       "Text-to-speech with native playback controls — reading continues when your eyes cannot.",
     screenshot: marketingImages.macReader,
     screenshotAlt: "Read aloud in Cardmaniacs",
-    surface: "reader",
+    surface: "none",
+    layout: "stacked",
+    bulletStyle: "prose",
     bullets: [
       { icon: "article", title: "TTS in Reader", description: "Start listening from any article." },
       {
@@ -121,6 +135,9 @@ export const featureSections: FeatureSection[] = [
     screenshot: marketingImages.macCommand,
     screenshotAlt: "Command palette on Mac",
     surface: "command",
+    layout: "split",
+    reverse: true,
+    bulletStyle: "prose",
     bullets: [
       { icon: "plus", title: "Quick Add", description: "Capture URLs and files in seconds." },
       {
@@ -141,6 +158,8 @@ export const featureSections: FeatureSection[] = [
     screenshot: marketingImages.macCommand,
     screenshotAlt: "Library organization",
     surface: "none",
+    layout: "surfaceFirst",
+    bulletStyle: "prose",
     bullets: [
       { icon: "tag", title: "Tags", description: "Flexible labels across all content types." },
       { icon: "folder", title: "Smart Lists", description: "Rules that keep collections fresh." },
@@ -157,6 +176,8 @@ export const featureSections: FeatureSection[] = [
     screenshot: marketingImages.macMedia,
     screenshotAlt: "Cardmaniacs integrations",
     surface: "media",
+    layout: "stacked",
+    bulletStyle: "prose",
     bullets: [
       { icon: "sparkle", title: "App Intents", description: "Automate with Shortcuts." },
       { icon: "code", title: "Web extension", description: "Save from Safari instantly." },
@@ -173,6 +194,8 @@ export const featureSections: FeatureSection[] = [
     screenshot: marketingImages.macHeroLight,
     screenshotAlt: "Cardmaniacs on Apple platforms",
     surface: "device",
+    layout: "platform",
+    bulletStyle: "prose",
     bullets: [
       { icon: "device-mobile", title: "iPhone", description: "Capture and read on the go." },
       { icon: "device-tablet", title: "iPad", description: "Split view and workspace layout." },

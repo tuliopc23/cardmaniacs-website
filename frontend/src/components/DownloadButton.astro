@@ -19,9 +19,9 @@ const { size = "sm", class: className = "", variant = "primary" } = Astro.props;
       <slot>Download</slot>
     </Button>
   ) : (
-    <Button href="/features" size={size} class={className} variant="secondary">
-      <LucideIcon name="compass" size={16} />
-      <slot>Explore features</slot>
+    <Button href="/#get-the-app" size={size} class={className} variant="secondary">
+      <LucideIcon name="download" size={16} />
+      <slot>Get the app</slot>
     </Button>
   )
 }

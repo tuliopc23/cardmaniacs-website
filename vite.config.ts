@@ -1,13 +1,23 @@
 import { defineConfig } from "vite-plus";
 
+const skillVendorIgnore = [
+  "**/.agents/**",
+  "**/.cursor/skills/**",
+  "**/.kiro/**",
+  "**/.claude/skills/**",
+];
+
 export default defineConfig({
   staged: {
     "*": "vp check --fix",
   },
   fmt: {
-    ignorePatterns: ["**/dist/**", "**/node_modules/**", "**/.astro/**"],
+    ignorePatterns: ["**/dist/**", "**/node_modules/**", "**/.astro/**", ...skillVendorIgnore],
   },
-  lint: { options: { typeAware: true, typeCheck: true } },
+  lint: {
+    ignorePatterns: skillVendorIgnore,
+    options: { typeAware: true, typeCheck: true },
+  },
   test: {
     environment: "jsdom",
     setupFiles: ["./frontend/src/test/setup.ts"],

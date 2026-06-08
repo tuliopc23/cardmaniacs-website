@@ -1,68 +1,152 @@
 ---
 import Container from "../Container.astro";
-import FeatureCard from "../FeatureCard.astro";
 import ProductShowcase from "../ProductShowcase.astro";
 import MarketingTriageSurface from "../marketing/MarketingTriageSurface.astro";
 import MarketingReaderSurface from "../marketing/MarketingReaderSurface.astro";
 import MarketingHighlightSurface from "../marketing/MarketingHighlightSurface.astro";
 import MarketingCommandSurface from "../marketing/MarketingCommandSurface.astro";
 import MarketingMediaSurface from "../marketing/MarketingMediaSurface.astro";
-import MarketingDeviceComposition from "../marketing/MarketingDeviceComposition.astro";
+import MarketingPlatformShowcase from "../marketing/MarketingPlatformShowcase.astro";
 import SectionHeader from "../ui/SectionHeader.astro";
 import { featureSections } from "../../data/feature-sections";
-import { marketingImages } from "../../lib/marketing-images";
 ---
 
 {
   featureSections.map((s, i) => {
-    return (
-      <section class:list={["py-20 md:py-28", i % 2 !== 0 ? "section-band" : ""]}>
-        <Container>
-          <div class="mb-10 max-w-[720px]">
-            <SectionHeader
-              eyebrow={s.label}
-              heading={s.heading}
-              description={s.description}
-              icon={s.icon}
-              iconPlacement="eyebrow"
-              headingClass="type-section-title ink-primary text-balance"
-            />
-          </div>
+    const header = (
+      <div class="mb-10 max-w-[720px]">
+        <SectionHeader
+          heading={s.heading}
+          description={s.description}
+          icon={s.icon}
+          iconPlacement="heading"
+          headingClass="type-section-title ink-primary text-balance"
+        />
+      </div>
+    );
 
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-            <div class="lg:col-span-4 space-y-6">
-              {s.bullets.map((f) => (
-                <FeatureCard icon={f.icon} title={f.title} description={f.description} />
-              ))}
+    const bullets = (
+      <ul class="measure space-y-3 ink-secondary type-body !text-[1rem]">
+        {s.bullets.map((f) => (
+          <li>
+            <strong class="ink-primary font-display font-semibold">{f.title}</strong>
+            {" — "}
+            {f.description}
+          </li>
+        ))}
+      </ul>
+    );
+
+    const surfaceBlock = (
+      <>
+        {s.surface === "reader" ? (
+          <MarketingReaderSurface title="Sample article" source="Feature preview" meta="Reader">
+            <p>
+              Native Reader typography with highlights and calm chrome — the same surface as blog and release notes on
+              this site.
+            </p>
+          </MarketingReaderSurface>
+        ) : s.surface === "highlight" ? (
+          <MarketingHighlightSurface
+            excerpt="Highlights stay tied to their source so you can revisit the idea, not just the link."
+            source="Feature preview"
+            tags={["highlights"]}
+          />
+        ) : s.surface === "triage" ? (
+          <MarketingTriageSurface />
+        ) : s.surface === "command" ? (
+          <MarketingCommandSurface />
+        ) : s.surface === "media" ? (
+          <MarketingMediaSurface />
+        ) : (
+          <ProductShowcase src={s.screenshot} alt={s.screenshotAlt} />
+        )}
+      </>
+    );
+
+    const sectionClass = ["py-20 md:py-28 scroll-anchor", i % 2 !== 0 ? "section-band" : ""];
+
+    if (s.layout === "platform") {
+      return (
+        <section id={s.id} class:list={sectionClass}>
+          <Container>
+            {header}
+            <div data-device-hero data-reveal>
+              <MarketingPlatformShowcase
+                macAlt={s.screenshotAlt}
+                iphoneAlt="Cardmaniacs on iPhone"
+                ipadAlt="Cardmaniacs on iPad"
+              />
             </div>
-            <div class="lg:col-span-8" data-reveal>
-              {
-                s.surface === "device" ? (
-                  <MarketingDeviceComposition
-                    srcLight={marketingImages.macHeroLight}
-                    srcDark={marketingImages.macHeroDark}
-                    alt={s.screenshotAlt}
-                  />
-                ) : s.surface === "reader" ? (
-                  <MarketingReaderSurface title="Sample article" source="Feature preview" meta="Reader">
-                    <p>Native Reader typography with highlights and calm chrome — the same surface as blog and release notes on this site.</p>
-                  </MarketingReaderSurface>
-                ) : s.surface === "highlight" ? (
-                  <MarketingHighlightSurface
-                    excerpt="Highlights stay tied to their source so you can revisit the idea, not just the link."
-                    source="Feature preview"
-                    tags={["highlights"]}
-                  />
-                ) : s.surface === "triage" ? (
-                  <MarketingTriageSurface />
-                ) : s.surface === "command" ? (
-                  <MarketingCommandSurface />
-                ) : s.surface === "media" ? (
-                  <MarketingMediaSurface />
-                ) : (
-                  <ProductShowcase src={s.screenshot} alt={s.screenshotAlt} />
-                )
-              }
+            <div class="mt-10">{bullets}</div>
+          </Container>
+        </section>
+      );
+    }
+
+    if (s.layout === "surfaceFirst") {
+      return (
+        <section id={s.id} class:list={sectionClass}>
+          <Container>
+            {header}
+            <div class="mb-10" data-reveal>
+              {surfaceBlock}
+            </div>
+            {bullets}
+          </Container>
+        </section>
+      );
+    }
+
+    if (s.layout === "fullBleed") {
+      return (
+        <section id={s.id} class:list={sectionClass}>
+          <Container>
+            {header}
+            <div data-reveal>{surfaceBlock}</div>
+            <div class="mt-8">{bullets}</div>
+          </Container>
+        </section>
+      );
+    }
+
+    if (s.layout === "stacked") {
+      return (
+        <section id={s.id} class:list={sectionClass}>
+          <Container>
+            <div class="max-w-[720px] mx-auto">
+              {header}
+              <div class="mb-10" data-reveal>
+                {surfaceBlock}
+              </div>
+              {bullets}
+            </div>
+          </Container>
+        </section>
+      );
+    }
+
+    return (
+      <section id={s.id} class:list={sectionClass}>
+        <Container>
+          {header}
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            <div
+              class:list={[
+                "lg:col-span-4",
+                s.reverse && "lg:col-start-9 lg:order-2",
+              ]}
+            >
+              {bullets}
+            </div>
+            <div
+              class:list={[
+                "lg:col-span-8",
+                s.reverse && "lg:col-start-1 lg:row-start-1 lg:order-1",
+              ]}
+              data-reveal
+            >
+              {surfaceBlock}
             </div>
           </div>
         </Container>

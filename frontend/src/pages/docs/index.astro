@@ -6,7 +6,7 @@ import Container from '../../components/Container.astro';
 import BejamasCard from '../../components/ui/bejamas/Card.astro';
 import LucideIcon from '../../components/LucideIcon.astro';
 import PageHero from '../../components/ui/PageHero.astro';
-import EyebrowLabel from '../../components/ui/EyebrowLabel.astro';
+import Surface from '../../components/ui/Surface.astro';
 import { getCollection } from 'astro:content';
 
 const docs = await getCollection('docs');
@@ -35,6 +35,14 @@ docs.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0)).forEach((doc) => 
 
     <section class="pb-20">
       <Container>
+        {docs.length === 0 ? (
+          <Surface variant="elevated" radius="card" class="max-w-[560px] mx-auto p-8 md:p-10 text-center">
+            <h2 class="type-section-title ink-primary mb-3">Guides are on the way.</h2>
+            <p class="type-lede measure-tight mx-auto ink-secondary">
+              Documentation will land here as Cardmaniacs ships. Visit the changelog for release notes in the meantime.
+            </p>
+          </Surface>
+        ) : (
         <div class="space-y-12">
           {[...sections.entries()].map(([section, items]) => (
             <div>
@@ -58,6 +66,7 @@ docs.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0)).forEach((doc) => 
             </div>
           ))}
         </div>
+        )}
       </Container>
     </section>
   </main>

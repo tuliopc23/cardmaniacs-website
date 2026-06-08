@@ -5,6 +5,7 @@ import SiteFooter from '../../components/SiteFooter.astro';
 import Container from '../../components/Container.astro';
 import PostCard from '../../components/PostCard.astro';
 import PageHero from '../../components/ui/PageHero.astro';
+import Surface from '../../components/ui/Surface.astro';
 import { getCollection } from 'astro:content';
 
 const posts = await getCollection('posts');
@@ -38,6 +39,15 @@ const rest = featured ? sortedPosts.filter((p) => p.id !== featured.id) : sorted
 
     <section class="pb-24">
       <Container>
+        {sortedPosts.length === 0 ? (
+          <Surface variant="elevated" radius="card" class="max-w-[560px] mx-auto p-8 md:p-10 text-center">
+            <h2 class="type-section-title ink-primary mb-3">Notes are on the way.</h2>
+            <p class="type-lede measure-tight mx-auto ink-secondary">
+              We are drafting the first posts from the reading desk. Check back soon, or follow the changelog for
+              product updates in the meantime.
+            </p>
+          </Surface>
+        ) : (
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-center">
           {featured && (
             <PostCard
@@ -62,6 +72,7 @@ const rest = featured ? sortedPosts.filter((p) => p.id !== featured.id) : sorted
             />
           ))}
         </div>
+        )}
       </Container>
     </section>
   </main>

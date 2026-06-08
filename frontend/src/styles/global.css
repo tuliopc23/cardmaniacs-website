@@ -879,7 +879,10 @@ body {
 
 @media (prefers-reduced-transparency: reduce) {
   .cm-btn-liquid,
-  .cm-btn-liquid--soft {
+  .cm-btn-liquid--soft,
+  .cm-mobile-drawer,
+  .cm-mobile-drawer-backdrop,
+  .section-module {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
   }
@@ -1014,6 +1017,12 @@ body {
 
 html.cm-drawer-open {
   overflow: hidden;
+}
+
+/* Reveal targets stay visible without JS; motion enhances from this baseline */
+[data-reveal] {
+  opacity: 1;
+  transform: none;
 }
 
 /* ==============================================

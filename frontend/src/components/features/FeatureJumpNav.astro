@@ -1,0 +1,32 @@
+---
+import Container from "../Container.astro";
+import LucideIcon from "../LucideIcon.astro";
+import { featureSections } from "../../data/feature-sections";
+---
+
+<nav
+  aria-label="Jump to feature sections"
+  class="sticky top-[max(0.5rem,env(safe-area-inset-top))] z-40 mb-2 md:top-[calc(3.25rem+env(safe-area-inset-top))]"
+>
+  <Container>
+    <div
+      class="rounded-[var(--radius-pill)] border border-[var(--border-subtle)] bg-[color-mix(in_oklab,var(--surface-glass)_72%,transparent)] p-1 shadow-[var(--shadow-pill)] backdrop-blur-[var(--blur-glass)] backdrop-saturate-[var(--sat-glass)]"
+    >
+      <ul class="flex items-center gap-0.5 overflow-x-auto px-0.5 py-0.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {
+          featureSections.map((s) => (
+            <li class="shrink-0">
+              <a
+                href={`#${s.id}`}
+                class="inline-flex items-center gap-1.5 rounded-[var(--radius-pill)] px-3 py-1.5 text-[13px] font-display font-medium tracking-[-0.01em] ink-secondary transition-colors duration-200 hover:ink-primary hover:bg-[color-mix(in_oklab,var(--surface-overlay)_55%,transparent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-inset whitespace-nowrap"
+              >
+                <LucideIcon name={s.icon} size={13} class="shrink-0 opacity-85" />
+                {s.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </Container>
+</nav>

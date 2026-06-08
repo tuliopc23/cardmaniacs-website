@@ -11,18 +11,21 @@
 
     document.querySelectorAll('[data-reveal]').forEach((el) => {
       const htmlEl = el as HTMLElement;
-      if (htmlEl.dataset.revealInit) return; // prevent double-init
+      if (htmlEl.dataset.revealInit) return;
       htmlEl.dataset.revealInit = '1';
-      htmlEl.style.opacity = '0';
-      htmlEl.style.transform = 'translateY(24px)';
 
-      inView(htmlEl, () => {
-        animate(
-          htmlEl,
-          ({ opacity: [0, 1], y: [24, 0] } as any),
-          ({ duration: 0.6, easing: 'ease-out' } as any)
-        );
-      }, { margin: '-60px 0px -60px 0px' });
+      inView(
+        htmlEl,
+        () => {
+          htmlEl.style.transform = 'translateY(24px)';
+          animate(
+            htmlEl,
+            ({ y: [24, 0] } as any),
+            ({ duration: 0.6, easing: 'ease-out' } as any)
+          );
+        },
+        { margin: '-60px 0px -60px 0px' }
+      );
     });
   }
 

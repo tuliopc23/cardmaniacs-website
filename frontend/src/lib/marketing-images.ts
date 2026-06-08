@@ -7,4 +7,10 @@ export const marketingImages = {
   macHighlights: "/images/marketing/mac-highlights.png",
   macCommand: "/images/marketing/mac-command-palette.png",
   macMedia: "/images/marketing/mac-media-player.png",
+  /** M6.7 — drop-in replace under public/images/marketing/ */
+  iphoneReader: "/images/marketing/iphone-reader-queue.png",
+  /** M6.8 */
+  iphoneQuickAdd: "/images/marketing/iphone-quick-add.png",
+  /** M6.9 */
+  ipadWorkspace: "/images/marketing/ipad-workspace-split.png",
 } as const;

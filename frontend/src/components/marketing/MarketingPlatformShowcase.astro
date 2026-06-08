@@ -1,0 +1,73 @@
+---
+import DevicePicker from "../site/DevicePicker.astro";
+import MarketingDeviceComposition from "./MarketingDeviceComposition.astro";
+import { marketingImages } from "../../lib/marketing-images";
+
+interface Props {
+  class?: string;
+  macAlt?: string;
+  iphoneAlt?: string;
+  ipadAlt?: string;
+  iphoneSrc?: string;
+}
+
+const {
+  class: className = "",
+  macAlt = "Cardmaniacs on macOS",
+  iphoneAlt = "Cardmaniacs on iPhone",
+  ipadAlt = "Cardmaniacs on iPad",
+  iphoneSrc = marketingImages.iphoneReader,
+} = Astro.props;
+---
+
+<DevicePicker />
+
+<div data-device-showcase class:list={["w-full", className]}>
+  <div
+    data-device-panel="mac"
+    id="device-panel-mac"
+    role="tabpanel"
+    aria-labelledby="device-tab-mac"
+    class="w-full"
+  >
+    <MarketingDeviceComposition
+      aspect="mac"
+      srcLight={marketingImages.macHeroLight}
+      srcDark={marketingImages.macHeroDark}
+      alt={macAlt}
+      class="mx-auto"
+    />
+  </div>
+
+  <div
+    data-device-panel="iphone"
+    id="device-panel-iphone"
+    role="tabpanel"
+    aria-labelledby="device-tab-iphone"
+    hidden
+    class="w-full"
+  >
+    <MarketingDeviceComposition
+      aspect="iphone"
+      srcLight={iphoneSrc}
+      alt={iphoneAlt}
+      class="mx-auto"
+    />
+  </div>
+
+  <div
+    data-device-panel="ipad"
+    id="device-panel-ipad"
+    role="tabpanel"
+    aria-labelledby="device-tab-ipad"
+    hidden
+    class="w-full"
+  >
+    <MarketingDeviceComposition
+      aspect="ipad"
+      srcLight={marketingImages.ipadWorkspace}
+      alt={ipadAlt}
+      class="mx-auto"
+    />
+  </div>
+</div>

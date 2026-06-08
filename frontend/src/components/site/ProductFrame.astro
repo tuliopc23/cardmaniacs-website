@@ -3,12 +3,12 @@ import Surface from "../ui/Surface.astro";
 
 interface Props {
   srcLight: string;
-  srcDark: string;
+  srcDark?: string;
   alt: string;
   class?: string;
 }
 
-const { srcLight, srcDark, alt, class: className = "" } = Astro.props;
+const { srcLight, srcDark = srcLight, alt, class: className = "" } = Astro.props;
 ---
 
 <Surface
@@ -23,12 +23,14 @@ const { srcLight, srcDark, alt, class: className = "" } = Astro.props;
       src={srcLight}
       alt={alt}
       loading="eager"
+      decoding="async"
       class="theme-only-light w-full h-auto [border-radius:calc(var(--radius-hero)-10px)] shadow-[var(--shadow-device)]"
     />
     <img
       src={srcDark}
       alt={alt}
       loading="eager"
+      decoding="async"
       class="theme-only-dark w-full h-auto [border-radius:calc(var(--radius-hero)-10px)] shadow-[var(--shadow-device)]"
     />
 
