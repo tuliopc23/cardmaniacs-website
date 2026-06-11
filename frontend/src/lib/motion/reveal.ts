@@ -1,5 +1,5 @@
 import { inView, stagger } from "motion";
-import { animateEl } from "./animate-el";
+import { animateEl, whenAnimationDone } from "./animate-el";
 import { easeOutQuint, prefersReducedMotion } from "./prefers-motion";
 
 /** Scroll / section reveals — perceptible but calm */
@@ -15,6 +15,11 @@ const HERO_BLUR = 6;
 const HERO_DURATION = 0.65;
 
 export type RevealVariant = "default" | "hero" | "device";
+
+function isInViewport(el: HTMLElement) {
+  const rect = el.getBoundingClientRect();
+  return rect.top < window.innerHeight * 0.92 && rect.bottom > 0;
+}
 
 export function setRevealInitial(el: HTMLElement, variant: RevealVariant = "default") {
   if (variant === "device") {
@@ -44,40 +49,64 @@ export function animateReveal(el: HTMLElement, delay = 0, variant: RevealVariant
   }
 
   if (variant === "device") {
-    return animateEl(
-      el,
-      {
-        transform: [`translateY(${HERO_Y + 8}px) scale(${HERO_SCALE})`, "translateY(0) scale(1)"],
-        opacity: [HERO_OPACITY, 1],
-        filter: [`blur(${HERO_BLUR}px)`, "blur(0px)"],
+    return whenAnimationDone(
+      animateEl(
+        el,
+        {
+          transform: [`translateY(${HERO_Y + 8}px) scale(${HERO_SCALE})`, "translateY(0) scale(1)"],
+          opacity: [HERO_OPACITY, 1],
+          filter: [`blur(${HERO_BLUR}px)`, "blur(0px)"],
+        },
+        { duration: HERO_DURATION + 0.08, delay, easing: easeOutQuint },
+      ),
+      () => {
+        el.dataset.revealDone = "1";
+        clearRevealInline(el);
       },
-      { duration: HERO_DURATION + 0.08, delay, easing: easeOutQuint },
-    ).finished.then(() => {
-      el.dataset.revealDone = "1";
-      clearRevealInline(el);
-    });
+    );
   }
 
   const y = variant === "hero" ? HERO_Y : REVEAL_Y;
   const opacity = variant === "hero" ? HERO_OPACITY : REVEAL_OPACITY;
   const duration = variant === "hero" ? HERO_DURATION : REVEAL_DURATION;
 
-  return animateEl(
-    el,
-    {
-      transform: [`translateY(${y}px)`, "translateY(0)"],
-      opacity: [opacity, 1],
+  return whenAnimationDone(
+    animateEl(
+      el,
+      {
+        transform: [`translateY(${y}px)`, "translateY(0)"],
+        opacity: [opacity, 1],
+      },
+      { duration, delay, easing: easeOutQuint },
+    ),
+    () => {
+      el.dataset.revealDone = "1";
+      clearRevealInline(el);
     },
-    { duration, delay, easing: easeOutQuint },
-  ).finished.then(() => {
-    el.dataset.revealDone = "1";
-    clearRevealInline(el);
-  });
+  );
 }
 
 function runRevealOnce(el: HTMLElement, delay = 0, variant: RevealVariant = "default") {
   if (el.dataset.revealDone === "1") return;
-  void animateReveal(el, delay, variant);
+  animateReveal(el, delay, variant);
+}
+
+function bindRevealOnView(el: HTMLElement, run: () => void) {
+  if (isInViewport(el)) {
+    requestAnimationFrame(run);
+    return;
+  }
+
+  inView(el, run, { margin: "-8% 0px -8% 0px", amount: 0.12 });
+}
+
+function bindStaggerOnView(root: HTMLElement, run: () => void) {
+  if (isInViewport(root)) {
+    requestAnimationFrame(run);
+    return;
+  }
+
+  inView(root, run, { margin: "-10% 0px -10% 0px", amount: 0.1 });
 }
 
 export function initScrollReveals() {
@@ -87,21 +116,7 @@ export function initScrollReveals() {
     if (el.dataset.revealInit) return;
     el.dataset.revealInit = "1";
 
-    const rect = el.getBoundingClientRect();
-    const inViewport = rect.top < window.innerHeight * 0.92 && rect.bottom > 0;
-
-    if (inViewport) {
-      el.dataset.revealDone = "1";
-      return;
-    }
-
-    inView(
-      el,
-      () => {
-        runRevealOnce(el);
-      },
-      { margin: "-8% 0px -8% 0px", amount: 0.12 },
-    );
+    bindRevealOnView(el, () => runRevealOnce(el));
   });
 }
 
@@ -119,11 +134,11 @@ export function initStaggerGroups() {
       if (root.dataset.staggerDone === "1") return;
       root.dataset.staggerDone = "1";
       items.forEach((el, i) => {
-        void animateReveal(el, i * 0.07);
+        animateReveal(el, i * 0.07);
       });
     };
 
-    inView(root, runStagger, { margin: "-10% 0px -10% 0px", amount: 0.1 });
+    bindStaggerOnView(root, runStagger);
   });
 }
 
@@ -142,21 +157,24 @@ export function initPlatformStills() {
       root.dataset.stillsDone = "1";
 
       figures.forEach((el) => setRevealInitial(el));
-      void animateEl(
-        figures,
-        {
-          transform: [`translateY(${REVEAL_Y}px)`, "translateY(0)"],
-          opacity: [REVEAL_OPACITY, 1],
+      whenAnimationDone(
+        animateEl(
+          figures,
+          {
+            transform: [`translateY(${REVEAL_Y}px)`, "translateY(0)"],
+            opacity: [REVEAL_OPACITY, 1],
+          },
+          { duration: 0.52, delay: stagger(0.09), easing: easeOutQuint },
+        ),
+        () => {
+          figures.forEach((el) => {
+            el.dataset.revealDone = "1";
+            clearRevealInline(el);
+          });
         },
-        { duration: 0.52, delay: stagger(0.09), easing: easeOutQuint },
-      ).finished.then(() => {
-        figures.forEach((el) => {
-          el.dataset.revealDone = "1";
-          clearRevealInline(el);
-        });
-      });
+      );
     };
 
-    inView(root, runStagger, { margin: "-10% 0px -10% 0px", amount: 0.1 });
+    bindStaggerOnView(root, runStagger);
   });
 }

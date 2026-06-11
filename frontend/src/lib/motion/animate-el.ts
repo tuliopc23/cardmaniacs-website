@@ -10,3 +10,15 @@ export function animateEl(
 ) {
   return animate(target, keyframes as never, (options ?? {}) as never);
 }
+
+/** Motion v12+: animate() is thenable; `.finished` was removed. */
+export function whenAnimationDone(
+  animation: { then?: (onfulfilled: () => void) => unknown },
+  onDone: () => void,
+) {
+  if (typeof animation.then === "function") {
+    void animation.then(onDone);
+    return;
+  }
+  onDone();
+}

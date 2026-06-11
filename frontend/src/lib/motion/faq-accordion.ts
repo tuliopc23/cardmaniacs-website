@@ -1,4 +1,4 @@
-import { animateEl } from "./animate-el";
+import { animateEl, whenAnimationDone } from "./animate-el";
 import { easeOutQuint, prefersReducedMotion } from "./prefers-motion";
 
 export function initFaqAccordion() {
@@ -22,15 +22,14 @@ export function initFaqAccordion() {
         const start = body.scrollHeight;
         body.style.height = `${start}px`;
         body.style.overflow = "hidden";
-        void animateEl(
-          body,
-          { height: [`${start}px`, "0px"] },
-          { duration: 0.22, easing: "ease-in" },
-        ).finished.then(() => {
-          details.open = false;
-          body.style.height = "";
-          body.style.overflow = "";
-        });
+        whenAnimationDone(
+          animateEl(body, { height: [`${start}px`, "0px"] }, { duration: 0.22, easing: "ease-in" }),
+          () => {
+            details.open = false;
+            body.style.height = "";
+            body.style.overflow = "";
+          },
+        );
         return;
       }
 
@@ -38,14 +37,17 @@ export function initFaqAccordion() {
       body.style.height = "0px";
       body.style.overflow = "hidden";
       const target = body.scrollHeight;
-      void animateEl(
-        body,
-        { height: ["0px", `${target}px`] },
-        { duration: 0.28, easing: easeOutQuint },
-      ).finished.then(() => {
-        body.style.height = "";
-        body.style.overflow = "";
-      });
+      whenAnimationDone(
+        animateEl(
+          body,
+          { height: ["0px", `${target}px`] },
+          { duration: 0.28, easing: easeOutQuint },
+        ),
+        () => {
+          body.style.height = "";
+          body.style.overflow = "";
+        },
+      );
     });
   });
 }

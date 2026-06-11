@@ -11,6 +11,6 @@ export function initHeroEntrance() {
   const items = [...root.querySelectorAll<HTMLElement>("[data-hero-item]")];
   items.forEach((el, i) => {
     const isDeviceFrame = el.hasAttribute("data-hero-device");
-    void animateReveal(el, i * 0.07, isDeviceFrame ? "device" : "hero");
+    animateReveal(el, i * 0.07, isDeviceFrame ? "device" : "hero");
   });
 }

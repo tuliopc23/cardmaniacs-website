@@ -193,7 +193,7 @@ const tabBase =
           );
           activePanelAnims = [outAnim, inAnim];
 
-          void Promise.all([outAnim.finished, inAnim.finished]).then(() => {
+          void Promise.all([outAnim, inAnim]).then(() => {
             if (transitionId !== panelTransition) return;
             hidePanel(prevPanel);
             nextPanel.style.opacity = "";

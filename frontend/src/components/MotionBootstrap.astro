@@ -21,6 +21,5 @@
     initFaqAccordion();
   }
 
-  initMotion();
-  document.addEventListener("astro:after-swap", initMotion);
+  document.addEventListener("astro:page-load", initMotion);
 </script>
