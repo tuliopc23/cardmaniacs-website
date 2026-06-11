@@ -1,6 +1,8 @@
 ---
 import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
 import SiteAmbient from '../components/site/SiteAmbient.astro';
+import MotionBootstrap from '../components/MotionBootstrap.astro';
 import {
   DEFAULT_OG_IMAGE,
   DEFAULT_OG_IMAGE_HEIGHT,
@@ -55,6 +57,9 @@ const ogImageUrl = new URL(ogImage, siteOrigin).href;
           document.documentElement.setAttribute('data-theme', 'light');
         }
         syncThemeColor();
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          document.documentElement.classList.add("motion-enhanced");
+        }
       })();
     </script>
 
@@ -92,12 +97,14 @@ const ogImageUrl = new URL(ogImage, siteOrigin).href;
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
+    <ClientRouter />
   </head>
   <body>
     <SiteAmbient />
     <a class="skip-to-main" href="#main-content">Skip to content</a>
-    <div class="relative z-[1] min-h-dvh cm-mobile-dock-pad">
+    <div class="relative z-[1] min-h-dvh cm-mobile-dock-pad" transition:animate="fade">
       <slot />
     </div>
+    <MotionBootstrap />
   </body>
 </html>

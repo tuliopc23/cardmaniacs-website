@@ -24,17 +24,17 @@ const sectionInsetClass =
   "rounded-[var(--radius-panel)] border border-[var(--border-subtle)] bg-[color-mix(in_oklab,var(--surface-glass)_55%,transparent)] p-1.5 shadow-[var(--shadow-soft)] backdrop-blur-[calc(var(--blur-glass)*0.5)] backdrop-saturate-[var(--sat-glass)]";
 ---
 
-<nav class="md:hidden" aria-label="Mobile navigation">
+<nav class="lg:hidden" aria-label="Mobile navigation">
   <div
     id="cm-mobile-drawer-backdrop"
-    class="cm-mobile-drawer-backdrop fixed inset-0 z-[54] bg-[color-mix(in_oklab,var(--ink-primary)_26%,transparent)] opacity-0 pointer-events-none backdrop-blur-md backdrop-saturate-[var(--sat-glass)] motion-reduce:transition-none [&[data-open=true]]:opacity-100 [&[data-open=true]]:pointer-events-auto"
+    class="cm-mobile-drawer-backdrop fixed inset-0 z-[54] bg-[color-mix(in_oklab,var(--ink-primary)_26%,transparent)] opacity-0 pointer-events-none backdrop-blur-[var(--blur-glass)] backdrop-saturate-[var(--sat-glass)] motion-reduce:transition-none [&[data-open=true]]:opacity-100 [&[data-open=true]]:pointer-events-auto"
     data-open="false"
     aria-hidden="true"
   />
 
   <div
     id="cm-mobile-drawer"
-    class="cm-mobile-drawer fixed inset-0 z-[55] flex flex-col border-[var(--border-glass)] bg-[var(--surface-glass)] opacity-0 pointer-events-none shadow-[var(--shadow-glass)] backdrop-blur-[var(--blur-glass)] backdrop-saturate-[var(--sat-glass)] motion-reduce:transition-none motion-reduce:opacity-100 [&[data-open=true]]:opacity-100 [&[data-open=true]]:pointer-events-auto"
+    class="cm-mobile-drawer fixed inset-x-0 bottom-0 top-[12vh] z-[55] flex flex-col rounded-t-[var(--radius-hero)] border border-b-0 border-[var(--border-glass)] bg-[var(--surface-glass)] opacity-0 pointer-events-none shadow-[var(--shadow-glass)] backdrop-blur-[var(--blur-glass)] backdrop-saturate-[var(--sat-glass)] motion-reduce:transition-none motion-reduce:opacity-100 [&[data-open=true]]:opacity-100 [&[data-open=true]]:pointer-events-auto"
     data-open="false"
     inert
     role="dialog"
@@ -42,30 +42,16 @@ const sectionInsetClass =
     aria-label="Site menu"
     style="transform: translateY(100%)"
   >
-    <div class="flex items-start justify-between gap-4 px-5 pb-4 pt-[max(1.25rem,env(safe-area-inset-top))]">
-      <div class="min-w-0">
-        <h2 class="type-section-title ink-primary text-balance">{currentLabel}</h2>
-        <p class="mt-1 body-s ink-tertiary measure-tight">
-          Feeds, pricing, docs, and the app — all in one place.
-        </p>
-      </div>
-      <div class="size-11 shrink-0 rounded-full shadow-[var(--shadow-nav)]">
-        <Surface variant="glass" radius="pill" class="size-full overflow-hidden rounded-full">
-          <button
-            id="cm-mobile-drawer-close"
-            type="button"
-            class="flex size-full items-center justify-center rounded-full ink-secondary hover:ink-primary active:scale-95 transition-[transform,color] duration-200 motion-reduce:transition-none outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-inset"
-            aria-label="Close menu"
-          >
-            <LucideIcon name="x" size={20} />
-          </button>
-        </Surface>
+    <div class="flex items-center gap-3 px-5 pb-3 pt-4">
+      <LogoMark size="sm" class="shrink-0" />
+      <div class="min-w-0 flex-1">
+        <p class="font-display font-semibold text-[15px] tracking-[-0.02em] ink-primary">Menu</p>
+        <p class="body-s ink-tertiary truncate">{currentLabel}</p>
       </div>
     </div>
 
-    <div class="flex-1 overflow-y-auto px-4 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
-      <div id="cm-drawer-section-explore" class="mb-6" data-drawer-section>
-        <p class="type-card-eyebrow mb-2 px-1">Explore</p>
+    <div class="flex-1 overflow-y-auto px-4 pb-[max(6.5rem,env(safe-area-inset-bottom))]">
+      <div id="cm-drawer-section-explore" class="mb-4" data-drawer-section>
         <div class:list={[sectionInsetClass, "flex flex-col gap-0.5"]}>
           {
             exploreNavLinks.map((link) => (
@@ -80,8 +66,7 @@ const sectionInsetClass =
         </div>
       </div>
 
-      <div id="cm-drawer-section-elsewhere" class="mb-6" data-drawer-section>
-        <p class="type-card-eyebrow mb-2 px-1">Elsewhere</p>
+      <div id="cm-drawer-section-elsewhere" class="mb-4" data-drawer-section>
         <div class:list={[sectionInsetClass, "flex flex-col gap-0.5"]}>
           {
             elsewhereNavLinks.map((link) => (
@@ -98,7 +83,6 @@ const sectionInsetClass =
       </div>
 
       <div id="cm-drawer-section-jump" data-drawer-section>
-        <p class="type-card-eyebrow mb-2 px-1">Quick jump</p>
         <label class="sr-only" for="cm-mobile-drawer-jump">Jump to a page</label>
         <input
           id="cm-mobile-drawer-jump"
@@ -108,6 +92,7 @@ const sectionInsetClass =
           placeholder="Jump to a page…"
           class="cm-drawer-jump-input w-full rounded-[var(--radius-card)] border border-[var(--border-glass)] bg-[color-mix(in_oklab,var(--surface-inset)_55%,transparent)] px-4 py-3 font-display text-[15px] ink-primary shadow-[inset_0_1px_2px_color-mix(in_oklab,var(--ink-primary)_6%,transparent)] placeholder:ink-tertiary outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)]"
         />
+        <p id="cm-drawer-jump-empty" class="body-s ink-tertiary mt-2 px-1 hidden" role="status">No pages match that search.</p>
       </div>
     </div>
   </div>
@@ -150,18 +135,22 @@ const sectionInsetClass =
 </nav>
 
 <script>
-  import { animate } from "motion";
+  import { animateEl } from "../../lib/motion/animate-el";
 
   function initMobileNavDock() {
+    window.__cmDockAbort?.abort();
+    const ac = new AbortController();
+    window.__cmDockAbort = ac;
+    const { signal } = ac;
+
     const menuBtn = document.getElementById("cm-mobile-dock-menu-btn");
-    const closeBtn = document.getElementById("cm-mobile-drawer-close");
     const drawer = document.getElementById("cm-mobile-drawer");
     const backdrop = document.getElementById("cm-mobile-drawer-backdrop");
     const jumpInput = document.getElementById("cm-mobile-drawer-jump");
+    const jumpEmpty = document.getElementById("cm-drawer-jump-empty");
 
     if (
       !(menuBtn instanceof HTMLButtonElement) ||
-      !(closeBtn instanceof HTMLButtonElement) ||
       !(drawer instanceof HTMLElement) ||
       !(backdrop instanceof HTMLElement)
     )
@@ -190,8 +179,17 @@ const sectionInsetClass =
       drawer.querySelectorAll<HTMLElement>("[data-drawer-section]").forEach((section) => {
         const links = section.querySelectorAll<HTMLElement>("[data-drawer-link]");
         const visible = [...links].some((link) => !link.classList.contains("hidden"));
-        section.classList.toggle("hidden", !visible);
+        const isJump = section.id === "cm-drawer-section-jump";
+        section.classList.toggle("hidden", !visible && !isJump);
       });
+
+      if (jumpEmpty instanceof HTMLElement && jumpInput instanceof HTMLInputElement) {
+        const q = jumpInput.value.trim();
+        const anyVisible = [...drawer.querySelectorAll<HTMLElement>("[data-drawer-link]")].some(
+          (link) => !link.classList.contains("hidden")
+        );
+        jumpEmpty.classList.toggle("hidden", q.length === 0 || anyVisible);
+      }
     };
 
     const setOpen = (open: boolean) => {
@@ -207,23 +205,26 @@ const sectionInsetClass =
         drawer.style.transform = open ? "translateY(0)" : "translateY(100%)";
         backdrop.style.opacity = open ? "1" : "0";
       } else if (open) {
-        animate(backdrop, { opacity: [0, 1] }, { duration: 0.22, easing: "ease-out" });
-        animate(
+        animateEl(backdrop, { opacity: [0, 1] }, { duration: 0.24, easing: "ease-out" });
+        animateEl(
           drawer,
           { transform: ["translateY(100%)", "translateY(0)"] },
-          { duration: 0.38, easing: [0.22, 1, 0.36, 1] }
+          { duration: 0.42, easing: [0.22, 1, 0.36, 1] }
         );
       } else {
-        animate(backdrop, { opacity: [1, 0] }, { duration: 0.18, easing: "ease-in" });
-        animate(
+        animateEl(backdrop, { opacity: [1, 0] }, { duration: 0.2, easing: "ease-in" });
+        animateEl(
           drawer,
           { transform: ["translateY(0)", "translateY(100%)"] },
-          { duration: 0.28, easing: [0.4, 0, 1, 1] }
+          { duration: 0.3, easing: [0.4, 0, 1, 1] }
         );
       }
 
       if (open) {
-        queueMicrotask(() => closeBtn.focus());
+        queueMicrotask(() => {
+          const first = getFocusable()[0];
+          first?.focus();
+        });
       } else {
         menuBtn.focus();
         if (jumpInput instanceof HTMLInputElement) jumpInput.value = "";
@@ -233,6 +234,7 @@ const sectionInsetClass =
         drawer.querySelectorAll<HTMLElement>("[data-drawer-section]").forEach((el) => {
           el.classList.remove("hidden");
         });
+        if (jumpEmpty) jumpEmpty.classList.add("hidden");
       }
     };
 
@@ -241,11 +243,9 @@ const sectionInsetClass =
     menuBtn.addEventListener("click", (e) => {
       e.stopPropagation();
       setOpen(!isOpen());
-    });
+    }, { signal });
 
-    closeBtn.addEventListener("click", () => setOpen(false));
-
-    backdrop.addEventListener("click", () => setOpen(false));
+    backdrop.addEventListener("click", () => setOpen(false), { signal });
 
     drawer.addEventListener("keydown", (e) => {
       if (!isOpen()) return;
@@ -268,10 +268,10 @@ const sectionInsetClass =
         e.preventDefault();
         first.focus();
       }
-    });
+    }, { signal });
 
     drawer.querySelectorAll("a[data-drawer-link]").forEach((a) => {
-      a.addEventListener("click", () => setOpen(false));
+      a.addEventListener("click", () => setOpen(false), { signal });
     });
 
     if (jumpInput instanceof HTMLInputElement) {
@@ -282,14 +282,14 @@ const sectionInsetClass =
           link.classList.toggle("hidden", q.length > 0 && !text.includes(q));
         });
         updateSectionVisibility();
-      });
+      }, { signal });
     }
 
-    const mq = window.matchMedia("(min-width: 768px)");
+    const mq = window.matchMedia("(min-width: 1024px)");
     const onMqChange = () => {
       if (mq.matches && isOpen()) setOpen(false);
     };
-    mq.addEventListener("change", onMqChange);
+    mq.addEventListener("change", onMqChange, { signal });
   }
 
   initMobileNavDock();

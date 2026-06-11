@@ -10,13 +10,15 @@ interface Props {
   id?: string;
   as?: keyof HTMLElementTagNameMap;
   inset?: boolean;
+  reveal?: boolean;
 }
 
-const { label, heading, icon, class: className = '', id, as: Tag = 'section', inset = false } = Astro.props;
+const { label, heading, icon, class: className = '', id, as: Tag = 'section', inset = false, reveal = false } = Astro.props;
 ---
 
 <Tag
   id={id}
+  data-reveal={reveal ? true : undefined}
   class:list={['py-20 md:py-28 lg:py-32', inset ? 'section-band' : '', className]}
 >
   <Container>

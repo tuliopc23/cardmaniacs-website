@@ -8,13 +8,20 @@ import Card from '../../components/Card.astro';
 import Pill from '../../components/Pill.astro';
 import LucideIcon from '../../components/LucideIcon.astro';
 import { APP_ICON_PNG } from '../../lib/site-icons';
+
+const screenshots = [
+  { src: '/images/Cardmaniacs-mac - 1.png', label: 'Empty state', platform: 'macOS' },
+  { src: '/images/Cardmaniacs-mac - 2.png', label: 'Card grid view', platform: 'macOS' },
+  { src: '/images/Cardmaniacs-mac - 3.png', label: 'Article reader', platform: 'macOS' },
+  { src: '/images/Cardmaniacs-mac - 4.png', label: 'Feed stream', platform: 'macOS' },
+];
 ---
 
 <Layout title="Press Kit — Cardmaniacs">
   <SiteNav currentPage="press" />
 
   <main id="main-content">
-    <section class="pt-16 pb-16 md:pt-40 md:pb-20">
+    <section class="pt-16 pb-16 lg:pt-40 lg:pb-20">
       <Container>
         <PageHero
           eyebrow="Press Kit"
@@ -27,9 +34,9 @@ import { APP_ICON_PNG } from '../../lib/site-icons';
 
     <section class="pb-20">
       <Container>
-        <div class="mb-16">
+        <div class="mb-16" data-reveal>
           <h2 class="type-section-title ink-primary mb-5">App icon</h2>
-          <div class="flex items-center gap-6">
+          <div class="flex flex-col sm:flex-row sm:items-center gap-6">
             <img src={APP_ICON_PNG} alt="Cardmaniacs App Icon" class="w-24 h-24 rounded-[20px] shadow-[var(--shadow-card)]" />
             <div>
               <p class="body-s ink-secondary mb-2">Cardmaniacs app icon in PNG format.</p>
@@ -46,40 +53,37 @@ import { APP_ICON_PNG } from '../../lib/site-icons';
           </div>
         </div>
 
-        <div>
+        <div data-reveal>
           <h2 class="type-section-title ink-primary mb-5">Screenshots</h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {[
-              { src: '/images/Cardmaniacs-mac - 1.png', label: 'Empty state', platform: 'macOS' },
-              { src: '/images/Cardmaniacs-mac - 2.png', label: 'Card grid view', platform: 'macOS' },
-              { src: '/images/Cardmaniacs-mac - 3.png', label: 'Article reader', platform: 'macOS' },
-              { src: '/images/Cardmaniacs-mac - 4.png', label: 'Feed stream', platform: 'macOS' },
-            ].map((s) => (
-              <Card variant="raised" class="overflow-hidden">
-                <img src={s.src} alt={s.label} loading="lazy" class="w-full h-auto" />
-                <div class="p-4 flex items-center justify-between">
-                  <div class="flex items-center gap-2">
-                    <span class="body-s ink-primary font-medium">{s.label}</span>
-                    <Pill variant="muted" class="gap-1">
-                      <LucideIcon name="keyboard" size={11} />
-                      {s.platform}
-                    </Pill>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5" data-reveal-stagger>
+            {screenshots.map((s) => (
+              <div data-reveal-card>
+                <Card variant="raised" class="cm-card-lift overflow-hidden h-full">
+                  <img src={s.src} alt={s.label} loading="lazy" class="w-full h-auto" />
+                  <div class="p-4 flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                      <span class="body-s ink-primary font-medium">{s.label}</span>
+                      <Pill variant="muted" class="gap-1">
+                        <LucideIcon name="keyboard" size={11} />
+                        {s.platform}
+                      </Pill>
+                    </div>
+                    <a
+                      href={s.src}
+                      download
+                      class="body-s ink-accent font-medium hover:underline underline-offset-2 inline-flex items-center gap-1.5"
+                    >
+                      <LucideIcon name="download" size={14} />
+                      Download
+                    </a>
                   </div>
-                  <a
-                    href={s.src}
-                    download
-                    class="body-s ink-accent font-medium hover:underline underline-offset-2 inline-flex items-center gap-1.5"
-                  >
-                    <LucideIcon name="download" size={14} />
-                    Download
-                  </a>
-                </div>
-              </Card>
+                </Card>
+              </div>
             ))}
           </div>
         </div>
 
-        <div class="mt-16 max-w-[560px]">
+        <div class="mt-16 max-w-[560px]" data-reveal>
           <h2 class="type-section-title ink-primary mb-4">About Cardmaniacs</h2>
           <p class="body ink-secondary leading-relaxed mb-3">
             Cardmaniacs is a native Apple app that unifies RSS feeds, Read Later, and Bookmarks into one beautifully crafted reading experience. Built entirely in Swift for macOS, iOS, and iPadOS, it features card-based content presentation, full-text search, offline reading, iCloud sync, and power-user features like Vim navigation.

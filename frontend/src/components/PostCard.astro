@@ -9,9 +9,10 @@ interface Props {
   cover?: string;
   featured?: boolean;
   tags?: string;
+  class?: string;
 }
 
-const { href, title, summary, date, cover, featured, tags } = Astro.props;
+const { href, title, summary, date, cover, featured, tags, class: className } = Astro.props;
 ---
 
-<ArticleCard href={href} title={title} summary={summary} date={date} cover={cover} featured={featured} tags={tags} />
+<ArticleCard href={href} title={title} summary={summary} date={date} cover={cover} featured={featured} tags={tags} class={className} />

@@ -20,7 +20,7 @@ const sorted = entries.sort((a, b) => {
   <SiteNav currentPage="changelog" />
 
   <main id="main-content">
-    <section class="pt-16 pb-16 md:pt-40 md:pb-20">
+    <section class="pt-16 pb-16 lg:pt-40 lg:pb-20">
       <Container>
         <PageHero
           eyebrow="Changelog"
@@ -34,26 +34,28 @@ const sorted = entries.sort((a, b) => {
     <section class="pb-20 md:pb-24">
       <Container>
         {sorted.length === 0 ? (
-          <Surface variant="elevated" radius="card" class="max-w-[560px] mx-auto p-8 md:p-10 text-center">
+          <Surface variant="elevated" radius="card" class="max-w-[560px] mx-auto p-8 md:p-10 text-center" data-reveal>
             <h2 class="type-section-title ink-primary mb-3">Shipping log starts here.</h2>
             <p class="type-lede measure-tight mx-auto ink-secondary">
               Release notes will appear as Cardmaniacs ships. Follow along on the blog for longer-form updates.
             </p>
           </Surface>
         ) : (
-        <div class="flex flex-col gap-10 md:gap-12">
+        <div class="flex flex-col gap-10 md:gap-12" data-reveal-stagger>
           {sorted.map(async (entry) => {
             const { Content } = await render(entry);
             return (
-              <ReleaseCard
-                version={entry.data.version}
-                type={entry.data.type}
-                platform={entry.data.platform}
-                date={entry.data.date}
-                title={entry.data.title}
-              >
-                  <Content />
-              </ReleaseCard>
+              <div data-reveal-card>
+                <ReleaseCard
+                  version={entry.data.version}
+                  type={entry.data.type}
+                  platform={entry.data.platform}
+                  date={entry.data.date}
+                  title={entry.data.title}
+                >
+                    <Content />
+                </ReleaseCard>
+              </div>
             );
           })}
         </div>

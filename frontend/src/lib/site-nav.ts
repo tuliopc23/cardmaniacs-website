@@ -33,6 +33,7 @@ export const headerNavLinks: SiteNavLink[] = [
   { href: "/pricing", label: "Pricing", key: "pricing", icon: navIcons.pricing },
   { href: "/blog", label: "Blog", key: "blog", icon: navIcons.blog },
   { href: "/changelog", label: "Changelog", key: "changelog", icon: navIcons.changelog },
+  { href: "/docs", label: "Docs", key: "docs", icon: navIcons.docs },
 ];
 
 export const exploreNavLinks: SiteNavLink[] = [
@@ -41,7 +42,6 @@ export const exploreNavLinks: SiteNavLink[] = [
 ];
 
 export const elsewhereNavLinks: SiteNavLink[] = [
-  { href: "/docs", label: "Docs", key: "docs", icon: "file-text" },
   { href: "/press", label: "Press kit", key: "press", icon: "press" },
   {
     href: hasAppStoreUrl ? (downloadCta.href ?? "/features") : "/features",

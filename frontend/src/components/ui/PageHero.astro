@@ -23,6 +23,7 @@ const {
 ---
 
 <div
+  data-reveal
   class:list={[
     align === "center" && "mx-auto text-center",
     className,
@@ -32,6 +33,7 @@ const {
   {eyebrow && (
     <EyebrowLabel
       icon={eyebrowIcon}
+      accent={false}
       class:list={[align === "center" && "justify-center", "mb-4"]}
     >
       {eyebrow}

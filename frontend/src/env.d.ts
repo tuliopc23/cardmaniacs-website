@@ -1,7 +1,11 @@
+/// <reference path="../.astro/types.d.ts" />
 /// <reference types="astro/client" />
 
-interface Window {
-  cmSyncThemeColor?: () => void;
+declare global {
+  interface Window {
+    __cmDockAbort?: AbortController;
+    cmSyncThemeColor?: () => void;
+  }
 }
 
 export {};

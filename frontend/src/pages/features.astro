@@ -7,14 +7,13 @@ import FeatureEncyclopedia from '../components/features/FeatureEncyclopedia.astr
 import FeatureJumpNav from '../components/features/FeatureJumpNav.astro';
 import PageHero from '../components/ui/PageHero.astro';
 import CtaBanner from '../components/CtaBanner.astro';
-import ScrollReveal from '../components/ScrollReveal.astro';
 ---
 
 <Layout title="Features — Cardmaniacs">
   <SiteNav currentPage="features" />
 
   <main id="main-content">
-    <section class="pt-16 pb-16 md:pt-40 md:pb-20">
+    <section class="pt-16 pb-16 lg:pt-40 lg:pb-20">
       <Container>
         <PageHero
           eyebrow="Features"
@@ -32,5 +31,4 @@ import ScrollReveal from '../components/ScrollReveal.astro';
   </main>
 
   <SiteFooter />
-  <ScrollReveal />
 </Layout>

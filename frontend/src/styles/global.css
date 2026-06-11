@@ -299,6 +299,16 @@
     --blur-glass: 12px;
     --ambient-bloom-blur: 72px;
     --ambient-frost-blur: 22px;
+    --shadow-nav:
+      0 1px 0 rgba(255, 255, 255, 0.5) inset, 0 4px 14px rgba(6, 10, 20, 0.08),
+      0 12px 28px rgba(6, 10, 20, 0.1);
+    --shadow-glass:
+      0 1px 0 rgba(255, 255, 255, 0.45) inset, 0 8px 24px rgba(6, 10, 20, 0.1),
+      0 20px 48px rgba(6, 10, 20, 0.12);
+    --shadow-soft: 0 1px 0 rgba(0, 0, 0, 0.02), 0 4px 16px rgba(6, 10, 20, 0.06);
+    --shadow-device:
+      0 1px 0 rgba(255, 255, 255, 0.55) inset, 0 6px 18px rgba(6, 10, 20, 0.09),
+      0 20px 44px rgba(6, 10, 20, 0.11), 0 0 48px rgba(83, 154, 198, 0.08);
   }
 
   [data-theme="dark"] {
@@ -324,6 +334,16 @@
     --blur-glass: 12px;
     --ambient-bloom-blur: 80px;
     --ambient-frost-blur: 26px;
+    --shadow-nav:
+      0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 4px 14px rgba(0, 0, 0, 0.38),
+      0 12px 28px rgba(0, 0, 0, 0.42);
+    --shadow-glass:
+      0 1px 0 rgba(255, 255, 255, 0.05) inset, 0 8px 22px rgba(0, 0, 0, 0.4),
+      0 20px 44px rgba(0, 0, 0, 0.44);
+    --shadow-soft: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 4px 16px rgba(0, 0, 0, 0.35);
+    --shadow-device:
+      0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 6px 18px rgba(0, 0, 0, 0.4),
+      0 20px 40px rgba(0, 0, 0, 0.44), 0 0 44px rgba(83, 154, 198, 0.1);
   }
 }
 
@@ -639,6 +659,14 @@ body {
   line-height: 1.03;
   letter-spacing: -0.042em;
   text-wrap: balance;
+}
+
+@media (max-width: 639px) {
+  .display-hero {
+    font-size: clamp(2.15rem, 8.2vw, 2.65rem);
+    letter-spacing: -0.038em;
+    line-height: 1.06;
+  }
 }
 
 .type-section-title {
@@ -1018,7 +1046,7 @@ body {
 /* ==============================================
    MOBILE BOTTOM DOCK
    ============================================== */
-@media (max-width: 767px) {
+@media (max-width: 1023px) {
   .cm-mobile-dock-pad {
     padding-bottom: calc(5.75rem + env(safe-area-inset-bottom));
   }
@@ -1034,6 +1062,56 @@ html.cm-drawer-open {
   transform: none;
 }
 
+/* Hero entrance initial state — applied before paint when motion-enhanced is set in head */
+html.motion-enhanced [data-hero-item]:not([data-reveal-done="1"]) {
+  opacity: 0.68;
+  transform: translateY(36px);
+}
+
+html.motion-enhanced [data-hero-item][data-hero-device]:not([data-reveal-done="1"]) {
+  opacity: 0.68;
+  transform: translateY(44px) scale(0.96);
+  filter: blur(6px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.motion-enhanced [data-hero-item] {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
+
+/* Feature jump nav — scroll-spy + press feedback */
+.cm-feature-jump-link[data-active="true"] {
+  color: var(--ink-primary);
+  background: color-mix(in oklab, var(--cm-blue-subtle) 92%, transparent);
+  box-shadow: var(--shadow-pill);
+}
+
+.cm-feature-jump-link.cm-jump-link-pressed {
+  transform: scale(0.97);
+}
+
+/* Editorial card hover lift (blog, docs, pricing) */
+.cm-card-lift {
+  transition:
+    transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cm-card-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card-hover);
+  }
+}
+
+.cm-workflow-pill:active,
+.cm-btn-liquid:active {
+  transform: scale(0.985);
+}
+
 /* ==============================================
    REDUCED MOTION
    ============================================== */
@@ -1042,9 +1120,12 @@ html.cm-drawer-open {
     scroll-behavior: auto;
   }
 
-  [data-reveal] {
+  [data-reveal],
+  [data-reveal-card],
+  [data-platform-still] {
     opacity: 1 !important;
     transform: none !important;
+    filter: none !important;
   }
 
   .cm-mobile-drawer,
@@ -1054,12 +1135,11 @@ html.cm-drawer-open {
     transition: none !important;
   }
 
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+  .cm-ambient__haze {
+    animation: none !important;
+  }
+
+  .cm-card-lift:hover {
+    transform: none;
   }
 }

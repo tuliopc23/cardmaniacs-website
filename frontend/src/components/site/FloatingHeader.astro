@@ -13,7 +13,7 @@ interface Props {
 const { currentPage = "" } = Astro.props;
 ---
 
-<header class="hidden md:block fixed top-0 left-0 right-0 z-50 px-4 pt-[max(0.75rem,env(safe-area-inset-top))]">
+<header class="hidden lg:block fixed top-0 left-0 right-0 z-50 px-4 pt-[max(0.75rem,env(safe-area-inset-top))]">
   <div class="mx-auto max-w-[1160px]">
     <Surface variant="glass" radius="pill" class="overflow-visible shadow-[var(--shadow-nav)]">
       <div
@@ -38,7 +38,7 @@ const { currentPage = "" } = Astro.props;
               href={link.href}
               aria-current={isActiveNavLink(link.key, currentPage) ? "page" : undefined}
               class:list={[
-                "relative inline-flex items-center gap-1.5 px-3 py-1.5 text-[14px] font-display font-medium tracking-[-0.005em] transition-colors duration-200 [border-radius:var(--radius-pill)]",
+                "relative inline-flex items-center gap-1.5 px-2.5 py-2 text-[13px] font-display font-medium tracking-[-0.005em] transition-colors duration-200 [border-radius:var(--radius-pill)]",
                 isActiveNavLink(link.key, currentPage)
                   ? "ink-primary bg-[var(--cm-blue-subtle)]"
                   : "ink-secondary hover:ink-primary hover:bg-[color-mix(in_oklab,var(--surface-overlay)_55%,transparent)]",

@@ -25,7 +25,7 @@ const rest = featured ? sortedPosts.filter((p) => p.id !== featured.id) : sorted
   <SiteNav currentPage="blog" />
 
   <main id="main-content">
-    <section class="pt-16 pb-14 md:pt-40 md:pb-18">
+    <section class="pt-16 pb-14 lg:pt-40 lg:pb-18">
       <Container>
         <PageHero
           eyebrow="Notes from the reading desk"
@@ -48,28 +48,36 @@ const rest = featured ? sortedPosts.filter((p) => p.id !== featured.id) : sorted
             </p>
           </Surface>
         ) : (
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-center">
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch"
+          data-reveal-stagger
+        >
           {featured && (
-            <PostCard
-              href={`/blog/${featured.id}`}
-              title={featured.data.title}
-              summary={featured.data.summary}
-              date={featured.data.date}
-              cover={featured.data.cover}
-              featured
-              tags={featured.data.tags}
-            />
+            <div class="md:col-span-2 lg:col-span-2" data-reveal-card>
+              <PostCard
+                href={`/blog/${featured.id}`}
+                title={featured.data.title}
+                summary={featured.data.summary}
+                date={featured.data.date}
+                cover={featured.data.cover}
+                featured
+                tags={featured.data.tags}
+                class="h-full max-w-none"
+              />
+            </div>
           )}
 
           {rest.map((post) => (
-            <PostCard
-              href={`/blog/${post.id}`}
-              title={post.data.title}
-              summary={post.data.summary}
-              date={post.data.date}
-              cover={post.data.cover}
-              tags={post.data.tags}
-            />
+            <div data-reveal-card class="flex justify-center">
+              <PostCard
+                href={`/blog/${post.id}`}
+                title={post.data.title}
+                summary={post.data.summary}
+                date={post.data.date}
+                cover={post.data.cover}
+                tags={post.data.tags}
+              />
+            </div>
           ))}
         </div>
         )}

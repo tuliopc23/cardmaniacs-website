@@ -26,7 +26,7 @@ const faqs = [
   <SiteNav currentPage="pricing" />
 
   <main id="main-content">
-    <section class="pt-16 pb-8 md:pt-40 md:pb-12">
+    <section class="pt-16 pb-8 lg:pt-40 lg:pb-12">
       <Container>
         <PageHero
           eyebrow="Pricing"
@@ -42,28 +42,30 @@ const faqs = [
       </Container>
     </section>
 
-    <PricingSection compact />
+    <PricingSection compact reveal />
 
-    <section class="py-20 md:py-28">
+    <section class="py-20 md:py-28" data-reveal>
       <Container>
         <div class="max-w-[560px] mb-12">
           <h2 class="type-section-title ink-primary scroll-anchor">Questions & answers</h2>
         </div>
 
-        <div class="max-w-[720px]">
+        <div class="max-w-[720px]" data-reveal-stagger>
           <BejamasCard padding="none" class="divide-y divide-[var(--border-subtle)] overflow-hidden">
             {faqs.map((faq, i) => (
-              <details class="group">
+              <details class="group" data-faq-item data-reveal-card>
                 <summary class="flex cursor-pointer list-none items-center justify-between px-6 py-5 outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ring-focus)]">
                   <h3 class="type-card-title pr-4 inline-flex items-center gap-2.5 !text-[15px]">
-                    <LucideIcon name={faqIcons[i]} size={18} class="text-[var(--accent)] shrink-0" />
+                    <LucideIcon name={faqIcons[i]} size={18} class="text-[var(--accent)] shrink-0 hidden sm:block" />
                     {faq.q}
                   </h3>
                   <span class="ink-tertiary shrink-0 transition-transform duration-200 group-open:rotate-45">
                     <LucideIcon name="plus" size={18} />
                   </span>
                 </summary>
-                <p class="body-s ink-secondary px-6 pb-5 pl-[3.25rem] pr-14 leading-relaxed">{faq.a}</p>
+                <div data-faq-body>
+                  <p class="body-s ink-secondary px-6 pb-5 sm:pl-[3.25rem] pr-14 leading-relaxed">{faq.a}</p>
+                </div>
               </details>
             ))}
           </BejamasCard>
@@ -71,7 +73,7 @@ const faqs = [
       </Container>
     </section>
 
-    <section class="section-band py-12">
+    <section class="section-band py-12" data-reveal>
       <Container>
         <Surface variant="elevated" radius="card" class="max-w-[720px] mx-auto p-6 md:p-8">
           <p class="type-lede measure-tight !text-[1rem] ink-secondary">

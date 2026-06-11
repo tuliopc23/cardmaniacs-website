@@ -1,0 +1,26 @@
+---
+// Site-wide motion init: scroll reveals, hero entrance, stagger groups, jump nav, FAQ.
+---
+
+<script>
+  import { initFaqAccordion } from "../lib/motion/faq-accordion";
+  import { initFeatureJumpNav } from "../lib/motion/feature-jump-nav";
+  import { initHeroEntrance } from "../lib/motion/hero-entrance";
+  import {
+    initPlatformStills,
+    initScrollReveals,
+    initStaggerGroups,
+  } from "../lib/motion/reveal";
+
+  function initMotion() {
+    initHeroEntrance();
+    initScrollReveals();
+    initStaggerGroups();
+    initPlatformStills();
+    initFeatureJumpNav();
+    initFaqAccordion();
+  }
+
+  initMotion();
+  document.addEventListener("astro:after-swap", initMotion);
+</script>

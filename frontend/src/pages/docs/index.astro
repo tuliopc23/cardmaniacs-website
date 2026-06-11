@@ -22,7 +22,7 @@ docs.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0)).forEach((doc) => 
   <SiteNav currentPage="docs" />
 
   <main id="main-content">
-    <section class="pt-16 pb-16 md:pt-40 md:pb-20">
+    <section class="pt-16 pb-16 lg:pt-40 lg:pb-20">
       <Container>
         <PageHero
           eyebrow="Documentation"
@@ -36,29 +36,35 @@ docs.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0)).forEach((doc) => 
     <section class="pb-20">
       <Container>
         {docs.length === 0 ? (
-          <Surface variant="elevated" radius="card" class="max-w-[560px] mx-auto p-8 md:p-10 text-center">
+          <Surface variant="elevated" radius="card" class="max-w-[560px] mx-auto p-8 md:p-10 text-center" data-reveal>
             <h2 class="type-section-title ink-primary mb-3">Guides are on the way.</h2>
             <p class="type-lede measure-tight mx-auto ink-secondary">
               Documentation will land here as Cardmaniacs ships. Visit the changelog for release notes in the meantime.
             </p>
           </Surface>
         ) : (
-        <div class="space-y-12">
-          {[...sections.entries()].map(([section, items]) => (
-            <div>
-              <h2 class="type-section-title ink-primary mb-5 inline-flex items-center gap-2.5">
+        <div class="space-y-14">
+          {[...sections.entries()].map(([section, items], sectionIndex) => (
+            <div data-reveal style={`--reveal-delay: ${sectionIndex * 0.04}s`}>
+              <h2 class="type-section-title ink-primary mb-6 inline-flex items-center gap-2.5">
                 <LucideIcon name="folder" size={20} class="shrink-0 text-[var(--accent)]" />
                 {section}
               </h2>
-              <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+              <div class="flex flex-col gap-3" data-reveal-stagger>
                 {items.map((doc) => (
-                  <a href={`/docs/${doc.id}`} class="group block rounded-[var(--radius-card)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-base)]">
-                    <BejamasCard padding="md" hover class="h-full">
-                      <h3 class="subheading ink-primary mb-2 transition-colors group-hover:text-[var(--accent)]">{doc.data.title}</h3>
-                      <p class="body-s ink-tertiary flex items-center gap-1.5">
-                        Read guide
-                        <LucideIcon name="arrow-right" size={14} class="text-[var(--accent)] transition-transform group-hover:translate-x-0.5" />
-                      </p>
+                  <a
+                    href={`/docs/${doc.id}`}
+                    data-reveal-card
+                    class="group block rounded-[var(--radius-card)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-base)]"
+                  >
+                    <BejamasCard padding="md" hover class="cm-card-lift h-full">
+                      <div class="flex items-start justify-between gap-4">
+                        <div class="min-w-0">
+                          <h3 class="subheading ink-primary mb-1.5 transition-colors group-hover:text-[var(--accent)]">{doc.data.title}</h3>
+                          <p class="body-s ink-tertiary">Read guide</p>
+                        </div>
+                        <LucideIcon name="arrow-right" size={18} class="shrink-0 text-[var(--accent)] mt-0.5 transition-transform group-hover:translate-x-0.5" />
+                      </div>
                     </BejamasCard>
                   </a>
                 ))}

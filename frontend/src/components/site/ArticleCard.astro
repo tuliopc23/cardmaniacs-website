@@ -12,9 +12,10 @@ interface Props {
   cover?: string;
   featured?: boolean;
   tags?: string;
+  class?: string;
 }
 
-const { href, title, summary, date, eyebrow, cover, featured = false, tags } = Astro.props;
+const { href, title, summary, date, eyebrow, cover, featured = false, tags, class: className = "" } = Astro.props;
 
 const tagList = (tags ?? "")
   .split(",")
@@ -32,8 +33,9 @@ const formattedDate =
   variant="elevated"
   interactive
   class:list={[
-    "group w-full max-w-[400px] p-0",
+    "group cm-card-lift w-full max-w-[400px] p-0",
     featured && "ring-1 ring-[var(--border-accent)] shadow-[var(--shadow-soft)]",
+    className,
   ]}
 >
   <div

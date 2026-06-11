@@ -166,6 +166,7 @@ export const navIcons = {
   pricing: "credit-card",
   blog: "newspaper",
   changelog: "history",
+  docs: "file-text",
 } as const satisfies Record<string, IconKey>;
 
 export const workflowStepIcons = [

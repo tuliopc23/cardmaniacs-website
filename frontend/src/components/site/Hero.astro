@@ -20,12 +20,14 @@ const chips = ["Feeds", "Read Later", "Bookmarks", "Highlights", "Summaries", "O
     />
   </div>
 
-  <Container class="relative z-10 pt-16 md:pt-40">
-    <div data-device-hero class="flex flex-col items-center">
+  <Container class="relative z-10 pt-16 lg:pt-40">
+    <div data-device-hero data-hero-enter class="flex flex-col items-center">
       <div class="w-full max-w-[620px] mx-auto mb-10 md:mb-12">
-        <EyebrowLabel icon="library" class="mb-4">A calmer home for everything you read</EyebrowLabel>
+        <div data-hero-item>
+          <EyebrowLabel icon="library" class="mb-4">A calmer home for everything you read</EyebrowLabel>
+        </div>
 
-        <div class="flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-6 mb-7">
+        <div data-hero-item class="flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-6 mb-7">
           <LogoMark size="lg" class="shrink-0" />
           <h1 class="display-hero ink-primary text-balance flex-1 min-w-0">
             Your native reading desk —<br class="hidden sm:block" />
@@ -33,12 +35,12 @@ const chips = ["Feeds", "Read Later", "Bookmarks", "Highlights", "Summaries", "O
           </h1>
         </div>
 
-        <p class="type-lede measure mb-9">
+        <p data-hero-item class="type-lede measure mb-9">
           Cardmaniacs unifies feeds, read-later, bookmarks, and highlights into one quiet Apple-native command
           center — so you stop tab-hoarding and start reading.
         </p>
 
-        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-8">
+        <div data-hero-item class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-8">
           <AppStoreButton />
           <a
             href="/features"
@@ -56,7 +58,8 @@ const chips = ["Feeds", "Read Later", "Bookmarks", "Highlights", "Summaries", "O
 
         <p class="sr-only">Including {chips.join(", ")}.</p>
         <div
-          class="hero-chip-rail mb-2 flex w-full flex-wrap justify-start gap-0.5 p-1 rounded-[var(--radius-pill)] border border-[var(--border-subtle)] bg-[color-mix(in_oklab,var(--surface-glass)_55%,transparent)] shadow-[var(--shadow-pill)] backdrop-blur-md backdrop-saturate-[var(--sat-glass)] supports-[backdrop-filter]:bg-[color-mix(in_oklab,var(--surface-glass)_42%,transparent)] md:mb-0"
+          data-hero-item
+          class="hero-chip-rail mb-2 flex w-full flex-wrap justify-start gap-0.5 p-1 rounded-[var(--radius-pill)] border border-[var(--border-subtle)] bg-[color-mix(in_oklab,var(--surface-glass)_55%,transparent)] shadow-[var(--shadow-pill)] backdrop-blur-[var(--blur-glass)] backdrop-saturate-[var(--sat-glass)] supports-[backdrop-filter]:bg-[color-mix(in_oklab,var(--surface-glass)_42%,transparent)] md:mb-0"
           aria-hidden="true"
         >
           {
@@ -75,7 +78,7 @@ const chips = ["Feeds", "Read Later", "Bookmarks", "Highlights", "Summaries", "O
         </div>
       </div>
 
-      <div class="w-full max-w-[920px] mx-auto" data-reveal>
+      <div data-hero-item data-hero-device class="w-full max-w-[920px] mx-auto">
         <MarketingPlatformShowcase
           macAlt="Cardmaniacs on macOS — card-based reading interface"
           iphoneAlt="Cardmaniacs on iPhone — reading queue"

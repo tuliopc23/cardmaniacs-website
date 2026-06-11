@@ -2,7 +2,6 @@
 import Container from "../Container.astro";
 import ProductShowcase from "../ProductShowcase.astro";
 import { marketingImages } from "../../lib/marketing-images";
-import MarketingPlatformStills from "../marketing/MarketingPlatformStills.astro";
 import LucideIcon from "../LucideIcon.astro";
 import IconWell from "../ui/IconWell.astro";
 import PricingSection from "../PricingSection.astro";
@@ -10,42 +9,62 @@ import CtaBanner from "../CtaBanner.astro";
 import { workflowStepIcons } from "../../lib/icons/registry";
 
 const workflowSteps = [
-  { step: "Collect", desc: "Feeds, saves, and imports land in one inbox." },
-  { step: "Triage", desc: "Skim, tag, and archive without tab chaos." },
-  { step: "Read", desc: "Articles, PDFs, and EPUB in one Reader." },
-  { step: "Highlight", desc: "Mark what matters inside the app." },
-  { step: "Revisit", desc: "Find saved references when they count." },
+  { step: "Collect", desc: "Feeds, saves, and imports land in one inbox.", href: "/features#feeds" },
+  { step: "Triage", desc: "Skim, tag, and archive without tab chaos.", href: "/features#feeds" },
+  { step: "Read", desc: "Articles, PDFs, and EPUB in one Reader.", href: "/features#read-later" },
+  { step: "Highlight", desc: "Mark what matters inside the app.", href: "/features#reader-highlights" },
+  { step: "Revisit", desc: "Find saved references when they count.", href: "/features#organization" },
 ];
 ---
 
-<section class="py-16 md:py-24 section-band">
+<section class="py-16 md:py-24 section-band" data-reveal>
   <Container>
-    <div class="max-w-[680px] mx-auto text-center mb-12">
-      <h2 class="type-section-title ink-primary mb-5">Your reading life is scattered.</h2>
-      <p class="type-lede measure-tight mx-auto">
-        Tabs, RSS, read-later queues, PDFs, videos, podcasts, and highlights live in different apps. Cardmaniacs gives
-        them one calm native home.
-      </p>
+    <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] gap-10 lg:gap-16 items-end">
+      <div class="max-w-[560px] lg:text-left text-center mx-auto lg:mx-0">
+        <h2 class="type-section-title ink-primary mb-5 text-balance">Your reading life is scattered.</h2>
+        <p class="type-lede measure-tight">
+          Tabs, RSS, read-later queues, PDFs, videos, podcasts, and highlights live in different apps. Cardmaniacs gives
+          them one calm native home.
+        </p>
+      </div>
+      <div class="rounded-[var(--radius-card)] border border-[var(--border-subtle)] bg-[color-mix(in_oklab,var(--surface-elevated)_70%,transparent)] p-5 md:p-6 shadow-[var(--shadow-soft)] lg:block">
+        <p class="type-card-title ink-primary mb-2">One desk, not five apps</p>
+        <p class="body-s ink-secondary leading-relaxed">
+          Feeds, read-later, bookmarks, and highlights share the same card stream — triaged once, read anywhere.
+        </p>
+      </div>
     </div>
   </Container>
 </section>
 
-<section class="py-16 md:py-20">
+<section class="py-16 md:py-20" data-reveal>
   <Container>
-    <div class="max-w-[720px] mx-auto text-center">
-      <p class="type-lede measure-tight mx-auto mb-8">
-        One loop for everything you save — collect in a single inbox, triage in cards, read in a native Reader,
-        highlight what matters, and revisit when the idea becomes useful.
-      </p>
-      <div class="flex flex-wrap justify-center gap-2">
-        {
-          workflowSteps.map((item, i) => (
-            <span class="inline-flex items-center gap-2 rounded-[var(--radius-pill)] border border-[var(--border-subtle)] bg-[color-mix(in_oklab,var(--surface-elevated)_75%,transparent)] px-3 py-2 shadow-[var(--shadow-soft)]">
-              <IconWell icon={workflowStepIcons[i]} size="sm" />
-              <span class="type-card-title !text-[0.8125rem]">{item.step}</span>
-            </span>
-          ))
-        }
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+      <div class="max-w-[520px] lg:order-2 mx-auto lg:mx-0 text-center lg:text-left">
+        <p class="type-lede measure-tight mb-8">
+          One loop for everything you save — collect in a single inbox, triage in cards, read in a native Reader,
+          highlight what matters, and revisit when the idea becomes useful.
+        </p>
+        <div class="flex flex-wrap justify-center lg:justify-start gap-2">
+          {
+            workflowSteps.map((item, i) => (
+              <a
+                href={item.href}
+                class="cm-workflow-pill group inline-flex items-center gap-2 rounded-[var(--radius-pill)] border border-[var(--border-subtle)] bg-[color-mix(in_oklab,var(--surface-elevated)_75%,transparent)] px-3 py-2.5 shadow-[var(--shadow-soft)] transition-[transform,box-shadow,background-color,border-color] duration-200 hover:-translate-y-px hover:shadow-[var(--shadow-card)] hover:border-[color-mix(in_oklab,var(--accent)_22%,var(--border-subtle))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-base)] active:scale-[0.98]"
+              >
+                <IconWell icon={workflowStepIcons[i]} size="sm" />
+                <span class="type-card-title !text-[0.8125rem]">{item.step}</span>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+      <div class="lg:order-1 max-w-[480px] mx-auto lg:mx-0 w-full">
+        <ProductShowcase
+          src={marketingImages.macTriage}
+          alt="Cardmaniacs feed triage on Mac — calm card stream"
+          loading="eager"
+        />
       </div>
     </div>
   </Container>
@@ -54,11 +73,11 @@ const workflowSteps = [
 <section class="py-16 md:py-24">
   <Container>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-      <div>
+      <div data-reveal>
         <h2 class="type-section-title ink-primary mb-5">See the desk in action.</h2>
         <p class="type-lede measure-tight mb-6">
-          Feeds, read-later, bookmarks, and highlights share one calm card stream. The app chrome is the proof — explore
-          the full feature set when you are ready.
+          Feeds, read-later, bookmarks, and highlights share one calm card stream. Mac, iPhone, and iPad each get a
+          considered layout — explore the full feature set when you are ready.
         </p>
         <a
           href="/features"
@@ -75,28 +94,14 @@ const workflowSteps = [
       </div>
       <div data-reveal>
         <ProductShowcase
-          src={marketingImages.macTriage}
-          alt="Cardmaniacs feed triage on Mac — calm card stream"
+          src={marketingImages.macReader}
+          alt="Cardmaniacs Reader on Mac — focused reading surface"
         />
       </div>
     </div>
   </Container>
 </section>
 
-<section class="py-16 md:py-24 section-band">
-  <Container>
-    <div class="max-w-[680px] mx-auto text-center mb-10">
-      <h2 class="type-section-title ink-primary mb-5 text-balance">Mac, iPhone, and iPad — each considered.</h2>
-      <p class="type-lede measure-tight mx-auto">
-        Keyboard-first on Mac. Touch-first capture on iPhone. Workspace-ready on iPad. Dark and light modes throughout.
-      </p>
-    </div>
-    <div data-reveal>
-      <MarketingPlatformStills />
-    </div>
-  </Container>
-</section>
-
-<PricingSection compact />
+<PricingSection compact reveal />
 
 <CtaBanner />

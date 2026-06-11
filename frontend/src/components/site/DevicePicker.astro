@@ -33,7 +33,9 @@ const tabBase =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-base)]";
 ---
 
-<div class="flex justify-center mb-10 md:mb-12">
+<div class="flex flex-col items-center mb-10 md:mb-12">
+  <p id="cm-device-picker-status" class="sr-only" aria-live="polite" aria-atomic="true"></p>
+  <div class="flex justify-center w-full">
   <Surface
     variant="glass"
     radius="pill"
@@ -77,6 +79,7 @@ const tabBase =
       </div>
     </div>
   </Surface>
+  </div>
 </div>
 
 <style>
@@ -95,6 +98,10 @@ const tabBase =
 </style>
 
 <script>
+  import { animateEl } from "../../lib/motion/animate-el";
+
+  const easeOutQuint = [0.22, 1, 0.36, 1];
+
   function initDevicePicker() {
     document.querySelectorAll("[data-device-hero]").forEach((root) => {
       const showcase = root.querySelector("[data-device-showcase]");
@@ -102,25 +109,100 @@ const tabBase =
 
       const tabs = root.querySelectorAll<HTMLButtonElement>("[data-device-tab]");
       const panels = showcase.querySelectorAll<HTMLElement>("[data-device-panel]");
+      const status = root.querySelector<HTMLElement>("#cm-device-picker-status");
       if (!tabs.length || !panels.length) return;
 
       const key = "devicePickerBound";
       if ((root as HTMLElement).dataset[key]) return;
       (root as HTMLElement).dataset[key] = "1";
 
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      let activeDevice =
+        Array.from(tabs).find((t) => t.getAttribute("aria-selected") === "true")?.dataset.deviceTab ?? "mac";
+      let panelTransition = 0;
+      let activePanelAnims: Array<{ stop: () => void }> = [];
+
+      const deviceLabels: Record<string, string> = { mac: "Mac", iphone: "iPhone", ipad: "iPad" };
+
+      function stopPanelAnims() {
+        activePanelAnims.forEach((anim) => anim.stop());
+        activePanelAnims = [];
+        panelTransition += 1;
+      }
+
+      function announceDevice(device: string) {
+        if (!status) return;
+        status.textContent = `Showing ${deviceLabels[device] ?? device} preview`;
+      }
+
+      function showPanel(panel: HTMLElement) {
+        panel.hidden = false;
+        panel.style.opacity = "1";
+        panel.style.transform = "scale(1)";
+        panel.setAttribute("aria-hidden", "false");
+      }
+
+      function hidePanel(panel: HTMLElement) {
+        panel.hidden = true;
+        panel.style.opacity = "";
+        panel.style.transform = "";
+        panel.setAttribute("aria-hidden", "true");
+      }
+
       function setActive(device: string, focusTab?: HTMLButtonElement) {
+        if (device === activeDevice && !focusTab) return;
+
         tabs.forEach((tab) => {
           const isOn = tab.dataset.deviceTab === device;
           tab.setAttribute("aria-selected", isOn ? "true" : "false");
           tab.tabIndex = isOn ? 0 : -1;
         });
 
+        const nextPanel = Array.from(panels).find((p) => p.dataset.devicePanel === device);
+        const prevPanel = Array.from(panels).find((p) => p.dataset.devicePanel === activeDevice);
+
+        if (!nextPanel) return;
+
+        stopPanelAnims();
+        const transitionId = panelTransition;
+
         panels.forEach((panel) => {
-          const match = panel.dataset.devicePanel === device;
-          panel.hidden = !match;
-          panel.setAttribute("aria-hidden", match ? "false" : "true");
+          if (panel !== nextPanel && panel !== prevPanel) hidePanel(panel);
         });
 
+        if (reducedMotion || !prevPanel || prevPanel === nextPanel) {
+          panels.forEach((panel) => {
+            if (panel.dataset.devicePanel === device) showPanel(panel);
+            else hidePanel(panel);
+          });
+        } else {
+          nextPanel.hidden = false;
+          nextPanel.style.opacity = "0";
+          nextPanel.style.transform = "scale(0.985)";
+          nextPanel.setAttribute("aria-hidden", "false");
+
+          const outAnim = animateEl(
+            prevPanel,
+            { opacity: [1, 0], transform: ["scale(1)", "scale(0.985)"] },
+            { duration: 0.2, easing: "ease-in" }
+          );
+          const inAnim = animateEl(
+            nextPanel,
+            { opacity: [0, 1], transform: ["scale(0.985)", "scale(1)"] },
+            { duration: 0.26, easing: easeOutQuint }
+          );
+          activePanelAnims = [outAnim, inAnim];
+
+          void Promise.all([outAnim.finished, inAnim.finished]).then(() => {
+            if (transitionId !== panelTransition) return;
+            hidePanel(prevPanel);
+            nextPanel.style.opacity = "";
+            nextPanel.style.transform = "";
+          });
+        }
+
+        activeDevice = device;
+        announceDevice(device);
         if (focusTab) focusTab.focus();
       }
 
@@ -168,6 +250,7 @@ const tabBase =
         Array.from(tabs).find((t) => t.getAttribute("aria-selected") === "true")?.dataset.deviceTab ??
         "mac";
       setActive(initial);
+      announceDevice(initial);
     });
   }
 
