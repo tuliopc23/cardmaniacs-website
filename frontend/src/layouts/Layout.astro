@@ -1,20 +1,31 @@
 ---
 import '../styles/global.css';
 import SiteAmbient from '../components/site/SiteAmbient.astro';
+import {
+  DEFAULT_OG_IMAGE,
+  DEFAULT_OG_IMAGE_HEIGHT,
+  DEFAULT_OG_IMAGE_WIDTH,
+} from '../lib/site-icons';
 
 interface Props {
   title?: string;
   description?: string;
   ogImage?: string;
+  ogImageWidth?: number;
+  ogImageHeight?: number;
 }
 
 const {
   title = 'Cardmaniacs — Your calm reading desk for feeds, articles & bookmarks',
   description = 'A native Apple app that unifies RSS feeds, Read Later, and Bookmarks into one beautifully crafted experience. Built for macOS, iOS & iPadOS.',
-  ogImage = '/images/Graphic.png',
+  ogImage = DEFAULT_OG_IMAGE,
+  ogImageWidth = DEFAULT_OG_IMAGE_WIDTH,
+  ogImageHeight = DEFAULT_OG_IMAGE_HEIGHT,
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://cardmaniacs.app');
+const siteOrigin = Astro.site ?? 'https://cardmaniacs.app';
+const canonicalURL = new URL(Astro.url.pathname, siteOrigin);
+const ogImageUrl = new URL(ogImage, siteOrigin).href;
 ---
 
 <!doctype html>
@@ -59,6 +70,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://cardmani
     <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <!-- SEO -->
     <title>{title}</title>
@@ -70,14 +82,16 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://cardmani
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content={String(ogImageWidth)} />
+    <meta property="og:image:height" content={String(ogImageHeight)} />
     <meta property="og:url" content={canonicalURL} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image" content={ogImageUrl} />
   </head>
   <body>
     <SiteAmbient />

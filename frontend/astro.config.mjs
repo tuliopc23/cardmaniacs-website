@@ -6,6 +6,7 @@ import keystatic from "@keystatic/astro";
 import cloudflare from "@astrojs/cloudflare";
 
 export default defineConfig({
+  site: "https://cardmaniacs.app",
   output: "server",
   adapter: cloudflare(),
   integrations: [react(), markdoc(), keystatic()],

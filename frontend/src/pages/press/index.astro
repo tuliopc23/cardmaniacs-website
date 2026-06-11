@@ -7,6 +7,7 @@ import PageHero from '../../components/ui/PageHero.astro';
 import Card from '../../components/Card.astro';
 import Pill from '../../components/Pill.astro';
 import LucideIcon from '../../components/LucideIcon.astro';
+import { APP_ICON_PNG } from '../../lib/site-icons';
 ---
 
 <Layout title="Press Kit — Cardmaniacs">
@@ -29,11 +30,11 @@ import LucideIcon from '../../components/LucideIcon.astro';
         <div class="mb-16">
           <h2 class="type-section-title ink-primary mb-5">App icon</h2>
           <div class="flex items-center gap-6">
-            <img src="/images/Graphic.png" alt="Cardmaniacs App Icon" class="w-24 h-24 rounded-[20px] shadow-[var(--shadow-card)]" />
+            <img src={APP_ICON_PNG} alt="Cardmaniacs App Icon" class="w-24 h-24 rounded-[20px] shadow-[var(--shadow-card)]" />
             <div>
               <p class="body-s ink-secondary mb-2">Cardmaniacs app icon in PNG format.</p>
               <a
-                href="/images/Graphic.png"
+                href={APP_ICON_PNG}
                 download
                 class="body-s ink-accent font-medium hover:underline underline-offset-2 inline-flex items-center gap-1.5"
               >
