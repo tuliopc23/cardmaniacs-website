@@ -13,6 +13,7 @@ export type SiteNavLink = {
 export const legalPageKeys: Record<string, string> = {
   "privacy-policy": "privacy",
   "terms-of-use": "terms",
+  support: "support",
 };
 
 export const pageLabels: Record<string, string> = {
@@ -25,6 +26,7 @@ export const pageLabels: Record<string, string> = {
   press: "Press kit",
   privacy: "Privacy",
   terms: "Terms",
+  support: "Support",
   releases: "Releases",
 };
 
@@ -51,6 +53,7 @@ export const elsewhereNavLinks: SiteNavLink[] = [
     external: hasAppStoreUrl,
   },
   { href: "/privacy", label: "Privacy", key: "privacy", icon: "shield-check" },
+  { href: "/support", label: "Support", key: "support", icon: "file-text" },
   { href: "/terms", label: "Terms", key: "terms", icon: "file-text" },
 ];
 
