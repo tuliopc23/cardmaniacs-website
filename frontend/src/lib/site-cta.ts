@@ -7,8 +7,8 @@ export const hasAppStoreUrl = appStoreUrl.length > 0;
 
 export const downloadCta = {
   href: hasAppStoreUrl ? appStoreUrl : undefined,
-  label: hasAppStoreUrl ? "Download on the App Store" : "Coming to the App Store",
-  sublabel: hasAppStoreUrl ? "Download on the" : undefined,
+  label: hasAppStoreUrl ? "App Store" : "App",
+  sublabel: hasAppStoreUrl ? "Download on the" : "Get the",
   isExternal: hasAppStoreUrl,
   isAvailable: hasAppStoreUrl,
 } as const;

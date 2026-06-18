@@ -33,15 +33,15 @@ const formattedDate =
   variant="elevated"
   interactive
   class:list={[
-    "group cm-card-lift w-full max-w-[400px] p-0",
+    "group cm-card-lift flex w-full flex-col p-0",
     featured && "ring-1 ring-[var(--border-accent)] shadow-[var(--shadow-soft)]",
     className,
   ]}
 >
   <div
     class:list={[
-      "relative overflow-hidden aspect-[16/10] max-h-[200px]",
-      featured && "max-h-[220px]",
+      "relative w-full shrink-0 overflow-hidden aspect-[16/10]",
+      featured ? "max-h-[220px] md:max-h-[280px]" : "max-h-[200px] md:max-h-[220px]",
       "[border-top-left-radius:var(--radius-card)] [border-top-right-radius:var(--radius-card)]",
       "border-b border-[var(--border-subtle)]",
       "bg-[radial-gradient(900px_260px_at_20%_0%,var(--accent-atmo-card-primary)_0%,transparent_60%),radial-gradient(900px_260px_at_70%_0%,var(--accent-atmo-card-secondary)_0%,transparent_60%),linear-gradient(to_bottom,color-mix(in_oklab,var(--surface-overlay)_45%,transparent),transparent)]",
@@ -51,8 +51,10 @@ const formattedDate =
       <img
         src={cover}
         alt=""
+        width={640}
+        height={400}
         loading="lazy"
-        class="absolute inset-0 h-full w-full object-cover opacity-[0.92]"
+        class="absolute inset-0 h-full w-full object-cover object-center opacity-[0.92]"
       />
     ) : null}
 
@@ -79,7 +81,7 @@ const formattedDate =
     </div>
   </div>
 
-  <div class="p-5 md:p-6">
+  <div class="flex min-w-0 flex-1 flex-col p-5 md:p-6">
     {formattedDate && (
       <p class="type-card-eyebrow type-card-eyebrow-accent mb-3 inline-flex items-center gap-1.5">
         <LucideIcon name="calendar-days" size={13} />

@@ -1,31 +1,37 @@
 ---
-import Surface from "./ui/Surface.astro";
+import DockIconChrome from "./ui/DockIconChrome.astro";
 import LucideIcon from "./LucideIcon.astro";
 ---
 
-<div class="size-[52px] shrink-0 rounded-full shadow-[var(--shadow-nav)]">
-  <Surface variant="glass" radius="pill" class="size-full overflow-hidden rounded-full">
-    <button
-      type="button"
-      id="cm-theme-dock-btn"
-      class="relative flex size-full items-center justify-center rounded-full ink-secondary hover:ink-primary active:scale-95 transition-[transform,color] duration-200 motion-reduce:transition-none outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-base)]"
-      aria-label="Toggle color theme"
+<DockIconChrome>
+  <button
+    type="button"
+    id="cm-theme-dock-btn"
+    class="relative z-[1] flex size-full items-center justify-center rounded-full ink-secondary hover:ink-primary active:scale-95 transition-[transform,color] duration-200 motion-reduce:transition-none outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-inset"
+    aria-label="Toggle color theme"
+  >
+    <span
+      data-theme-dock-icon="light"
+      class="absolute inset-0 flex items-center justify-center transition-[opacity,transform] duration-200 motion-reduce:transition-none"
     >
-      <span data-theme-dock-icon="light" class="absolute inset-0 m-auto flex size-5 items-center justify-center transition-[opacity,transform] duration-200 motion-reduce:transition-none">
-        <LucideIcon name="sun" size={20} weight="bold" />
-      </span>
-      <span
-        data-theme-dock-icon="dark"
-        class="absolute inset-0 m-auto flex size-5 items-center justify-center opacity-0 scale-75 transition-[opacity,transform] duration-200 motion-reduce:transition-none"
-      >
-        <LucideIcon name="moon" size={20} weight="bold" />
-      </span>
-    </button>
-  </Surface>
-</div>
+      <LucideIcon name="sun" size={20} weight="bold" />
+    </span>
+    <span
+      data-theme-dock-icon="dark"
+      class="absolute inset-0 flex items-center justify-center opacity-0 scale-75 transition-[opacity,transform] duration-200 motion-reduce:transition-none"
+    >
+      <LucideIcon name="moon" size={20} weight="bold" />
+    </span>
+  </button>
+</DockIconChrome>
 
 <script>
   function initThemeDockButton() {
+    window.__cmThemeDockAbort?.abort();
+    const ac = new AbortController();
+    window.__cmThemeDockAbort = ac;
+    const { signal } = ac;
+
     const btn = document.getElementById("cm-theme-dock-btn");
     if (!(btn instanceof HTMLButtonElement)) return;
 
@@ -59,9 +65,13 @@ import LucideIcon from "./LucideIcon.astro";
 
     applyIcons();
 
-    btn.addEventListener("click", () => {
-      setTheme(readTheme() === "dark" ? "light" : "dark");
-    });
+    btn.addEventListener(
+      "click",
+      () => {
+        setTheme(readTheme() === "dark" ? "light" : "dark");
+      },
+      { signal }
+    );
   }
 
   initThemeDockButton();

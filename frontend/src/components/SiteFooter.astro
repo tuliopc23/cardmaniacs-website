@@ -3,6 +3,7 @@ import Container from './Container.astro';
 import BejamasSeparator from './ui/bejamas/Separator.astro';
 import LucideIcon from './LucideIcon.astro';
 import LogoMark from './ui/LogoMark.astro';
+import AppleLogo from './ui/AppleLogo.astro';
 import { downloadCta } from '../lib/site-cta';
 
 const footerDownloadHref = downloadCta.href ?? '/features';
@@ -135,7 +136,7 @@ const chevronClass =
           &copy; {new Date().getFullYear()} <span translate="no">Cardmaniacs</span>. All rights reserved.
         </p>
         <p class="body-s ink-tertiary inline-flex items-center gap-1.5">
-          <LucideIcon name="apple" size={14} />
+          <AppleLogo size={14} class="opacity-80" />
           Crafted for macOS, iOS & iPadOS
         </p>
       </div>

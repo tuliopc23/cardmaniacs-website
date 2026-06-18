@@ -1,7 +1,7 @@
 ---
 import SectionBlock from './SectionBlock.astro';
 import PricingCard from './site/PricingCard.astro';
-import { appStoreUrl, hasAppStoreUrl } from '../lib/site-cta';
+import { hasAppStoreUrl } from '../lib/site-cta';
 
 interface Props {
   compact?: boolean;
@@ -9,9 +9,6 @@ interface Props {
 }
 
 const { compact = false, reveal = false } = Astro.props;
-
-const planCtaHref = hasAppStoreUrl ? appStoreUrl : undefined;
-const planCtaLabel = hasAppStoreUrl ? undefined : 'Coming to the App Store';
 
 const trialFeatures = [
   'Full app access for 7 days',
@@ -51,49 +48,48 @@ const annualFeatures = [
   )}
 
   <div
-    class="mx-auto grid w-full max-w-[980px] grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-12 lg:gap-5 items-stretch"
+    class="mx-auto grid w-full max-w-[1040px] grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-[minmax(0,1.06fr)_minmax(0,0.94fr)] lg:gap-6 lg:items-stretch"
     data-reveal-stagger={reveal ? true : undefined}
   >
-    <div class="lg:col-span-7 lg:row-span-2" data-reveal-card={reveal ? true : undefined}>
+    <div class="lg:min-h-0" data-reveal-card={reveal ? true : undefined}>
       <PricingCard
         label="Annual"
         price="$34.99"
         interval="/year"
         description="Best value — $2.92/month. Everything included on every Apple device."
-        ctaHref={planCtaHref}
-        ctaLabel={planCtaLabel}
         highlighted
         badge="Save 42%"
         features={annualFeatures}
+        layout="tall"
         class="max-w-none h-full"
       />
     </div>
 
-    <div class="lg:col-span-5" data-reveal-card={reveal ? true : undefined}>
-      <PricingCard
-        label="7-day trial"
-        price="$0"
-        interval="/ trial"
-        description="Try everything before you subscribe."
-        ctaHref={planCtaHref}
-        ctaLabel={planCtaLabel ?? 'Start free trial'}
-        badge="Try it"
-        features={trialFeatures}
-        class="max-w-none h-full"
-      />
-    </div>
+    <div class="flex flex-col gap-4 sm:gap-5 lg:gap-6 lg:min-h-0">
+      <div class="lg:flex-1 lg:min-h-0" data-reveal-card={reveal ? true : undefined}>
+        <PricingCard
+          label="7-day trial"
+          price="$0"
+          interval="/ trial"
+          description="Try everything before you subscribe."
+          badge="Try it"
+          features={trialFeatures}
+          layout="compact"
+          class="max-w-none h-full"
+        />
+      </div>
 
-    <div class="lg:col-span-5" data-reveal-card={reveal ? true : undefined}>
-      <PricingCard
-        label="Monthly"
-        price="$4.99"
-        interval="/month"
-        description="Full access, cancel anytime."
-        ctaHref={planCtaHref}
-        ctaLabel={planCtaLabel}
-        features={monthlyFeatures}
-        class="max-w-none h-full"
-      />
+      <div class="lg:flex-1 lg:min-h-0" data-reveal-card={reveal ? true : undefined}>
+        <PricingCard
+          label="Monthly"
+          price="$4.99"
+          interval="/month"
+          description="Full access, cancel anytime."
+          features={monthlyFeatures}
+          layout="compact"
+          class="max-w-none h-full"
+        />
+      </div>
     </div>
   </div>
 </SectionBlock>

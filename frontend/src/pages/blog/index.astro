@@ -53,7 +53,7 @@ const rest = featured ? sortedPosts.filter((p) => p.id !== featured.id) : sorted
           data-reveal-stagger
         >
           {featured && (
-            <div class="md:col-span-2 lg:col-span-2" data-reveal-card>
+            <div class="w-full md:col-span-2 lg:col-span-2" data-reveal-card>
               <PostCard
                 href={`/blog/${featured.id}`}
                 title={featured.data.title}
@@ -62,13 +62,13 @@ const rest = featured ? sortedPosts.filter((p) => p.id !== featured.id) : sorted
                 cover={featured.data.cover}
                 featured
                 tags={featured.data.tags}
-                class="h-full max-w-none"
+                class="h-full w-full"
               />
             </div>
           )}
 
           {rest.map((post) => (
-            <div data-reveal-card class="flex justify-center">
+            <div data-reveal-card class="w-full min-w-0">
               <PostCard
                 href={`/blog/${post.id}`}
                 title={post.data.title}
@@ -76,6 +76,7 @@ const rest = featured ? sortedPosts.filter((p) => p.id !== featured.id) : sorted
                 date={post.data.date}
                 cover={post.data.cover}
                 tags={post.data.tags}
+                class="h-full w-full"
               />
             </div>
           ))}

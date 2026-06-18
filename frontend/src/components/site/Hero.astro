@@ -27,7 +27,7 @@ const chips = ["Feeds", "Read Later", "Bookmarks", "Highlights", "Summaries", "O
           <EyebrowLabel icon="library" class="mb-4">A calmer home for everything you read</EyebrowLabel>
         </div>
 
-        <div data-hero-item class="flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-6 mb-7">
+        <div data-hero-item class="flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-7 md:gap-8 mb-7">
           <LogoMark size="lg" class="shrink-0" />
           <h1 class="display-hero ink-primary text-balance flex-1 min-w-0">
             Your native reading desk —<br class="hidden sm:block" />
@@ -41,7 +41,7 @@ const chips = ["Feeds", "Read Later", "Bookmarks", "Highlights", "Summaries", "O
         </p>
 
         <div data-hero-item class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-8">
-          <AppStoreButton />
+          <AppStoreButton class="w-full justify-center sm:w-auto sm:justify-start" />
           <a
             href="/features"
             class="inline-flex items-center gap-2 font-display font-semibold text-[15px] ink-primary py-3 group"
@@ -59,14 +59,14 @@ const chips = ["Feeds", "Read Later", "Bookmarks", "Highlights", "Summaries", "O
         <p class="sr-only">Including {chips.join(", ")}.</p>
         <div
           data-hero-item
-          class="hero-chip-rail mb-2 flex w-full flex-wrap justify-start gap-0.5 p-1 rounded-[var(--radius-pill)] border border-[var(--border-subtle)] bg-[color-mix(in_oklab,var(--surface-glass)_55%,transparent)] shadow-[var(--shadow-pill)] backdrop-blur-[var(--blur-glass)] backdrop-saturate-[var(--sat-glass)] supports-[backdrop-filter]:bg-[color-mix(in_oklab,var(--surface-glass)_42%,transparent)] md:mb-0"
+          class="hero-chip-rail mb-2 grid w-full grid-cols-3 gap-0.5 p-1 rounded-[var(--radius-pill)] border border-[var(--border-subtle)] bg-[color-mix(in_oklab,var(--surface-glass)_55%,transparent)] shadow-[var(--shadow-pill)] backdrop-blur-[var(--blur-glass)] backdrop-saturate-[var(--sat-glass)] supports-[backdrop-filter]:bg-[color-mix(in_oklab,var(--surface-glass)_42%,transparent)] md:mb-0 md:flex md:flex-wrap md:justify-start"
           aria-hidden="true"
         >
           {
             chips.map((c, i) => (
               <span
                 class:list={[
-                  "hero-chip-pill inline-flex items-center gap-1.5 select-none rounded-[var(--radius-pill)] px-3 py-1.5 text-[11px] font-display font-semibold tracking-wide text-[var(--ink-secondary)]",
+                  "hero-chip-pill flex w-full items-center justify-center gap-1 select-none rounded-[var(--radius-pill)] px-2 py-1.5 text-[10px] font-display font-semibold tracking-wide text-[var(--ink-secondary)] whitespace-nowrap sm:gap-1.5 sm:px-3 sm:text-[11px] md:inline-flex md:w-auto md:justify-start",
                   i === 0 && "hero-chip-pill--active",
                 ]}
               >

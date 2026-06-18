@@ -1,0 +1,20 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+---
+
+<div
+  class:list={[
+    "cm-dock-icon relative flex size-[52px] shrink-0 items-center justify-center overflow-hidden rounded-full border border-[var(--border-glass)] bg-[var(--surface-glass)] shadow-[var(--shadow-nav)] backdrop-blur-[var(--blur-glass)] backdrop-saturate-[var(--sat-glass)] supports-[backdrop-filter]:bg-[var(--surface-glass)]",
+    className,
+  ]}
+>
+  <div
+    class="pointer-events-none absolute inset-0 opacity-70 [background:radial-gradient(1200px_600px_at_30%_0%,var(--accent-atmo-sheen)_0%,transparent_55%)]"
+    aria-hidden="true"
+  ></div>
+  <slot />
+</div>

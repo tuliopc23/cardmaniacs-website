@@ -4,6 +4,8 @@
 declare global {
   interface Window {
     __cmDockAbort?: AbortController;
+    __cmAppDockAbort?: AbortController;
+    __cmThemeDockAbort?: AbortController;
     cmSyncThemeColor?: () => void;
   }
 }
