@@ -1,0 +1,216 @@
+---
+title: Keyboard and Commands
+section: Reference
+order: 13
+---
+
+## About this reference
+
+Shortcuts listed here come from **`AppCommandDescriptor.shortcut`** in the Cardmaniacs app command catalog—the authoritative source for default macOS bindings. Commands with `shortcut: nil` are available from the **Command palette** (`⌘K`) or **Actions palette** (`⌘⇧A`) only.
+
+{% note %}
+Unless marked otherwise, shortcuts are **macOS defaults**. iOS and iPadOS use touch and external-keyboard mappings where supported; many palette-only commands have no hardware shortcut on mobile.
+{% /note %}
+
+Custom rebinding may be available in the **Help → Keyboard Shortcuts** (`⌘/`) reference on macOS.
+
+## Navigation
+
+| Shortcut | Command |
+|----------|---------|
+| `⌘0` | Go to Home |
+| `⌘1` | Go to Feeds |
+| `⌘2` | Go to Read Later |
+| `⌘3` | Go to Bookmarks |
+| `⌘4` | Go to Starred Read Later |
+| `⌘[` | Go Back |
+| `⌘]` | Go Forward |
+| `⌘↩` | Accept |
+| `⌃L` | Focus Cards |
+| `⌃Tab` | Cycle focus (sidebar ↔ cards) |
+| `⌘⌃S` | Toggle Sidebar |
+
+### Sidebar mode
+
+| Shortcut | Command |
+|----------|---------|
+| `⌘⌥R` | Sidebar Mode: RSS |
+| `⌘⌥L` | Sidebar Mode: Read Later |
+| `⌘⌥B` | Sidebar Mode: Bookmarks |
+
+### Layout
+
+| Shortcut | Command |
+|----------|---------|
+| `⌘⌥1` | Focused Layout |
+| `⌘⌥2` | Triage Layout |
+
+## Feeds and imports
+
+| Shortcut | Command |
+|----------|---------|
+| `⌘R` | Refresh Feeds |
+| `⌘⇧R` | Mark All as Read |
+| `⌥⇧T` | Tag Feed… |
+| `⌘N` | Quick Add |
+| `⌘⌥N` | Add Feed... |
+| `⌘⇧O` | Import OPML... |
+| `⌘⇧I` | Import... |
+
+## Items (selection)
+
+| Shortcut | Command |
+|----------|---------|
+| `⌘E` | Mark as Read |
+| `⌘⇧S` | Toggle Star |
+| `⌘⇧T` | Manage Tags… |
+| `⌘⌥O` | Open in Browser |
+| `⌘⇧C` | Copy Link |
+| `⌘⌫` | Delete |
+| `⌘⇧M` | Move… |
+
+### Palette-only item actions
+
+| Command | Shortcut |
+|---------|----------|
+| Archive | — |
+| Unarchive | — |
+| Share | — |
+| Save to Read Later | — |
+| Remove from Read Later | — |
+| Fix Content Issues | — |
+| Select All | — |
+| Deselect All | — |
+
+## Reader
+
+| Shortcut | Command |
+|----------|---------|
+| `⌘F` | Find in Article |
+| `⌘G` | Find Next |
+| `⌘⇧G` | Find Previous |
+| `⌘⇧F` | Toggle Focus Mode |
+| `⌘=` | Increase Font Size |
+| `⌘-` | Decrease Font Size |
+| `⌘⌥T` | Next Theme |
+| `⌘⇧P` | Toggle Paged Mode |
+| `⌘⇧U` | AI Summary |
+
+### Palette-only reader actions
+
+| Command |
+|---------|
+| Toggle Auto-Scroll |
+| Table of Contents |
+| Start / Pause / Resume / Stop Read Aloud |
+| Content Width: Narrow / Standard / Wide |
+| Text Alignment: Leading / Center / Justified |
+| Toggle System Text Size |
+| Extract Key Highlights |
+| Show Entities |
+| Share Reader View |
+| Save Progress |
+| Open in New Window |
+| Refresh Content |
+| Fix Content Issues |
+| Highlight Yellow / Orange / Pink / Blue |
+
+## Cards and palettes
+
+| Shortcut | Command |
+|----------|---------|
+| `⌘K` | Command Palette |
+| `⌘⇧A` | Actions Palette |
+| `⌘,` | Open Settings |
+| `⌘/` | Keyboard Shortcuts reference (Help menu, macOS) |
+| `⌘⌥=` | Card Size: Zoom In |
+| `⌘⌥-` | Card Size: Zoom Out |
+
+| Command | Shortcut |
+|---------|----------|
+| Card Size: Actual Size | — |
+
+## Command palette — Go To destinations
+
+These **Go To** routes have **no default shortcut**—open with `⌘K`:
+
+### Feeds (articles)
+
+- Go to Unread Articles
+- Go to All Articles
+- Go to Read Articles
+- Go to Starred Articles
+- Go to Archived Articles
+
+### Read Later
+
+- Go to In Progress
+- Go to Read
+- Go to Archived Read Later
+- Go to Highlights
+- Go to Books
+- Go to PDFs
+- Go to Markdown
+- Go to Statistics
+
+### Bookmarks
+
+- Go to Starred Bookmarks
+- Go to Archived Bookmarks
+- Go to Unread Bookmarks
+
+## Settings jumps (palette)
+
+| Command | Shortcut |
+|---------|----------|
+| Settings: General | — |
+| Settings: Siri & Shortcuts (General) | — |
+| Settings: Share Extension (General) | — |
+| Settings: About (General) | — |
+| Settings: Feeds | — |
+| Settings: Keyboard Shortcuts (Advanced) | — |
+| Settings: Global Hotkey (Advanced) | — |
+| Settings: Data & Storage (Advanced) | — |
+
+## Help reference window (macOS)
+
+Open **Help → Keyboard Shortcuts** (`⌘/`) for the in-app shortcut reference window—a curated table maintained alongside the command catalog. The command palette also lists **Settings: Keyboard Shortcuts (Advanced)** to jump there quickly.
+
+Custom rebinding, when available, is configured in that reference UI—not duplicated here.
+
+## Vim-style navigation (macOS)
+
+When card focus is active (`⌃L`), use single-key navigation in lists and triage grids:
+
+### List mode (Focused layout)
+
+| Key | Action |
+|-----|--------|
+| `j` | Move down |
+| `k` | Move up |
+| `⇧J` / `⇧K` | Extend batch selection |
+| `Space` | Toggle selection / open focused item |
+| `v` | Enter selection mode |
+
+### Grid mode (Triage card grid)
+
+| Key | Action |
+|-----|--------|
+| `h` | Move left |
+| `j` | Move down |
+| `k` | Move up |
+| `l` | Move right |
+| `Space` | Focus current card in view (does not open reader) |
+
+Arrow keys work in both surfaces. **Cycle focus** between sidebar and cards with `⌃Tab`. Built-in vim bindings are always available when card focus is active—they are not a separate settings toggle.
+
+## Naming corrections
+
+Older guides may say **“Move to folder”** — the catalog command is **Move…** (`⌘⇧M`).  
+**Archive** has no default shortcut; use the command or actions palette.
+
+## Next steps
+
+- [Settings](/docs/settings) — pane reference
+- [Layouts and Navigation](/docs/layouts-and-navigation)
+- [Your First Ten Minutes](/docs/your-first-ten-minutes)

@@ -1,0 +1,92 @@
+---
+title: Core Concepts
+section: Introduction
+order: 1
+---
+
+## Cards: the universal unit
+
+Every article, feed entry, saved link, and imported document becomes a **card**. Cards carry:
+
+- **Title and source** — where the item came from (feed, URL, file)
+- **Read state** — unread, read, or in progress (for longer items)
+- **Star** — quick importance flag, separate from tags
+- **Tags** — your organizational vocabulary, shared across the library
+- **Highlights** — selections in the reader, PDF, or EPUB views
+- **Archive state** — removed from active lists without deleting
+
+Treating everything as a card means you can move between Feeds, Read Later, and Bookmarks without re-learning different item types.
+
+## Sidebar modes
+
+The sidebar has three top-level **modes** that reshape which destinations appear:
+
+| Mode | Purpose |
+|------|---------|
+| **RSS** | Feeds, folders, and article collections (Unread, All, Starred, Archived) |
+| **Read Later** | Your queue and filtered collections (In Progress, Highlights, PDFs, …) |
+| **Bookmarks** | Reference links and bookmark collections |
+
+Switch modes from the sidebar header or with shortcuts `⌘⌥R` (RSS), `⌘⌥L` (Read Later), and `⌘⌥B` (Bookmarks) on macOS.
+
+Within each mode, **destinations** are specific lists—Unread Articles, In Progress, Starred Bookmarks, and so on. The command palette exposes many destinations under “Go to …” without dedicated keyboard shortcuts.
+
+## Layouts: Focused and Triage
+
+Cardmaniacs offers two primary layouts on macOS (and adapted equivalents on iOS/iPadOS):
+
+### Focused layout (`⌘⌥1`)
+
+Reader-first. The content pane dominates; the card list stays accessible but secondary. Use Focused layout when you are reading one item deeply or want minimal chrome.
+
+### Triage layout (`⌘⌥2`)
+
+List-first. Scan many cards quickly, batch-select, and open items into the reader. Use Triage when clearing a feed or processing your Read Later queue.
+
+{% note %}
+Layout shortcuts apply on macOS. On iPhone and iPad, use the layout control in the toolbar or split view affordances instead.
+{% /note %}
+
+## Read states and progress
+
+- **Unread** — you have not opened or finished the item
+- **Read** — marked complete (`⌘E` on macOS) or finished in the reader
+- **In progress** — partially read; common for long articles and books
+
+Read Later collections can filter by these states. Feeds track unread counts per feed and folder.
+
+## Archive vs delete
+
+**Archive** removes an item from active triage lists while keeping it recoverable. Archived articles, read-later items, and bookmarks live in dedicated archived destinations. Archive is available from the command palette and actions palette; there is no default keyboard shortcut for Archive in the command catalog.
+
+**Delete** (`⌘⌫` on macOS) permanently removes the card from your library. Use delete when you are certain you will not need the item again.
+
+{% warning %}
+Delete is destructive. Archive is the safer default when you are unsure.
+{% /warning %}
+
+## Tags and smart lists
+
+**Tags** label cards across modes. Open **Manage Tags…** (`⌘⇧T`) from an item or use the Tag Panel in the reader.
+
+**Smart lists** are saved filters—rules over fields like tag, source, read state, and media type. They appear in the sidebar when their criteria match. See [Highlights and Tags](/docs/highlights-and-tags) for recipes and the editor.
+
+## Home
+
+**Home** (`⌘0`) is the dashboard: recommendations, reading momentum, and entry points into your library. It is not a fourth pillar like Feeds or Read Later—it is an overview that pulls from all of them.
+
+## Command surfaces
+
+Power users rely on three overlapping surfaces:
+
+1. **Command palette** (`⌘K`) — search all commands and “Go to” destinations
+2. **Actions palette** (`⌘⇧A`) — context actions for the current selection
+3. **Menus and shortcuts** — muscle memory for frequent operations
+
+The [Keyboard and Commands](/docs/keyboard-and-commands) reference lists authoritative shortcuts from the app catalog.
+
+## Next steps
+
+- [Layouts and Navigation](/docs/layouts-and-navigation) — shortcuts, focus handoff, sidebar destinations
+- [Feeds and Syndication](/docs/feeds-and-syndication) — how incoming content works
+- [Read Later](/docs/read-later) — queue habits and collections

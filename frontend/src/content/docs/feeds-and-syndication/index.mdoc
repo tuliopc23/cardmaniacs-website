@@ -1,0 +1,97 @@
+---
+title: Feeds and Syndication
+section: Guides
+order: 5
+---
+
+## What feeds do in Cardmaniacs
+
+**Feeds** are your incoming stream: blogs, newsletters, YouTube channels, podcasts, and other syndicated sources discovered through RSS or Atom. New entries become cards in feed collections—primarily **Unread**, **All**, **Starred**, and **Archived** articles.
+
+Feeds answer: *what published since I last looked?*
+
+## Adding and discovering feeds
+
+### Add Feed
+
+Use **Add Feed…** (`⌘⌥N` on macOS). Paste a site URL or direct feed URL. Cardmaniacs runs **feed discovery** against common patterns (RSS, Atom, JSON Feed where supported) and shows candidates before you subscribe.
+
+### Quick Add vs Add Feed
+
+- **Quick Add** (`⌘N`) saves a single URL—often to Read Later or Bookmarks
+- **Add Feed…** (`⌘⌥N`) creates an ongoing subscription that refreshes on a schedule
+
+### OPML import and export
+
+Migrate subscriptions in bulk:
+
+- **Import OPML…** (`⌘⇧O`) — merge subscriptions from another reader
+- Export (via File menu or settings, where exposed) — backup or move to another app
+
+OPML imports preserve folder structure when the source file includes outlines.
+
+## Refresh and feed health
+
+| Shortcut | Action |
+|----------|--------|
+| `⌘R` | Refresh feeds |
+| `⌘⇧R` | Mark all as read (current context) |
+
+Background refresh respects system settings and **Settings → Feeds** preferences. When a feed fails repeatedly, **feed health** surfaces errors—broken URLs, SSL issues, or empty responses—so you can fix or unsubscribe without silent failure.
+
+{% tip %}
+Tag feeds with **Tag Feed…** (`⌥⇧T`) to group sources in the sidebar (e.g. “News”, “Dev”, “YouTube”).
+{% /tip %}
+
+## Source types
+
+Cardmaniacs resolves specialized sources where possible:
+
+- **Standard RSS/Atom** — articles with reader extraction
+- **YouTube** — channel feeds map to playable entries
+- **Podcasts** — enclosure-aware playback in the reader
+- **Social and alternate URLs** — discovery may suggest the best available feed
+
+Not every website exposes a reliable feed. When discovery fails, use Quick Add or the Share extension to save individual pages.
+
+## Triage workflow
+
+A productive feed session in **Triage layout** (`⌘⌥2`):
+
+1. `⌘1` → Feeds → Unread
+2. Skim cards; `⌘↩` to open interesting items
+3. `⌘E` mark read, palette **Archive**, or **Save to Read Later** for longer pieces
+4. `⌘⇧S` star must-keep articles
+5. `⌘⇧R` when you want to clear remaining unread in the current view (confirm intent)
+
+Archive removes clutter without deleting history—find archived articles via **Go to Archived Articles** in the palette.
+
+## Folders and organization
+
+Organize subscriptions into **folders** in the sidebar. Drag feeds between folders, or use feed inspector actions. Folders sync through iCloud with the rest of your library.
+
+## Reader extraction for feed articles
+
+Feed cards open in the **reader** with extracted article text when available. If extraction is poor, try **Fix Content Issues** from the reader or item actions palette, or **Open in Browser** (`⌘⌥O`).
+
+**Refresh Content** (palette) re-fetches the article body without re-subscribing to the feed.
+
+## Feeds vs Read Later
+
+| Feeds | Read Later |
+|-------|------------|
+| Publisher-driven updates | Your intentional queue |
+| Unread counts per subscription | Collections like In Progress, PDFs |
+| Archive when done skimming | Save for deep reading later |
+
+Sending to Read Later does not unsubscribe you from the feed—the feed entry can still be marked read separately.
+
+## Settings
+
+Feed-specific defaults—refresh interval, article limits, discovery behavior—live under **Settings → Feeds**. See [Settings](/docs/settings).
+
+## Next steps
+
+- [Read Later](/docs/read-later) — queue habits
+- [Reading Tools](/docs/reading-tools) — reader typography and media playback
+- [Keyboard and Commands](/docs/keyboard-and-commands) — `⌘1`, `⌘R`, and palette Go To routes

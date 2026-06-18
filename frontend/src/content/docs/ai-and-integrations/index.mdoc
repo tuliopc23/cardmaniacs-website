@@ -1,0 +1,89 @@
+---
+title: AI and Integrations
+section: Guides
+order: 12
+---
+
+## Apple Intelligence in Cardmaniacs
+
+On supported Mac, iPhone, and iPad models with Apple Intelligence enabled, Cardmaniacs adds **on-device** features—no account with a third-party AI provider required.
+
+### Reader intelligence
+
+| Feature | Access |
+|---------|--------|
+| **AI Summary** | `⌘⇧U` (macOS) |
+| **Show Entities** | Command palette |
+| **Extract Key Highlights** | Command palette |
+
+Summaries and entity extraction run against article text locally. Quality depends on content length and language.
+
+### Digest
+
+**Digest** (where surfaced in app UI) batches recent library activity into a readable briefing—unfinished queue items, notable feed posts, or highlights. Availability follows OS intelligence gates and user opt-in under **Settings → General** intelligence sections.
+
+{% note %}
+Intelligence settings live under the **General** settings pane—not a separate “Intelligence” top-level pane on macOS.
+{% /note %}
+
+## Share extension
+
+Save URLs from Safari, News, social apps, and anywhere the system share sheet appears. Choose Read Later or Bookmarks at save time.
+
+Configure defaults and enable the extension in **Settings → Share**. On iOS, also verify the extension is enabled in **Settings → Apps → Cardmaniacs**.
+
+## Safari extension
+
+The Safari extension adds in-browser actions—quick save, reader handoff, and related capture flows. Enable from Cardmaniacs Settings or Safari → Settings → Extensions.
+
+## Widgets
+
+Home Screen and Lock Screen **widgets** show unread counts, queue depth, or quick-launch into common destinations—implementation varies by widget family and OS version.
+
+## Shortcuts and Siri
+
+**CardmaniacsShortcuts** exposes App Intents for automation:
+
+- Add to Read Later or Bookmarks
+- Open a destination
+- Mark read / star
+- Refresh feeds (where exposed)
+
+Build shortcuts in the Shortcuts app; trigger via Siri, Focus filters, or automation. Palette entries like **Settings: Siri & Shortcuts (General)** jump to the relevant General settings section on macOS.
+
+## Spotlight
+
+Indexed cards appear in **Spotlight** search on macOS and iOS—search by title, tag, or snippet. Open directly into the reader.
+
+## Handoff
+
+**Handoff** continues reading on another Apple device signed into the same Apple ID—open the article you were reading on Mac on iPhone, or vice versa, from the Dock or app switcher handoff affordance.
+
+## Global hotkey (macOS)
+
+**Settings → Advanced → Global Hotkey** registers a system-wide **Quick Capture** shortcut (default `⌘⌥⇧C` when enabled)—optional for capture-heavy workflows.
+
+## Command palette integrations
+
+Palette-only settings jumps (no shortcuts):
+
+- Settings: General
+- Settings: Siri & Shortcuts (General)
+- Settings: Share Extension (General)
+- Settings: Feeds
+- Settings: Keyboard Shortcuts (Advanced)
+- Settings: Global Hotkey (Advanced)
+- Settings: Data & Storage (Advanced)
+- Settings: About (General)
+
+Use `⌘K` and type “Settings:” to reach these quickly.
+
+## Privacy model
+
+Integrations use Apple frameworks (Share, Safari, WidgetKit, App Intents, Handoff, Spotlight). Intelligence processing stays on-device where Apple Intelligence applies. Cardmaniacs does not require a separate cloud AI subscription for core reading features.
+
+## Next steps
+
+- [Settings](/docs/settings) — General and Advanced panes
+- [Reading Tools](/docs/reading-tools) — AI Summary in the reader
+- [Download and Setup](/docs/download-and-setup) — extension setup

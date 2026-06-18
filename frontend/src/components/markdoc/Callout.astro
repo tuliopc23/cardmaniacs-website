@@ -1,0 +1,71 @@
+---
+interface Props {
+  variant?: "note" | "tip" | "important" | "warning";
+  title?: string;
+}
+
+const { variant = "note", title } = Astro.props;
+
+const labels: Record<NonNullable<Props["variant"]>, string> = {
+  note: "Note",
+  tip: "Tip",
+  important: "Important",
+  warning: "Warning",
+};
+
+const label = title ?? labels[variant];
+const role = variant === "warning" ? "alert" : "note";
+---
+
+<aside class:list={["doc-callout", `doc-callout--${variant}`]} role={role}>
+  <p class="doc-callout__label">{label}</p>
+  <div class="doc-callout__body">
+    <slot />
+  </div>
+</aside>
+
+<style>
+  .doc-callout {
+    margin: 1.75rem 0;
+    padding: 1rem 1.2rem;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    background: color-mix(in oklab, var(--surface-elevated) 92%, var(--cm-blue) 8%);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .doc-callout--tip {
+    background: color-mix(in oklab, var(--surface-elevated) 90%, var(--cm-blue) 12%);
+  }
+
+  .doc-callout--important {
+    border-color: color-mix(in oklab, var(--accent) 35%, var(--border-subtle));
+    background: color-mix(in oklab, var(--surface-elevated) 88%, var(--accent) 12%);
+  }
+
+  .doc-callout--warning {
+    border-color: color-mix(in oklab, #c97a2b 40%, var(--border-subtle));
+    background: color-mix(in oklab, var(--surface-elevated) 88%, #c97a2b 10%);
+  }
+
+  .doc-callout__label {
+    margin: 0 0 0.5rem;
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    font-weight: 650;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-primary);
+  }
+
+  .doc-callout__body :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .doc-callout__body :global(p) {
+    margin-bottom: 0.65rem;
+    color: var(--ink-secondary);
+    font-style: normal;
+    max-width: none;
+  }
+</style>

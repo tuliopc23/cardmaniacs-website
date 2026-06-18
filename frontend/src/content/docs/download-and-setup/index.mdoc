@@ -1,0 +1,98 @@
+---
+title: Download and Setup
+section: Getting Started
+order: 2
+---
+
+## Download Cardmaniacs
+
+Cardmaniacs is distributed on the **Mac App Store** and **App Store** for iPhone and iPad. Search for “Cardmaniacs” or use the App Store link from [cardmaniacs.com](https://cardmaniacs.com) when available.
+
+{% note %}
+If the public App Store URL is not yet published, the marketing site shows “Coming to the App Store” until release. Install from TestFlight only if you have been invited to a beta.
+{% /note %}
+
+### System requirements
+
+- **macOS** — recent macOS versions supported by the current App Store build (Apple Silicon and Intel where applicable)
+- **iOS / iPadOS** — versions aligned with the current App Store listing
+- **iCloud** — Apple ID with iCloud Drive enabled for library sync
+- **Apple Intelligence** (optional) — supported device and OS for on-device summaries and related features
+
+## iCloud sync
+
+On first launch, Cardmaniacs asks to use **iCloud** for your library. Accepting enables sync of feeds, cards, tags, highlights, and reading state across your devices.
+
+The app's iCloud container is `iCloud.com.cardmaniacs.app`. Your data stays in your Apple account; Cardmaniacs does not operate a separate cloud reading account.
+
+### Troubleshooting sync
+
+If items do not appear on another device:
+
+1. Confirm the same Apple ID is signed in on both devices
+2. Open **Settings → Apple ID → iCloud** and ensure iCloud Drive is on
+3. Check that Cardmaniacs is allowed to use iCloud Drive
+4. Leave the app open briefly on Wi‑Fi to allow an initial merge
+5. On macOS, **Refresh Feeds** (`⌘R`) updates feed content but is not a full library reset
+
+{% tip %}
+Large libraries may take several minutes to reconcile on first install. Avoid deleting and reinstalling during an initial sync.
+{% /tip %}
+
+## Extensions and capture
+
+Cardmaniacs includes system integrations for saving from other apps:
+
+### Share extension
+
+Enable the Cardmaniacs share action in Safari, News, and other apps that support the system share sheet. Saved URLs can go to Read Later or Bookmarks depending on the share UI and your default.
+
+Configure share defaults under **Settings → Share** on macOS. Enable the extension in **Settings → General** (browser and extension health) or Safari's extension preferences. See [Settings](/docs/settings) for pane details.
+
+### Safari extension
+
+The Safari extension adds capture and reader-related actions while browsing. Install and enable it from **Settings → General** or Safari's extension preferences.
+
+### Widgets and Shortcuts
+
+Home Screen widgets and **Shortcuts** actions expose quick capture, navigation, and automation. See [AI and Integrations](/docs/ai-and-integrations).
+
+{% note title="macOS vs iOS" %}
+Extension setup flows differ slightly by platform. macOS surfaces extension toggles in Cardmaniacs Settings; iOS uses Settings.app and the share sheet editor.
+{% /note %}
+
+## First launch and onboarding
+
+Onboarding walks through:
+
+1. **Welcome** — what Cardmaniacs unifies
+2. **iCloud** — sync consent
+3. **Extensions** — optional Share and Safari setup
+4. **Sample content** — optional starter feeds or empty library
+
+You can skip sample feeds and add your own via **Add Feed…** (`⌘⌥N`) or OPML import (`⌘⇧O`) later.
+
+## Importing an existing library
+
+If you are migrating from another reader:
+
+- **OPML** — import feed subscriptions (`⌘⇧O` on macOS)
+- **Import…** — additional import formats via **Import…** (`⌘⇧I`) where supported
+
+Imported feeds merge with existing subscriptions; duplicate URLs are typically deduplicated.
+
+## Global hotkey (macOS)
+
+Advanced settings allow a **global quick-capture hotkey** (default `⌘⌥⇧C` when enabled) to summon Cardmaniacs from any app. Configure under **Settings → Advanced → Global Hotkey**. This is optional; most users start without it.
+
+## Settings overview
+
+macOS settings use these panes: **General**, **Reading**, **Feeds**, **Share**, **Subscription** (when enabled), and **Advanced**. Intelligence and Siri-related options live under General—not as separate top-level panes.
+
+Open Settings with `⌘,` or from the app menu.
+
+## Next steps
+
+- [Your First Ten Minutes](/docs/your-first-ten-minutes) — hands-on checklist
+- [Layouts and Navigation](/docs/layouts-and-navigation) — learn the desk layout
+- [Feeds and Syndication](/docs/feeds-and-syndication) — add your first feeds

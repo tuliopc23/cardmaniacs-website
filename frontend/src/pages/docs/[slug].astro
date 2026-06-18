@@ -7,6 +7,7 @@ import Prose from '../../components/ui/Prose.astro';
 import LucideIcon from '../../components/LucideIcon.astro';
 import EyebrowLabel from '../../components/ui/EyebrowLabel.astro';
 import { getCollection, render } from 'astro:content';
+import { docNeighbors, groupDocsBySection } from '../../lib/docs';
 
 /** Static HTML at build for content routes under `output: "server"`. */
 export const prerender = true;
@@ -23,13 +24,8 @@ const { doc } = Astro.props;
 const { Content } = await render(doc);
 
 const allDocs = await getCollection('docs');
-const sorted = allDocs.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
-const sections = new Map<string, typeof sorted>();
-sorted.forEach((d) => {
-  const section = d.data.section ?? 'General';
-  if (!sections.has(section)) sections.set(section, []);
-  sections.get(section)!.push(d);
-});
+const sections = groupDocsBySection(allDocs);
+const { previous, next } = docNeighbors(allDocs, doc.id);
 ---
 
 <Layout title={`${doc.data.title} — Cardmaniacs Docs`}>
@@ -41,7 +37,7 @@ sorted.forEach((d) => {
         <!-- Sidebar -->
         <aside class="hidden lg:block">
           <nav class="sticky top-28 space-y-6">
-            {[...sections.entries()].map(([section, items]) => (
+            {sections.map(([section, items]) => (
               <div>
                 <EyebrowLabel class="mb-2 ink-tertiary">{section}</EyebrowLabel>
                 <ul class="space-y-1">
@@ -77,6 +73,38 @@ sorted.forEach((d) => {
           <Prose>
             <Content />
           </Prose>
+
+          {(previous || next) && (
+            <nav
+              class="mt-14 pt-8 border-t border-[var(--border-subtle)] grid gap-4 sm:grid-cols-2"
+              aria-label="Documentation pages"
+            >
+              {previous ? (
+                <a
+                  href={`/docs/${previous.id}`}
+                  class="group rounded-[var(--radius-md)] border border-[var(--border-subtle)] bg-[var(--surface-elevated)] p-4 transition-colors hover:border-[var(--accent)]/30"
+                >
+                  <span class="block text-[12px] font-display font-medium uppercase tracking-[0.06em] ink-tertiary mb-1">
+                    Previous
+                  </span>
+                  <span class="body-s ink-primary group-hover:text-[var(--accent)]">{previous.data.title}</span>
+                </a>
+              ) : (
+                <span />
+              )}
+              {next && (
+                <a
+                  href={`/docs/${next.id}`}
+                  class="group rounded-[var(--radius-md)] border border-[var(--border-subtle)] bg-[var(--surface-elevated)] p-4 text-right transition-colors hover:border-[var(--accent)]/30 sm:col-start-2"
+                >
+                  <span class="block text-[12px] font-display font-medium uppercase tracking-[0.06em] ink-tertiary mb-1">
+                    Next
+                  </span>
+                  <span class="body-s ink-primary group-hover:text-[var(--accent)]">{next.data.title}</span>
+                </a>
+              )}
+            </nav>
+          )}
         </article>
       </div>
     </Container>

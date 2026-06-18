@@ -1,0 +1,122 @@
+---
+title: Layouts and Navigation
+section: Getting Started
+order: 4
+---
+
+## The reading desk mental model
+
+Cardmaniacs is built around a persistent **sidebar**, a **card list**, and a **reader**. Navigation moves your selection across destinations (Unread, Read Later, Bookmarks collections) while layouts control how much space each region receives.
+
+Think of navigation as *where* you are, and layout as *how* you see it.
+
+## Primary destinations
+
+These shortcuts jump to top-level areas on macOS:
+
+| Shortcut | Destination |
+|----------|-------------|
+| `⌘0` | Home |
+| `⌘1` | Feeds |
+| `⌘2` | Read Later |
+| `⌘3` | Bookmarks |
+| `⌘4` | Starred Read Later |
+
+Starred Read Later (`⌘4`) is a filtered view of your queue, not the same as starred feed articles or starred bookmarks—those live under their respective modes.
+
+## Sidebar modes
+
+Switch the sidebar's organizational context:
+
+| Shortcut | Mode |
+|----------|------|
+| `⌘⌥R` | RSS (feeds and article folders) |
+| `⌘⌥L` | Read Later |
+| `⌘⌥B` | Bookmarks |
+
+Within each mode, click folders and smart lists in the sidebar, or use the command palette (`⌘K`) to **Go to** a specific collection—Unread Articles, In Progress, Highlights, PDFs, Starred Bookmarks, and more. Most granular destinations are palette-only (no dedicated shortcut).
+
+## Focused vs Triage layout
+
+| Shortcut | Layout |
+|----------|--------|
+| `⌘⌥1` | Focused — reader-first |
+| `⌘⌥2` | Triage — list-first |
+
+**Focused** suits deep reading sessions: one article, minimal distraction, optional focus mode (`⌘⇧F`) to hide remaining chrome.
+
+**Triage** suits feed processing: scan titles, batch select, mark read (`⌘E`), archive from the palette, and open the next item with `⌘↩`.
+
+{% note %}
+On iPhone, layout adapts to single-column navigation; on iPad, use split view. macOS shortcuts above are the reference for keyboard workflows.
+{% /note %}
+
+## Focus handoff and keyboard flow
+
+Power users move focus between regions without the mouse:
+
+| Shortcut | Action |
+|----------|--------|
+| `⌃L` | Focus cards (card list) |
+| `⌃Tab` | Cycle focus (sidebar ↔ cards) |
+| `⌘↩` | Accept — open selection in reader |
+| `⌘[` | Go back |
+| `⌘]` | Go forward |
+
+A typical keyboard loop: `⌘1` Feeds → `⌃L` focus list → arrow keys to select → `⌘↩` open → read → `⌘E` mark read → `⌃L` return to list.
+
+## Sidebar visibility
+
+| Shortcut | Action |
+|----------|--------|
+| `⌘⌃S` | Toggle sidebar |
+
+Hide the sidebar in Focused layout when you want a near-full-screen reader. Toggle it back when you need to change destinations.
+
+## Card list density
+
+Adjust card thumbnail and text scale:
+
+| Shortcut | Action |
+|----------|--------|
+| `⌘⌥=` | Card size: zoom in |
+| `⌘⌥-` | Card size: zoom out |
+
+**Card size: actual size** resets zoom from the command palette.
+
+## Command palette vs actions palette
+
+| Shortcut | Surface |
+|----------|---------|
+| `⌘K` | Command palette — global commands and Go To |
+| `⌘⇧A` | Actions palette — selection-specific actions |
+
+Use `⌘K` when you know the command name (“Go to PDFs”, “Import OPML”). Use `⌘⇧A` when you have items selected and want archive, move, highlight, or read-later actions.
+
+## History and deep links
+
+`⌘[` and `⌘]` navigate backward and forward through your in-app reading history—similar to browser back/forward but scoped to Cardmaniacs navigation, not the in-article web view.
+
+Opening **Open in Browser** (`⌘⌥O`) sends the original URL to your default browser when you need the live page.
+
+## iOS and iPadOS navigation
+
+- **Tab bar or sidebar** (size class dependent) replaces some `⌘0–4` jumps
+- **Swipe back** replaces `⌘[` where applicable
+- **Command palette** may be available from the toolbar on iPad with external keyboard
+- **Drag and drop** between split views on iPad for side-by-side reading
+
+Refer to platform tooltips in-app when a macOS shortcut has no iOS equivalent.
+
+## Related commands
+
+Settings: `⌘,`  
+Refresh feeds: `⌘R`  
+Mark all as read in current context: `⌘⇧R`  
+Move selection: `⌘⇧M` (**Move…** in the catalog—not “Move to folder”)
+
+## Next steps
+
+- [Keyboard and Commands](/docs/keyboard-and-commands) — full shortcut tables
+- [Feeds and Syndication](/docs/feeds-and-syndication)
+- [Read Later](/docs/read-later)

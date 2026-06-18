@@ -1,0 +1,143 @@
+---
+title: Settings
+section: Reference
+order: 14
+---
+
+## Opening Settings
+
+| Shortcut | Action |
+|----------|---------|
+| `⌘,` | Open Settings |
+
+On macOS, Settings opens as a standard multi-pane window. iOS and iPadOS use in-app settings sheets with the same logical groupings where applicable.
+
+Jump to a pane from the command palette (`⌘K`): type **Settings:** followed by the pane name (e.g. “Settings: Feeds”).
+
+## macOS settings panes
+
+The authoritative pane list from `SettingsConfiguration` on macOS:
+
+| Pane | Identifier | Purpose |
+|------|------------|---------|
+| **General** | `general` | Startup, integrations, intelligence, extensions, onboarding |
+| **Reading** | `reading` | Reader typography, themes, parsing engine |
+| **Feeds** | `feeds` | Refresh intervals and feed health |
+| **Share** | `share` | Share extension defaults and tag presets |
+| **Subscription** | `subscription` | In-app subscription (when RevenueCat feature flag enabled) |
+| **Advanced** | `advanced` | Cache, global hotkey, privacy analytics |
+
+{% important %}
+**Apple Intelligence** and **Siri & Spotlight** toggles live under **General**, not as separate top-level panes. Older in-app guides that list “Keyboard” or “Siri & Shortcuts” as top-level settings panes are outdated—the command palette still exposes jumps like “Settings: Siri & Shortcuts (General)” for navigation.
+{% /important %}
+
+## General
+
+Sections typically include:
+
+### Onboarding
+
+- **Show Onboarding Again** — replay the welcome tour
+- **Open Welcome Guide** — open or recreate the in-app markdown welcome guide in Read Later
+
+### Startup
+
+- **Launch at Login** — open Cardmaniacs when you sign in to your Mac
+
+### System Integration
+
+- **Handoff** — continue reading on other Apple devices
+- **Spotlight & Siri** — index cards for system search and Siri queries
+
+### Apple Intelligence
+
+- **Enable Apple Intelligence** — on-device summaries and tag suggestions
+- **Daily Digest** — AI-generated digest for Smart Lists (requires intelligence support)
+
+Privacy disclosure footer explains on-device processing boundaries.
+
+### Browser extension
+
+Safari extension status, install/repair actions, and health messaging. Resolve degraded extension states from warnings in this section or **Extension Health**.
+
+### Feedback
+
+- **Rate Cardmaniacs** — App Store review link (macOS)
+
+Palette jumps: **Settings: General**, **Settings: About (General)**, **Settings: Siri & Shortcuts (General)**, **Settings: Share Extension (General)**.
+
+## Reading
+
+Controls default reader experience before you open any article:
+
+| Section | Options |
+|---------|---------|
+| **Preview** | Live preview of typography choices |
+| **Reading Theme** | Cardmaniacs vs System editorial style |
+| **Typography** | Font size, font family, line spacing |
+| **Appearance** | Color theme (auto/light/dark variants) |
+| **Reader Mode** | Parsing engine — Readability vs Postlight Parser |
+| **Auto Mark as Read** | Optional automatic read marking |
+| **Highlight default** | Default highlight color for new selections |
+| **Layout** | Content width mode and related layout defaults |
+
+Per-article overrides remain available in the reader (`⌘=`, `⌘-`, `⌘⌥T`, palette width and alignment commands).
+
+## Feeds
+
+| Section | Options |
+|---------|---------|
+| **Refresh** | Automatic refresh toggle; background interval (15 min → daily) |
+| **Feed health** | Health check interval; auto-retry failed fetches |
+
+Manual refresh anytime with `⌘R`. Feed health surfaces broken subscriptions in the app UI when checks fail.
+
+Palette jump: **Settings: Feeds**.
+
+## Share
+
+Dedicated **Share** pane (not only General) for extension capture behavior:
+
+| Section | Options |
+|---------|---------|
+| **Share Mode** | Quick (immediate save) vs Full Editor |
+| **Quick Save Defaults** | Destination (Read Later or Bookmarks); Mark as Read default |
+| **Default Tags** | Tags applied on quick saves |
+| **Tag Presets** | Manage presets created from the share sheet |
+
+Configure iOS share extension enablement in **Settings.app** as well as in-app guidance under General.
+
+## Subscription
+
+Visible when `BuildConfig.Features.isRevenueCatSubscriptionsEnabled` is true. Manages in-app subscription status, restoration, and plan details. Hidden entirely in builds without subscriptions enabled.
+
+## Advanced
+
+| Section | Options |
+|---------|---------|
+| **Caching** | Cache size display; **Clear Cache** for images and web responses |
+| **Global Hotkey** | Enable quick capture hotkey; record shortcut (default `⌘⌥⇧C` when enabled) |
+| **Privacy** | Anonymous analytics toggle |
+| **Developer** | Debug-only diagnostics when enabled in debug builds |
+
+Palette jumps: **Settings: Keyboard Shortcuts (Advanced)**, **Settings: Global Hotkey (Advanced)**, **Settings: Data & Storage (Advanced)**.
+
+{% note %}
+The **Keyboard Shortcuts reference window** (accurate shortcut tables) opens from the macOS **Help → Keyboard Shortcuts** menu (`⌘/`). In-app command rebinding, when available, is separate from the Global Hotkey quick-capture recorder in Advanced.
+{% /note %}
+
+## iOS settings
+
+iOS composes **General**, **Reading**, **Feeds**, and **Advanced** in sheets—no separate Share toolbar pane on all size classes; share defaults may appear within General or platform-specific groupings. Subscription pane appears when the feature flag is enabled.
+
+## Data and iCloud
+
+Library data syncs via **iCloud** (`iCloud.com.cardmaniacs.app`). Advanced privacy footer states data stays on device and syncs through iCloud—not a proprietary Cardmaniacs cloud account.
+
+Export, import, and storage management actions live in File menu and Advanced-related flows (`⌘⇧I` Import…, palette **Settings: Data & Storage (Advanced)**).
+
+## Next steps
+
+- [Keyboard and Commands](/docs/keyboard-and-commands)
+- [Download and Setup](/docs/download-and-setup)
+- [AI and Integrations](/docs/ai-and-integrations)

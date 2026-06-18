@@ -8,14 +8,10 @@ import LucideIcon from '../../components/LucideIcon.astro';
 import PageHero from '../../components/ui/PageHero.astro';
 import Surface from '../../components/ui/Surface.astro';
 import { getCollection } from 'astro:content';
+import { groupDocsBySection } from '../../lib/docs';
 
 const docs = await getCollection('docs');
-const sections = new Map<string, typeof docs>();
-docs.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0)).forEach((doc) => {
-  const section = doc.data.section ?? 'General';
-  if (!sections.has(section)) sections.set(section, []);
-  sections.get(section)!.push(doc);
-});
+const sections = groupDocsBySection(docs);
 ---
 
 <Layout title="Documentation — Cardmaniacs">
@@ -44,7 +40,7 @@ docs.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0)).forEach((doc) => 
           </Surface>
         ) : (
         <div class="space-y-14">
-          {[...sections.entries()].map(([section, items], sectionIndex) => (
+          {sections.map(([section, items], sectionIndex) => (
             <div data-reveal style={`--reveal-delay: ${sectionIndex * 0.04}s`}>
               <h2 class="type-section-title ink-primary mb-6 inline-flex items-center gap-2.5">
                 <LucideIcon name="folder" size={20} class="shrink-0 text-[var(--accent)]" />

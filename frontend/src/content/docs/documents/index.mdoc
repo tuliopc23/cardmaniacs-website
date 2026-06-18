@@ -1,0 +1,77 @@
+---
+title: Documents
+section: Guides
+order: 8
+---
+
+## Imported documents in Cardmaniacs
+
+Beyond web articles, Cardmaniacs imports **local files** as first-class cards:
+
+- **PDF**
+- **EPUB**
+- **Markdown** (`.md`)
+
+Imported documents appear in Read Later collections filtered by type—**PDFs**, **Markdown**, **Books** (EPUB)—and open in the reader with format-appropriate controls.
+
+## Import paths
+
+- **File → Import** or **Import…** (`⌘⇧I`) on macOS
+- **Drag and drop** onto the app window or dock icon (macOS)
+- **Share sheet** from Files or other apps (iOS/iPadOS)
+- In-app welcome guides and document import flows for first-time setup
+
+The import pipeline extracts title, cover or preview metadata, and reading position where supported.
+
+## Local files vs synced metadata
+
+{% important %}
+File bytes and sync behavior depend on document type and platform settings. Metadata—title, tags, read progress, highlights—syncs through iCloud; large PDFs may remain primarily on the device that imported them until opened elsewhere.
+{% /important %}
+
+Check **Settings → Advanced → Data & Storage** for storage-related options and export paths.
+
+## Reading PDFs
+
+PDF cards support:
+
+- Page navigation and zoom
+- Highlights (see [Highlights and Tags](/docs/highlights-and-tags))
+- Reader themes where applicable
+- **Separate reader window** on macOS for side-by-side reference
+
+Use **Go to PDFs** in the command palette to filter the queue to PDF documents only.
+
+## Reading EPUB
+
+EPUB imports map to the **Books** collection. Long-form navigation, typography controls, and progress sync apply similarly to web articles. Paged mode (`⌘⇧P`) may suit long chapters on macOS.
+
+## Markdown files
+
+Markdown imports appear under **Go to Markdown** collections. Rendering respects reader typography settings; code-heavy files benefit from wide content width (palette: Content Width: Wide).
+
+## Documents vs URL bookmarks
+
+| URL bookmark | Imported file |
+|--------------|----------------|
+| Points to live web | Local copy on disk |
+| Reader extracts HTML | Native PDF/EPUB/MD rendering |
+| May break if site changes | Stable offline reading |
+
+For archival PDFs (papers, reports), import the file. For frequently updated docs, a bookmark may be better.
+
+## Welcome guides
+
+The app ships **in-app welcome guides** (markdown bundled with the app) explaining import basics. Website documentation expands those seeds; content is not auto-synced from the app bundle in v1.
+
+## Troubleshooting
+
+- **Import failed** — confirm file type and size; try Import… again from a local path
+- **Missing on second device** — open Files sync settings; wait for iCloud; re-import if needed
+- **Garbled PDF text** — scanned PDFs may not extract for search; highlights still apply to selections
+
+## Next steps
+
+- [Reading Tools](/docs/reading-tools)
+- [Read Later](/docs/read-later)
+- [Highlights and Tags](/docs/highlights-and-tags)

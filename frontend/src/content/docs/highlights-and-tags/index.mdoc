@@ -1,0 +1,108 @@
+---
+title: Highlights and Tags
+section: Guides
+order: 9
+---
+
+## Highlights across formats
+
+Cardmaniacs highlights are **first-class data** attached to cards—not ephemeral browser marks. Create highlights in:
+
+- **Reader view** (extracted articles)
+- **PDF** documents
+- **EPUB** books
+- **Safari extension** capture flows (where supported)
+
+### Creating highlights
+
+Select text in the reader, then choose a highlight color from the actions palette (`⌘⇧A`) or context menu:
+
+- Highlight Yellow
+- Highlight Orange
+- Highlight Pink
+- Highlight Blue
+
+These palette actions have **no default keyboard shortcuts** in the command catalog—use the palette or on-screen controls.
+
+### Viewing highlights
+
+- **Go to Highlights** (command palette) — Read Later collection of items with highlights
+- Per-article highlight list in the reader chrome
+- **Extract Key Highlights** (palette) — AI-assisted summary of key passages where Apple Intelligence is available
+
+Highlights sync through iCloud with the parent card.
+
+## Tags
+
+**Tags** are freeform labels shared across feeds, Read Later, and Bookmarks. They power filtering, smart lists, and cross-library search in the command palette.
+
+| Shortcut | Action |
+|----------|--------|
+| `⌘⇧T` | Manage Tags… (current item) |
+| `⌥⇧T` | Tag Feed… (RSS subscriptions) |
+
+Open the **Tag Panel** from reader or list chrome to add, remove, or browse tags without opening the full manage sheet.
+
+## Smart lists
+
+**Smart lists** are saved rules that dynamically populate sidebar entries when cards match criteria. The editor exposes fields aligned with `SmartListData.FilterField` in the app—typical dimensions include:
+
+- **Tags** — include or exclude labels
+- **Read state** — unread, read, in progress
+- **Starred** — yes/no
+- **Source / feed** — specific origins
+- **Media type** — article, PDF, podcast, etc.
+- **Date** — published or added ranges (where exposed in UI)
+
+### Example recipes
+
+**Starred unread research**
+
+- Tag contains `research`
+- Read state is unread
+- Starred is true
+
+**PDF backlog**
+
+- Media type is PDF
+- Read state is not read
+- In Read Later
+
+**One feed, triage only**
+
+- Source equals a specific feed
+- Archived is false
+
+Smart lists appear in the sidebar when active; edit or delete them from the smart list inspector. Combine with **Move…** (`⌘⇧M`) to act on batches surfaced by a list.
+
+{% tip %}
+Start with one or two smart lists. Too many overlapping rules make the sidebar noisy.
+{% /tip %}
+
+## Highlights vs tags
+
+| Highlights | Tags |
+|------------|------|
+| Text selections in content | Card-level labels |
+| Colors in reader | Filter and smart list input |
+| Per-passage | Whole-item organization |
+
+Tag an item `quote` if you want to find all highlighted pieces later; the highlight itself stores the passage text.
+
+## Export and sharing
+
+- **Share** (palette) — system share sheet for the item
+- **Share Reader View** (palette) — share formatted reader output
+- **Copy Link** (`⌘⇧C`) — URL only
+
+Reading statistics export is covered in [Home and Statistics](/docs/home-and-statistics).
+
+## Siri and Shortcuts
+
+Tag- and highlight-related automations may be exposed through **Shortcuts** actions. Intelligence features that reference highlights require supported hardware—see [AI and Integrations](/docs/ai-and-integrations).
+
+## Next steps
+
+- [Reading Tools](/docs/reading-tools) — reader typography while annotating
+- [Read Later](/docs/read-later) — Highlights collection
+- [Keyboard and Commands](/docs/keyboard-and-commands)

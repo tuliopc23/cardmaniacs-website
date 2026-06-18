@@ -126,13 +126,17 @@ const sizes = {
 
   .cm-prose :global(blockquote) {
     margin: 1.75rem 0;
-    padding: 1.15rem 1.35rem;
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
-    background: color-mix(in oklab, var(--cm-blue) 7%, var(--surface-elevated));
-    box-shadow: var(--shadow-soft);
+    padding: 0 0 0 1.1rem;
+    border-left: 3px solid color-mix(in oklab, var(--cm-blue) 45%, var(--border-subtle));
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
     color: var(--ink-secondary);
     font-style: italic;
+  }
+
+  .cm-prose :global(blockquote:not(:has(.doc-callout))) {
+    max-width: 58ch;
   }
 
   .cm-prose :global(hr) {
