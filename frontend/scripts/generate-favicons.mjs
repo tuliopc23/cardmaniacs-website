@@ -1,5 +1,5 @@
 /**
- * Generates favicon.ico and apple-touch-icon.png from the app icon PNG.
+ * Generates favicon.svg, favicon.ico, and apple-touch-icon.png from the app icon PNG.
  * Run from repo root: node frontend/scripts/generate-favicons.mjs
  */
 import { readdirSync, writeFileSync } from "node:fs";
@@ -9,7 +9,7 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const workspaceRoot = join(__dirname, "..", "..");
 const publicDir = join(__dirname, "..", "public");
-const source = join(publicDir, "images", "Graphic.png");
+const source = join(publicDir, "images", "Cardmaniacs-icon-white.png");
 
 async function loadSharp() {
   const pnpmDir = join(workspaceRoot, "node_modules", ".pnpm");
@@ -37,7 +37,11 @@ async function generateFavicons() {
     .png()
     .toFile(join(publicDir, "apple-touch-icon.png"));
 
-  console.log("Generated favicon.ico and apple-touch-icon.png");
+  const svgPng = await sharp(source).resize(64, 64, { fit: "cover" }).png().toBuffer();
+  const faviconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Cardmaniacs"><image width="64" height="64" href="data:image/png;base64,${svgPng.toString("base64")}"/></svg>\n`;
+  writeFileSync(join(publicDir, "favicon.svg"), faviconSvg);
+
+  console.log("Generated favicon.svg, favicon.ico, and apple-touch-icon.png");
 }
 
 /** Minimal ICO writer for PNG-embedded favicons. */

@@ -21,6 +21,7 @@ Docs are local at `node_modules/vite-plus/docs` or online at https://viteplus.de
 - Use brand accent blue `#539AC6` for primary blue accents unless design tokens specify otherwise.
 - When building or refactoring UI, prefer modular Astro components and Tailwind or design tokens over scattered inline CSS (`style` attributes and ad-hoc one-off rules).
 - Prefer SVGs and other static assets already in the repository (for example root-level icons or files under `public/`) instead of substituting unrelated third-party artwork.
+- Use the shared `AppleLogo.astro` SVG for Apple platform branding and App Store badges—not Lucide's `apple` icon.
 - Run agent shell commands in **fish** syntax; avoid bash-only constructs that hang in the user's shell.
 - Marketing motion and micro-interactions must be perceptible on index pages (scroll reveals, hero entrance, drawers, hovers)—wired-but-invisible animation fails the bar.
 
@@ -29,15 +30,15 @@ Docs are local at `node_modules/vite-plus/docs` or online at https://viteplus.de
 - Primary Astro site lives under `frontend/` with SSR via `@astrojs/cloudflare`; CMS is **Keystatic** with Markdoc-backed collections (not Sanity). Production deploy uses **Cloudflare Workers Builds** (git push); there is no GitHub Actions deploy workflow in this repo.
 - `frontend/wrangler.jsonc` binds `SESSION` (KV) and `IMAGES` for the Astro Cloudflare adapter; from `frontend/`, `pnpm run deploy` runs build plus `wrangler deploy`. Before deploy, ensure Wrangler auth matches `account_id` in that file—unset `CLOUDFLARE_API_TOKEN` / `CF_API_TOKEN` when they target a different Cloudflare account.
 - For Tailwind v4 with Astro, use `@tailwindcss/vite` in the Astro/Vite config; do not use `@astrojs/tailwind` for Tailwind v4.
-- `Surface` wraps slot children in an inner `relative` container, so flex/grid on the `Surface` root does not arrange slot siblings—apply layout on an explicit wrapper inside the slot.
+- `Surface` wraps slot children in an inner `relative` container, so flex/grid on the `Surface` root does not arrange slot siblings—apply layout on an explicit wrapper inside the slot; mobile dock icons use `DockIconChrome` instead—`Surface` collapses when children are absolutely positioned.
 - In `frontend/astro.config.mjs`, exclude `@keystatic/astro` from Vite `optimizeDeps` and `ssr.optimizeDeps` so dependency pre-bundling does not try to resolve `virtual:keystatic-config` without Keystatic’s plugin.
 - Routes that use `getStaticPaths` while `output` is `"server"` need `export const prerender = true` when those URLs should be generated as static HTML at build time.
 - Vite+ walks upward to resolve `vite.config.ts` (a home-directory config can shadow the project); run `vp check` from repo root with `fmt` in root config, and keep frontend `vite` aligned with the installed Astro release (e.g. Astro 6 → Vite 7).
 - Site motion uses the `motion` package via `MotionBootstrap.astro` in `Layout.astro` and `frontend/src/lib/motion/*` (`data-reveal`, `data-reveal-stagger`); reach for this stack rather than introducing a parallel animation stack.
-- Brand and product design context for marketing work lives in root `PRODUCT.md` and `DESIGN.md`.
+- Brand and product design context for marketing work lives in root `PRODUCT.md` and `DESIGN.md`; native app feature depth is in `~/Developer/Cardmaniacs` (separate repo).
 - `pnpm-workspace.yaml` `allowBuilds` must include `esbuild`, `sharp`, and `workerd` for Astro/Cloudflare; after a pnpm major bump, remove stale `node_modules` and rerun `vp install` if you hit `ERR_PNPM_UNEXPECTED_STORE`.
 - Marketing images: slots in `frontend/src/lib/marketing-images.ts` (`/images/marketing/*`); production specs in `docs/marketing-assets.md`.
-- App Store CTAs use `PUBLIC_APP_STORE_URL` via `frontend/src/lib/site-cta.ts`; when unset, keep honest “Coming to the App Store” labels—never fake download links.
+- App Store CTAs use `PUBLIC_APP_STORE_URL` via `frontend/src/lib/site-cta.ts`; when unset, render the real badge chrome with “Get the” / “App” and no link—never fake URLs or icon stand-ins.
 
 <!-- BEGIN BEADS INTEGRATION v:1 profile:minimal hash:7510c1e2 -->
 
