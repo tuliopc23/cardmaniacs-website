@@ -1,36 +1,41 @@
 /** Stable marketing asset paths (see docs/marketing-assets.md). */
 export const marketingImages = {
-  macHeroLight: "/images/marketing/mac-hero-light.png",
-  macHeroDark: "/images/marketing/mac-hero-dark.png",
+  macHeroLight: "/images/marketing/mac-hero-light.jpg",
+  macHeroDark: "/images/marketing/mac-hero-dark.jpg",
 
-  macReaderLight: "/images/marketing/mac-reader-focused-light.png",
-  macReaderDark: "/images/marketing/mac-reader-focused-dark.png",
-  macReader: "/images/marketing/mac-reader-focused.png",
+  macReaderLight: "/images/marketing/mac-reader-focused-light.jpg",
+  macReaderDark: "/images/marketing/mac-reader-focused-dark.jpg",
+  macReader: "/images/marketing/mac-reader-focused.jpg",
 
-  macTriageLight: "/images/marketing/mac-triage-feed-light.png",
-  macTriageDark: "/images/marketing/mac-triage-feed-dark.png",
-  macTriage: "/images/marketing/mac-triage-feed.png",
+  macTriageLight: "/images/marketing/mac-triage-feed-light.jpg",
+  macTriageDark: "/images/marketing/mac-triage-feed-dark.jpg",
+  macTriage: "/images/marketing/mac-triage-feed.jpg",
 
-  macHighlightsLight: "/images/marketing/mac-highlights-light.png",
-  macHighlightsDark: "/images/marketing/mac-highlights-dark.png",
-  macHighlights: "/images/marketing/mac-highlights.png",
+  macHighlightsLight: "/images/marketing/mac-highlights-light.jpg",
+  macHighlightsDark: "/images/marketing/mac-highlights-dark.jpg",
+  macHighlights: "/images/marketing/mac-highlights.jpg",
 
-  macCommandLight: "/images/marketing/mac-command-palette-light.png",
-  macCommandDark: "/images/marketing/mac-command-palette-dark.png",
-  macCommand: "/images/marketing/mac-command-palette.png",
+  macCommandLight: "/images/marketing/mac-command-palette-light.jpg",
+  macCommandDark: "/images/marketing/mac-command-palette-dark.jpg",
+  macCommand: "/images/marketing/mac-command-palette.jpg",
 
-  macMedia: "/images/marketing/mac-media-player.png",
+  macMedia: "/images/marketing/mac-media-player.jpg",
 
-  macPdfLight: "/images/marketing/mac-pdf-light.png",
-  macPdfDark: "/images/marketing/mac-pdf-dark.png",
+  macPdfLight: "/images/marketing/mac-pdf-light.jpg",
+  macPdfDark: "/images/marketing/mac-pdf-dark.jpg",
+  macPdf: "/images/marketing/mac-pdf.jpg",
 
-  macMarkdownLight: "/images/marketing/mac-markdown-light.png",
-  macMarkdownDark: "/images/marketing/mac-markdown-dark.png",
+  macMarkdownLight: "/images/marketing/mac-markdown-light.jpg",
+  macMarkdownDark: "/images/marketing/mac-markdown-dark.jpg",
+  macMarkdown: "/images/marketing/mac-markdown.jpg",
 
-  macGuideLight: "/images/marketing/mac-guide-light.png",
-  macGuideDark: "/images/marketing/mac-guide-dark.png",
+  macGuideLight: "/images/marketing/mac-guide-light.jpg",
+  macGuideDark: "/images/marketing/mac-guide-dark.jpg",
+  macGuide: "/images/marketing/mac-guide.jpg",
 
-  macQuickCapture: "/images/marketing/mac-quick-capture.png",
+  macQuickCapture: "/images/marketing/mac-media-player.jpg",
+  macThemes: "/images/marketing/mac-themes.jpg",
+  macDedicatedHighlights: "/images/marketing/mac-dedicated-highlights.jpg",
 
   /** M6.7 — drop-in replace under public/images/marketing/ */
   iphoneReader: "/images/marketing/iphone-reader-queue.png",
