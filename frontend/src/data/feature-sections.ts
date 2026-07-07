@@ -13,6 +13,8 @@ export type FeatureSection = {
   heading: string;
   description: string;
   screenshot: string;
+  screenshotLight?: string;
+  screenshotDark?: string;
   screenshotAlt: string;
   bullets: FeatureBullet[];
   bulletStyle?: FeatureBulletStyle;
@@ -30,6 +32,8 @@ export const featureSections: FeatureSection[] = [
     description:
       "Subscribe with RSS, Atom, or JSON Feed. Add Reddit, Mastodon, and media channels as first-class sources — with more social integrations on the roadmap.",
     screenshot: marketingImages.macTriage,
+    screenshotLight: marketingImages.macTriageLight,
+    screenshotDark: marketingImages.macTriageDark,
     screenshotAlt: "Cardmaniacs feed triage on Mac",
     surface: "triage",
     layout: "split",
@@ -60,6 +64,8 @@ export const featureSections: FeatureSection[] = [
     description:
       "Articles, Wikipedia, GitHub READMEs, JS-heavy pages, Markdown notes, PDFs, and EPUB — offline when you need it.",
     screenshot: marketingImages.macReader,
+    screenshotLight: marketingImages.macReaderLight,
+    screenshotDark: marketingImages.macReaderDark,
     screenshotAlt: "Cardmaniacs Reader on Mac",
     surface: "reader",
     layout: "surfaceFirst",
@@ -86,6 +92,8 @@ export const featureSections: FeatureSection[] = [
     description:
       "Highlight in the Reader or on web content — stored references with tags and a dedicated highlights library.",
     screenshot: marketingImages.macHighlights,
+    screenshotLight: marketingImages.macHighlightsLight,
+    screenshotDark: marketingImages.macHighlightsDark,
     screenshotAlt: "Highlights in Cardmaniacs",
     surface: "highlight",
     layout: "fullBleed",
@@ -111,8 +119,10 @@ export const featureSections: FeatureSection[] = [
     heading: "Listen on your terms.",
     description:
       "Text-to-speech with native playback controls — reading continues when your eyes cannot.",
-    screenshot: marketingImages.macReader,
-    screenshotAlt: "Read aloud in Cardmaniacs",
+    screenshot: marketingImages.macGuideLight,
+    screenshotLight: marketingImages.macGuideLight,
+    screenshotDark: marketingImages.macGuideDark,
+    screenshotAlt: "In-app guide reader page",
     surface: "none",
     layout: "stacked",
     bulletStyle: "prose",
@@ -133,6 +143,8 @@ export const featureSections: FeatureSection[] = [
     description:
       "Quick Add, command palette, search, and Vim-style navigation for fast triage and reading.",
     screenshot: marketingImages.macCommand,
+    screenshotLight: marketingImages.macCommandLight,
+    screenshotDark: marketingImages.macCommandDark,
     screenshotAlt: "Command palette on Mac",
     surface: "command",
     layout: "split",
@@ -155,8 +167,10 @@ export const featureSections: FeatureSection[] = [
     heading: "Find everything later.",
     description:
       "Frictionless tagging, Smart Lists, full-text search, bookmarks, and reading states.",
-    screenshot: marketingImages.macCommand,
-    screenshotAlt: "Library organization",
+    screenshot: marketingImages.macMarkdownLight,
+    screenshotLight: marketingImages.macMarkdownLight,
+    screenshotDark: marketingImages.macMarkdownDark,
+    screenshotAlt: "Markdown and document library view",
     surface: "none",
     layout: "surfaceFirst",
     bulletStyle: "prose",
@@ -173,8 +187,10 @@ export const featureSections: FeatureSection[] = [
     heading: "Plugs into Apple platforms.",
     description:
       "App Intents, web extension, widgets, and iCloud sync — where supported on your devices.",
-    screenshot: marketingImages.macMedia,
-    screenshotAlt: "Cardmaniacs integrations",
+    screenshot: marketingImages.macQuickCapture,
+    screenshotLight: marketingImages.macQuickCapture,
+    screenshotDark: marketingImages.macQuickCapture,
+    screenshotAlt: "macOS Quick Capture panel",
     surface: "media",
     layout: "stacked",
     bulletStyle: "prose",
@@ -192,6 +208,8 @@ export const featureSections: FeatureSection[] = [
     description:
       "Keyboard-first Mac workspace, touch-first iPhone capture, iPad multitasking — with dark mode and offline reading.",
     screenshot: marketingImages.macHeroLight,
+    screenshotLight: marketingImages.macHeroLight,
+    screenshotDark: marketingImages.macHeroDark,
     screenshotAlt: "Cardmaniacs on Apple platforms",
     surface: "device",
     layout: "platform",

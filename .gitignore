@@ -41,3 +41,6 @@ frontend/.wrangler/
 *.db
 .beads-credential-key
 .beads/proxieddb/
+
+# Temporary screenshots
+Cardmaniacs-screenshots/

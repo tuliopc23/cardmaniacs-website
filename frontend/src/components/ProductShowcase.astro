@@ -3,13 +3,16 @@
  * Product screenshot in a floating elevated frame — no faux window chrome.
  */
 interface Props {
-  src: string;
+  src?: string;
+  srcLight?: string;
+  srcDark?: string;
   alt: string;
   loading?: "eager" | "lazy";
   class?: string;
 }
 
-const { src, alt, loading = "lazy", class: className = "" } = Astro.props;
+const { src, srcLight = src, srcDark, alt, loading = "lazy", class: className = "" } = Astro.props;
+const finalSrcDark = srcDark || srcLight;
 ---
 
 <div
@@ -30,5 +33,23 @@ const { src, alt, loading = "lazy", class: className = "" } = Astro.props;
     class="pointer-events-none absolute inset-x-0 top-0 h-14 bg-[linear-gradient(180deg,color-mix(in_oklab,var(--surface-overlay)_55%,transparent),transparent)]"
     aria-hidden="true"
   />
-  <img src={src} alt={alt} loading={loading} class="relative z-[1] block w-full h-auto" />
+  {srcLight && (
+    <img
+      src={srcLight}
+      alt={alt}
+      loading={loading}
+      class:list={[
+        "relative z-[1] block w-full h-auto",
+        finalSrcDark !== srcLight && "theme-only-light"
+      ]}
+    />
+  )}
+  {finalSrcDark && finalSrcDark !== srcLight && (
+    <img
+      src={finalSrcDark}
+      alt={alt}
+      loading={loading}
+      class="theme-only-dark relative z-[1] block w-full h-auto"
+    />
+  )}
 </div>

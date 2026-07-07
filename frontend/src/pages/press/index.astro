@@ -9,11 +9,19 @@ import Pill from '../../components/Pill.astro';
 import LucideIcon from '../../components/LucideIcon.astro';
 import { APP_ICON_PNG } from '../../lib/site-icons';
 
+import { marketingImages } from '../../lib/marketing-images';
+
 const screenshots = [
-  { src: '/images/Cardmaniacs-mac - 1.png', label: 'Empty state', platform: 'macOS' },
-  { src: '/images/Cardmaniacs-mac - 2.png', label: 'Card grid view', platform: 'macOS' },
-  { src: '/images/Cardmaniacs-mac - 3.png', label: 'Article reader', platform: 'macOS' },
-  { src: '/images/Cardmaniacs-mac - 4.png', label: 'Feed stream', platform: 'macOS' },
+  { src: marketingImages.macHeroLight, label: 'Dashboard (Light)', platform: 'macOS' },
+  { src: marketingImages.macHeroDark, label: 'Dashboard (Dark)', platform: 'macOS' },
+  { src: marketingImages.macTriageLight, label: 'Feed Triage (Light)', platform: 'macOS' },
+  { src: marketingImages.macTriageDark, label: 'Feed Triage (Dark)', platform: 'macOS' },
+  { src: marketingImages.macReaderLight, label: 'Focused Reader (Light)', platform: 'macOS' },
+  { src: marketingImages.macReaderDark, label: 'Focused Reader (Dark)', platform: 'macOS' },
+  { src: marketingImages.macHighlightsDark, label: 'Highlights Library', platform: 'macOS' },
+  { src: marketingImages.macPdfLight, label: 'PDF Document Reader', platform: 'macOS' },
+  { src: marketingImages.macMarkdownLight, label: 'Markdown & Note Reader', platform: 'macOS' },
+  { src: marketingImages.macCommandDark, label: 'Command Palette', platform: 'macOS' },
 ];
 ---
 

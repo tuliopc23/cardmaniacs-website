@@ -59,7 +59,11 @@ import { featureSections } from "../../data/feature-sections";
         ) : s.surface === "media" ? (
           <MarketingMediaSurface />
         ) : (
-          <ProductShowcase src={s.screenshot} alt={s.screenshotAlt} />
+          <ProductShowcase
+            srcLight={s.screenshotLight || s.screenshot}
+            srcDark={s.screenshotDark}
+            alt={s.screenshotAlt}
+          />
         )}
       </>
     );
