@@ -9,9 +9,22 @@ interface Props {
   alt: string;
   loading?: "eager" | "lazy";
   class?: string;
+  /** Add inner blue outline ring (default: false) */
+  innerOutline?: boolean;
+  /** Add top shading gradient (default: false) */
+  topGradient?: boolean;
 }
 
-const { src, srcLight = src, srcDark, alt, loading = "lazy", class: className = "" } = Astro.props;
+const {
+  src,
+  srcLight = src,
+  srcDark,
+  alt,
+  loading = "lazy",
+  class: className = "",
+  innerOutline = false,
+  topGradient = false,
+} = Astro.props;
 const finalSrcDark = srcDark || srcLight;
 ---
 
@@ -25,14 +38,18 @@ const finalSrcDark = srcDark || srcLight;
     class="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]"
     aria-hidden="true"
   />
-  <div
-    class="pointer-events-none absolute inset-[10px] rounded-[calc(var(--radius-hero)_-_10px)] ring-1 ring-[color-mix(in_oklab,var(--cm-blue)_22%,transparent)] opacity-70 max-sm:inset-[6px] max-sm:rounded-[calc(var(--radius-hero)_-_6px)]"
-    aria-hidden="true"
-  />
-  <div
-    class="pointer-events-none absolute inset-x-0 top-0 h-14 bg-[linear-gradient(180deg,color-mix(in_oklab,var(--surface-overlay)_55%,transparent),transparent)]"
-    aria-hidden="true"
-  />
+  {innerOutline && (
+    <div
+      class="pointer-events-none absolute inset-[10px] rounded-[calc(var(--radius-hero)_-_10px)] ring-1 ring-[color-mix(in_oklab,var(--cm-blue)_22%,transparent)] opacity-70 max-sm:inset-[6px] max-sm:rounded-[calc(var(--radius-hero)_-_6px)]"
+      aria-hidden="true"
+    />
+  )}
+  {topGradient && (
+    <div
+      class="pointer-events-none absolute inset-x-0 top-0 h-14 bg-[linear-gradient(180deg,color-mix(in_oklab,var(--surface-overlay)_55%,transparent),transparent)]"
+      aria-hidden="true"
+    />
+  )}
   {srcLight && (
     <img
       src={srcLight}
