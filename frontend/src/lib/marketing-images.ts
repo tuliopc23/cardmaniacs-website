@@ -1,7 +1,7 @@
 /** Stable marketing asset paths (see docs/marketing-assets.md). */
 export const marketingImages = {
-  macHeroLight: "/images/marketing/mac-hero-light.jpg",
-  macHeroDark: "/images/marketing/mac-hero-dark.jpg",
+  macHeroLight: "/images/marketing/mac-triage-feed-light.jpg",
+  macHeroDark: "/images/marketing/mac-triage-feed-dark.jpg",
 
   macReaderLight: "/images/marketing/mac-reader-focused-light.jpg",
   macReaderDark: "/images/marketing/mac-reader-focused-dark.jpg",

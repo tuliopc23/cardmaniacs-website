@@ -211,3 +211,4 @@
 {"id":"int-1afa6bbe","kind":"field_change","created_at":"2026-07-07T22:59:09.56839Z","actor":"Tulio Cunha","issue_id":"cardmaniacs-website-2yp.4","extra":{"field":"status","new_value":"closed","old_value":"open","reason":"Closed"}}
 {"id":"int-d844764b","kind":"field_change","created_at":"2026-07-07T22:59:10.062419Z","actor":"Tulio Cunha","issue_id":"cardmaniacs-website-2yp.5","extra":{"field":"status","new_value":"closed","old_value":"open","reason":"Closed"}}
 {"id":"int-351cf3df","kind":"field_change","created_at":"2026-07-07T22:59:21.576372Z","actor":"Tulio Cunha","issue_id":"cardmaniacs-website-2yp","extra":{"field":"status","new_value":"closed","old_value":"open","reason":"Closed"}}
+{"id":"int-fa52287f","kind":"field_change","created_at":"2026-07-08T03:24:32.264678Z","actor":"Tulio Cunha","issue_id":"cardmaniacs-website-9jn","extra":{"field":"status","new_value":"closed","old_value":"in_progress","reason":"Closed"}}
