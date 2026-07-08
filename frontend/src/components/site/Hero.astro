@@ -60,20 +60,31 @@ const chips = ["Feeds", "Read Later", "Bookmarks", "Highlights", "Summaries", "O
         <div
           data-hero-item
           class="hero-chip-rail mb-2 grid w-full grid-cols-3 gap-0.5 p-1 rounded-[var(--radius-pill)] border border-[var(--border-subtle)] bg-[color-mix(in_oklab,var(--surface-glass)_55%,transparent)] shadow-[var(--shadow-pill)] backdrop-blur-[var(--blur-glass)] backdrop-saturate-[var(--sat-glass)] supports-[backdrop-filter]:bg-[color-mix(in_oklab,var(--surface-glass)_42%,transparent)] md:mb-0 md:flex md:flex-wrap md:justify-start"
-          aria-hidden="true"
+          role="tablist"
+          aria-label="Features quick selector"
         >
           {
-            chips.map((c, i) => (
-              <span
-                class:list={[
-                  "hero-chip-pill flex w-full items-center justify-center gap-1 select-none rounded-[var(--radius-pill)] px-2 py-1.5 text-[10px] font-display font-semibold tracking-wide text-[var(--ink-secondary)] whitespace-nowrap sm:gap-1.5 sm:px-3 sm:text-[11px] md:inline-flex md:w-auto md:justify-start",
-                  i === 0 && "hero-chip-pill--active",
-                ]}
-              >
-                <LucideIcon name={heroChipIcons[c]} size={12} class="opacity-90" />
-                {c}
-              </span>
-            ))
+            chips.map((c, i) => {
+              let device = "mac";
+              if (c === "Read Later" || c === "Offline") device = "iphone";
+              if (c === "Bookmarks" || c === "Summaries") device = "ipad";
+
+              return (
+                <button
+                  type="button"
+                  role="tab"
+                  data-hero-chip-device={device}
+                  aria-selected={i === 0 ? "true" : "false"}
+                  class:list={[
+                    "hero-chip-pill flex w-full items-center justify-center gap-1 rounded-[var(--radius-pill)] px-2 py-1.5 text-[10px] font-display font-semibold tracking-wide text-[var(--ink-secondary)] transition-all duration-200 ease-out whitespace-nowrap sm:gap-1.5 sm:px-3 sm:text-[11px] md:inline-flex md:w-auto md:justify-start hover:text-[var(--ink-primary)] hover:bg-[color-mix(in_oklab,var(--surface-overlay)_25%,transparent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-offset-1",
+                    i === 0 && "hero-chip-pill--active",
+                  ]}
+                >
+                  <LucideIcon name={heroChipIcons[c]} size={12} class="opacity-90" />
+                  {c}
+                </button>
+              );
+            })
           }
         </div>
       </div>

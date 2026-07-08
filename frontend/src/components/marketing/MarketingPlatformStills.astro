@@ -4,15 +4,21 @@ import { marketingImages } from "../../lib/marketing-images";
 
 interface Props {
   class?: string;
+  macSrcLight?: string;
+  macSrcDark?: string;
 }
 
-const { class: className = "" } = Astro.props;
+const {
+  class: className = "",
+  macSrcLight = marketingImages.macHeroLight,
+  macSrcDark = marketingImages.macHeroDark,
+} = Astro.props;
 
 const mac = {
   label: "Mac",
   aspect: "mac" as const,
-  srcLight: marketingImages.macHeroLight,
-  srcDark: marketingImages.macHeroDark,
+  srcLight: macSrcLight,
+  srcDark: macSrcDark,
   alt: "Cardmaniacs on macOS",
 };
 

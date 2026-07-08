@@ -88,7 +88,7 @@
 
   --ink-primary: #1d1d1f;
   --ink-secondary: #6e6e73;
-  --ink-tertiary: #86868b;
+  --ink-tertiary: #65656a;
   --ink-faint: #d2d2d7;
 
   /* Back-compat: existing components reference --accent */
@@ -850,6 +850,10 @@ body {
     transparent 58%
   );
   border-block: 1px solid var(--border-subtle);
+}
+
+.section-band + .section-band {
+  border-top: none;
 }
 
 .section-module {

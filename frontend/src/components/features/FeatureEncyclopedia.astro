@@ -46,25 +46,33 @@ import { featureSections } from "../../data/feature-sections";
               this site.
             </p>
           </MarketingReaderSurface>
-        ) : s.surface === "highlight" ? (
-          <MarketingHighlightSurface
-            excerpt="Highlights stay tied to their source so you can revisit the idea, not just the link."
-            source="Feature preview"
-            tags={["highlights"]}
-          />
-        ) : s.surface === "triage" ? (
-          <MarketingTriageSurface />
-        ) : s.surface === "command" ? (
-          <MarketingCommandSurface />
-        ) : s.surface === "media" ? (
-          <MarketingMediaSurface />
-        ) : (
-          <ProductShowcase
-            srcLight={s.screenshotLight || s.screenshot}
-            srcDark={s.screenshotDark}
-            alt={s.screenshotAlt}
-          />
-        )}
+) : s.surface === "highlight" ? (
+        <ProductShowcase
+          srcLight={s.screenshotLight || s.screenshot}
+          srcDark={s.screenshotDark}
+          alt={s.screenshotAlt}
+        />
+      ) : s.surface === "triage" ? (
+        <MarketingTriageSurface />
+      ) : s.surface === "command" ? (
+        <ProductShowcase
+          srcLight={s.screenshotLight || s.screenshot}
+          srcDark={s.screenshotDark}
+          alt={s.screenshotAlt}
+        />
+      ) : s.surface === "media" ? (
+        <ProductShowcase
+          srcLight={s.screenshotLight || s.screenshot}
+          srcDark={s.screenshotDark}
+          alt={s.screenshotAlt}
+        />
+      ) : (
+        <ProductShowcase
+          srcLight={s.screenshotLight || s.screenshot}
+          srcDark={s.screenshotDark}
+          alt={s.screenshotAlt}
+        />
+      )}
       </>
     );
 

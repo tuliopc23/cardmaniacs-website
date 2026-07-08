@@ -2,29 +2,9 @@
 import Surface from "../ui/Surface.astro";
 
 const devices = [
-  {
-    key: "mac",
-    label: "Mac",
-    icon: "/images/macbook.svg",
-    iconClass: "h-[22px] w-9 object-contain md:h-6 md:w-10",
-    defaultSelected: true,
-  },
-  /* Defer mobile slots until real screenshots exist
-  {
-    key: "iphone",
-    label: "iPhone",
-    icon: "/images/iphone.svg",
-    iconClass: "h-[24px] w-[18px] object-contain md:h-[26px] md:w-5",
-    defaultSelected: false,
-  },
-  {
-    key: "ipad",
-    label: "iPad",
-    icon: "/images/ipad.svg",
-    iconClass: "h-5 w-8 object-contain md:h-[22px] md:w-9",
-    defaultSelected: false,
-  },
-  */
+  { key: "mac", label: "Mac", icon: "/images/macbook.svg", iconClass: "h-[22px] w-9 object-contain md:h-6 md:w-10", defaultSelected: true },
+  { key: "iphone", label: "iPhone", icon: "/images/iphone.svg", iconClass: "h-[24px] w-[18px] object-contain md:h-[26px] md:w-5", defaultSelected: false },
+  { key: "ipad", label: "iPad", icon: "/images/ipad.svg", iconClass: "h-5 w-8 object-contain md:h-[22px] md:w-9", defaultSelected: false },
 ] as const;
 
 const tabBase =
@@ -39,225 +19,216 @@ const tabBase =
 <div class="flex flex-col items-center mb-10 md:mb-12">
   <p id="cm-device-picker-status" class="sr-only" aria-live="polite" aria-atomic="true"></p>
   <div class="flex justify-center w-full">
-  <Surface
-    variant="glass"
-    radius="pill"
-    class="inline-flex shadow-[var(--shadow-nav)] ring-1 ring-white/40 dark:ring-white/10"
-  >
-    <div
-      class="p-1 md:p-1.5 rounded-[var(--radius-pill)] bg-[color-mix(in_oklab,var(--surface-overlay)_42%,transparent)] ring-1 ring-black/[0.04] dark:ring-white/[0.06]"
-    >
-      <div
-        role="tablist"
-        aria-label="Choose device preview"
-        class="flex flex-wrap items-center justify-center gap-0.5 sm:gap-1"
-      >
-        {devices.map((d) => (
-          <button
-            type="button"
-            role="tab"
-            id={`device-tab-${d.key}`}
-            data-device-tab={d.key}
-            aria-selected={d.defaultSelected ? "true" : "false"}
-            aria-controls={`device-panel-${d.key}`}
-            tabindex={d.defaultSelected ? 0 : -1}
-            class={tabBase}
-          >
-            <span class="flex h-7 w-full items-center justify-center" aria-hidden="true">
-              <img
-                src={d.icon}
-                alt=""
-                width="40"
-                height="40"
-                class:list={["device-picker-icon pointer-events-none select-none", d.iconClass]}
-                loading="eager"
-                decoding="async"
-              />
-            </span>
-            <span class="font-display text-[13px] font-semibold leading-none tracking-[-0.02em] sm:text-[14px]">
-              {d.label}
-            </span>
-          </button>
-        ))}
+    <Surface variant="glass" radius="pill" class="inline-flex shadow-[var(--shadow-nav)] ring-1 ring-white/40 dark:ring-white/10">
+      <div class="p-1 md:p-1.5 rounded-[var(--radius-pill)] bg-[color-mix(in_oklab,var(--surface-overlay)_42%,transparent)] ring-1 ring-black/[0.04] dark:ring-white/[0.06]">
+        <div role="tablist" aria-label="Choose device preview" class="flex flex-wrap items-center justify-center gap-0.5 sm:gap-1">
+          {devices.map((d) => (
+            <button
+              type="button"
+              role="tab"
+              id={`device-tab-${d.key}`}
+              data-device-tab={d.key}
+              aria-selected={d.defaultSelected ? "true" : "false"}
+              aria-controls={`device-panel-${d.key}`}
+              tabindex={d.defaultSelected ? 0 : -1}
+              class={tabBase}
+            >
+              <span class="flex h-7 w-full items-center justify-center" aria-hidden="true">
+                <img src={d.icon} alt="" width="40" height="40" class:list={["device-picker-icon pointer-events-none select-none", d.iconClass]} loading="eager" decoding="async" />
+              </span>
+              <span class="font-display text-[13px] font-semibold leading-none tracking-[-0.02em] sm:text-[14px]">{d.label}</span>
+            </button>
+          ))}
+        </div>
       </div>
-    </div>
-  </Surface>
+    </Surface>
   </div>
 </div>
 )}
 
 <style>
-  .device-picker-tab[aria-selected="true"] .device-picker-icon {
-    opacity: 1;
-  }
-  .device-picker-tab[aria-selected="false"] .device-picker-icon {
-    opacity: 0.62;
-  }
-  [data-theme="dark"] .device-picker-tab[aria-selected="false"] .device-picker-icon {
-    opacity: 0.72;
-  }
-  [data-theme="dark"] .device-picker-icon {
-    filter: brightness(1.25);
-  }
+.device-picker-tab[aria-selected="true"] .device-picker-icon { opacity: 1; }
+.device-picker-tab[aria-selected="false"] .device-picker-icon { opacity: 0.62; }
+[data-theme="dark"] .device-picker-tab[aria-selected="false"] .device-picker-icon { opacity: 0.72; }
+[data-theme="dark"] .device-picker-icon { filter: brightness(1.25); }
 </style>
 
 <script>
-  import { animateEl } from "../../lib/motion/animate-el";
+import { animateEl } from "../../lib/motion/animate-el";
 
-  const easeOutQuint = [0.22, 1, 0.36, 1];
+const easeOutQuint = [0.22, 1, 0.36, 1];
 
-  function initDevicePicker() {
-    document.querySelectorAll("[data-device-hero]").forEach((root) => {
-      const showcase = root.querySelector("[data-device-showcase]");
-      if (!(showcase instanceof HTMLElement)) return;
+function initDevicePicker() {
+  document.querySelectorAll("[data-device-hero]").forEach((root) => {
+    const showcase = root.querySelector("[data-device-showcase]");
+    if (!(showcase instanceof HTMLElement)) return;
 
-      const tabs = root.querySelectorAll<HTMLButtonElement>("[data-device-tab]");
-      const panels = showcase.querySelectorAll<HTMLElement>("[data-device-panel]");
-      const status = root.querySelector<HTMLElement>("#cm-device-picker-status");
-      if (!tabs.length || !panels.length) return;
+    const tabs = root.querySelectorAll<HTMLButtonElement>("[data-device-tab]");
+    const panels = showcase.querySelectorAll<HTMLElement>("[data-device-panel]");
+    const status = root.querySelector<HTMLElement>("#cm-device-picker-status");
+    if (!tabs.length || !panels.length) return;
 
-      const key = "devicePickerBound";
-      if ((root as HTMLElement).dataset[key]) return;
-      (root as HTMLElement).dataset[key] = "1";
+    const key = "devicePickerBound";
+    if ((root as HTMLElement).dataset[key]) return;
+    (root as HTMLElement).dataset[key] = "1";
 
-      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      let activeDevice =
-        Array.from(tabs).find((t) => t.getAttribute("aria-selected") === "true")?.dataset.deviceTab ?? "mac";
-      let panelTransition = 0;
-      let activePanelAnims: Array<{ stop: () => void }> = [];
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let activeDevice = Array.from(tabs).find((t) => t.getAttribute("aria-selected") === "true")?.dataset.deviceTab ?? "mac";
+    let panelTransition = 0;
+    let activePanelAnims: Array<{ stop: () => void }> = [];
 
-      const deviceLabels: Record<string, string> = { mac: "Mac", iphone: "iPhone", ipad: "iPad" };
+    const deviceLabels: Record<string, string> = { mac: "Mac", iphone: "iPhone", ipad: "iPad" };
 
-      function stopPanelAnims() {
-        activePanelAnims.forEach((anim) => anim.stop());
-        activePanelAnims = [];
-        panelTransition += 1;
-      }
+    function stopPanelAnims() {
+      activePanelAnims.forEach((anim) => anim.stop());
+      activePanelAnims = [];
+      panelTransition += 1;
+    }
 
-      function announceDevice(device: string) {
-        if (!status) return;
-        status.textContent = `Showing ${deviceLabels[device] ?? device} preview`;
-      }
+    function announceDevice(device: string) {
+      if (!status) return;
+      status.textContent = `Showing ${deviceLabels[device] ?? device} preview`;
+    }
 
-      function showPanel(panel: HTMLElement) {
-        panel.hidden = false;
-        panel.style.opacity = "1";
-        panel.style.transform = "scale(1)";
-        panel.setAttribute("aria-hidden", "false");
-      }
+    function showPanel(panel: HTMLElement) {
+      panel.hidden = false;
+      panel.style.opacity = "1";
+      panel.style.transform = "scale(1)";
+      panel.setAttribute("aria-hidden", "false");
+    }
 
-      function hidePanel(panel: HTMLElement) {
-        panel.hidden = true;
-        panel.style.opacity = "";
-        panel.style.transform = "";
-        panel.setAttribute("aria-hidden", "true");
-      }
+    function hidePanel(panel: HTMLElement) {
+      panel.hidden = true;
+      panel.style.opacity = "";
+      panel.style.transform = "";
+      panel.setAttribute("aria-hidden", "true");
+    }
 
-      function setActive(device: string, focusTab?: HTMLButtonElement) {
-        if (device === activeDevice && !focusTab) return;
+    const chipPills = root.querySelectorAll<HTMLButtonElement>("[data-hero-chip-device]");
 
-        tabs.forEach((tab) => {
-          const isOn = tab.dataset.deviceTab === device;
-          tab.setAttribute("aria-selected", isOn ? "true" : "false");
-          tab.tabIndex = isOn ? 0 : -1;
-        });
-
-        const nextPanel = Array.from(panels).find((p) => p.dataset.devicePanel === device);
-        const prevPanel = Array.from(panels).find((p) => p.dataset.devicePanel === activeDevice);
-
-        if (!nextPanel) return;
-
-        stopPanelAnims();
-        const transitionId = panelTransition;
-
-        panels.forEach((panel) => {
-          if (panel !== nextPanel && panel !== prevPanel) hidePanel(panel);
-        });
-
-        if (reducedMotion || !prevPanel || prevPanel === nextPanel) {
-          panels.forEach((panel) => {
-            if (panel.dataset.devicePanel === device) showPanel(panel);
-            else hidePanel(panel);
-          });
-        } else {
-          nextPanel.hidden = false;
-          nextPanel.style.opacity = "0";
-          nextPanel.style.transform = "scale(0.985)";
-          nextPanel.setAttribute("aria-hidden", "false");
-
-          const outAnim = animateEl(
-            prevPanel,
-            { opacity: [1, 0], transform: ["scale(1)", "scale(0.985)"] },
-            { duration: 0.2, easing: "ease-in" }
-          );
-          const inAnim = animateEl(
-            nextPanel,
-            { opacity: [0, 1], transform: ["scale(0.985)", "scale(1)"] },
-            { duration: 0.26, easing: easeOutQuint }
-          );
-          activePanelAnims = [outAnim, inAnim];
-
-          void Promise.all([outAnim, inAnim]).then(() => {
-            if (transitionId !== panelTransition) return;
-            hidePanel(prevPanel);
-            nextPanel.style.opacity = "";
-            nextPanel.style.transform = "";
-          });
-        }
-
-        activeDevice = device;
-        announceDevice(device);
-        if (focusTab) focusTab.focus();
-      }
+    function setActive(device: string, focusTab?: HTMLButtonElement, activePill?: HTMLButtonElement) {
+      if (device === activeDevice && !focusTab && !activePill) return;
 
       tabs.forEach((tab) => {
-        tab.addEventListener("click", () => {
-          const device = tab.dataset.deviceTab;
-          if (!device) return;
-          setActive(device);
-        });
+        const isOn = tab.dataset.deviceTab === device;
+        tab.setAttribute("aria-selected", isOn ? "true" : "false");
+        tab.tabIndex = isOn ? 0 : -1;
       });
 
-      root.addEventListener("keydown", (e) => {
-        const ev = e as KeyboardEvent;
-        const ae = document.activeElement;
-        if (!(ae instanceof HTMLButtonElement) || !ae.matches("[data-device-tab]")) return;
-        if (!root.contains(ae)) return;
-
-        const list = Array.from(tabs);
-        const currentIdx = list.findIndex((t) => t.getAttribute("aria-selected") === "true");
-        if (currentIdx < 0) return;
-
-        let nextIdx = currentIdx;
-        if (ev.key === "ArrowRight" || ev.key === "ArrowDown") {
-          ev.preventDefault();
-          nextIdx = (currentIdx + 1) % list.length;
-        } else if (ev.key === "ArrowLeft" || ev.key === "ArrowUp") {
-          ev.preventDefault();
-          nextIdx = (currentIdx - 1 + list.length) % list.length;
-        } else if (ev.key === "Home") {
-          ev.preventDefault();
-          nextIdx = 0;
-        } else if (ev.key === "End") {
-          ev.preventDefault();
-          nextIdx = list.length - 1;
-        } else {
-          return;
+      // Update Hero Chip Pills if present on page
+      if (chipPills.length) {
+        let pillToActivate = activePill;
+        if (!pillToActivate) {
+          pillToActivate = Array.from(chipPills).find((p) => p.dataset.heroChipDevice === device);
         }
+        chipPills.forEach((pill) => {
+          const isCurrent = pill === pillToActivate;
+          pill.classList.toggle("hero-chip-pill--active", isCurrent);
+          pill.setAttribute("aria-selected", isCurrent ? "true" : "false");
+        });
+      }
 
-        const nextTab = list[nextIdx];
-        const device = nextTab?.dataset.deviceTab;
-        if (device && nextTab) setActive(device, nextTab);
+      const nextPanel = Array.from(panels).find((p) => p.dataset.devicePanel === device);
+      const prevPanel = Array.from(panels).find((p) => p.dataset.devicePanel === activeDevice);
+      if (!nextPanel) return;
+
+      stopPanelAnims();
+      const transitionId = panelTransition;
+
+      panels.forEach((panel) => {
+        if (panel !== nextPanel && panel !== prevPanel) hidePanel(panel);
       });
 
-      const initial =
-        Array.from(tabs).find((t) => t.getAttribute("aria-selected") === "true")?.dataset.deviceTab ??
-        "mac";
-      setActive(initial);
-      announceDevice(initial);
-    });
-  }
+      if (reducedMotion || !prevPanel || prevPanel === nextPanel) {
+        panels.forEach((panel) => {
+          if (panel.dataset.devicePanel === device) showPanel(panel);
+          else hidePanel(panel);
+        });
+      } else {
+        nextPanel.hidden = false;
+        nextPanel.style.opacity = "0";
+        nextPanel.style.transform = "scale(0.985)";
+        nextPanel.setAttribute("aria-hidden", "false");
 
-  initDevicePicker();
-  document.addEventListener("astro:after-swap", initDevicePicker);
+        const outAnim = animateEl(
+          prevPanel,
+          { opacity: [1, 0], transform: ["scale(1)", "scale(0.985)"] },
+          { duration: 0.2, easing: "ease-in" }
+        );
+        const inAnim = animateEl(
+          nextPanel,
+          { opacity: [0, 1], transform: ["scale(0.985)", "scale(1)"] },
+          { duration: 0.26, easing: easeOutQuint }
+        );
+        activePanelAnims = [outAnim, inAnim];
+
+        void Promise.all([outAnim, inAnim]).then(() => {
+          if (transitionId !== panelTransition) return;
+          hidePanel(prevPanel);
+          nextPanel.style.opacity = "";
+          nextPanel.style.transform = "";
+        });
+      }
+
+      activeDevice = device;
+      announceDevice(device);
+      if (focusTab) focusTab.focus();
+    }
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const device = tab.dataset.deviceTab;
+        if (!device) return;
+        setActive(device);
+      });
+    });
+
+    chipPills.forEach((pill) => {
+      pill.addEventListener("click", () => {
+        const device = pill.dataset.heroChipDevice;
+        if (!device) return;
+        setActive(device, undefined, pill);
+      });
+    });
+
+    root.addEventListener("keydown", (e) => {
+      const ev = e as KeyboardEvent;
+      const ae = document.activeElement;
+      if (!(ae instanceof HTMLButtonElement) || !ae.matches("[data-device-tab]")) return;
+      if (!root.contains(ae)) return;
+
+      const list = Array.from(tabs);
+      const currentIdx = list.findIndex((t) => t.getAttribute("aria-selected") === "true");
+      if (currentIdx < 0) return;
+
+      let nextIdx = currentIdx;
+      if (ev.key === "ArrowRight" || ev.key === "ArrowDown") {
+        ev.preventDefault();
+        nextIdx = (currentIdx + 1) % list.length;
+      } else if (ev.key === "ArrowLeft" || ev.key === "ArrowUp") {
+        ev.preventDefault();
+        nextIdx = (currentIdx - 1 + list.length) % list.length;
+      } else if (ev.key === "Home") {
+        ev.preventDefault();
+        nextIdx = 0;
+      } else if (ev.key === "End") {
+        ev.preventDefault();
+        nextIdx = list.length - 1;
+      } else {
+        return;
+      }
+
+      const nextTab = list[nextIdx];
+      const device = nextTab?.dataset.deviceTab;
+      if (device && nextTab) setActive(device, nextTab);
+    });
+
+    const initial = Array.from(tabs).find((t) => t.getAttribute("aria-selected") === "true")?.dataset.deviceTab ?? "mac";
+    setActive(initial);
+    announceDevice(initial);
+  });
+}
+
+initDevicePicker();
+document.addEventListener("astro:after-swap", initDevicePicker);
 </script>

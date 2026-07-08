@@ -2,8 +2,11 @@
 import Layout from '../layouts/Layout.astro';
 import SiteNav from '../components/SiteNav.astro';
 import HeroSection from '../components/HeroSection.astro';
-import LaunchStory from '../components/home/LaunchStory.astro';
+import MarketingPlatformStills from '../components/marketing/MarketingPlatformStills.astro';
+import ProductShowcase from '../components/ProductShowcase.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import LaunchStory from '../components/home/LaunchStory.astro';
+import { marketingImages } from '../lib/marketing-images';
 ---
 
 <Layout>
@@ -11,6 +14,64 @@ import SiteFooter from '../components/SiteFooter.astro';
 
   <main id="main-content" class="relative">
     <HeroSection />
+
+    <section class="py-10 md:py-16" data-reveal>
+      <MarketingPlatformStills
+  macSrcLight={marketingImages.macTriageLight}
+  macSrcDark={marketingImages.macTriageDark}
+/>
+    </section>
+
+    <section class="py-16 md:py-24 section-band" data-reveal>
+      <div class="max-w-[720px] mx-auto text-center mb-10 md:mb-14">
+        <h2 class="type-section-title ink-primary text-balance mb-5">Highlights that travel with you.</h2>
+        <p class="type-lede measure-tight ink-secondary">
+          Mark what matters inside the Reader or on the web. Highlights are stored by source so you can revisit the idea, not just the link.
+        </p>
+      </div>
+      <ProductShowcase
+        srcLight={marketingImages.macHighlightsLight}
+        srcDark={marketingImages.macHighlightsDark}
+        alt="Cardmaniacs highlights library on Mac"
+        class="mx-auto max-w-[920px]"
+      />
+    </section>
+
+    <section class="py-16 md:py-24" data-reveal>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div class="max-w-[520px] mx-auto lg:mx-0 text-center lg:text-left">
+          <h2 class="type-section-title ink-primary mb-5 text-balance">Watch and listen without browser chaos.</h2>
+          <p class="type-lede measure-tight ink-secondary">
+            YouTube videos and podcast episodes open in a calm native player — audio keeps playing while you browse other articles.
+          </p>
+        </div>
+        <ProductShowcase
+          srcLight={marketingImages.macMedia}
+          srcDark={marketingImages.macMedia}
+          alt="Cardmaniacs in-app media player on Mac"
+          class="mx-auto max-w-[920px]"
+        />
+      </div>
+    </section>
+
+    <section class="py-16 md:py-24 section-band" data-reveal>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div class="order-1 lg:order-2 max-w-[520px] mx-auto lg:mx-0 text-center lg:text-left">
+          <h2 class="type-section-title ink-primary mb-5 text-balance">Keyboard-first, when you want it.</h2>
+          <p class="type-lede measure-tight ink-secondary">
+            Quick Add, command palette, search, and Vim-style navigation for fast triage and reading.
+          </p>
+        </div>
+        <div class="order-2 lg:order-1">
+          <ProductShowcase
+            srcLight={marketingImages.macCommandLight}
+            srcDark={marketingImages.macCommandDark}
+            alt="Cardmaniacs command palette on Mac"
+            class="mx-auto max-w-[920px]"
+          />
+        </div>
+      </div>
+    </section>
 
     <LaunchStory />
   </main>
