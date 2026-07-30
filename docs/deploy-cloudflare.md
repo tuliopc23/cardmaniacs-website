@@ -2,7 +2,7 @@
 
 Marketing site: Astro SSR on Workers (`frontend/`, `@astrojs/cloudflare`).
 
-**Account:** `e328c1497ae7e9a61aea8ca119af439d` (Contact@tuliocunha.dev)
+**Account:** `5d145cbfe0763e30463d78ee91715631` (tuliopinheiroc23@icloud.com)
 
 Deploy is **Workers Builds** (Git → build → `wrangler deploy`). There is no GitHub Actions deploy workflow in this repo.
 
@@ -10,7 +10,7 @@ The Worker script **`cardmaniacs-website`** is created on the **first successful
 
 ## Cloudflare MCP (Cursor)
 
-Connect the **Cloudflare** plugin to **Contact@tuliocunha.dev's Account** (`e328c1497ae7e9a61aea8ca119af439d`). In Cursor: **Settings → MCP → Cloudflare → authenticate**, and set header `cf-account-id` to `e328c1497ae7e9a61aea8ca119af439d` if you use multiple accounts.
+Connect the **Cloudflare** plugin to **Tuliopinheiroc23@icloud.com's Account** (`5d145cbfe0763e30463d78ee91715631`). In Cursor: **Settings → MCP → Cloudflare → authenticate**, and set header `cf-account-id` to `5d145cbfe0763e30463d78ee91715631` if you use multiple accounts.
 
 Useful MCP tools after auth:
 
@@ -28,7 +28,7 @@ If MCP returns `Authentication error [10000]`, the plugin is not logged in or is
 
 | Binding   | Type              | ID / config                                                        |
 | --------- | ----------------- | ------------------------------------------------------------------ |
-| `SESSION` | KV                | `3a8c1f24c1b54398bee2691c46eb1f09` (`cardmaniacs-website-session`) |
+| `SESSION` | KV                | `ba96600d52f64f50817b4eb3575d9bed` (`cardmaniacs-website-session`) |
 | `IMAGES`  | Cloudflare Images | `binding: "IMAGES"` (adapter uses at build)                        |
 
 `ASSETS` and the Worker entrypoint come from the Astro build output (`dist/`); Wrangler picks them up on deploy.
@@ -39,7 +39,7 @@ KV was created on your account via Cloudflare bindings MCP. Do **not** deploy to
 
 Workers Builds MCP can **list builds and logs** after the Worker exists; it cannot attach a repository. Use the dashboard once:
 
-1. [Workers & Pages → Create → Import a repository](https://dash.cloudflare.com/e328c1497ae7e9a61aea8ca119af439d/workers-and-pages/create)
+1. [Workers & Pages → Create → Import a repository](https://dash.cloudflare.com/5d145cbfe0763e30463d78ee91715631/workers-and-pages/create)
 2. GitHub: `tuliopc23/cardmaniacs-website`
 3. Worker name must be **`cardmaniacs-website`** (same as `name` in `wrangler.jsonc`)
 4. **Production branch:** `main`
@@ -94,6 +94,6 @@ pnpm exec wrangler whoami --json
 pnpm run deploy
 ```
 
-OAuth must list account `e328c149…`, or use an **Edit Cloudflare Workers** [API token](https://dash.cloudflare.com/e328c1497ae7e9a61aea8ca119af439d/api-tokens) on that account only.
+OAuth must list account `5d145cbfe0763e30463d78ee91715631`, or use an **Edit Cloudflare Workers** [API token](https://dash.cloudflare.com/5d145cbfe0763e30463d78ee91715631/api-tokens) on that account only.
 
-**Wrong account:** If `wrangler whoami` shows **Gabs.villela@gmail.com's Account** (`73b8e225…`) while `wrangler.jsonc` has `account_id` `e328c149…`, deploy will fail with `Authentication error`. Unset `CLOUDFLARE_API_TOKEN` / `CF_API_TOKEN` (they may be set in your shell profile for the client) and re-auth to your account, or export a token created only on `e328c149…`.
+**Wrong account:** If `wrangler whoami` shows **Gabs.villela@gmail.com's Account** (`73b8e225…`) while `wrangler.jsonc` has `account_id` `5d145cbfe0763e30463d78ee91715631`, deploy will fail with `Authentication error`. Unset `CLOUDFLARE_API_TOKEN` / `CF_API_TOKEN` (they may be set in your shell profile for the client) and re-auth to your account, or export a token created only on `5d145cbfe0763e30463d78ee91715631`.
