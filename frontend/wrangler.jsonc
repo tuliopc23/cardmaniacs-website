@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "cardmaniacs-website",
-  "account_id": "5d145cbfe0763e30463d78ee91715631",
+  "account_id": "e328c1497ae7e9a61aea8ca119af439d",
   "compatibility_date": "2026-04-27",
   "compatibility_flags": ["nodejs_compat"],
   "kv_namespaces": [
